@@ -1,0 +1,10 @@
+.campaign {
+    letter-spacing: -.4em;
+    text-align: center;
+}
+
+.campaign li{
+    margin: 2.083333334%;
+    display: inline-block;
+    width: 45.833333333%;
+}
