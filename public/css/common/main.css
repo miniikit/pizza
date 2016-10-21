@@ -133,8 +133,8 @@
 }
 
 #main {
-    padding: 73px 0;
-    background-image: url(../images/background01.png);
+    padding: 72px 0;
+    background-image: url(../../images/common/background01.png);
     background-position: center;
     background-size: cover;
 }
@@ -142,7 +142,6 @@
 #header {
     width: 100%;
     background-color: #fff;
-    border-bottom: solid 2px #9c9c9c;
     position: fixed;
     top: 0;
     left: 0;
