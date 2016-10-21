@@ -1,32 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-
         <meta charset="utf-8">
         <title>トップ | OIC PIZZA</title>
-
         <!-- viewport -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <!-- fixed -->
-        <script src="/js/jQuery.js" charset="utf-8"></script>
-        <script src="/js/util.js" charset="utf-8"></script>
-        <script src="/js/main.js" charset="utf-8"></script>
-        <link rel="stylesheet" href="/css/reset.css" media="all" title="no title">
-        <link rel="stylesheet" href="/css/main.css" media="all" title="no title">
+        <script src="/js/common/jQuery.js" charset="utf-8"></script>
+        <script src="/js/common/util.js" charset="utf-8"></script>
+        <script src="/js/common/main.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="/css/common/reset.css" media="all" title="no title">
+        <link rel="stylesheet" href="/css/common/main.css" media="all" title="no title">
         <link rel="stylesheet" href="/css/index/index.css" media="all" title="no title">
-
         <!-- plugIn -->
         <script src="/plug/flexSlier/jquery.flexslider-min.js" charset="utf-8"></script>
         <link rel="stylesheet" href="/plug/flexSlier/flexslider.css" media="screen" title="no title">
-
         <!-- font&icon -->
         <link rel="stylesheet" href="/plug/fontawesome/css/font-awesome.min.css" media="screen" title="no title">
     </head>
     <body id="app">
         <header id="header">
             <div class="wrap">
-                <h1><a href="/"><img src="images/logo.png" alt="OIC PIZZA" /></a></h1>
+                <h1><a href="/"><img src="images/common/logo.png" alt="OIC PIZZA" /></a></h1>
                 <nav id="gNav">
                     <ul>
                         <li id="gTop"><a href="#">TOP</a></li>
@@ -55,23 +50,23 @@
             <div class="container">
                 <div class="flexslider">
                   <ul class="slides">
-                      <li><img src="images/pizza01.png" /></li>
-                      <li><img src="images/pizza02.png" /></li>
-                      <li><img src="images/pizza03.png" /></li>
-                      <li><img src="images/pizza04.png" /></li>
-                      <li><img src="images/pizza05.png" /></li>
+                      <li><img src="images/index/pizza01.png" /></li>
+                      <li><img src="images/index/pizza02.png" /></li>
+                      <li><img src="images/index/pizza03.png" /></li>
+                      <li><img src="images/index/pizza04.png" /></li>
+                      <li><img src="images/index/pizza05.png" /></li>
                   </ul>
                 </div>
                 <div class="container wrap">
 
                     <div class="campaign">
                         <ul>
-                            <li><img src="images/banner02.png" alt="" /></li>
-                            <li><img src="images/banner01.png" alt="" /></li>
-                            <li><img src="images/banner01.png" alt="" /></li>
-                            <li><img src="images/banner01.png" alt="" /></li>
-                            <li><img src="images/banner01.png" alt="" /></li>
-                            <li><img src="images/banner01.png" alt="" /></li>
+                            <li><img src="images/index/banner02.png" alt="" /></li>
+                            <li><img src="images/index/banner01.png" alt="" /></li>
+                            <li><img src="images/index/banner01.png" alt="" /></li>
+                            <li><img src="images/index/banner01.png" alt="" /></li>
+                            <li><img src="images/index/banner01.png" alt="" /></li>
+                            <li><img src="images/index/banner01.png" alt="" /></li>
                         </ul>
                     </div>
                 </div>
