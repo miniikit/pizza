@@ -34,3 +34,13 @@
         </div>
     </div>
 @endsection
+
+@section('script')
+    <script type="text/javascript">
+        $(window).load(function() {
+            $('.flexslider').flexslider({
+                animation: "slide"
+            });
+        });
+    </script>
+@endsection

@@ -27,3 +27,7 @@
         </p>
     </div>
 @endsection
+
+@section('scrip')
+
+@endsection
