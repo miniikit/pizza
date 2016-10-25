@@ -12,3 +12,8 @@
 */
 
 Route::get('/', 'IndexController@index');
+
+
+Route::get('/company', 'PagesController@company');
+Route::get('/privacypolicy', 'PagesController@privacypolicy');
+Route::get('/faq', 'PagesController@faq');

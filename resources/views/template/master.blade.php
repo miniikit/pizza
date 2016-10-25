@@ -19,7 +19,7 @@
                 <h1><a href="/"><img src="images/common/logo.png" alt="OIC PIZZA" /></a></h1>
                 <nav id="gNav">
                     <ul>
-                        <li id="gTop"><a href="#">TOP</a></li>
+                        <li id="gTop"><a href="/">TOP</a></li>
                         <li id="gMenu"><a href="#">MENU</a></li>
                         <li id="gTopics"><a href="#">TOPICS</a></li>
                         <li id="gContact"><a href="#">CONTACT</a></li>
@@ -32,7 +32,7 @@
         <div id="spMenu">
             <div class="inner">
                 <ul>
-                    <li><a href="#"><span>TOP</span></a></li>
+                    <li><a href="/"><span>TOP</span></a></li>
                     <li><a href="#"><span>MENU</span></a></li>
                     <li><a href="#"><span>TOPICS</span></a></li>
                     <li><a href="#"><span>CONTACT</span></a></li>
@@ -51,10 +51,10 @@
             <div class="wrap container">
                 <div class="nav">
                     <ul>
-                        <li><a href="#">会社概要</a></li>
-                        <li><a href="#">個人情報保護方針</a></li>
+                        <li><a href="/company">会社概要</a></li>
+                        <li><a href="/privacypolicy">個人情報保護方針</a></li>
                         <li><a href="#">会員規約</a></li>
-                        <li><a href="#">よくある質問</a></li>
+                        <li><a href="/faq">よくある質問</a></li>
                         <li><a href="#">お問い合わせ</a></li>
                     </ul>
                 </div>
