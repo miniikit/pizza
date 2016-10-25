@@ -11,14 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
-Route::get('/menu', function () {
-    return view('menu.index');
-});
-
-Route::get('/menu/side', function () {
-		return view('menu.side.index');
-});
+Route::get('/', 'IndexController@index');
