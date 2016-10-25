@@ -63,5 +63,8 @@
     		$('#spMenu').fadeToggle();
 		});
 
+		$(window).load(function() {
+			$("#loading").fadeOut();
+		});
 	});
 })(jQuery);

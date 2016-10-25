@@ -10,5 +10,6 @@ class PagesController extends Controller
 {
     public function company(){ return view('company/index'); }
     public function privacypolicy(){ return view('privacypolicy/index'); }
+    public function agreement(){ return view('agreement/index'); }
     public function faq(){ return view('faq/index'); }
 }

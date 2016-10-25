@@ -14,6 +14,22 @@
         @yield('plug')
     </head>
     <body id="app">
+        <div id="loading">
+            <div class="inner">
+                <div class="sk-cube-grid">
+                  <div class="sk-cube sk-cube1"></div>
+                  <div class="sk-cube sk-cube2"></div>
+                  <div class="sk-cube sk-cube3"></div>
+                  <div class="sk-cube sk-cube4"></div>
+                  <div class="sk-cube sk-cube5"></div>
+                  <div class="sk-cube sk-cube6"></div>
+                  <div class="sk-cube sk-cube7"></div>
+                  <div class="sk-cube sk-cube8"></div>
+                  <div class="sk-cube sk-cube9"></div>
+                </div>
+                <span>Now Loading..</span>
+            </div>
+        </div>
         <header id="header">
             <div class="wrap">
                 <h1><a href="/"><img src="images/common/logo.png" alt="OIC PIZZA" /></a></h1>
@@ -32,10 +48,10 @@
         <div id="spMenu">
             <div class="inner">
                 <ul>
-                    <li><a href="/"><span>TOP</span></a></li>
-                    <li><a href="#"><span>MENU</span></a></li>
-                    <li><a href="#"><span>TOPICS</span></a></li>
-                    <li><a href="#"><span>CONTACT</span></a></li>
+                    <li><a href="/"><span><i class="fa fa-home" aria-hidden="true"></i><br>TOP</span></a></li>
+                    <li><a href="#"><span><i class="fa fa-list-alt" aria-hidden="true"></i><br>MENU</span></a></li>
+                    <li><a href="#"><span><i class="fa fa-th-list" aria-hidden="true"></i><br>TOPICS</span></a></li>
+                    <li><a href="#"><span><i class="fa fa-envelope-o" aria-hidden="true"></i><br>CONTACT</span></a></li>
                 </ul>
             </div>
         </div>
@@ -53,7 +69,7 @@
                     <ul>
                         <li><a href="/company">会社概要</a></li>
                         <li><a href="/privacypolicy">個人情報保護方針</a></li>
-                        <li><a href="#">会員規約</a></li>
+                        <li><a href="/agreement">会員規約</a></li>
                         <li><a href="/faq">よくある質問</a></li>
                         <li><a href="#">お問い合わせ</a></li>
                     </ul>
@@ -63,13 +79,6 @@
         <div id="copyright">
             Copyright (c) 2016 Copyright Holder All Rights Reserved.
         </div>
-
-        <script type="text/javascript">
-            $(window).load(function() {
-                $('.flexslider').flexslider({
-                    animation: "slide"
-                });
-            });
-        </script>
+        @yield('script')
     </body>
 </html>

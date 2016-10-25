@@ -1,7 +1,7 @@
 
 @extends('template/master')
 
-@section('title', '会社概要')
+@section('title', '会員規約')
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
@@ -13,7 +13,7 @@
 
 @section('main')
     <div class="container wrap">
-        <h1>会社概要</h1>
+        <h1>会員規約</h1>
         <p>
             テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります
             テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります
