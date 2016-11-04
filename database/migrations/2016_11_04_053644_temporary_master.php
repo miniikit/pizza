@@ -14,15 +14,15 @@ class TemporaryMaster extends Migration
     public function up()
     {
       Schema::create('temporaries_members_master', function (Blueprint $table) {
-        $table->integer('temporary_member_id')->primary();
-        $table->string('temporary_member_name');
-        $table->string('temporary_member_kana');
-        $table->integer('temporary_member_postel');
-        $table->string('temporary_member_address1');
-        $table->string('temporary_member_address2');
-        $table->string('temporary_member_address3')->nullable();
-        $table->integer('temporary_member_tel');
-        $table->timestamps();
+        $table->integer('temporary_member_id')->primary(); //一時会員ID
+        $table->string('temporary_member_name'); //氏名
+        $table->string('temporary_member_kana');　//カナ
+        $table->integer('temporary_member_postel');　//郵便番号
+        $table->string('temporary_member_address1');　//住所1
+        $table->string('temporary_member_address2');　//住所2
+        $table->string('temporary_member_address3')->nullable();　//住所3
+        $table->integer('temporary_member_tel'); //電話番号
+        $table->timestamps(); //登録・更新
       });
     }
 
@@ -33,6 +33,6 @@ class TemporaryMaster extends Migration
      */
     public function down()
     {
-        //
+      Schema::dropIfExists('temporaries_members_master');
     }
 }
