@@ -23,7 +23,7 @@ class MembersMaster extends Migration
         $table->string('member_address2');
         $table->string('member_address3')->nullable();
         $table->integer('member_tel');
-        $table->integer('gender_id');->references('id')->on('gender_master');
+        $table->integer('gender_id')->references('id')->on('gender_master');
         $table->integer('member_birth');
         $table->timestamps();
         $table->string('member_password');
