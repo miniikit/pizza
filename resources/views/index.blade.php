@@ -1,4 +1,4 @@
-
+/*ooiwdjoiwad*/
 @extends('template/master')
 
 @section('title', 'トップ')
