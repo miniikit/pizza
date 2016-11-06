@@ -1,4 +1,3 @@
-/*ooiwdjoiwad*/
 @extends('template/master')
 
 @section('title', 'トップ')
@@ -44,5 +43,3 @@
         });
     </script>
 @endsection
-
-/*ちかっざｗ*/
