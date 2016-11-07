@@ -11,6 +11,7 @@ class GenresMaster extends Migration
      *
      * @return void
      */
+     // set seeder
     public function up()
     {
       Schema::create('genres_master', function (Blueprint $table) {

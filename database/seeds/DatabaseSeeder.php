@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Genre;
 use App\Gender;
 use App\CouponType;
+use App\Authority;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call('GenresMasterTableSeeder');
         $this->call('CouponsTypesMasterTableSeeder');
         $this->call('GendersMasterTableSeeder');
+        $this->call('AuthoritiesMasterTableSeeder');
 
         Model::reguard();
     }
@@ -81,6 +83,22 @@ class GendersMasterTableSeeder extends Seeder
         ]);
         Gender::create([
             'gender_name' => '女'
+        ]);
+    }
+}
+//　権限
+class AuthoritiesMasterTableSeeder extends Seeder
+{
+
+    public function run()
+    {
+        DB::table('authorities_master')->delete();
+
+        Authority::create([
+            'authority_name' => 'administrator'
+        ]);
+        Authority::create([
+            'authority_name' => 'employee'
         ]);
     }
 }

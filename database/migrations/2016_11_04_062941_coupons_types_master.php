@@ -11,6 +11,8 @@ class CouponsTypesMaster extends Migration
      *
      * @return void
      */
+
+     // set seeder
      public function up()
      {
        Schema::create('coupons_types_master', function (Blueprint $table) {
