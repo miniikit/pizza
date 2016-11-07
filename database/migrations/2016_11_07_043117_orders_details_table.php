@@ -18,6 +18,7 @@ class OrdersDetailsTable extends Migration
         $table->integer('product_id')->references('id')->on('products_master'); //商品ID
         $table->integer('number'); //数量
         $table->timestamps(); //登録・更新日
+        });
     }
 
     /**

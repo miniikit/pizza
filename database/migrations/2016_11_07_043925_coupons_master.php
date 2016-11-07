@@ -25,6 +25,7 @@ class CouponsMaster extends Migration
         $table->integer('coupon_conditions_count')->nullable(); //クーポン使用条件回数
         $table->integer('coupon_conditions_first')->nullable(); //クーポン使用条件初回
         $table->timestamps(); //登録・更新日
+        });
     }
 
     /**
