@@ -14,8 +14,9 @@ class GendersMaster extends Migration
     public function up()
     {
         Schema::create('genders_master', function (Blueprint $table) {
-          $table->integer('gender_id')->primary();  //性別ID
+          $table->increments('gender_id');  //性別ID
           $table->string('gender_name'); //性別
+          $table->timestamps();
         });
     }
 

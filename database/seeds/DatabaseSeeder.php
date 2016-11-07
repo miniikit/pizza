@@ -6,6 +6,7 @@ use Faker\Factory as Faker;
 use Carbon\Carbon;
 
 use App\Genre;
+use App\Gender;
 use App\CouponType;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call('GenresMasterTableSeeder');
         $this->call('CouponsTypesMasterTableSeeder');
+        $this->call('GendersMasterTableSeeder');
 
         Model::reguard();
     }
@@ -46,6 +48,7 @@ class GenresMasterTableSeeder extends Seeder
     }
 }
 
+// クーポン種別
 class CouponsTypesMasterTableSeeder extends Seeder
 {
 
@@ -61,6 +64,23 @@ class CouponsTypesMasterTableSeeder extends Seeder
         ]);
         CouponType::create([
             'coupon_type' => 'sample03'
+        ]);
+    }
+}
+
+// 性別
+class GendersMasterTableSeeder extends Seeder
+{
+
+    public function run()
+    {
+        DB::table('coupons_types_master')->delete();
+
+        Gender::create([
+            'gender_name' => '男'
+        ]);
+        Gender::create([
+            'gender_name' => '女'
         ]);
     }
 }
