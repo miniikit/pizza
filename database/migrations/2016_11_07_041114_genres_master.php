@@ -14,8 +14,9 @@ class GenresMaster extends Migration
     public function up()
     {
       Schema::create('genres_master', function (Blueprint $table) {
-        $table->integer('genre_id')->primary(); //ジャンルID
+        $table->increments('genre_id'); //ジャンルID
         $table->string('genre_name'); //ジャンル名
+        $table->timestamps();
       });
     }
 
