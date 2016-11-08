@@ -76,7 +76,7 @@ class GendersMasterTableSeeder extends Seeder
 
     public function run()
     {
-        DB::table('coupons_types_master')->delete();
+        DB::table('genders_master')->delete();
 
         Gender::create([
             'gender_name' => '男'
