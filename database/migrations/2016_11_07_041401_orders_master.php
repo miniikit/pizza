@@ -14,11 +14,11 @@ class OrdersMaster extends Migration
     public function up()
     {
       Schema::create('orders_master', function (Blueprint $table) {
-        $table->integer('order_id')->primary(); //注文ID
+        $table->increments('order_id');//->primary(); //注文ID
         $table->datetime('order_date'); //注文日時
         $table->datetime('order_appointment_date'); //注文予約日時
-        $table->integer('coupon_id')->references('id')->on('coupons_master')->nullable(); //クーポンID
-        $table->integer('state_id')->references('id')->on('states_master'); //状態ID
+        $table->integer('coupon_id');//->references('id')->on('coupons_master')->nullable(); //クーポンID
+        $table->integer('state_id');//->references('id')->on('states_master'); //状態ID
         $table->timestamps(); //登録・更新日
       });
     }

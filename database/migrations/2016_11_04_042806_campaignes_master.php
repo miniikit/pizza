@@ -14,7 +14,7 @@ class CampaignesMaster extends Migration
     public function up()
     {
       Schema::create('campaigns_master', function (Blueprint $table) {
-          $table->integer('campaign_id')->primary();  //キャンペーンID
+          $table->increments('campaign_id');//->primary();  //キャンペーンID
           $table->string('campaign_title'); //キャンペーンタイトル
           $table->string('campaign_image'); //キャンペーン画像
           $table->string('campaign_text');  //キャンペーン内容分
