@@ -7,6 +7,7 @@ use Carbon\Carbon;
 
 use App\Genre;
 use App\Gender;
+use App\Coupon;
 use App\Coupontype;
 use App\Authority;
 use App\Product;
@@ -14,6 +15,7 @@ use App\ProductPrice;
 use App\State;
 use App\Order;
 use App\OrderDetail;
+use App\Campaign;
 
 class DatabaseSeeder extends Seeder
 {
@@ -35,6 +37,8 @@ class DatabaseSeeder extends Seeder
         $this->call('StatesMasterSeeder');
         $this->call('OrdersMasterSeeder');
         $this->call('OrdersDetailsTableSeeder');
+        $this->call('CouponsMasterSeeder');
+        $this->call('CampaignesMasterSeeder');
 
         Model::reguard();
     }
@@ -75,6 +79,51 @@ class GendersMasterSeeder extends Seeder
         Gender::create([
             'gender_name' => '女'
         ]);
+    }
+}
+
+//クーポン
+class CouponsMasterSeeder extends Seeder
+{
+
+    public function run()
+    {
+        DB::table('coupons_master')->delete();
+
+        Coupon::create([
+            'coupon_name' => '500円値引きクーポン',
+            'coupon_discount' => 500,
+            'coupon_conditions_money' => 3000,
+            'product_id' => 1,
+            'coupon_start_date' => Carbon::today(),
+            'coupon_end_date' => null,
+            'coupon_number' => 00000001,
+            'coupon_conditions_count' => 1,
+            'coupon_conditions_first' => null,
+        ]);
+        Coupon::create([
+            'coupon_name' => '1000円値引きクーポン',
+            'coupon_discount' => 1000,
+            'coupon_conditions_money' => 5000,
+            'product_id' => 1,
+            'coupon_start_date' => Carbon::today(),
+            'coupon_end_date' => null,
+            'coupon_number' => 00000002,
+            'coupon_conditions_count' => 1,
+            'coupon_conditions_first' => null,
+        ]);
+        Coupon::create([
+            'coupon_name' => 'プレゼントクーポン',
+            'coupon_discount' => 2200,
+            'coupon_conditions_money' => 1,
+            'product_id' => 2,
+            'coupon_start_date' => Carbon::today(),
+            'coupon_end_date' => null,
+            'coupon_number' => 00000003,
+            'coupon_conditions_count' => 1,
+            'coupon_conditions_first' => null,
+        ]);
+
     }
 }
 
@@ -253,6 +302,46 @@ class OrdersDetailsTableSeeder extends Seeder
             'product_id' => 3,
             'number' => 3,
         ]);
+
+    }
+}
+
+//キャンペーン
+class CampaignesMasterSeeder extends Seeder
+{
+
+    public function run()
+    {
+        DB::table('campaigns_master')->delete();
+
+        Campaign::create([
+            'campaign_title' => '秋の贅沢サプライズ４',
+            'campaign_image' => 'public/images/campaign/1.jpg',
+            'campaign_text' => 'このトッピングでこの贅沢がお手頃価格で登場！ポケット状の ‘みみ’部分に4分の1ずつ異なるビーフステーキや北海道産チーズなど贅沢な4種の具材を包み、…',
+            'campaign_note' => '秋限定です。',
+            'campaign_subject' => 'allユーザー',
+            'campaign_start_day' => Carbon::today(),
+            'campaign_end_day' => null,
+        ]);
+        Campaign::create([
+            'campaign_title' => '濃厚ゴージャス4',
+            'campaign_image' => 'public/images/campaign/2.jpg',
+            'campaign_text' => '[期間限定】「パリッとソーセージクラスト」Ｍサイズが今なら\880もお得！「厚切イベリコ」、「贅沢フォルマッジ」「ピザハット・シュ…',
+            'campaign_note' => '秋限定です。',
+            'campaign_subject' => 'allユーザー',
+            'campaign_start_day' => Carbon::today(),
+            'campaign_end_day' => null,
+        ]);
+        Campaign::create([
+            'campaign_title' => '家族の満足4',
+            'campaign_image' => 'public/images/campaign/3.jpg',
+            'campaign_text' => '【期間限定】「ゴールデンチーズクラスト」Ｍサイズが今なら\640もお得！「ほっくりポテマヨ」「ペパロニ・シュプリーム」「もちポテ明…',
+            'campaign_note' => '秋限定です。',
+            'campaign_subject' => 'allユーザー',
+            'campaign_start_day' => Carbon::today(),
+            'campaign_end_day' => null,
+        ]);
+
 
     }
 }

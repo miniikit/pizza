@@ -21,7 +21,7 @@ class CampaignesMaster extends Migration
           $table->string('campaign_note');  //キャンペーン注意事項
           $table->string('campaign_subject'); //キャンペーン対象者
           $table->dateTime('campaign_start_day'); //キャンペーン開始日
-          $table->dateTime('campaign_end_day'); //キャンペーン終了日
+          $table->dateTime('campaign_end_day')->nullable(); //キャンペーン終了日
           $table->timestamps(); //登録日時・更新日時
       });
     }
