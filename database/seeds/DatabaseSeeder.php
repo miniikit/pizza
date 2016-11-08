@@ -7,6 +7,7 @@ use Carbon\Carbon;
 
 use App\Genre;
 use App\Gender;
+use App\Coupon;
 use App\Coupontype;
 use App\Authority;
 use App\Product;
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call('StatesMasterSeeder');
         $this->call('OrdersMasterSeeder');
         $this->call('OrdersDetailsTableSeeder');
+        $this->call('CouponsMasterSeeder');
 
         Model::reguard();
     }
@@ -75,6 +77,51 @@ class GendersMasterSeeder extends Seeder
         Gender::create([
             'gender_name' => '女'
         ]);
+    }
+}
+
+//クーポン
+class CouponsMasterSeeder extends Seeder
+{
+
+    public function run()
+    {
+        DB::table('coupons_master')->delete();
+
+        Coupon::create([
+            'coupon_name' => '500円値引きクーポン',
+            'coupon_discount' => 500,
+            'coupon_conditions_money' => 3000,
+            'product_id' => 1,
+            'coupon_start_date' => Carbon::today(),
+            'coupon_end_date' => null,
+            'coupon_number' => 00000001,
+            'coupon_conditions_count' => 1,
+            'coupon_conditions_first' => null,
+        ]);
+        Coupon::create([
+            'coupon_name' => '1000円値引きクーポン',
+            'coupon_discount' => 1000,
+            'coupon_conditions_money' => 5000,
+            'product_id' => 1,
+            'coupon_start_date' => Carbon::today(),
+            'coupon_end_date' => null,
+            'coupon_number' => 00000002,
+            'coupon_conditions_count' => 1,
+            'coupon_conditions_first' => null,
+        ]);
+        Coupon::create([
+            'coupon_name' => 'プレゼントクーポン',
+            'coupon_discount' => 2200,
+            'coupon_conditions_money' => 1,
+            'product_id' => 2,
+            'coupon_start_date' => Carbon::today(),
+            'coupon_end_date' => null,
+            'coupon_number' => 00000003,
+            'coupon_conditions_count' => 1,
+            'coupon_conditions_first' => null,
+        ]);
+
     }
 }
 
