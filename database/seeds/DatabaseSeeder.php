@@ -13,6 +13,7 @@ use App\Product;
 use App\ProductPrice;
 use App\State;
 use App\Order;
+use App\OrderDetail;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call('ProductsPricesMasterSeeder');
         $this->call('StatesMasterSeeder');
         $this->call('OrdersMasterSeeder');
+        $this->call('OrdersDetailsTableSeeder');
 
         Model::reguard();
     }
@@ -226,6 +228,30 @@ class OrdersMasterSeeder extends Seeder
             'order_appointment_date' => Carbon::tomorrow(),
             'coupon_id' => 2,
             'state_id' => 1
+        ]);
+
+    }
+}
+
+//注文明細
+class OrdersDetailsTableSeeder extends Seeder
+{
+
+    public function run()
+    {
+        DB::table('orders_details_table')->delete();
+
+        OrderDetail::create([
+            'product_id' => 1,
+            'number' => 1,
+        ]);
+        OrderDetail::create([
+            'product_id' => 2,
+            'number' => 2,
+        ]);
+        OrderDetail::create([
+            'product_id' => 3,
+            'number' => 3,
         ]);
 
     }
