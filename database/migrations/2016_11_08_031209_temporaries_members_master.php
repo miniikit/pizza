@@ -14,7 +14,7 @@ class TemporariesMembersMaster extends Migration
     public function up()
     {
       Schema::create('temporaries_members_master', function (Blueprint $table) {
-        $table->increments('temporary_member_id');//->primary(); //一時会員ID
+        $table->increments('id');//->primary(); //一時会員ID
         $table->string('temporary_member_name'); //氏名
         $table->string('temporary_member_kana'); //カナ
         $table->integer('temporary_member_postel'); //郵便番号

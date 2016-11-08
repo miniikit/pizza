@@ -14,7 +14,7 @@ class StatusMaster extends Migration
     public function up()
     {
       Schema::create('status_master', function (Blueprint $table) {
-        $table->increments('state_id');//->primary(); //状態ID
+        $table->increments('id');//->primary(); //状態ID
         $table->string('state_name'); //状態名
         $table->timestamps(); //登録・更新日
       });
