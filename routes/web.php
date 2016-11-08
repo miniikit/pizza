@@ -13,13 +13,18 @@
 
 Route::get('/', 'IndexController@index');
 
+Route::get('/menu','MenusController@index');
 
-Route::get('/company', 'PagesController@company');
-Route::get('/privacypolicy', 'PagesController@privacypolicy');
-Route::get('/agreement', 'PagesController@agreement');
-Route::get('/faq', 'PagesController@faq');
+
 
 Route::get('/menuadd',function(){
     return view('/menuadd/index');
 });
 
+
+
+
+Route::get('/company', 'PagesController@company');
+Route::get('/privacypolicy', 'PagesController@privacypolicy');
+Route::get('/agreement', 'PagesController@agreement');
+Route::get('/faq', 'PagesController@faq');
