@@ -19,10 +19,13 @@
 </head>
 <body>
 
-<main id="main">
+
+<main class="main">
 <div class="container">
 
 @yield('main')
+</main>
+</div>
 
 </div>
 </main>
