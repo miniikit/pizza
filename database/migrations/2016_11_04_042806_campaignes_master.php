@@ -17,8 +17,8 @@ class CampaignesMaster extends Migration
           $table->increments('id');//->primary();  //キャンペーンID
           $table->string('campaign_title'); //キャンペーンタイトル
           $table->string('campaign_image'); //キャンペーン画像
-          $table->string('campaign_text');  //キャンペーン内容分
-          $table->string('campaign_note');  //キャンペーン注意事項
+          $table->text('campaign_text');  //キャンペーン内容文
+          $table->text('campaign_note');  //キャンペーン注意事項
           $table->string('campaign_subject'); //キャンペーン対象者
           $table->dateTime('campaign_start_day'); //キャンペーン開始日
           $table->dateTime('campaign_end_day')->nullable(); //キャンペーン終了日

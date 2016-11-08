@@ -18,7 +18,7 @@ class ProductsMaster extends Migration
         $table->string('product_name'); //商品名
         $table->integer('price_id');//->references('id')->on('products_prices_master'); //価格ID
         $table->string('product_image'); //商品画像
-        $table->string('product_text'); //商品説明文
+        $table->text('product_text'); //商品説明文
         $table->integer('genre_id');//->references('id')->on('genres_master'); //ジャンルID
         $table->date('sales_start_date'); //販売開始日
         $table->date('sales_end_date')->nullable(); //販売終了日
