@@ -14,7 +14,8 @@ class MembersMaster extends Migration
     public function up()
     {
       Schema::create('members_master', function (Blueprint $table) {
-        $table->integer('member_id')->primary(); //会員ID
+        $table->increments('member_id');//->primary(); //会員ID
+        $table->string('member_password'); //パスワード
         $table->string('member_mail')->unique(); //メールアドレス
         $table->string('member_name'); //氏名
         $table->string('member_kana'); //カナ
@@ -23,10 +24,9 @@ class MembersMaster extends Migration
         $table->string('member_address2'); //住所2
         $table->string('member_address3')->nullable(); //住所3
         $table->integer('member_tel'); //電話番号
-        $table->integer('gender_id')->references('id')->on('gender_master'); //性別ID
+        $table->integer('gender_id');//->references('id')->on('gender_master'); //性別ID
         $table->integer('member_birth'); //生年月日
         $table->timestamps(); //登録・更新
-        $table->string('member_password'); //パスワード
       });
     }
 
