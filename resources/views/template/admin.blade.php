@@ -10,6 +10,7 @@
 <link href="/css/common/font-awesome.min.css" rel="stylesheet">
 <link href="/css/common/bootstrap.min.css" rel="stylesheet">
 <link href="/css/common/reset.css" rel="stylesheet">
+<link href="/css/common/main.css"  rel="stylesheet">
  
 @yield('css') 
  
@@ -18,11 +19,16 @@
 </head>
 <body>
 
+
 <main class="main">
 <div class="container">
+
 @yield('main')
 </main>
 </div>
+
+</div>
+</main>
 
 </body>
 </html>
