@@ -11,6 +11,7 @@ use App\CouponType;
 use App\Authority;
 use App\Product;
 use App\ProductPrice;
+use App\State;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call('AuthoritiesMasterSeeder');
         $this->call('ProducstMasterSeeder');
         $this->call('ProductsPricesMasterSeeder');
+        $this->call('StatesMasterSeeder');
 
         Model::reguard();
     }
@@ -176,5 +178,23 @@ class ProductsPricesMasterSeeder extends Seeder
             'price_change_enddate' => null,
             'employee_id' => '3',
         ]);
+    }
+}
+
+//状態
+class StatesMasterSeeder extends Seeder
+{
+
+    public function run()
+    {
+        DB::table('states_master')->delete();
+
+        State::create([
+            'state_name' => '未完了'
+        ]);
+        State::create([
+            'state_name' => '完了'
+        ]);
+
     }
 }
