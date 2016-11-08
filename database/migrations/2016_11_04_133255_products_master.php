@@ -33,6 +33,6 @@ class ProductsMaster extends Migration
      */
     public function down()
     {
-      Schema::dropIfExists('employees_master');
+      Schema::dropIfExists('products_master');
     }
 }

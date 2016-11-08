@@ -4,18 +4,19 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AuthoritiesMaster extends Migration
+class GenresMaster extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
+     // set seeder
     public function up()
     {
-      Schema::create('authorities_master', function (Blueprint $table) {
-        $table->increments('authority_id'); //権限ID
-        $table->string('authority_name'); //権限名
+      Schema::create('genres_master', function (Blueprint $table) {
+        $table->increments('genre_id'); //ジャンルID
+        $table->string('genre_name'); //ジャンル名
         $table->timestamps();
       });
     }
@@ -27,6 +28,6 @@ class AuthoritiesMaster extends Migration
      */
     public function down()
     {
-      Schema::dropIfExists('authorities_master');
+        Schema::dropIfExists('genres_master');
     }
 }
