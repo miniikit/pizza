@@ -342,6 +342,5 @@ class CampaignesMasterSeeder extends Seeder
             'campaign_end_day' => null,
         ]);
 
-
     }
 }
