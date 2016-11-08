@@ -16,7 +16,7 @@ class CouponsTypesMaster extends Migration
      public function up()
      {
        Schema::create('coupons_types_master', function (Blueprint $table) {
-           $table->increments('coupon_type_id'); //クーポン種別ID
+           $table->increments('id'); //クーポン種別ID
            $table->string('coupon_type'); //クーポン種別
            $table->timestamps();
        });

@@ -14,7 +14,7 @@ class MembersMaster extends Migration
     public function up()
     {
       Schema::create('members_master', function (Blueprint $table) {
-        $table->increments('member_id');//->primary(); //会員ID
+        $table->increments('id');//->primary(); //会員ID
         $table->string('member_password'); //パスワード
         $table->string('member_mail')->unique(); //メールアドレス
         $table->string('member_name'); //氏名

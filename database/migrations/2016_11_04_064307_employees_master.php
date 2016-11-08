@@ -14,7 +14,7 @@ class EmployeesMaster extends Migration
     public function up()
     {
       Schema::create('employees_master', function (Blueprint $table) {
-        $table->increments('emoloyee_id');//->primary(); //従業員ID
+        $table->increments('id');//->primary(); //従業員ID
         $table->string('emoloyee_name'); //従業員氏名
         $table->string('emoloyee_kana'); //従業員カナ
         $table->string('emoloyee_birth'); //生年月日

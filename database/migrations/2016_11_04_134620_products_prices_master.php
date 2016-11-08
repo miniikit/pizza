@@ -14,7 +14,7 @@ class ProductsPricesMaster extends Migration
     public function up()
     {
       Schema::create('products_prices_master', function (Blueprint $table) {
-        $table->increments('product_price_id');//->primary(); //価格ID
+        $table->increments('id');//->primary(); //価格ID
         $table->integer('product_id');//->references('id')->on('products_master'); //商品ID
         $table->integer('product_price'); //商品価格
         $table->date('price_change_startdate'); //価格変更開始日

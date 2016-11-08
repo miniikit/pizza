@@ -14,7 +14,7 @@ class ProductsMaster extends Migration
     public function up()
     {
       Schema::create('products_master', function (Blueprint $table) {
-        $table->increments('product_id');//->primary(); //商品ID
+        $table->increments('id');//->primary(); //商品ID
         $table->string('product_name'); //商品名
         $table->integer('price_id');//->references('id')->on('products_prices_master'); //価格ID
         $table->string('product_image'); //商品画像
