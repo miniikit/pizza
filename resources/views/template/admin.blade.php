@@ -18,7 +18,11 @@
 </head>
 <body>
 
+<main class="main">
+<div class="container">
 @yield('main')
+</main>
+</div>
 
 </body>
 </html>

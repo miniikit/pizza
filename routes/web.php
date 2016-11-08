@@ -19,3 +19,7 @@ Route::get('/privacypolicy', 'PagesController@privacypolicy');
 Route::get('/agreement', 'PagesController@agreement');
 Route::get('/faq', 'PagesController@faq');
 
+Route::get('/menuadd',function(){
+    return view('/menuadd/index');
+});
+
