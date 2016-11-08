@@ -14,8 +14,9 @@ class StatesMaster extends Migration
     public function up()
     {
       Schema::create('states_master', function (Blueprint $table) {
-        $table->integer('state_id')->primary(); //状態ID
+        $table->increments('id');//->primary(); //状態ID
         $table->string('state_name'); //状態名
+        $table->timestamps(); //登録・更新日
       });
     }
 
@@ -26,6 +27,6 @@ class StatesMaster extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('states_master');
+      Schema::dropIfExists('states_master');
     }
 }
