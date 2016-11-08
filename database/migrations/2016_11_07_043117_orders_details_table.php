@@ -13,7 +13,7 @@ class OrdersDetailsTable extends Migration
      */
     public function up()
     {
-      Schema::create('orders_details_master', function (Blueprint $table) {
+      Schema::create('orders_details_table', function (Blueprint $table) {
         $table->increments('id');//->primary(); //注文明細ID
         $table->integer('product_id');//->references('id')->on('products_master'); //商品ID
         $table->integer('number'); //数量
@@ -28,6 +28,6 @@ class OrdersDetailsTable extends Migration
      */
     public function down()
     {
-      Schema::dropIfExists('orders_details_master');
+      Schema::dropIfExists('orders_details_table');
     }
 }

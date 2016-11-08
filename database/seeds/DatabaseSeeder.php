@@ -7,11 +7,13 @@ use Carbon\Carbon;
 
 use App\Genre;
 use App\Gender;
-use App\CouponType;
+use App\Coupontype;
 use App\Authority;
 use App\Product;
 use App\ProductPrice;
 use App\State;
+use App\Order;
+use App\OrderDetail;
 
 class DatabaseSeeder extends Seeder
 {
@@ -31,6 +33,8 @@ class DatabaseSeeder extends Seeder
         $this->call('ProducstMasterSeeder');
         $this->call('ProductsPricesMasterSeeder');
         $this->call('StatesMasterSeeder');
+        $this->call('OrdersMasterSeeder');
+        $this->call('OrdersDetailsTableSeeder');
 
         Model::reguard();
     }
@@ -121,28 +125,28 @@ class ProducstMasterSeeder extends Seeder
 
         Product::create([
             'product_name' => '明太バターチーズ',
-            'price_id' => '1',
+            'price_id' => 1,
             'product_image' => 'public/images/product/1.jpg',
             'product_text' => '大きくカットしたポテトにコーンとベーコンをトッピングして、明太クリームソース、バター、チーズを合わせた、家族で楽しめるピザです。',
-            'genre_id' => '1',
+            'genre_id' => 1,
             'sales_start_date' => Carbon::now(),
             'sales_end_date' => null,
         ]);
         Product::create([
             'product_name' => 'じゃがバターベーコン',
-            'price_id' => '2',
+            'price_id' => 2,
             'product_image' => 'public/images/product/2.jpg',
             'product_text' => 'ホクホクのポテトと旨味が凝縮されたベーコンを特製マヨソースで味わって頂く商品です。バター風味豊かなキューブチーズが食材の味を一層引き立てます。',
-            'genre_id' => '1',
+            'genre_id' => 1,
             'sales_start_date' => Carbon::tomorrow(),
             'sales_end_date' => null,
         ]);
         Product::create([
             'product_name' => 'フレッシュモッツァレラのジェノベーゼ',
-            'price_id' => '3',
+            'price_id' => 3,
             'product_image' => 'public/images/product/3.jpg',
             'product_text' => '生クリームを加えたバジルの香り豊かなジェノベーゼソースと、まろやかでクセのないフレッシュモッツァレラの香りと濃厚チーズの組み合わせが大人向けの商品',
-            'genre_id' => '1',
+            'genre_id' => 1,
             'sales_start_date' => Carbon::today(),
             'sales_end_date' => null,
         ]);
@@ -158,25 +162,25 @@ class ProductsPricesMasterSeeder extends Seeder
         DB::table('products_prices_master')->delete();
 
         ProductPrice::create([
-            'product_id' => '1',
+            'product_id' => 1,
             'product_price' => '1990',
             'price_change_startdate' => Carbon::today(),
             'price_change_enddate' => null,
-            'employee_id' => '1',
+            'employee_id' => 1,
         ]);
         ProductPrice::create([
-            'product_id' => '2',
+            'product_id' => 2,
             'product_price' => '2200',
             'price_change_startdate' => Carbon::today(),
             'price_change_enddate' => null,
-            'employee_id' => '2',
+            'employee_id' => 2,
         ]);
         ProductPrice::create([
-            'product_id' => '3',
+            'product_id' => 3,
             'product_price' => '1800',
             'price_change_startdate' => Carbon::today(),
             'price_change_enddate' => null,
-            'employee_id' => '3',
+            'employee_id' => 3,
         ]);
     }
 }
@@ -194,6 +198,60 @@ class StatesMasterSeeder extends Seeder
         ]);
         State::create([
             'state_name' => '完了'
+        ]);
+
+    }
+}
+
+//注文
+class OrdersMasterSeeder extends Seeder
+{
+
+    public function run()
+    {
+        DB::table('orders_master')->delete();
+
+        Order::create([
+            'order_date' => Carbon::now(),
+            'order_appointment_date' => Carbon::tomorrow(),
+            'coupon_id' => 1,
+            'state_id' => 1
+        ]);
+        Order::create([
+            'order_date' => Carbon::now(),
+            'order_appointment_date' => Carbon::tomorrow(),
+            'coupon_id' => 2,
+            'state_id' => 2
+        ]);
+        Order::create([
+            'order_date' => Carbon::now(),
+            'order_appointment_date' => Carbon::tomorrow(),
+            'coupon_id' => 2,
+            'state_id' => 1
+        ]);
+
+    }
+}
+
+//注文明細
+class OrdersDetailsTableSeeder extends Seeder
+{
+
+    public function run()
+    {
+        DB::table('orders_details_table')->delete();
+
+        OrderDetail::create([
+            'product_id' => 1,
+            'number' => 1,
+        ]);
+        OrderDetail::create([
+            'product_id' => 2,
+            'number' => 2,
+        ]);
+        OrderDetail::create([
+            'product_id' => 3,
+            'number' => 3,
         ]);
 
     }

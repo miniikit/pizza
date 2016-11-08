@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Genre extends Model
+class OrderDetail extends Model
 {
-    protected $table = 'orders_details_master';
+    protected $table = 'orders_details_table';
     protected $fillable = ['product_id','number'];
 
 }
