@@ -175,7 +175,7 @@ class ProducstMasterSeeder extends Seeder
         Product::create([
             'product_name' => '明太バターチーズ',
             'price_id' => 1,
-            'product_image' => 'public/images/product/1.jpg',
+            'product_image' => '/images/product/1.jpg',
             'product_text' => '大きくカットしたポテトにコーンとベーコンをトッピングして、明太クリームソース、バター、チーズを合わせた、家族で楽しめるピザです。',
             'genre_id' => 1,
             'sales_start_date' => Carbon::now(),
@@ -184,7 +184,7 @@ class ProducstMasterSeeder extends Seeder
         Product::create([
             'product_name' => 'じゃがバターベーコン',
             'price_id' => 2,
-            'product_image' => 'public/images/product/2.jpg',
+            'product_image' => '/images/product/2.jpg',
             'product_text' => 'ホクホクのポテトと旨味が凝縮されたベーコンを特製マヨソースで味わって頂く商品です。バター風味豊かなキューブチーズが食材の味を一層引き立てます。',
             'genre_id' => 1,
             'sales_start_date' => Carbon::tomorrow(),
@@ -193,7 +193,7 @@ class ProducstMasterSeeder extends Seeder
         Product::create([
             'product_name' => 'フレッシュモッツァレラのジェノベーゼ',
             'price_id' => 3,
-            'product_image' => 'public/images/product/3.jpg',
+            'product_image' => '/images/product/3.jpg',
             'product_text' => '生クリームを加えたバジルの香り豊かなジェノベーゼソースと、まろやかでクセのないフレッシュモッツァレラの香りと濃厚チーズの組み合わせが大人向けの商品',
             'genre_id' => 1,
             'sales_start_date' => Carbon::today(),
