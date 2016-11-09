@@ -11,7 +11,7 @@ class MenusController extends Controller
 {
     public function index() {
 
-        $products = Product::with('productPrice')->get()->toArray();
+        $products = Product::with('productPrice')->get();
 
         return view('menu.index',compact('products'));
     }

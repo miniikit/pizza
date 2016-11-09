@@ -1,0 +1,42 @@
+
+.container.wrap {
+    padding: 100px 0;
+}
+.productsBox {
+    letter-spacing: -.4em;
+}
+
+.product {
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+    letter-spacing: normal;
+    background-color: #424242;
+    color: #fff;
+    margin: 0 1.666666667% 30px;
+    font-family: "ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", serif;
+
+}
+
+.product .title {
+    font-size: 18px;
+    box-sizing: border-box;
+    padding: 10px 5px;
+    line-height: 1.5;
+    color: #ebcb6d;
+    letter-spacing: 1px;
+}
+
+.product .praice {
+    padding: 0 5px;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+    font-size: 17px;
+    text-align: right;
+}
+
+.product .text {
+    padding: 0 5px;
+    line-height: 1.5;
+    font-size: 14px;
+}

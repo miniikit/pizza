@@ -36,7 +36,7 @@
                 <nav id="gNav">
                     <ul>
                         <li id="gTop"><a href="/">TOP</a></li>
-                        <li id="gMenu"><a href="#">MENU</a></li>
+                        <li id="gMenu"><a href="/menu">MENU</a></li>
                         <li id="gTopics"><a href="#">TOPICS</a></li>
                         <li id="gContact"><a href="#">CONTACT</a></li>
                         <li id="cart"><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>

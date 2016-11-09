@@ -1,10 +1,10 @@
 
 @extends('template/master')
 
-@section('title', '個人情報保護方針')
+@section('title', 'メニュー')
 
 @section('css')
-    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+    <link rel="stylesheet" href="/css/menu/index.css" media="all" title="no title">
 @endsection
 
 @section('plug')
@@ -13,19 +13,19 @@
 
 @section('main')
     <div class="container wrap">
-        {{ var_dump($products)}}
+        <div class="productsBox">
         @foreach ($products as $product)
             <div class="product">
                 <div class="inner">
                     <div class="image"><img src="{{ $product->product_image }}" alt="" /></div>
-                    <div class="title"><p>{{ $product->product_name }}</p></div>
-                    {{-- <div class="praice"><p>{{ $product->product_price->product_price }}</p></div> --}}
-                    <div class="praice"><p>praice</p></div>
+                    <div class="title"><h3>{{ $product->product_name }}</h3></div>
+                     <div class="praice"><p>{{ $product->productPrice->product_price }}円</p></div>
                     <div class="text"><p>{{ $product->product_text }}</p></div>
+                    <div class="btn">{{ $product->id }}</div>
                 </div>
             </div>
-            {{-- {{ $product }} --}}
         @endforeach
+        </div>
     </div>
 @endsection
 
