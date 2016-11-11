@@ -17,7 +17,7 @@ class EmployeesMaster extends Migration
         $table->increments('id');//->primary(); //従業員ID
         $table->string('emoloyee_name'); //従業員氏名
         $table->string('emoloyee_kana'); //従業員カナ
-        $table->string('emoloyee_birth'); //生年月日
+        $table->date('emoloyee_birth'); //生年月日
         $table->integer('gender_id');//->references('id')->on('gender_master'); //性別ID
         $table->date('emoloyee_agreement_date'); //契約開始日
         $table->date('emoloyee_agreement_enddate')->nullable(); //契約終了日
