@@ -31,5 +31,9 @@ Route::get('/faq', 'PagesController@faq');
 Route::get('/contact','ContactController@index');
 Route::post('/contact','ContactController@post');
 
+Route::get('/employeee/list', 'EmployeesController@employeeList'); //従業員一覧
+Route::get('/employeee/edit', 'EmployeesController@employeeEdit'); //従業員編集
+Route::get('/employeee/add', 'EmployeesController@employeeAdd'); //従業員追加
+
 
 Route::get('/test','TestsController@index');
