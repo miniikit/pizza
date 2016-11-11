@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('address1'); //住所1
             $table->string('address2'); //住所2
             $table->string('address3')->nullable(); //住所3
-            $table->integer('phone'); //電話番号
+            $table->string('phone'); //電話番号
             $table->integer('gender_id');//->references('id')->on('gender_master'); //性別ID
             $table->date('birthday'); //生年月日
             $table->integer('authority_id');//->references('id')->on('authorities_master'); //権限ID
