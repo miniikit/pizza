@@ -172,3 +172,9 @@
     width: 100%;
     float: left;
 }
+
+/*メニュー追加画面*/
+
+.form-price {
+    width: 25%;
+}
