@@ -28,3 +28,8 @@ Route::get('/privacypolicy', 'PagesController@privacypolicy');
 Route::get('/agreement', 'PagesController@agreement');
 Route::get('/faq', 'PagesController@faq');
 
+Route::get('/contact','ContactController@index');
+Route::post('/contact','ContactController@post');
+
+
+Route::get('/test','TestsController@index');
