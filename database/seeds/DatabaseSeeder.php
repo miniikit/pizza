@@ -211,16 +211,25 @@ class ProducstMasterSeeder extends Seeder
         Product::create([
             'product_name' => '十勝産コーンポタージュ',
             'price_id' => 5,
-            'product_image' => '/images/product/4.jpg',
+            'product_image' => '/images/product/5.jpg',
             'product_text' => 'コーンをふんだんに入れ、濃厚で上品な甘さが特徴のスープです。北海道十勝産スイートコーンを使用したクリーミーなスープに仕上げました。',
             'genre_id' => 2,
             'sales_start_date' => Carbon::today(),
             'sales_end_date' => null,
         ]);
         Product::create([
-            'product_name' => 'コカ・コーラ',
+            'product_name' => 'ローストチキンレッグ',
             'price_id' => 6,
-            'product_image' => '/images/product/4.jpg',
+            'product_image' => '/images/product/6.jpg',
+            'product_text' => '旨みたっぷりの骨付き鶏肉をガーリックなどの香辛料とハーブで味付けし、表面はパリｯと、中はジューシーにローストしたクリスマスにぴったりのローストチキンです。',
+            'genre_id' => 2,
+            'sales_start_date' => Carbon::today(),
+            'sales_end_date' => null,
+        ]);
+        Product::create([
+            'product_name' => 'コカ・コーラ',
+            'price_id' => 7,
+            'product_image' => '/images/product/7.jpg',
             'product_text' => '税抜き150円',
             'genre_id' => 3,
             'sales_start_date' => Carbon::today(),
@@ -228,8 +237,17 @@ class ProducstMasterSeeder extends Seeder
         ]);
         Product::create([
             'product_name' => '綾鷹',
-            'price_id' => 7,
-            'product_image' => '/images/product/4.jpg',
+            'price_id' => 8,
+            'product_image' => '/images/product/8.jpg',
+            'product_text' => '税抜き150円',
+            'genre_id' => 3,
+            'sales_start_date' => Carbon::today(),
+            'sales_end_date' => null,
+        ]);
+        Product::create([
+            'product_name' => 'Qooみかん',
+            'price_id' => 9,
+            'product_image' => '/images/product/9.jpg',
             'product_text' => '税抜き150円',
             'genre_id' => 3,
             'sales_start_date' => Carbon::today(),
@@ -283,13 +301,27 @@ class ProductsPricesMasterSeeder extends Seeder
         ]);
         ProductPrice::create([
             'product_id' => 6,
-            'product_price' => '162',
+            'product_price' => '734',
             'price_change_startdate' => Carbon::today(),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
         ProductPrice::create([
             'product_id' => 7,
+            'product_price' => '162',
+            'price_change_startdate' => Carbon::today(),
+            'price_change_enddate' => null,
+            'employee_id' => 3,
+        ]);
+        ProductPrice::create([
+            'product_id' => 8,
+            'product_price' => '162',
+            'price_change_startdate' => Carbon::today(),
+            'price_change_enddate' => null,
+            'employee_id' => 3,
+        ]);
+        ProductPrice::create([
+            'product_id' => 9,
             'product_price' => '162',
             'price_change_startdate' => Carbon::today(),
             'price_change_enddate' => null,
