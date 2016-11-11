@@ -17,16 +17,16 @@ class AdminMenusController extends Controller
 {
     //  従業員一覧ページ
     public function AdminMenuList()  {
-        return view('pizzzzza/menu.list');
+        return view('pizzzzza.menu.list');
     }
 
     //  従業員編集ページ
     public function AdminMenuEdit()  {
-        return view('pizzzzza/menu.edit');
+        return view('pizzzzza.menu.edit');
     }
 
     //  従業員追加ページ
     public function AdminMenuAdd()  {
-        return view('pizzzzza/menu.add');
+        return view('pizzzzza.menu.add');
     }
 }
