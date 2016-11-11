@@ -15,7 +15,7 @@ class CartsController extends Controller
 {
     //  カートページ
     public function index()  {
-        return 'cart';
+        return view('cart.index');
     }
 
     public function store(Request $request) {

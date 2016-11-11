@@ -39,4 +39,10 @@
     padding: 0 5px;
     line-height: 1.5;
     font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.product .btn {
+    text-align: center;
+    margin-bottom: 20px;
 }
