@@ -15,6 +15,8 @@ Route::get('/', 'IndexController@index');
 
 Route::get('/menu','MenusController@index');
 
+Route::post('/cart/store','CartsController@store');
+Route::get('/cart','CartsController@index')->name('cart');
 
 
 Route::get('/menuadd',function(){
