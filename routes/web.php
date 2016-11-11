@@ -15,13 +15,13 @@ Route::get('/', 'IndexController@index');
 
 Route::get('/menu','MenusController@index');
 
+Route::post('/cart/store','CartsController@store');
+Route::get('/cart','CartsController@index')->name('cart');
 
 
 Route::get('/menuadd',function(){
     return view('/menuadd/index');
 });
-
-
 
 Route::get('/company', 'PagesController@company');
 Route::get('/privacypolicy', 'PagesController@privacypolicy');
@@ -30,6 +30,15 @@ Route::get('/faq', 'PagesController@faq');
 
 Route::get('/contact','ContactController@index');
 Route::post('/contact','ContactController@post');
+
+Route::get('/employee/list', 'EmployeesController@employeeList'); //従業員一覧
+Route::get('/employee/edit', 'EmployeesController@employeeEdit'); //従業員編集
+Route::get('/employee/add', 'EmployeesController@employeeAdd'); //従業員追加
+
+Route::get('/menu/list', 'AdminMenusController@AdminMenuList'); //従業員用メニュー一覧
+Route::get('/menu/edit', 'AdminMenusController@AdminMenuEdit'); //従業員用メニュー編集
+Route::get('/menu/add', 'AdminMenusController@AdminMenuAdd'); //従業員用メニュー追加
+
 
 
 Route::get('/test','TestsController@index');

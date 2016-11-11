@@ -14,7 +14,17 @@ use App\Http\Requests;
 class CartsController extends Controller
 {
     //  カートページ
-    public function cart()  {
-        return view('cart');
+    public function index()  {
+        return view('cart.index');
+    }
+
+    public function store(Request $request) {
+
+        $id  = $request->get("id");
+        $sum = $request->get("sum");
+
+        $cart = new \App\Service\CartService();
+
+        $cart->addProduct($id,$sum);
     }
 }
