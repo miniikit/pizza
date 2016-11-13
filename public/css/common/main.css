@@ -136,7 +136,7 @@
     padding-top: 72px;
     background-image: url(../../images/common/background01.png);
     background-position: center;
-    background-size: cover;
+    background-size: contain;
 }
 
 #header {
