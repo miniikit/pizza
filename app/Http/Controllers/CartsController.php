@@ -26,5 +26,7 @@ class CartsController extends Controller
         $cart = new \App\Service\CartService();
 
         $cart->addProduct($id,$sum);
+
+        return redirect()->route('cart');
     }
 }

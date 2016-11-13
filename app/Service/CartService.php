@@ -14,7 +14,7 @@
              $products = session()->get("products",[]);
 
              for ($i=0; $i < $sum ; $i++) {
-                 $products[] = $product;
+                //  $products[] = $product;
              }
 
              session()->put("products", $products);
