@@ -105,5 +105,11 @@
             $('.product .title').heightLine();
             $('.product .text').heightLine();
         });
+        $(function(){
+            $('.form-bottom').click(function(){
+                var form = $(this).parent();
+                $(form).submit();
+            });
+        })
     </script>
 @endsection
