@@ -108,3 +108,21 @@
     letter-spacing: 5px;
     margin-left: 2%;
 }
+
+@media screen and (max-width: 763px){
+    .product {
+        width: 100%;
+        margin: 0;
+    }
+    .product .image {
+        text-align: center;
+
+    }
+    .product .image img {
+        width: 100%;
+    }
+
+    .product .btn {
+        margin-bottom: 30px;
+    }
+}
