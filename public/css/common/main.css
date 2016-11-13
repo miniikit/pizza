@@ -158,6 +158,7 @@
     position: absolute;
     top: -8px;
     right: 10px;
+    font-size: 15px;
 }
 
 #gNav ul {
@@ -191,7 +192,7 @@
 #gNav a {
     display: block;
     color: #484848;
-    letter-spacing: 2px;
+    letter-spacing: 5px;
     font-weight: 600;
     padding: 10px 15px;
 }
