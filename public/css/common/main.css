@@ -5,12 +5,13 @@
    body {
        position: relative;
        background-color: #ffffff;
+       font-family: monospace;
    }
    .page {
        color: #333333;
        font-size: 14px;
        line-height: 1.5;
-       font-family:'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
+       font-family: monospace;
    }
 
    em {
