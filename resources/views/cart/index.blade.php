@@ -15,8 +15,26 @@
     <div id="cart" class="wrap">
         <h2>CART</h2>
 
-        @if (false)
+        @if ($products)
+            {{-- {{ dd($productMap) }} --}}
+            @foreach ($productMap as $product)
+                <ul>
+                    <li><img src="{{$product->product_image}}" alt="" /></li>
+                    <li>{{$product->product_name}}</li>
+                    <li>{{$product->product_text}}</li>
+                    <li>{{$product->productPrice->product_price}}</li>
+                    <li>{{$productCount[$product->id]}}</li>
+                    <li>{{number_format($productCount[$product->id] * $product->productPrice->product_price)}}</li>
+                </ul>
+            @endforeach
 
+            <div class="total">
+                <p>合計金額: <span>{{ number_format($total) }}</span>円</p>
+            </div>
+            <div class="btn">
+                <div class="inner"><a href="/menu">買い物を続ける</a></div>
+                <div class="inner"><a href="/menu">レジに進む</a></div>
+            </div>
         @else
             <div class="empty">
                 <div class="inner">

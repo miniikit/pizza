@@ -11,12 +11,16 @@
 |
 */
 
+// トップページ
 Route::get('/', 'IndexController@index');
 
+// メニューページ
 Route::get('/menu','MenusController@index');
 
-Route::post('/cart/store','CartsController@store');
+// カートページ
 Route::get('/cart','CartsController@index')->name('cart');
+Route::post('/cart/store','CartsController@store');
+Route::get('/cart/clear','CartsController@clear');
 
 
 Route::get('/menuadd',function(){
