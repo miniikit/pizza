@@ -16,12 +16,11 @@
 
              //セッションデータを取得、nullの場合は空の配列
              $products = session()->get("products",[]);
-
+             $productMap = session()->get("productMap",[]);
              $productCount = [];
-             $productMap = [];
              $total = 0;
 
-            foreach ($products as  $product) {
+            foreach ($products as $product) {
 
 
                 if(isset($productCount[$product->id])){
@@ -31,15 +30,14 @@
                 }else{
 
                     $productCount[$product->id] = 1;
-                    $productMap[$product->id] = $product;
 
                 }
 
-
+                // 合計金額の処理
                 $total += $product->productPrice->product_price;
             }
 
-            
+
             return [$products,$productCount,$productMap,$total];
 
          }
@@ -50,6 +48,8 @@
 
              // セッションデータを取得、nullの場合は空の配列
              $products = session()->get("products",[]);
+             $productMap = session()->get("productMap",[]);
+
 
              // 引数idの商品を取得
              $product = Product::with('productPrice')->find($id);
@@ -59,14 +59,28 @@
                  $products[] = $product;
              }
 
+             $productMap[$product->id] = $product;
+
              // セッションに格納する
              session()->put("products", $products);
+             session()->put("productMap", $productMap);
          }
 
 
          // カートの中身を空にする
          static public function clear() {
              session()->flush();
+         }
+
+         /**
+          * @return int
+          */
+         static public function countCartContents() {
+
+             $productMap = session()->get("productMap",[]);
+             $count = count($productMap);
+
+            return compact('count');
          }
 
      }

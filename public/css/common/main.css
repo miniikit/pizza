@@ -215,6 +215,7 @@
 #gNav #cart a {
     padding: 8px 9px 8px 8px;
     transition: 0.5s;
+    position: relative;
 }
 
 #gNav #cart a:hover {
@@ -453,6 +454,18 @@
     display: block;
     color: #696666;
     letter-spacing: 1.5px;
+}
+
+#cartCount {
+    display: none;
+    position: absolute;
+    font-size: 11px;
+    background-color: #dcdcdc;
+    text-align: center;
+    padding: 5px 1px 4px 6px;
+    border-radius: 20px;
+    top: -2px;
+    right: -1px;
 }
 
 .sk-cube-grid {
