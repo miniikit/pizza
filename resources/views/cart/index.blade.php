@@ -14,8 +14,20 @@
 @section('main')
     <div id="cart" class="wrap">
         <h2>CART</h2>
-        @if (true)
-            
+
+        @if (false)
+
+        @else
+            <div class="empty">
+                <div class="inner">
+                    <i class="fa fa-cube" aria-hidden="true"></i>
+                    <h3>カートの中にはなにもありませんでした。</h3>
+                </div>
+
+            </div>
+            <div class="btn">
+                <div class="inner"><a href="/menu">商品一覧へ</a></div>
+            </div>
         @endif
     </div>
 @endsection

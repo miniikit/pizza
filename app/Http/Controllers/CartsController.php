@@ -18,5 +18,15 @@ class CartsController extends Controller
         return view('cart');
     }
 
-    
+    public function store(Request $request) {
+
+        $id  = $request->get("id");
+        $sum = $request->get("sum");
+
+        $cart = new \App\Service\CartService();
+
+        $cart->addProduct($id,$sum);
+
+        return redirect()->route('cart');
+    }
 }
