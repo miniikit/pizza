@@ -15,16 +15,8 @@ class CartsController extends Controller
 {
     //  カートページ
     public function index()  {
-        return view('cart.index');
+        return view('cart');
     }
 
-    public function store(Request $request) {
-
-        $id  = $request->get("id");
-        $sum = $request->get("sum");
-
-        $cart = new \App\Service\CartService();
-
-        $cart->addProduct($id,$sum);
-    }
+    
 }
