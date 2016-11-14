@@ -21,7 +21,7 @@
 		$("a[href^=#]").smoothScroll();
 	//対象の要素をスクロールに追従するようにする
 		//$("#fixBox").fixPosition("stopperID","normal");
-	}
+	};
 	//onload
 	$(function() {
 		config();
@@ -33,6 +33,13 @@
 		$(window).load(function() {
 			$("#loading").fadeOut();
 		});
+
+        $(function(){
+            $('.form-bottom').click(function(){
+                var form = $(this).parent();
+                $(form).submit();
+            });
+        })
 
 		$.ajax({
 			type: 'GET',

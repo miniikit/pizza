@@ -45,7 +45,6 @@ h2::after {
     text-align: center;
     margin-top: 50px;
 }
-
 .btn .inner {
     display: inline-block;
     width: 200px;
@@ -58,10 +57,33 @@ h2::after {
     color: #fff;
     background-color: #424242;
     letter-spacing: 5px;
-    transition: ease-in 0.5;
+    transition: ease-in 0.2s;
+    border: solid 1px #424242
 }
 
 .btn .inner a:hover {
     letter-spacing: 6px;
     opacity: 0.8;
+}
+
+.btn .inner.special {
+    margin-right: 2%;
+}
+
+.btn .inner.special a {
+    background-color: #fff;
+    color: #424242;
+    box-sizing: border-box;
+}
+
+.clear.btn {
+    text-align: right;
+    cursor: pointer;
+}
+
+.clear.btn a {
+    text-align: center;
+    background-color: #888888;
+    font-size: 12px;
+    border: none;
 }

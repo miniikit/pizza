@@ -17,6 +17,14 @@
 
         @if ($products)
             {{-- {{ dd($productMap) }} --}}
+
+            <div class="clear btn">
+                <form id="clear" action="/cart/clear" method="post">
+                    <div class="inner form-bottom"><a>カートをカラにする</a></div>
+                    {{ csrf_field() }}
+                </form>
+            </div>
+
             @foreach ($productMap as $product)
                 <ul>
                     <li><img src="{{$product->product_image}}" alt="" /></li>
@@ -32,7 +40,7 @@
                 <p>合計金額: <span>{{ number_format($total) }}</span>円</p>
             </div>
             <div class="btn">
-                <div class="inner"><a href="/menu">買い物を続ける</a></div>
+                <div class="inner special"><a href="/menu">買い物を続ける</a></div>
                 <div class="inner"><a href="/menu">レジに進む</a></div>
             </div>
         @else

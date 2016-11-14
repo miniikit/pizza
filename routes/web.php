@@ -20,20 +20,26 @@ Route::get('/menu','MenusController@index');
 // カートページ
 Route::get('/cart','CartsController@index')->name('cart');
 Route::post('/cart/store','CartsController@store');
-Route::get('/cart/clear','CartsController@clear');
+Route::post('/cart/clear','CartsController@clear');
 
-
-Route::get('/menuadd',function(){
-    return view('/menuadd/index');
-});
-
+// etc..
 Route::get('/company', 'PagesController@company');
 Route::get('/privacypolicy', 'PagesController@privacypolicy');
 Route::get('/agreement', 'PagesController@agreement');
 Route::get('/faq', 'PagesController@faq');
 
+
+// コンタクト
 Route::get('/contact','ContactController@index');
 Route::post('/contact','ContactController@post');
+
+
+// API
+Route::get('/app/countCartContents','ApisController@countCartContents');
+
+
+
+// --------------------------- 管理者用 ---------------------------------------
 
 
 //管理者用ページ
@@ -46,7 +52,8 @@ Route::get('/pizzzzza/menu/edit', 'AdminMenusController@AdminMenuEdit'); //従�
 Route::get('/pizzzzza/menu/add', 'AdminMenusController@AdminMenuAdd'); //従業員用メニュー追加
 
 
+
+
+
 //テスト
 Route::get('/test','TestsController@index');
-
-Route::get('/app/countCartContents','ApisController@countCartContents');
