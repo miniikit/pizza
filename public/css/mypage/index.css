@@ -1,0 +1,68 @@
+﻿#order{
+    width:100%;
+}
+
+.fonts h2 {
+    text-align: center;
+    letter-spacing: 8px;
+    font-size: 40px;
+    margin-bottom: 80px;
+    color: #656565;
+    position: relative;
+}
+.fonts h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    background: #656565;
+    height: 3px;
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    margin-left: -25px;
+}
+
+.fonts h2:nth-child(n+1) {
+    margin-top: 50px;
+}
+
+
+
+
+.history{
+    height:30px;
+    width:75%;
+    padding: .5em .75em;
+    border: 1.5px solid #ccc;
+    border-radius: 4px;
+    margin:0 auto;
+    margin-bottom:25px;
+
+}
+.history:hover{
+    background-color: rgba(255,255,255,0.2);
+}
+
+
+.mini{
+    width: 40%;
+    text-align:center;
+    float: left;
+    margin-bottom:5px;
+}
+.date{
+    margin-right:0;
+}
+.pay{
+    margin-left:8%;
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 763px){
+
+}
