@@ -15,7 +15,7 @@
     <div class="container wrap">
         <h1>お問い合わせ</h1>
          <div id="contact">
-          <form>
+          <form action="contactmail" method="post">
               <ul id="from-group">
                 <li>
                   <label>メールアドレス(必須)</label>
