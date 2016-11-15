@@ -64,3 +64,7 @@ Route::get('/pizzzzza/menu/add', 'AdminMenusController@AdminMenuAdd'); //従業�
 
 //テスト
 Route::get('/test','TestsController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
