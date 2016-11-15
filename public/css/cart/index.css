@@ -22,23 +22,83 @@ h2::after {
     left: 50%;
     margin-left: -25px;
 }
-.pruduct {
-    letter-spacing: -.4em;
-    margin-top: 50px;
+
+#table {
+    margin-bottom: 50px;
 }
 
-.pruduct > div {
+#table th{
+    background-color: #424242;
+    text-align: center;
+    padding: 10px 0;
+    color: #eee;
+    letter-spacing: 2px;
+}
+
+#table th:nth-child(2) {
+    width: 15%;
+}
+
+#table th:nth-child(4) {
+    width: 10%;
+}
+#table th:nth-child(5) {
+    width: 10%;
+}
+#table th:nth-child(6) {
+    width: 10%;
+}
+#table th:nth-child(7) {
+    width: 5%;
+}
+
+#table td{
+    vertical-align: middle;
+    text-align: center;
+    background-color: #fff;
+    border: solid 2px #eee;
+    padding: 5px;
+}
+
+#table td:nth-child(3) {
+    text-align: left;
+}
+
+.btn span {
+    position: relative;
     display: inline-block;
-    letter-spacing: normal;
+    width: 45px;
+    border: solid 1px #bfbfbf;
+    background-color: #fff;
     vertical-align: top;
-}
 
-.pruduct > div:first-child {
-    width: 38.125%;
 }
-
-.pruduct > div:last-child {
-    width: 61.875%;
+.btn span:after {
+    content: "▼";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-right: 5px;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: #424242;
+}
+.btn option,
+.btn select {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    padding: 0;
+    margin: 0;
+    text-indent: 1em;
+    background-color: transparent;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
 }
 
 .total {
@@ -51,6 +111,18 @@ h2::after {
     position: relative;
 }
 
+.tablebox,.tablebox tbody,.tablebox tr{
+    width: 100%;
+}
+
+.tablebox tr td:first-child {
+    width: 20%;
+    padding: 15px 10px;
+    text-align: center;
+    background-color: #888;
+    color: #eee;
+    letter-spacing: 2px;
+}
 
 
 .empty {
@@ -108,7 +180,7 @@ h2::after {
 
 .clear.btn {
     text-align: right;
-    cursor: pointer;
+    margin-bottom: 50px;
 }
 
 .clear.btn a {
@@ -116,4 +188,5 @@ h2::after {
     background-color: #888888;
     font-size: 12px;
     border: none;
+    cursor: pointer;
 }

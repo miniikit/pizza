@@ -83,4 +83,20 @@
             return compact('count');
          }
 
+         //　一部商品を消す
+         public function popProduct($id) {
+
+             $productMap = session()->get("productMap",[]);
+             $products = session()->get("products",[]);
+
+            foreach ($products as $index => $product) {
+                if($product->id == $id){
+                    session()->forget("products.$index");
+                }
+            }
+
+             unset($productMap[$id]);
+             session()->put("productMap", $productMap);
+
+         }
      }
