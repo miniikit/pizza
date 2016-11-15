@@ -22,6 +22,36 @@ h2::after {
     left: 50%;
     margin-left: -25px;
 }
+.pruduct {
+    letter-spacing: -.4em;
+    margin-top: 50px;
+}
+
+.pruduct > div {
+    display: inline-block;
+    letter-spacing: normal;
+    vertical-align: top;
+}
+
+.pruduct > div:first-child {
+    width: 38.125%;
+}
+
+.pruduct > div:last-child {
+    width: 61.875%;
+}
+
+.total {
+    text-align: right;
+}
+
+.total p {
+    display: inline-block;
+    font-size: 20px;
+    position: relative;
+}
+
+
 
 .empty {
     text-align: center;

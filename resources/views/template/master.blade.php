@@ -30,6 +30,12 @@
                 <span>Now Loading..</span>
             </div>
         </div>
+        <div id="info">
+            <div class="wrap">
+                <a href="#">ログイン</a>
+                <a href="#">ログアウト</a>
+            </div>
+        </div>
         <header id="header">
             <div class="wrap">
                 <h1><a href="/"><img src="images/common/logo.png" alt="OIC PIZZA" /></a></h1>
