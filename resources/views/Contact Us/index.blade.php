@@ -12,9 +12,9 @@
 @endsection
 
 @section('main')
-    <div class="container wrap">
+    <div class="container-wrap">
         <h1>お問い合わせ</h1>
-        <div class="container">
+        <div id="contact">
           <form>
               <div class="form-group">
                   <label>メールアドレス(必須)</label>
@@ -26,7 +26,7 @@
               </div>
               <div class="checkbox">
                   <label>
-                      <input type="checkbox">
+                      <input type="checkbox">XXXに同意します
                   </label>
               </div>
               <button type="submit"></button>

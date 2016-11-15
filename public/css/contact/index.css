@@ -1,0 +1,51 @@
+.container .wrap {
+    padding: 80px 10px;
+    width: 100%;
+}
+
+.container h1 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+
+#contact,
+#contact form{
+  width: 100%;
+  display: block;
+  background-color: #C8C8C8;
+  text-align: -webkit-center;
+}
+
+#contact .form-group{
+  font-size: 18px;
+}
+
+#contact label{
+  font-size: 20px;
+}
+
+#contact #from-group{
+  width: 400px;
+  padding: 20px;
+}
+
+#contact #from-group li{
+  padding: 5px;
+}
+
+#contact #from-group textarea{
+  width: 100%;
+  height: 100%;
+  resize: none;
+}
+#contact #from-group .checkbox{
+  margin-top: 10px;
+}
+#contact #from-group button{
+  margin-top: 10px;
+}
+
+input.form-mail{
+  width: 100%;
+}
