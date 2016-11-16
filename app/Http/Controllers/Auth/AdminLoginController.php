@@ -20,11 +20,18 @@ public function login(Request $request) {
     $email = $request->get('email');
     $password = $request->get('password');
 
-    $pizza = DB::table('users')->where('users.email',$email)->whereIn('users.authority_id',[1,2,3])->get();
+    $pizza = DB::table('users')->where('users.email',$email)->get();
+    
+    if(!isset($pizza)){
+        // からの時
+        dd("だめだよ");
+    }
 
-    if (empty($pizza)){
+
+ if (isset($pizza)){
+    //登録されていないメールアドレスを入力したときにエラー。
+    $tmp = $pizza[0];
  
-    list($tmp) = $pizza;
     $authId = $tmp->authority_id;
 
 if($authId === 1 || $authId === 2 || $authId === 3){
@@ -37,9 +44,11 @@ if($authId === 1 || $authId === 2 || $authId === 3){
     }else{
         return "ログイン失敗";
     }
-   }  
+   }else{
+       return "権限がありません";
+   }
   }else{
-      return "ログインエラー";
-  }
+      return "登録されていないメールアドレスです（ DEV";
+  
  }
 }
