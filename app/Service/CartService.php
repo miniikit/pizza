@@ -16,29 +16,16 @@
 
              //セッションデータを取得、nullの場合は空の配列
              $products = session()->get("products",[]);
-             $productMap = session()->get("productMap",[]);
-             $productCount = [];
+             $productCount = session()->get("productCount",[]);
              $total = 0;
 
             foreach ($products as $product) {
-
-
-                if(isset($productCount[$product->id])){
-
-                    $productCount[$product->id] += 1;
-
-                }else{
-
-                    $productCount[$product->id] = 1;
-
-                }
-
                 // 合計金額の処理
-                $total += $product->productPrice->product_price;
+                $total += $product->productPrice->product_price * $productCount[$product->id];
             }
 
 
-            return [$products,$productCount,$productMap,$total];
+            return [$products,$productCount,$total];
 
          }
 
@@ -48,22 +35,23 @@
 
              // セッションデータを取得、nullの場合は空の配列
              $products = session()->get("products",[]);
-             $productMap = session()->get("productMap",[]);
-
+             $productCount = session()->get("productCount",[]);
 
              // 引数idの商品を取得
              $product = Product::with('productPrice')->find($id);
 
-             // 数量分追加する
-             for ($i=0; $i < $sum ; $i++) {
-                 $products[] = $product;
-             }
+             $products[$id] = $product;
 
-             $productMap[$product->id] = $product;
+
+             if (isset($productCount[$id])) {
+                 $productCount[$id] += $sum;  
+             }else {
+                 $productCount[$id] = $sum;
+             }
 
              // セッションに格納する
              session()->put("products", $products);
-             session()->put("productMap", $productMap);
+             session()->put("productCount", $productCount);
          }
 
 
@@ -77,8 +65,8 @@
           */
          static public function countCartContents() {
 
-             $productMap = session()->get("productMap",[]);
-             $count = count($productMap);
+             $productCount = session()->get("productCount",[]);
+             $count = count($productCount);
 
             return compact('count');
          }
@@ -86,16 +74,14 @@
          //　一部商品を消す
          public function popProduct($id) {
 
-             $productMap = session()->get("productMap",[]);
              $products = session()->get("products",[]);
+             $productCount = session()->get("productCount",[]);
 
-            foreach ($products as $index => $product) {
-                if($product->id == $id){
-                    session()->forget("products.$index");
-                }
-            }
 
-             unset($productMap[$id]);
+             unset($products[$id]);
+             unset($productCount[$id]);
+
+             session()->put("products", $products);
              session()->put("productMap", $productMap);
 
          }
