@@ -38,7 +38,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($productMap as $product)
+                @foreach ($products as $product)
                     <tr>
                         <td><img src="{{$product->product_image}}" alt="" /></td>
                         <td>{{$product->product_name}}</td>

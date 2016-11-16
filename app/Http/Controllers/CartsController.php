@@ -18,9 +18,9 @@ class CartsController extends Controller
 
         $cart = new CartService();
 
-        list($products,$productCount,$productMap,$total) = $cart->showCart();
+        list($products,$productCount,$total) = $cart->showCart();
 
-        return view('cart.index',compact('products','productCount','productMap','total'));
+        return view('cart.index',compact('products','productCount','total'));
     }
 
     public function store(Request $request) {
