@@ -1,6 +1,16 @@
-@extends('layouts.app')
+@extends('template.admin')
 
-@section('content')
+@section('title', 'Login')
+
+@section('css')
+    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+@endsection
+
+@section('js')
+    <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+@endsection
+
+@section('main')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

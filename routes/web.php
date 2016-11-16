@@ -65,6 +65,10 @@ Route::get('/pizzzzza/menu/add', 'AdminMenusController@AdminMenuAdd'); //従業�
 //テスト
 Route::get('/test','TestsController@index');
 
+
+
+//auth
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/pizzzzza/login', 'auth\AdminLoginController@form'); //管理画面ログインページ
+Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理画面トップ

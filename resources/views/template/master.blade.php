@@ -32,8 +32,11 @@
         </div>
         <div id="info">
             <div class="wrap">
-                <a href="#">ログイン</a>
-                <a href="#">ログアウト</a>
+            @if (Auth::guest())
+                <a href="/login">ログイン</a>
+                @else
+                <a href="/logout">ログアウト</a>
+                @endif
             </div>
         </div>
         <header id="header">
