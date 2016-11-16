@@ -28,6 +28,13 @@ Route::get('/privacypolicy', 'PagesController@privacypolicy');
 Route::get('/agreement', 'PagesController@agreement');
 Route::get('/faq', 'PagesController@faq');
 
+//マイページ
+Route::get('/mypage/order/history','MypagesController@orderHistory');
+Route::get('/mypage/order/detail','MypagesController@orderDetail');
+Route::get('/mypage/detail','MypagesController@detail');
+Route::get('/mypage/edit','MypagesController@edit');
+Route::get('/mypage/confirm','MypagesController@confirm');
+
 
 // コンタクト
 Route::get('/contact','ContactController@index');
@@ -57,3 +64,11 @@ Route::get('/pizzzzza/menu/add', 'AdminMenusController@AdminMenuAdd'); //従業�
 
 //テスト
 Route::get('/test','TestsController@index');
+
+
+
+//auth
+Auth::routes();
+
+Route::get('/pizzzzza/login', 'auth\AdminLoginController@form'); //管理画面ログインページ
+Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理画面トップ

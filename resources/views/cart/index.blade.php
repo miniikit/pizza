@@ -26,14 +26,42 @@
             </div>
 
             @foreach ($productMap as $product)
-                <ul>
-                    <li><img src="{{$product->product_image}}" alt="" /></li>
-                    <li>{{$product->product_name}}</li>
-                    <li>{{$product->product_text}}</li>
-                    <li>{{$product->productPrice->product_price}}</li>
-                    <li>{{$productCount[$product->id]}}</li>
-                    <li>{{number_format($productCount[$product->id] * $product->productPrice->product_price)}}</li>
-                </ul>
+                <div class="pruduct">
+                    <div class="image"><img src="{{$product->product_image}}" alt="" /></div>
+                    <div class="content">
+                        <table id="tablebox">
+                            <tbody>
+                                <tr>
+                                    <td class="name">商品名</td>
+                                    <td>{{$product->product_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="name">詳細</td>
+                                    <td>{{$product->product_text}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="name">金額</td>
+                                    <td>{{$product->productPrice->product_price}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="name">数量</td>
+                                    <td>
+                                        <select class="sum" name="sum">
+                                            <option value="{{$productCount[$product->id]}}">{{$productCount[$product->id]}}</option>
+                                            @for ($i=1; $i <= 10 ; $i++)
+                                            <option value="{{$i}}">{{$i}}</option>
+                                            @endfor
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="subtotal">小計</td>
+                                    <td>{{number_format($productCount[$product->id] * $product->productPrice->product_price)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             @endforeach
 
             <div class="total">
