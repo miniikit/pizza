@@ -50,4 +50,16 @@ class CartsController extends Controller
         return redirect()->route('cart');
 
     }
+
+    public function edit(Request $request) {
+
+        $id  = $request->get("id");
+        $sum = $request->get("sum");
+
+        $cart = new CartService();
+        $cart->editCartSum($id,$sum);
+
+        return redirect()->route('cart');
+
+    }
 }

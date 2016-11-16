@@ -45,14 +45,18 @@
                         <td>{{$product->product_text}}</td>
                         <td>{{number_format($product->productPrice->product_price)}}円</td>
                         <td class="btn">
-                            <span>
-                                <select class="sum" name="sum">
-                                    <option value="{{$productCount[$product->id]}}">{{$productCount[$product->id]}}</option>
-                                    @for ($i=1; $i <= 10 ; $i++)
-                                    <option value="{{$i}}">{{$i}}</option>
-                                    @endfor
-                                </select>
-                            </span>
+                            <form class="" action="/cart/edit/" method="post">
+                                <span>
+                                    <select class="sum" name="sum">
+                                        <option value="{{$productCount[$product->id]}}">{{$productCount[$product->id]}}</option>
+                                        @for ($i=1; $i <= 10 ; $i++)
+                                        <option value="{{$i}}">{{$i}}</option>
+                                        @endfor
+                                    </select>
+                                </span>
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                {{ csrf_field() }}
+                            </form>
                         </td>
                         <td>{{number_format($productCount[$product->id] * $product->productPrice->product_price)}}円</td>
                         <td><form action="/cart/clear/{{$product->id}}" method="post"><div class="form-bottom"><a><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>{{ csrf_field() }}</form></td>
@@ -84,5 +88,10 @@
 @endsection
 
 @section('script')
-
+    <script type="text/javascript">
+    $(".sum").change(function(){
+        var form = $(this).parent().parent();
+        $(form).submit();
+    });
+    </script>
 @endsection

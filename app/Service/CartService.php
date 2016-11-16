@@ -44,7 +44,7 @@
 
 
              if (isset($productCount[$id])) {
-                 $productCount[$id] += $sum;  
+                 $productCount[$id] += $sum;
              }else {
                  $productCount[$id] = $sum;
              }
@@ -82,7 +82,17 @@
              unset($productCount[$id]);
 
              session()->put("products", $products);
-             session()->put("productMap", $productMap);
+             session()->put("productCount", $productCount);
 
          }
+
+         public function editCartSum($id,$sum) {
+
+             $productCount = session()->get("productCount",[]);
+
+             $productCount[$id] = $sum;
+
+             session()->put("productCount", $productCount);
+         }
+
      }

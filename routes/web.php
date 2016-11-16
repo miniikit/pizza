@@ -21,6 +21,7 @@ Route::get('/menu','MenusController@index');
 Route::get('/cart','CartsController@index')->name('cart');
 Route::post('/cart/store','CartsController@store');
 Route::post('/cart/clear/{id}','CartsController@pop');
+Route::post('/cart/edit/','CartsController@edit');
 Route::post('/cart/clear','CartsController@clear');
 
 // etc..
