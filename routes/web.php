@@ -20,6 +20,7 @@ Route::get('/menu','MenusController@index');
 // カートページ
 Route::get('/cart','CartsController@index')->name('cart');
 Route::post('/cart/store','CartsController@store');
+Route::post('/cart/clear/{id}','CartsController@pop');
 Route::post('/cart/clear','CartsController@clear');
 
 // etc..

@@ -25,44 +25,41 @@
                 </form>
             </div>
 
-            @foreach ($productMap as $product)
-                <div class="pruduct">
-                    <div class="image"><img src="{{$product->product_image}}" alt="" /></div>
-                    <div class="content">
-                        <table id="tablebox">
-                            <tbody>
-                                <tr>
-                                    <td class="name">商品名</td>
-                                    <td>{{$product->product_name}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="name">詳細</td>
-                                    <td>{{$product->product_text}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="name">金額</td>
-                                    <td>{{$product->productPrice->product_price}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="name">数量</td>
-                                    <td>
-                                        <select class="sum" name="sum">
-                                            <option value="{{$productCount[$product->id]}}">{{$productCount[$product->id]}}</option>
-                                            @for ($i=1; $i <= 10 ; $i++)
-                                            <option value="{{$i}}">{{$i}}</option>
-                                            @endfor
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="subtotal">小計</td>
-                                    <td>{{number_format($productCount[$product->id] * $product->productPrice->product_price)}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            @endforeach
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>商品名</th>
+                        <th>詳細</th>
+                        <th>金額</th>
+                        <th>数量</th>
+                        <th>小計</th>
+                        <th>削除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach ($productMap as $product)
+                    <tr>
+                        <td><img src="{{$product->product_image}}" alt="" /></td>
+                        <td>{{$product->product_name}}</td>
+                        <td>{{$product->product_text}}</td>
+                        <td>{{number_format($product->productPrice->product_price)}}円</td>
+                        <td class="btn">
+                            <span>
+                                <select class="sum" name="sum">
+                                    <option value="{{$productCount[$product->id]}}">{{$productCount[$product->id]}}</option>
+                                    @for ($i=1; $i <= 10 ; $i++)
+                                    <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                                </select>
+                            </span>
+                        </td>
+                        <td>{{number_format($productCount[$product->id] * $product->productPrice->product_price)}}円</td>
+                        <td><form action="/cart/clear/{{$product->id}}" method="post"><div class="form-bottom"><a><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>{{ csrf_field() }}</form></td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
 
             <div class="total">
                 <p>合計金額: <span>{{ number_format($total) }}</span>円</p>

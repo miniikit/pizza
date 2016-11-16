@@ -41,4 +41,13 @@ class CartsController extends Controller
 
         return redirect()->route('cart');
     }
+
+    public function pop($id) {
+
+        $cart = new CartService();
+        $cart->popProduct($id);
+
+        return redirect()->route('cart');
+
+    }
 }
