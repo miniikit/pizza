@@ -44,7 +44,13 @@
 
 
              if (isset($productCount[$id])) {
-                 $productCount[$id] += $sum;
+
+                 if ($productCount[$id] + $sum > 10) {
+                    $productCount[$id] = 10;
+                }else {
+                    $productCount[$id] += $sum;
+                }
+
              }else {
                  $productCount[$id] = $sum;
              }
