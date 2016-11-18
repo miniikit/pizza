@@ -10,7 +10,7 @@
 <link href="/css/common/font-awesome.min.css" rel="stylesheet">
 <link href="/css/common/bootstrap.min.css" rel="stylesheet">
 <link href="/css/common/reset.css" rel="stylesheet">
-<link href="/css/common/main.css"  rel="stylesheet">
+<link href="/css/common/admin.css"  rel="stylesheet">
 
 @yield('css')
 
@@ -28,7 +28,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">管理画面</a>
+            <a class="navbar-brand" href="/pizzzzza/order/">管理画面</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
