@@ -34,40 +34,40 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#">注文確認</a></li>
-                <li><a href="#">電話注文</a></li>
+                <li><a href="/pizzzzza/order/">注文確認</a></li>
+                <li><a href="/pizzzzza/order/accept">電話注文</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">売上&売れ筋<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">売上</a></li>
+                        <li><a href="/pizzzzza/analysis/earning">売上</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">売れ筋</a></li>
+                        <li><a href="/pizzzzza/analysis/popular">売れ筋</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">メニュー<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">メニュー一覧</a></li>
+                        <li><a href="/pizzzzza/menu/">メニュー一覧</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">メニュー追加</a></li>
+                        <li><a href="/pizzzzza/menu/add">メニュー追加</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">クーポン<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">クーポン一覧</a></li>
+                        <li><a href="/pizzzzza/coupon">クーポン一覧</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">クーポン追加</a></li>
+                        <li><a href="/pizzzzza/add">クーポン追加</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">クーポン履歴</a></li>
+                        <li><a href="/pizzzzza/history">クーポン履歴</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">従業員<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">従業員一覧</a></li>
+                        <li><a href="/pizzzzza/employee">従業員一覧</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">従業員追加</a></li>
+                        <li><a href="/pizzzzza/employee/add">従業員追加</a></li>
                     </ul>
                 </li>
             </ul>
