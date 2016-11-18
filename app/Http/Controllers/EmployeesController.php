@@ -16,17 +16,17 @@ use App\Http\Requests;
 class EmployeesController extends Controller
 {
     //  従業員一覧ページ
-    public function employeeList()  {
-        return view('pizzzzza/employee.list');
+    public function index()  {
+        return view('pizzzzza/employee.index');
     }
 
     //  従業員編集ページ
-    public function employeeEdit()  {
+    public function edit()  {
         return view('pizzzzza/employee.edit');
     }
 
     //  従業員追加ページ
-    public function employeeAdd()  {
+    public function add()  {
         return view('pizzzzza/employee.add');
     }
 }

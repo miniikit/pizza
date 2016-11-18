@@ -52,9 +52,9 @@ Route::get('/app/countCartContents','ApisController@countCartContents');
 
 
 //管理者用ページ
-Route::get('/employee/list', 'EmployeesController@employeeList'); //従業員一覧
-Route::get('/employee/edit', 'EmployeesController@employeeEdit'); //従業員編集
-Route::get('/employee/add', 'EmployeesController@employeeAdd'); //従業員追加
+Route::get('/pizzzzza/employee/index', 'EmployeesController@index'); //従業員一覧
+Route::get('/pizzzzza/employee/edit', 'EmployeesController@edit'); //従業員編集
+Route::get('/pizzzzza/employee/add', 'EmployeesController@add'); //従業員追加
 
 Route::get('/pizzzzza/menu/list', 'AdminMenusController@AdminMenuList'); //従業員用メニュー一覧
 Route::get('/pizzzzza/menu/edit', 'AdminMenusController@AdminMenuEdit'); //従業員用メニュー編集
