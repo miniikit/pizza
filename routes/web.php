@@ -56,9 +56,9 @@ Route::get('/pizzzzza/employee/index', 'EmployeesController@index'); //従業員
 Route::get('/pizzzzza/employee/edit', 'EmployeesController@edit'); //従業員編集
 Route::get('/pizzzzza/employee/add', 'EmployeesController@add'); //従業員追加
 
-Route::get('/pizzzzza/menu/list', 'AdminMenusController@AdminMenuList'); //従業員用メニュー一覧
-Route::get('/pizzzzza/menu/edit', 'AdminMenusController@AdminMenuEdit'); //従業員用メニュー編集
-Route::get('/pizzzzza/menu/add', 'AdminMenusController@AdminMenuAdd'); //従業員用メニュー追加
+Route::get('/pizzzzza/menu/index', 'AdminMenusController@index'); //従業員用メニュー一覧
+Route::get('/pizzzzza/menu/edit', 'AdminMenusController@edit'); //従業員用メニュー編集
+Route::get('/pizzzzza/menu/add', 'AdminMenusController@add'); //従業員用メニュー追加
 
 
 
