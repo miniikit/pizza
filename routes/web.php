@@ -60,7 +60,7 @@ Route::get('/pizzzzza/menu', 'AdminMenusController@index'); //従業員用メニ
 Route::get('/pizzzzza/menu/edit', 'AdminMenusController@edit'); //従業員用メニュー編集
 Route::get('/pizzzzza/menu/add', 'AdminMenusController@add'); //従業員用メニュー追加
 
-
+Route::get('/pizzzzza/analysis','AnalysisController@index');
 
 
 
