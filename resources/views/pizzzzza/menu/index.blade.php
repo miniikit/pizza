@@ -18,7 +18,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th>チェック</br>ボックス</th>
+              <th></th>
               <th>ID</th>
               <th>メニュー名</th>
               <th>画像データ</th>
@@ -33,7 +33,7 @@
                 <td>マルゲリータピザ</td>
                 <td><form method="post" enctype="multipart/form-data">
                     <input type="file" name="pic">
-                    
+
                 <td>マルゲリータピザの説明</td>
                 <td>850</td>
               </tr>
