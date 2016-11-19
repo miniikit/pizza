@@ -39,7 +39,7 @@
                 var form = $(this).parent();
                 $(form).submit();
             });
-        })
+        });
 
 		$.ajax({
 			type: 'GET',

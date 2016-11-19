@@ -16,17 +16,17 @@ use App\Http\Requests;
 class AdminMenusController extends Controller
 {
     //  従業員一覧ページ
-    public function AdminMenuList()  {
-        return view('pizzzzza.menu.list');
+    public function index()  {
+        return view('pizzzzza.menu.index');
     }
 
     //  従業員編集ページ
-    public function AdminMenuEdit()  {
+    public function edit()  {
         return view('pizzzzza.menu.edit');
     }
 
     //  従業員追加ページ
-    public function AdminMenuAdd()  {
+    public function add()  {
         return view('pizzzzza.menu.add');
     }
 }
