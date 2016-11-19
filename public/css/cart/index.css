@@ -62,6 +62,7 @@ h2::after {
 
 #table td:nth-child(3) {
     text-align: left;
+    line-height: 1.5;
 }
 
 .btn span {

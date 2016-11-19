@@ -1,6 +1,6 @@
 @extends('template.auth')
 
-@section('title', 'Login')
+@section('title', '新規登録')
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
