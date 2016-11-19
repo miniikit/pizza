@@ -72,5 +72,8 @@ Route::get('/test','TestsController@index');
 //auth
 Auth::routes();
 
+Route::post('/logout','Auth\LoginController@logout');
+
+
 Route::get('/pizzzzza/login', 'auth\AdminLoginController@form'); //管理画面ログインページ
 Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理画面トップ
