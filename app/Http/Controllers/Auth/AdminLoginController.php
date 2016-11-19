@@ -22,9 +22,8 @@ public function login(Request $request) {
 
     $pizza = DB::table('users')->where('users.email',$email)->get();
     
-    if(!isset($pizza)){
+   if(!isset($pizza)){
         // からの時
-        dd("だめだよ");
     }
 
 
@@ -41,14 +40,21 @@ if($authId === 1 || $authId === 2 || $authId === 3){
 
         return "ログイン成功";
 
-    }else{
+    }
+    else{
         return "ログイン失敗";
     }
-   }else{
+
+   }
+   
+   else{
        return "権限がありません";
    }
-  }else{
-      return "登録されていないメールアドレスです（ DEV";
-  
  }
+  
+  
+  else{
+      return "登録されていないメールアドレスです（ DEV"; 
+ }
+}
 }
