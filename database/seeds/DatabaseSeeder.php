@@ -488,17 +488,17 @@ class OrdersDetailsTableSeeder extends Seeder
 
         OrderDetail::create([
             'id' => 1,
-            'product_id' => 1,
+            'price_id' => 1,
             'number' => 1,
         ]);
         OrderDetail::create([
             'id' => 1,
-            'product_id' => 2,
+            'price_id' => 2,
             'number' => 2,
         ]);
         OrderDetail::create([
             'id' => 1,
-            'product_id' => 3,
+            'price_id' => 3,
             'number' => 3,
         ]);
 
