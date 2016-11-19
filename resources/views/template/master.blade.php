@@ -32,8 +32,11 @@
         </div>
         <div id="info">
             <div class="wrap">
-                <a href="#">ログイン</a>
-                <a href="#">ログアウト</a>
+            @if (Auth::guest())
+                <a href="/login">ログイン</a>
+                @else
+                <a href="/logout">ログアウト</a>
+                @endif
             </div>
         </div>
         <header id="header">
@@ -41,6 +44,7 @@
                 <h1><a href="/"><img src="images/common/logo.png" alt="OIC PIZZA" /></a></h1>
                 <nav id="gNav">
                     <ul>
+                    
                         <li id="gTop"><a href="/">TOP</a></li>
                         <li id="gMenu"><a href="/menu">MENU</a></li>
                         <li id="gTopics"><a href="#">TOPICS</a></li>

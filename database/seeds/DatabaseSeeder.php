@@ -113,7 +113,7 @@ class UsersSeeder extends Seeder
 
         $faker = \Faker\Factory::create('ja_JP');
 
-        for ($i=0; $i < 50; $i++) {
+        for ($i=0; $i < 20; $i++) {
 
             User::create([
                 'name' => $faker->name,
