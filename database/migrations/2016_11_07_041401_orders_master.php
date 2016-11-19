@@ -17,8 +17,9 @@ class OrdersMaster extends Migration
         $table->increments('id');//->primary(); //注文ID
         $table->datetime('order_date'); //注文日時
         $table->datetime('order_appointment_date'); //注文予約日時
-        $table->integer('coupon_id');//->references('id')->on('coupons_master')->nullable(); //クーポンID
+        $table->integer('coupon_id')->nullable();//->references('id')->on('coupons_master'); //クーポンID
         $table->integer('state_id');//->references('id')->on('states_master'); //状態ID
+        $table->integer('user_id');//->references('id')->on('user_id'); //顧客ID
         $table->timestamps(); //登録・更新日
       });
     }

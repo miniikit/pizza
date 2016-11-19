@@ -110,6 +110,28 @@ class UsersSeeder extends Seeder
             'birthday' => 19960607,
             'authority_id' => 4,
         ]);
+
+        $faker = \Faker\Factory::create('ja_JP');
+
+        for ($i=0; $i < 50; $i++) {
+
+            User::create([
+                'name' => $faker->name,
+                'kana' => 'テスト',
+                'email' => $faker->safeEmail,
+                'password' => bcrypt('faker'),
+                'postel' => $faker->postcode,
+                'address1' => $faker->prefecture.$faker->city,
+                'address2' => $faker->streetAddress,
+                'address3' => null,
+                'phone' => $faker->phoneNumber,
+                'gender_id' => rand(1, 2),
+                'birthday' => $faker->dateTimeBetween('-80 years', '-20years')->format('Ymd'),
+                'authority_id' => 4,
+            ]);
+
+        }
+
     }
 }
 
@@ -166,7 +188,7 @@ class CouponsMasterSeeder extends Seeder
             'product_id' => 1,
             'coupon_start_date' => Carbon::today(),
             'coupon_end_date' => null,
-            'coupon_number' => 00000001,
+            'coupon_number' => '00000001',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => null,
         ]);
@@ -177,7 +199,7 @@ class CouponsMasterSeeder extends Seeder
             'product_id' => 1,
             'coupon_start_date' => Carbon::today(),
             'coupon_end_date' => null,
-            'coupon_number' => 00000002,
+            'coupon_number' => '00000002',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => null,
         ]);
@@ -188,7 +210,7 @@ class CouponsMasterSeeder extends Seeder
             'product_id' => 2,
             'coupon_start_date' => Carbon::today(),
             'coupon_end_date' => null,
-            'coupon_number' => 00000003,
+            'coupon_number' => '00000003',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => null,
         ]);
@@ -435,19 +457,22 @@ class OrdersMasterSeeder extends Seeder
             'order_date' => Carbon::now(),
             'order_appointment_date' => Carbon::tomorrow(),
             'coupon_id' => 1,
-            'state_id' => 1
+            'state_id' => 1,
+            'user_id' => 4,
         ]);
         Order::create([
             'order_date' => Carbon::now(),
             'order_appointment_date' => Carbon::tomorrow(),
             'coupon_id' => 2,
-            'state_id' => 2
+            'state_id' => 2,
+            'user_id' => 4,
         ]);
         Order::create([
             'order_date' => Carbon::now(),
             'order_appointment_date' => Carbon::tomorrow(),
             'coupon_id' => 2,
-            'state_id' => 1
+            'state_id' => 1,
+            'user_id' => 4,
         ]);
 
     }
@@ -462,14 +487,17 @@ class OrdersDetailsTableSeeder extends Seeder
         DB::table('orders_details_table')->delete();
 
         OrderDetail::create([
+            'id' => 1,
             'product_id' => 1,
             'number' => 1,
         ]);
         OrderDetail::create([
+            'id' => 1,
             'product_id' => 2,
             'number' => 2,
         ]);
         OrderDetail::create([
+            'id' => 1,
             'product_id' => 3,
             'number' => 3,
         ]);
