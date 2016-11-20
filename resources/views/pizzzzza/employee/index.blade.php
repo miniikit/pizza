@@ -30,12 +30,13 @@
        </tr>
      </thead>
      <tbody>
+     @foreach($employees as $employee)
        <tr>
          <th scope="row"><input type="checkbox" name="name" value=""></th>
-           <td>001</td>
-           <td>近澤</td>
-           <td>チカザワ</td>
-           <td>16600101</td>
+           <td>{{ $employee->id }}</td>
+           <td>{{ $employee->user->name }}</td>
+           <td>{{ $employee->user->kana }}</td>
+           <td>{{ \Carbon\Carbon::parse($employee->user->birthday)->format('Y年m月d日') }}</td>
            <td>M</td>
            <td>19991212</td>
            <td>25101212</td>
@@ -43,7 +44,8 @@
            <td>00000000</td>
            <td>aaaaaaaaaaaaaaaaaaaaa</td>
        </tr>
-        </tbody>
+     @endforeach
+     </tbody>
    </table>
  </div>
 

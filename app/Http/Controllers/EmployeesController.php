@@ -10,14 +10,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Employee;
 use App\Http\Requests;
 
 class EmployeesController extends Controller
 {
     //  従業員一覧ページ
     public function index()  {
-        return view('pizzzzza/employee.index');
+
+        $employees = Employee::with('user')->get();
+
+        return view('pizzzzza/employee.index',compact('employees'));
     }
 
     //  従業員編集ページ

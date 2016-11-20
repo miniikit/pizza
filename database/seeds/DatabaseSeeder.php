@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call('CouponsTypesMasterSeeder');
         $this->call('GendersMasterSeeder');
         $this->call('AuthoritiesMasterSeeder');
-        $this->call('ProducstMasterSeeder');
+        $this->call('ProductsMasterSeeder');
         $this->call('ProductsPricesMasterSeeder');
         $this->call('StatesMasterSeeder');
         $this->call('OrdersMasterSeeder');
@@ -62,7 +62,7 @@ class UsersSeeder extends Seeder
             'kana' => '管理者',
             'email' => 'admin@oic.jp',
             'password' => bcrypt('root'),
-            'postel' => 5900014,
+            'postal' => 5900014,
             'address1' => '大阪府堺市堺区登坂町',
             'address2' => '8-5',
             'address3' => '910号室',
@@ -76,7 +76,7 @@ class UsersSeeder extends Seeder
             'kana' => 'ヒョウドウユウイチ',
             'email' => 'B5123@oic.jp',
             'password' => bcrypt('19970221'),
-            'postel' => 5320003,
+            'postal' => 5320003,
             'address1' => '大阪府大阪市淀川区宮原町',
             'address2' => '2-8-1',
             'address3' => '312号室',
@@ -90,7 +90,7 @@ class UsersSeeder extends Seeder
             'kana' => 'ハマダマサキ',
             'email' => 'B5163@oic.jp',
             'password' => bcrypt('djmasaki'),
-            'postel' => 5550011,
+            'postal' => 5550011,
             'address1' => '大阪府大阪市大正区北恩加島',
             'address2' => '2-8-1',
             'address3' => null,
@@ -104,7 +104,7 @@ class UsersSeeder extends Seeder
             'kana' => 'チカザワクニヒコ',
             'email' => 'B5164@oic.jp',
             'password' => bcrypt('zawatika'),
-            'postel' => 5550012,
+            'postal' => 5550012,
             'address1' => '大阪府大阪市大正区北恩加島',
             'address2' => '2-8-2',
             'address3' => null,
@@ -123,7 +123,7 @@ class UsersSeeder extends Seeder
                 'kana' => 'テスト',
                 'email' => $faker->safeEmail,
                 'password' => bcrypt('faker'),
-                'postel' => $faker->postcode,
+                'postal' => $faker->postcode,
                 'address1' => $faker->prefecture.$faker->city,
                 'address2' => $faker->streetAddress,
                 'address3' => null,
@@ -293,7 +293,7 @@ class AuthoritiesMasterSeeder extends Seeder
 }
 
 //商品
-class ProducstMasterSeeder extends Seeder
+class ProductsMasterSeeder extends Seeder
 {
 
     public function run()
