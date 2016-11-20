@@ -91,8 +91,8 @@
                         </div>
 
  <div class="form-group{{ $errors->has('zip1') ? ' has-error' : '' }}">
-  <label for="postel" class="col-md-4 control-label">郵便番号 (半角)</label>
-   
+  <label for="postal" class="col-md-4 control-label">郵便番号 (半角)</label>
+
    <div class="col-md-2">
     <input type="text" class="form-control" name="zip1" size="4" maxlength="3">
     </div>
@@ -181,7 +181,7 @@
   <div class="col-md-5">
    <input type="text" class="form-control" name="address3" size="40">
 </div>
-</div>    
+</div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
