@@ -21,38 +21,34 @@
                 <tr>
                     <th>お客様情報</th>
                     <th>クーポン</th>
-                    <th>お支払金額</th>
+                    <th>お支払金額（税込）</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td class="font_left">北海道札幌市<br>旭川町５−１<br>マンショントリップ１０１号室</td>
-                    <td align="2">SPRING_PIZZA</td>
-                    <td>¥ 8,800</td>
+                    @foreach($users as $user)
+                    <td class="font_left">{{ $user->address1 }}<br>{{ $user->address2 }}<br>{{ $user->address3 }}</td>
+                        @foreach($orders as $order)
+                        <td align="2">{{ $order->coupon_name }}</td>
+                        <td>¥ {{ number_format($order->total_price) }}</td>
+                        @endforeach
+                    @endforeach
                 </tr>
                 </tbody>
             </table>
             <ul>
+                @foreach($contents as $product)
                 <a href="#">
-                    <!--    繰り返し    !-->
                     <li class="order">
                         <div class="contents">
-                            <img class="item img" src="/images/product/2.jpg" alt="">
-                            <div class="item name">パンナコッタ</div>
-                            <div class="item price">¥ 4,400</div>
-                            <div class="item num">3</div>
-                        </div>
-                    </li>
-                    <!--    繰り返し    !-->
-                    <li class="order">
-                        <div class="contents">
-                            <img src="/images/product/2.jpg" alt="">
-                            <div class="item_name">パンナコッタ</div>
-                            <div class="item_price">¥ 4,400</div>
-                            <div class="item_num">3</div>
+                            <img class="item img" src="{{ url($product->product_image) }}" alt="">
+                            <div class="item name">{{ $product->product_name }}</div>
+                            <div class="item price">¥ {{ number_format($product->product_price) }}</div>
+                            <div class="item num">{{ $product->number }} 個</div>
                         </div>
                     </li>
                 </a>
+                @endforeach
             </ul>
         </div>
     </div>
