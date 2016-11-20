@@ -16,9 +16,14 @@
     <div class="container wrap">
         <div class="fonts"><h2>注文詳細</h2></div>
         <div id="order">
+                <?php
+                    list($order) = $orders;
+                    $date = Carbon\Carbon::parse($order->order_date)->format('Y年m月d日');
+                ?>
             <table id="table">
                 <thead>
                 <tr>
+                    <th>注文日</th>
                     <th>お客様情報</th>
                     <th>クーポン</th>
                     <th>お支払金額（税込）</th>
@@ -27,6 +32,7 @@
                 <tbody>
                 <tr>
                     @foreach($users as $user)
+                        <td> {{  $date }}</td>
                     <td class="font_left">{{ $user->address1 }}<br>{{ $user->address2 }}<br>{{ $user->address3 }}</td>
                         @foreach($orders as $order)
                         <td align="2">{{ $order->coupon_name }}</td>
