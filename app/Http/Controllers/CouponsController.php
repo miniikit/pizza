@@ -26,46 +26,46 @@ class CouponsController extends Controller
 {
     //  クーポンメニューページ
     public function couponMenu()  {
-        return view('coupon.menu');
+        return view('pizzzzza.coupon.menu');
     }
 
     //  クーポン種別選択ページ
     public function couponNew()  {
-        return view('coupon.new');
+        return view('pizzzzza.coupon.add');
     }
 
     //  クーポン種別選択ページ＞値引きクーポン新規発行ページ
     public function couponNewDiscount()  {
-        return view('coupon.new.discount.input');
+        return view('pizzzzza.coupon.add.discount.input');
     }
 
     //  クーポン種別選択ページ＞（１）プレゼントクーポン新規発行ページ
     public function couponNewGiftInput()  {
-        return view('coupon.new.gift.input');
+        return view('pizzzzza.coupon.add.gift.input');
     }
 
     //  クーポン種別選択ページ＞（２）プレゼントクーポン商品選択ページ
     public function couponNewGiftSelect()  {
-        return view('coupon.new.gift.select');
+        return view('pizzzzza.coupon.new.gift.select');
     }
 
     //  開催中クーポン一覧ページ
     public function couponNowList()  {
-        return view('coupon.list');
+        return view('pizzzzza.coupon.list');
     }
 
     //  開催中クーポン一覧ページ＞値引きクーポン編集ページ
     public function couponNowDiscountEdit()  {
-        return view('coupon.list.discount.edit');
+        return view('pizzzzza.coupon.list.discount.edit');
     }
 
     //  開催中クーポン一覧ページ＞プレゼントクーポン編集ページ
     public function couponNowGiftEdit()  {
-        return view('coupon.list.gift.edit');
+        return view('pizzzzza.coupon.list.gift.edit');
     }
 
     //  過去クーポン一覧ページ
     public function couponHistory()  {
-        return view('coupon.history');
+        return view('pizzzzza.coupon.history');
     }
 }
