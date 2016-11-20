@@ -463,18 +463,24 @@ class OrdersMasterSeeder extends Seeder
         Order::create([
             'order_date' => Carbon::now(),
             'order_appointment_date' => Carbon::tomorrow(),
-            'coupon_id' => 2,
-            'state_id' => 2,
-            'user_id' => 4,
+            'coupon_id' => null,
+            'state_id' => 1,
+            'user_id' => 5,
         ]);
         Order::create([
             'order_date' => Carbon::now(),
             'order_appointment_date' => Carbon::tomorrow(),
-            'coupon_id' => 2,
+            'coupon_id' => null,
+            'state_id' => 1,
+            'user_id' => 6,
+        ]);
+        Order::create([
+            'order_date' => Carbon::now(),
+            'order_appointment_date' => Carbon::tomorrow(),
+            'coupon_id' => null,
             'state_id' => 1,
             'user_id' => 4,
         ]);
-
     }
 }
 
@@ -501,7 +507,31 @@ class OrdersDetailsTableSeeder extends Seeder
             'price_id' => 3,
             'number' => 3,
         ]);
-
+        OrderDetail::create([
+            'id' => 2,
+            'price_id' => 4,
+            'number' => 3,
+        ]);
+        OrderDetail::create([
+            'id' => 2,
+            'price_id' => 7,
+            'number' => 3,
+        ]);
+        OrderDetail::create([
+            'id' => 3,
+            'price_id' => 8,
+            'number' => 3,
+        ]);
+        OrderDetail::create([
+            'id' => 4,
+            'price_id' => 1,
+            'number' => 3,
+        ]);
+        OrderDetail::create([
+            'id' => 4,
+            'price_id' => 2,
+            'number' => 3,
+        ]);
     }
 }
 
