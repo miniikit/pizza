@@ -17,6 +17,8 @@ use App\Order;
 use App\OrderDetail;
 use App\Campaign;
 use App\User;
+use App\Employee;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -41,6 +43,7 @@ class DatabaseSeeder extends Seeder
         $this->call('CouponsMasterSeeder');
         $this->call('CampaignesMasterSeeder');
         $this->call('UsersSeeder');
+        $this->call('EmployeeMasterSeeder');
 
         Model::reguard();
     }
@@ -111,7 +114,7 @@ class UsersSeeder extends Seeder
             'authority_id' => 4,
         ]);
 
-        $faker = \Faker\Factory::create('ja_JP');
+        $faker = Faker::create('ja_JP');
 
         for ($i=0; $i < 20; $i++) {
 
@@ -131,6 +134,34 @@ class UsersSeeder extends Seeder
             ]);
 
         }
+
+    }
+}
+
+class EmployeeMasterSeeder extends Seeder
+{
+
+    public function run()
+    {
+        DB::table('employees_master')->delete();
+
+        Employee::create([
+            'users_id' => 1,
+            'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
+            'emoloyee_agreement_enddate' => null,
+        ]);
+
+        Employee::create([
+            'users_id' => 3,
+            'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
+            'emoloyee_agreement_enddate' => null,
+        ]);
+
+        Employee::create([
+            'users_id' => 2,
+            'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
+            'emoloyee_agreement_enddate' => null,
+        ]);
 
     }
 }
