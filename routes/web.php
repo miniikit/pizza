@@ -32,7 +32,7 @@ Route::get('/faq', 'PagesController@faq');
 
 //マイページ
 Route::get('/mypage/order/history','MypagesController@orderHistory');
-Route::get('/mypage/order/detail','MypagesController@orderDetail');
+Route::get('/mypage/order/detail/{id}','MypagesController@orderDetail');
 Route::get('/mypage/detail','MypagesController@detail');
 Route::get('/mypage/edit','MypagesController@edit');
 Route::get('/mypage/confirm','MypagesController@confirm');

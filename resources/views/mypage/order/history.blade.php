@@ -25,7 +25,7 @@
                         $price = $totalPrice-$coupon;
                         $date = Carbon\Carbon::parse($details->order_date)->format('Y年m月d日');
                 ?>
-                <a href="/order/detail/{{  $details->id }}">
+                <a href="/mypage/order/detail/{{  $details->id }}">
                     <li class="history">
                         <div class="head">
                             <div class="date mini">注文日</div>
