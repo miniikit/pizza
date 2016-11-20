@@ -58,9 +58,69 @@
 }
 
 
+/*
+*   詳細ページのテーブル用
+*
+*
+*/
+img{
+    max-width:100%;
+    height:auto;
+}
 
+#table {
+    width:100%;
+    margin:0 auto;
+    margin-bottom: 50px;
 
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+#table th {
+    background-color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 10px 0;
+    color: #656565;
+    letter-spacing: 2px;
+}
+#table td {
+    vertical-align: middle;
+    text-align: center;
+    background-color: rgba(100,100,100,0.1);
+    border: solid 2px #eee;
+    padding: 5px;
+    color:  #656565;
+}
+.font_left{
+    text-align: left;
+}
 
+/*
+*   注文詳細ページ
+*
+*
+*/
+.order{
+    height:auto;
+    width:95%;
+    padding: .5em .75em;
+    border: 1.5px solid #ccc;
+    border-radius: 4px;
+    margin:0 auto;
+    margin-bottom:25px;
+}
+.order .contents{
+    width:100%;
+    display: inline-block;
+}
+.order .contents .item{
+    display: inline-block;
+}
+.name,.price,.num{
+    vertical-align: middle;
+}
 
 
 @media screen and (max-width: 763px){
