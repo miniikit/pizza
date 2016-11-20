@@ -19,42 +19,48 @@ public function login(Request $request) {
 
     $email = $request->get('email');
     $password = $request->get('password');
+    $remember = $request->get('remember');
 
-    $pizza = DB::table('users')->where('users.email',$email)->get();
+
+    $pizza = DB::table('users')->where('users.email',$email)->get();;
+
+    //メールが一致するか
+    $count = count($pizza);
+    if($count != 1){
+     return "メール登録されていません。";
+    }
+
+    $userinfo = $pizza[0];
+
+    $authId = $userinfo->authority_id;
+
+    if($authId === 1 || $authId === 2 || $authId === 3){
+        if(Auth::attempt(['email' => $email, 'password' => $password ],$remember)){
+
+            return "ログイン成功"; //メール、パスワード、権限がすべて一致した場合
+
+        }else{
+            return "メールアドレスまたはパスワードが間違っています"; //メール、パスワードが一致していない場合
+        }
     
-   if(!isset($pizza)){
-        // からの時
+    }else{
+        return "権限がありません"; //権限が４の場合
     }
-
-
- if (isset($pizza)){
-    //登録されていないメールアドレスを入力したときにエラー。
-    $tmp = $pizza[0];
- 
-    $authId = $tmp->authority_id;
-
-if($authId === 1 || $authId === 2 || $authId === 3){
-    if(Auth::attempt(['email' => $email, 'password' => $password ])) {
-
-        //return redirect('/pizzzzza/order/top');
-
-        return "ログイン成功";
-
-    }
-    else{
-        return "ログイン失敗";
-    }
-
-   }
-   
-   else{
-       return "権限がありません";
-   }
- }
-  
-  
-  else{
-      return "登録されていないメールアドレスです（ DEV"; 
- }
+    
 }
+
+
+
+
+
+    public function logout(Request $request){ //ログアウト処理
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        return redirect('/');
+    }
+
 }

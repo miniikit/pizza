@@ -46,6 +46,9 @@ Route::post('/contact','ContactController@post');
 // API
 Route::get('/app/countCartContents','ApisController@countCartContents');
 
+//お客様用ログアウト
+Route::post('/logout','Auth\LoginController@logout');
+
 
 
 // --------------------------- 管理者用 ---------------------------------------
@@ -72,7 +75,7 @@ Route::get('/test','TestsController@index');
 //auth
 Auth::routes();
 
-Route::post('/logout','Auth\LoginController@logout');
+
 
 
 Route::get('/pizzzzza/login', 'auth\AdminLoginController@form'); //管理画面ログインページ
