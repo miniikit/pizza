@@ -58,8 +58,8 @@ class UsersSeeder extends Seeder
         DB::table('users')->delete();
 
         User::create([
-            'name' => 'admin',
-            'kana' => 'アドミニ',
+            'name' => '管理者',
+            'kana' => '管理者',
             'email' => 'admin@oic.jp',
             'password' => bcrypt('root'),
             'postel' => 5900014,
@@ -72,8 +72,8 @@ class UsersSeeder extends Seeder
             'authority_id' => 1,
         ]);
         User::create([
-            'name' => '兵頭もっぷ',
-            'kana' => 'ヒョウドウモップ',
+            'name' => '兵頭佑一',
+            'kana' => 'ヒョウドウユウイチ',
             'email' => 'B5123@oic.jp',
             'password' => bcrypt('19970221'),
             'postel' => 5320003,
