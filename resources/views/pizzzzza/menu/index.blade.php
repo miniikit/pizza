@@ -3,15 +3,25 @@
 @section('title', 'メニュー追加画面')
 
 @section('css')
-    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+    <link rel="stylesheet" href="/css/pizzzzza/menu/index.css" media="all" title="no title">
 @endsection
 
 @section('main')
       <h1>メニュー管理画面</h1>
       <div id="menu_button">
         <button type="button" class="btn btn-primary btn-lg"name="button">編集</button>
-        <button type="button" class="btn btn-danger btn-lg"name="button">削除</button>
+        <a class="btn btn-danger btn-lg" data-featherlight="#delete">削除</a>
         {{-- <button type="button" class="btn btn-primary btn-lg"name="button">追加</button> --}}
+      </div>
+
+      <div id="delete" class="delete">
+          <div class="inner">
+              本当に削除しますか？
+              <div class="button">
+                  <a class="btn btn-default" aria-label="Close" onclick="$.featherlight.current().close();">キャンセル</a>
+                  <a class="btn btn-danger">　削除　</a>
+              </div>
+          </div>
       </div>
 
       <div class="form-group table-responsive">

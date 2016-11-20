@@ -9,13 +9,15 @@
 <meta name="keywords" itemprop="keywords" content="@yield('keywords')">
 <link href="/css/common/font-awesome.min.css" rel="stylesheet">
 <link href="/css/common/bootstrap.min.css" rel="stylesheet">
-<link href="/css/common/reset.css" rel="stylesheet">
-<link href="/css/common/admin.css"  rel="stylesheet">
-
-@yield('css')
-
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/js/common/bootstrap.min.js"></script>
+<link href="/css/common/reset.css" rel="stylesheet">
+<link href="/css/common/admin.css"  rel="stylesheet">
+<link rel="stylesheet" href="/plug/featherlight/featherlight.css">
+<script src="/plug/featherlight/featherlight.js" charset="utf-8"></script>
+@yield('css')
+
+
 
 @yield('js')
 
