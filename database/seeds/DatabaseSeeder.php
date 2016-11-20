@@ -275,7 +275,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/1.jpg',
             'product_text' => '大きくカットしたポテトにコーンとベーコンをトッピングして、明太クリームソース、バター、チーズを合わせた、家族で楽しめるピザです。',
             'genre_id' => 1,
-            'sales_start_date' => Carbon::now(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -284,7 +284,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/2.jpg',
             'product_text' => 'ホクホクのポテトと旨味が凝縮されたベーコンを特製マヨソースで味わって頂く商品です。バター風味豊かなキューブチーズが食材の味を一層引き立てます。',
             'genre_id' => 1,
-            'sales_start_date' => Carbon::tomorrow(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -293,7 +293,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/3.jpg',
             'product_text' => '生クリームを加えたバジルの香り豊かなジェノベーゼソースと、まろやかでクセのないフレッシュモッツァレラの香りと濃厚チーズの組み合わせが大人向けの商品',
             'genre_id' => 1,
-            'sales_start_date' => Carbon::today(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -302,7 +302,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/4.jpg',
             'product_text' => '少量を食べたいときにおすすめ。皮つきのうまさ！外はカリッ、中はホックリ！お子様にも大人気です！口に運べば、バターの風味とポテトの旨みが広がります。',
             'genre_id' => 2,
-            'sales_start_date' => Carbon::today(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -311,7 +311,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/5.jpg',
             'product_text' => 'コーンをふんだんに入れ、濃厚で上品な甘さが特徴のスープです。北海道十勝産スイートコーンを使用したクリーミーなスープに仕上げました。',
             'genre_id' => 2,
-            'sales_start_date' => Carbon::today(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -320,7 +320,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/6.jpg',
             'product_text' => '旨みたっぷりの骨付き鶏肉をガーリックなどの香辛料とハーブで味付けし、表面はパリｯと、中はジューシーにローストしたクリスマスにぴったりのローストチキンです。',
             'genre_id' => 2,
-            'sales_start_date' => Carbon::today(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -329,7 +329,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/7.jpg',
             'product_text' => '税抜き150円',
             'genre_id' => 3,
-            'sales_start_date' => Carbon::today(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -338,7 +338,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/8.jpg',
             'product_text' => '税抜き150円',
             'genre_id' => 3,
-            'sales_start_date' => Carbon::today(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -347,8 +347,17 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/9.jpg',
             'product_text' => '税抜き150円',
             'genre_id' => 3,
-            'sales_start_date' => Carbon::today(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
+        ]);
+        Product::create([
+            'product_name' => 'もち明太グラタン',
+            'price_id' => 10,
+            'product_image' => '/images/product/10.jpg',
+            'product_text' => 'まろやかな明太子クリームソースとホワイトソースを一緒に味わって頂く商品です。',
+            'genre_id' => 2,
+            'sales_start_date' => Carbon::parse('2016-10-10'),
+            'sales_end_date' => Carbon::yesterday(),
         ]);
     }
 }
@@ -364,63 +373,70 @@ class ProductsPricesMasterSeeder extends Seeder
         ProductPrice::create([
             'product_id' => 1,
             'product_price' => '1990',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 1,
         ]);
         ProductPrice::create([
             'product_id' => 2,
             'product_price' => '2200',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 2,
         ]);
         ProductPrice::create([
             'product_id' => 3,
             'product_price' => '1800',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
         ProductPrice::create([
             'product_id' => 4,
             'product_price' => '410',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
         ProductPrice::create([
             'product_id' => 5,
             'product_price' => '400',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
         ProductPrice::create([
             'product_id' => 6,
             'product_price' => '734',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
         ProductPrice::create([
             'product_id' => 7,
             'product_price' => '162',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
         ProductPrice::create([
             'product_id' => 8,
             'product_price' => '162',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
         ProductPrice::create([
             'product_id' => 9,
             'product_price' => '162',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
+            'price_change_enddate' => null,
+            'employee_id' => 3,
+        ]);
+        ProductPrice::create([
+            'product_id' => 10,
+            'product_price' => '680',
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
