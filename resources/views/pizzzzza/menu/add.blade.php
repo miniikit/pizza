@@ -29,10 +29,10 @@
     <tr>
       <th class="text-center" style="padding-top:12px;"><label for="">ジャンル</label></th>
       <td><select name="example2">
-          <option value="---">-----</option>
-          <option value="選択肢1">メイン</option>
-          <option value="選択肢2">ドリンク</option>
-          <option value="選択肢3">サイド</option>
+          <option value="">-----</option>
+          <option value="1">ピザ</option>
+          <option value="2">サイド</option>
+          <option value="3">ドリンク</option>
         </select></td>
     </tr>
     <tr>

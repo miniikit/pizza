@@ -31,6 +31,7 @@ class AdminMenusController extends Controller
 
     public function add()
     {
+
         return view('pizzzzza.menu.add');
     }
 }
