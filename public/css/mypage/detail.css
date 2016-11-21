@@ -1,0 +1,102 @@
+.register{
+    width:80%;
+    margin:0 auto;
+}
+.submit{
+    text-align: center;
+    width: 100%;
+}
+.submit a{
+    display: inline-block;
+    width: 200px;
+    background-color: #656565;
+    opacity: 0.85;
+    padding: 15px;
+    color: #fff;
+    letter-spacing:15px;
+    text-indent:15px;
+    text-align:center;
+}
+.submit a:hover {
+    opacity: 0.8;
+    letter-spacing: 17px;
+    text-indent: 17px;
+    background-color: #828282;
+    transition: ease-in 0.2s;
+}
+
+
+
+/**
+*
+*
+* タイトル
+*
+*/
+.fonts h2 {
+    text-align: center;
+    letter-spacing: 8px;
+    font-size: 40px;
+    margin-bottom: 80px;
+    color: #656565;
+    position: relative;
+}
+.fonts h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    background: #656565;
+    height: 3px;
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    margin-left: -25px;
+}
+
+.fonts h2:nth-child(n+1) {
+    margin-top: 50px;
+}
+/*
+*   詳細ページのテーブル用
+*
+*
+*/
+img{
+    max-width:100%;
+    height:auto;
+}
+
+#table {
+    width:100%;
+    margin:0 auto;
+    margin-bottom: 50px;
+
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+#table th {
+    background-color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 10px 0;
+    color: #656565;
+    letter-spacing: 2px;
+}
+#table td {
+    vertical-align: middle;
+    text-align: center;
+    background-color: rgba(100,100,100,0.1);
+    border: solid 2px #eee;
+    padding: 5px;
+    color:  #656565;
+}
+.font_left{
+    text-align: left;
+}
+
+@media screen and (max-width: 470px) {
+    .submit a{
+        width: 150px;
+    }
+}
