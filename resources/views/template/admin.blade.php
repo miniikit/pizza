@@ -62,9 +62,11 @@
                     <ul class="dropdown-menu">
                         <li><a href="/pizzzzza/coupon">クーポン一覧</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/pizzzzza/add">クーポン追加</a></li>
+                        <li><a href="/pizzzzza/coupon/add">クーポンメニュー</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/pizzzzza/history">クーポン履歴</a></li>
+                        <li><a href="/pizzzzza/coupon/list">クーポン新規発行</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/pizzzzza/coupon/history">クーポン履歴</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

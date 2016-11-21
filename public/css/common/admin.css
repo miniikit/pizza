@@ -11,3 +11,13 @@ main.main {
 #menu_button {
     margin-bottom: 60px;
 }
+
+.menu_wrap {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.menu_wrap li {
+    margin-bottom: 20px;
+}
+
