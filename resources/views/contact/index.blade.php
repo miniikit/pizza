@@ -31,7 +31,7 @@
                 </li>
                 <li class="checkbox">
                   <label>
-                      <input type="checkbox">XXXに同意します
+                      <input type="checkbox">XXXXに同意します
                   </label>
                 </li>
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
