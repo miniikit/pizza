@@ -25,8 +25,12 @@ class ContactController extends Controller
     */
    public function send(Request $request)
    {
-       Mail::to('B5021@oic.jp')->send(new Contacted($request));
-       return redirect('/contact');
+      //  Mail::to('B5021@oic.jp')->send(new Contacted($request));
+        $data = $request->all();
+        Mail::send(['text' => 'mail.contact'], $data, function($message) use($data){ // useを追加
+        $message->to($data["email"]);
+        });
+        return redirect('/contact');
    }
 
 }

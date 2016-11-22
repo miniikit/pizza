@@ -21,13 +21,13 @@
                   <label>メールアドレス(必須)</label>
                 </li>
                 <li>
-                  <input type="text" name="email" class="form-mail">
+                  <input type="text" name="email" label="email" class="form-mail">
                 </li>
                 <li>
                   <label>内容文</label>
                 </li>
                 <li>
-                  <textarea name="textarea" rows="10" cols="100"></textarea>
+                  <textarea name="textarea" label="text" rows="10" cols="100"></textarea>
                 </li>
                 <li class="checkbox">
                   <label>
