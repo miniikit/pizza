@@ -19,6 +19,7 @@ class EmployeesMaster extends Migration
         $table->date('emoloyee_agreement_date'); //契約開始日
         $table->date('emoloyee_agreement_enddate')->nullable(); //契約終了日
         $table->timestamps(); //登録・更新日
+        $table->softDeletes();
       });
     }
 
