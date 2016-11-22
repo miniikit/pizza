@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => 'hello@example.com',
-        'name' => 'Example',
+        'address' => 'oicpizza@gmail.com',
+        'name' => 'oicpizza',
     ],
 
     /*
@@ -70,6 +70,7 @@ return [
     | transport layer security protocol should provide great security.
     |
     */
+
 
     'encryption' => env('MAIL_ENCRYPTION', 'tls'),
 
@@ -111,5 +112,8 @@ return [
     */
 
     'sendmail' => '/usr/sbin/sendmail -bs',
+
+    // Mail "Pretend"
+    'pretend' => env('MAIL_PRETEND', false),
 
 ];

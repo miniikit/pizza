@@ -119,7 +119,15 @@
 
 
 /*お問い合わせフォーム*/
+#contact,
+#contact form{
+  width: 100%;
+  display: block;
+}
 
+#contact .form-group{
+  width:300px;
+}
 
 /*管理者ログイン画面*/
 
