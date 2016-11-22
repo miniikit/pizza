@@ -23,6 +23,7 @@ class ProductsMaster extends Migration
         $table->date('sales_start_date'); //販売開始日
         $table->date('sales_end_date')->nullable(); //販売終了日
         $table->timestamps(); //登録・更新日
+        $table->softDeletes();
       });
     }
 
