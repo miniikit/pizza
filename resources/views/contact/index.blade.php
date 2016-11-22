@@ -26,10 +26,10 @@
          <div id="contact">
           <form action="/contact" method="post">
               <ul id="from-group">
-                <li>メールアドレス</li>
-                <li><input type="text" name="email" class="form-mail"></li>
-                <li>内容</li>
-                <li><textarea name="body" rows="10" cols="100"></textarea></li>
+                <li class="title">メールアドレス</li>
+                <li><input type="text" name="email" class="form-mail" placeholder="example@xxx.com"></li>
+                <li class="title">内容</li>
+                <li><textarea name="body" rows="10" cols="100" placeholder="テキストを入れてください" ></textarea></li>
               </ul>
               <div class="form-bottom"><a>送信</a></div>
               {{ csrf_field() }}
