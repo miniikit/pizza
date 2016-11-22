@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>電話番号受付</title>
-      <link rel="stylesheet" href="css/common/main.css" charset="utf-8">
-      <link rel="stylesheet" href="css/common/reset.css" charset="utf-8">
-      <link rel="stylesheet" href="css/common/bootstrap.min.css" charset="utf-8">
-      <link rel="stylesheet" href="css/pages/index.css" charset="utf-8">
-      <script src="js/common/bootstrap.min.js" charset="utf-8"></script>
-  </head>
-  <body>
+@extends('template.admin')
+
+@section('title', '電話注文')
+
+@section('css')
+    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+@endsection
+
+@section('main')
     <div class="wrap">
       <h1>電話番号受付</h1>
       <div id="tel">
@@ -33,5 +30,4 @@
 
       </div>
     </div>
-  </body>
-</html>
+@endsection
