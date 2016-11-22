@@ -21,7 +21,7 @@
                     <?php
                             $zip = $user->postal;
                             $postal = substr($zip, 0, 3).'-'.substr($zip, 3);
-                            $gender = "男"
+                            $gender = "男";
                     ?>
                     @if($user->gender_id == 2)
                         $gender = 女
@@ -29,9 +29,9 @@
                 <tr><th>名前</th><td>{{ $user->name }}</td></tr>
                 <tr><th>フリガナ</th><td>{{ $user->kana }}</td></tr>
                 <tr><th>郵便番号</th><td>〒{{ $postal }}</td></tr>
-                <tr><th>住所</th><td>{{ $user->address1 }}</td></tr>
-                <tr><th>建物名</th><td>{{ $user->address2 }}</td></tr>
-                <tr><th>生年月日</th><td>{{ $user->address3 }}</td></tr>
+                <tr><th>住所１</th><td>{{ $user->address1 }}</td></tr>
+                <tr><th>住所２</th><td>{{ $user->address2 }} {{ $user->address3 }}</td></tr>
+                <tr><th>生年月日</th><td>{{ date('Y年 n月 j日', strtotime($user->birthday)) }}</td></tr>
                 <tr><th>電話番号</th><td>{{ $user->phone }}</td></tr>
                 <tr><th>性別</th><td>{{ $gender }}</td></tr>
                 <tr><th>メールアドレス</th><td>{{ $user->email }}</td></tr>
@@ -40,6 +40,7 @@
             </table>
             <form class="submit" action="/mypage/edit" method="post">
                 <a class="form-bottom" href="#">編集</a>
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             </form>
         </div>
     </div>
