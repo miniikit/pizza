@@ -19,7 +19,6 @@ public function login(Request $request) {
     //リクエストを取得
     $email = $request->get('email');
     $password = $request->get('password');
-    $remember = $request->get('remember');
     
 
     //DBからメアドが一致するやつを取得
@@ -38,12 +37,9 @@ public function login(Request $request) {
     $authId = $userinfo->authority_id;
 
     if($authId === 1 || $authId === 2 || $authId === 3){
-        if(Auth::attempt(['email' => $email, 'password' => $password ],$remember)){
-            //rememberがONか
-            if($remember === "on"){
-                return "rememberがONです。";
-            }
-            return "ログイン成功"; //メール、パスワード、権限がすべて一致した場合
+        if(Auth::attempt(['email' => $email, 'password' => $password ])){
+
+            return redirect('/pizzzzza/order/top'); //メール、パスワード、権限がすべて一致した場合
 
         }else{
             return "メールアドレスまたはパスワードが間違っています"; //メール、パスワードが一致していない場合

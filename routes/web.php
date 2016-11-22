@@ -47,7 +47,7 @@ Route::post('/contact','ContactController@send');
 Route::get('/app/countCartContents','ApisController@countCartContents');
 
 //お客様用ログアウト
-Route::post('/logout','Auth\LoginController@logout');
+Route::post('/logout','auth\LoginController@logout');
 
 
 
@@ -66,14 +66,17 @@ Route::post('/pizzzzza/menu/add', 'AdminMenusController@push'); //従業員用�
 
 Route::get('/pizzzzza/analysis','AnalysisController@index'); //売り上げ・売れ筋ページ
 
+Route::get('/pizzzzza/coupon/menu','CouponsController@couponMenu'); //クーポンメニュー
 Route::get('/pizzzzza/coupon/add','CouponsController@couponNew'); //クーポン種別選択ページ
+Route::get('/pizzzzza/coupon/list','CouponsController@couponNowList'); //開催中クーポン一覧ページ
 Route::get('/pizzzzza/coupon/add/discount/input','CouponsController@couponNewDiscount'); //クーポン値引き入力ページ
 Route::get('/pizzzzza/coupon/add/gift/input','CouponsController@couponNewGiftInput'); //プレゼントクーポン条件入力ページ
 Route::get('/pizzzzza/coupon/add/gift/select','CouponsController@couponNewGiftSelect'); //プレゼントクーポン商品選択ページ(未完成)
-Route::get('/pizzzzza/coupon/list','CouponsController@couponNowList'); //クーポンメニュー
 Route::get('/pizzzzza/coupon/list/discount/edit','CouponsController@couponNowDiscountEdit'); //値引きクーポン編集ページ　
 Route::get('/pizzzzza/coupon/list/gift/edit','CouponsController@couponNowGiftEdit'); //プレゼントクーポン条件変更ページ
 Route::get('/pizzzzza/coupon/history','CouponsController@couponHistory'); //過去のクーポン一覧ページ(未完成)
+
+Route::get('/pizzzzza/order/top','AdminController@orderTop'); //注文確認ページ
 
 
 //auth

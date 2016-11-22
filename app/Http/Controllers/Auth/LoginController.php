@@ -35,16 +35,16 @@ class LoginController extends Controller
      *
      * @return void
      */
+
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
-    
-     public function login(Request $request) {
+
+    public function login(Request $request) {
     //リクエストを取得
     $email = $request->get('email');
     $password = $request->get('password');
-    $remember = $request->get('remember');
     
 
     //DBからメアドが一致するやつを取得
@@ -61,13 +61,10 @@ class LoginController extends Controller
 
     //権限を取得。
     $authId = $userinfo->authority_id;
-
+    
     if($authId == 4){
-        if(Auth::attempt(['email' => $email, 'password' => $password ],$remember)){
-            //rememberがONか
-            if($remember === "on"){
-                return "rememberがONです。";
-            }
+        if(Auth::attempt(['email' => $email, 'password' => $password ])){
+
             return redirect('/'); //メール、パスワード、権限がすべて一致した場合
 
         }else{
@@ -79,8 +76,6 @@ class LoginController extends Controller
     }
     
 }
-
-
 
     public function logout(Request $request) //ログアウト処理
     {
