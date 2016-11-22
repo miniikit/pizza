@@ -31,7 +31,7 @@ Route::get('/faq', 'PagesController@faq');
 
 // コンタクト
 Route::get('/contact','ContactController@index');
-Route::post('/contact','ContactController@post');
+Route::post('/contact','ContactController@send');
 
 
 // API

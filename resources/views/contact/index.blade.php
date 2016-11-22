@@ -15,7 +15,7 @@
     <div class="container wrap">
         <h1>お問い合わせ</h1>
          <div id="contact">
-          <form>
+          <form action="/contact" method="post">
               <ul id="from-group">
                 <li>
                   <label>メールアドレス(必須)</label>
@@ -34,6 +34,7 @@
                       <input type="checkbox">XXXに同意します
                   </label>
                 </li>
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <button type="submit">送信</button>
               </ul>
           </form>
