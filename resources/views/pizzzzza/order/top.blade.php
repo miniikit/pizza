@@ -7,13 +7,7 @@
 @endsection
 
 @section('main')
-@if (Auth::attempt('authority_id'=1)
-{
-    Your Admin!
-}@else{
-    fuck!
-}
-@endif
+
 
 
 
