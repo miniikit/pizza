@@ -29,6 +29,21 @@
     box-sizing: border-box;
 }
 
+#main .error {
+    text-align: right;
+    padding: 15px;
+}
+
+#main .error li{
+    background-color: #b73b3b;
+    color: #eee;
+    font-size: 15px;
+    padding: 15px;
+    margin: 10px 0;
+    max-width: 400px;
+    display: inline-block;
+}
+
 #contact,
 #contact form {
     width: 100%;
@@ -96,4 +111,22 @@ input.form-mail {
     margin: 0 0 20px;
     box-sizing: border-box;
     padding: 10px;
+}
+
+#complete {
+    text-align: center;
+}
+
+#complete .inner {
+    display: inline-block;
+    font-size: 20px;
+    letter-spacing: 5px;
+    background-color: #c1c1c1;
+    color: #000000;
+    padding: 60px;
+}
+
+#complete i {
+    font-size: 125px;
+    margin-bottom: 30px;
 }
