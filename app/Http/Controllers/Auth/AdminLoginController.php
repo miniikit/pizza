@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-
-class AdminLoginController extends Controller{
+class AdminLoginController extends Controller
+{
 
 public function form(){
     return view('/pizzzzza/login');
@@ -19,7 +19,6 @@ public function login(Request $request) {
     //リクエストを取得
     $email = $request->get('email');
     $password = $request->get('password');
-    
 
     //DBからメアドが一致するやつを取得
     $pizza = DB::table('users')->where('users.email',$email)->get();;
@@ -52,13 +51,13 @@ public function login(Request $request) {
 }
 
     public function logout(Request $request){ //ログアウト処理
-        $this->guard()->logout();
+        //$this->guard()->logout();
 
         $request->session()->flush();
 
         $request->session()->regenerate();
 
-        return redirect('/');
+        return redirect('/pizzzzza/login');
     }
 
 }

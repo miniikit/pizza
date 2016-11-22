@@ -33,14 +33,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/pizzzzza/order/">管理画面</a>
+            <a class="navbar-brand" href="/pizzzzza/order/top">管理画面</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/pizzzzza/order/">注文確認</a></li>
-                <li><a href="/pizzzzza/order/accept">電話注文</a></li>
+                <li><a href="/pizzzzza/order/top">注文確認</a></li>
+                <li><a href="/pizzzzza/order/accept/input">電話注文</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">売上&売れ筋<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -60,9 +60,9 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">クーポン<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/pizzzzza/coupon/list">クーポン一覧</a></li>
+                        <li><a href="/pizzzzza/coupon/list">開催中のクーポン一覧</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/pizzzzza/coupon/add">クーポン新規発行</a></li>
+                        <li><a href="/pizzzzza/coupon/menu">クーポン新規発行</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/pizzzzza/coupon/history">クーポン履歴</a></li>
                     </ul>
@@ -75,6 +75,8 @@
                         <li><a href="/pizzzzza/employee/add">従業員追加</a></li>
                     </ul>
                 </li>
+                <a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">ログアウト</a>
+                <form id="logout-form" action="{{ url('/pizzzzza/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

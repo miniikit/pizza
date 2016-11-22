@@ -94,4 +94,5 @@ Route::get('/pizzzzza/order/accept/item/confirm','PhoneOrdersController@phoneOrd
 Auth::routes();
 
 Route::get('/pizzzzza/login', 'auth\AdminLoginController@form'); //管理画面ログインページ
+Route::post('/pizzzzza/logout', 'auth\AdminLoginController@logout'); //管理者用ログアウトページ
 Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理画面トップ
