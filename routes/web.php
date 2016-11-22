@@ -40,7 +40,7 @@ Route::get('/mypage/confirm','MypagesController@confirm');
 
 // コンタクト
 Route::get('/contact','ContactController@index');
-Route::post('/contact','ContactController@post');
+Route::post('/contact','ContactController@send');
 
 
 // API

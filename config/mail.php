@@ -56,6 +56,7 @@ return [
     */
 
     'from' => [
+
         'address' => 'oicpizza@gmail.com',
         'name' => 'oicpizza',
     ],
@@ -70,6 +71,7 @@ return [
     | transport layer security protocol should provide great security.
     |
     */
+
 
     'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
 
@@ -111,5 +113,8 @@ return [
     */
 
     'sendmail' => '/usr/sbin/sendmail -bs',
+
+    // Mail "Pretend"
+    'pretend' => env('MAIL_PRETEND', false),
 
 ];
