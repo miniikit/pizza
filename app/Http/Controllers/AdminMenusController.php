@@ -10,23 +10,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 use App\Http\Requests;
+use App\Product;
 
 class AdminMenusController extends Controller
 {
-    //  従業員一覧ページ
-    public function AdminMenuList()  {
-        return view('pizzzzza.menu.list');
+
+    public function index()
+    {
+        $products = Product::with('productPrice')->get();
+        return view('pizzzzza.menu.index', compact('products'));
     }
 
-    //  従業員編集ページ
-    public function AdminMenuEdit()  {
+    public function edit()
+    {
         return view('pizzzzza.menu.edit');
     }
 
-    //  従業員追加ページ
-    public function AdminMenuAdd()  {
+
+    public function add()
+    {
+
         return view('pizzzzza.menu.add');
     }
 }

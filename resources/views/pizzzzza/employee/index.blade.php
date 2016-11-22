@@ -30,20 +30,28 @@
        </tr>
      </thead>
      <tbody>
+     @foreach($employees as $employee)
        <tr>
-         <th scope="row"><input type="checkbox" name="name" value=""></th>
-           <td>001</td>
-           <td>近澤</td>
-           <td>チカザワ</td>
-           <td>16600101</td>
-           <td>M</td>
-           <td>19991212</td>
-           <td>25101212</td>
-          <td>00000000</td>
-           <td>00000000</td>
-           <td>aaaaaaaaaaaaaaaaaaaaa</td>
+         <th scope="row"><input type="radio" name="id" value="{{ $employee->id }}"></th>
+           <td>{{ $employee->id }}</td>
+           <td>{{ $employee->user->name }}</td>
+           <td>{{ $employee->user->kana }}</td>
+           <td>{{ \Carbon\Carbon::parse($employee->user->birthday)->format('Y年m月d日') }}</td>
+           <td>{{ $employee->user->gender->gender_name }}</td>
+           <td>{{ $employee->emoloyee_agreement_date }}</td>
+           <td>
+               @if($employee->emoloyee_agreement_enddate == null)
+                   未設定
+               @else
+                   {{ $employee->emoloyee_agreement_enddate }}
+               @endif
+           </td>
+           <td>{{ $employee->created_at }}</td>
+           <td>{{ $employee->updated_at }}</td>
+           <td>{{ $employee->user->address1 . $employee->user->address2 .$employee->user->address3 }}</td>
        </tr>
-        </tbody>
+     @endforeach
+     </tbody>
    </table>
  </div>
 

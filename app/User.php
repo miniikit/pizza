@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'kana', 'email', 'password', 'postel', 'address1', 'address2', 'address3', 'phone', 'gender_id', 'birthday', 'authority_id'
+        'name', 'kana', 'email', 'password', 'postal', 'address1', 'address2', 'address3', 'phone', 'gender_id', 'birthday', 'authority_id'
     ];
 
     /**
@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function gender() {
+        return $this->belongsTo('App\Gender','gender_id');
+    }
+
 }

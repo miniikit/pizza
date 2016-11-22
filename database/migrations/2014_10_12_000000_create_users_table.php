@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->integer('postel'); //郵便番号
+            $table->integer('postal'); //郵便番号
             $table->string('address1'); //住所1
             $table->string('address2'); //住所2
             $table->string('address3')->nullable(); //住所3

@@ -1,0 +1,160 @@
+﻿#order{
+    width:100%;
+}
+
+.fonts h2 {
+    text-align: center;
+    letter-spacing: 8px;
+    font-size: 40px;
+    margin-bottom: 80px;
+    color: #656565;
+    position: relative;
+}
+.fonts h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    background: #656565;
+    height: 3px;
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    margin-left: -25px;
+}
+
+.fonts h2:nth-child(n+1) {
+    margin-top: 50px;
+}
+
+
+
+
+.history{
+    height:30px;
+    width:75%;
+    padding: .5em .75em;
+    border: 1.5px solid #ccc;
+    border-radius: 4px;
+    margin:0 auto;
+    margin-bottom:25px;
+
+}
+.history:hover{
+    background-color: rgba(255,255,255,0.2);
+}
+
+
+.mini{
+    width: 40%;
+    text-align:center;
+    float: left;
+    margin-bottom:5px;
+}
+.date{
+    margin-right:0;
+}
+.pay{
+    margin-left:8%;
+}
+
+
+/*
+*   詳細ページのテーブル用
+*
+*
+*/
+img{
+    max-width:100%;
+    height:auto;
+}
+
+#table {
+    width:100%;
+    margin:0 auto;
+    margin-bottom: 50px;
+
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+#table th {
+    background-color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 10px 0;
+    color: #656565;
+    letter-spacing: 2px;
+}
+#table td {
+    vertical-align: middle;
+    text-align: center;
+    background-color: rgba(100,100,100,0.1);
+    border: solid 2px #eee;
+    padding: 5px;
+    color:  #656565;
+}
+.font_left{
+    text-align: left;
+}
+
+/*
+*   注文詳細ページ
+*
+*
+*/
+.order{
+    height:auto;
+    width:90%;
+    padding: .5em .75em;
+    border: 1.5px solid #ccc;
+    border-radius: 4px;
+    margin:0 auto;
+    margin-bottom:25px;
+}
+.order:hover{
+    background-color:rgba(255,255,255,0.3);
+}
+.order .date{
+
+}
+.order .contents .img{
+    max-width:250px;
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    -webkit-border-radius:30px;
+    -moz-border-radius:30px;
+    border-radius:10px;
+
+}
+.order .contents{
+    width:100%;
+    display: inline-block;
+}
+.order .contents .item{
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    width:24%;
+}
+.order .contents .item br{
+    margin-bottom: 10px;
+}
+.name,.price,.num,.total{
+    vertical-align: middle;
+    font-size:2em;
+    color:#656565;
+}
+
+
+@media screen and (max-width: 763px){
+    .order .contents .img{
+        max-width:150px;
+    }
+    .name,.price,.num,.total{
+        font-size:1.4em;
+    }
+}
+@media screen and (max-width: 470px){
+    .name,.price,.num,.total{
+        font-size:1em;
+    }
+}
