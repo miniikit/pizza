@@ -1,3 +1,10 @@
+/*  フォーム下のスペース　*/
+.space{
+    margin : 10px 0;
+}
+
+
+
 .register{
     width:80%;
     margin:0 auto;

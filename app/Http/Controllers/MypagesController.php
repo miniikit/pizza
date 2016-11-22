@@ -21,6 +21,9 @@ use App\Service\MypageService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+//バリデーション
+use Illuminate\Support\ServiceProvider;
+
 
 use Illuminate\Support\Facades\DB;  //サービスに移植後削除
 
@@ -113,8 +116,53 @@ class MypagesController extends Controller
     }
 
     //更新確認ページ
-    public function confirm()
+    public function confirm(Request $request)
     {
+        //バリデーションチェック
+            $this->validate($request, [
+            //$validator =Validator::make($request->all(),[
+                /**
+                 *
+                 *  required : 必須
+                */
+                'name' => 'required|unique:posts|max:255',
+                'name_katakana' => 'required|unique:posts|',
+                'postal' => 'required|unique:posts|size:7|integer',
+                'address1' => 'required|unique:posts|',
+                'address2' => 'required|unique:posts|',
+                'address3' => 'unique:posts|',
+                'birthday' => 'required|unique:posts|',
+                'phone' => 'required|unique:posts|integer',
+                'gender' => 'required|unique:posts|',
+                'email' => 'required|unique:posts|email',
+                'new_password' => 'required|unique:posts|new_password_confirm|min:6',
+                'new_password_confirm' => 'required|unique:posts|new_password',
+                'confirm_password' => 'required|unique:posts|'
+            ]);
+        //バリデーションチェック　カタカナ
+            mb_regex_encoding("UTF-8");
+            $name_katakana = $request->input('name_katakana');
+            if (!preg_match("/^[ァ-ヶー]+$/u", $name_katakana)) {
+                //失敗時？　要確認
+            }
+
+        //POSTデータの受け取り
+            $name = $request->input('name');
+            $name_katakana = $request->input('name_katakana');
+            $postal = $request->input('postal');
+            $address1 = $request->input('address1');
+            $address2 = $request->input('address2');
+            $address3 = $request->input('address3');
+            $birthday = $request->input('$birthday');
+            $phone = $request->input('phone');
+            $gender = $request->input('gender');
+            $email = $request->input('email');
+            $new_password = $request->input('new_password');
+            $new_password_confirm = $request->input('new_password_confirm');
+            $confirm_password = $request->input('confirm_password');
+
+
+
         return view('mypage.confirm');
     }
 }

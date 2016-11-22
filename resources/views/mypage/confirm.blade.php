@@ -13,7 +13,7 @@
 @endsection
 @section('main')
     <div class="container wrap">
-        <div class="fonts"><h2>会員情報確認</h2></div>
+        <div class="fonts"><h2>会員情報更新確認</h2></div>
         <div class="register">
             <table id="table">
                 @foreach($users as $user)
@@ -39,7 +39,7 @@
                 <tr><th>パスワード</th><td>**********</td></tr>
                 @endforeach
             </table>
-            <form class="submit" action="/mypage/edit" method="post">
+            <form class="submit" action="/mypage/" method="post">
                 <a class="form-bottom" href="#">編集</a>
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             </form>
