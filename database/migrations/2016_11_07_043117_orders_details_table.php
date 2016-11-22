@@ -14,10 +14,14 @@ class OrdersDetailsTable extends Migration
     public function up()
     {
       Schema::create('orders_details_table', function (Blueprint $table) {
-        $table->increments('id');//->primary(); //注文明細ID
-        $table->integer('product_id');//->references('id')->on('products_master'); //商品ID
+
+        $table->integer('id'); //注文明細ID
+        $table->integer('price_id');//->references('id')->on('products_master'); //商品ID
         $table->integer('number'); //数量
         $table->timestamps(); //登録・更新日
+
+        $table->primary(['id', 'price_id']);
+
         });
     }
 

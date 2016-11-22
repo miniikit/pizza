@@ -17,6 +17,8 @@ use App\Order;
 use App\OrderDetail;
 use App\Campaign;
 use App\User;
+use App\Employee;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,7 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call('CouponsTypesMasterSeeder');
         $this->call('GendersMasterSeeder');
         $this->call('AuthoritiesMasterSeeder');
-        $this->call('ProducstMasterSeeder');
+        $this->call('ProductsMasterSeeder');
         $this->call('ProductsPricesMasterSeeder');
         $this->call('StatesMasterSeeder');
         $this->call('OrdersMasterSeeder');
@@ -41,6 +43,7 @@ class DatabaseSeeder extends Seeder
         $this->call('CouponsMasterSeeder');
         $this->call('CampaignesMasterSeeder');
         $this->call('UsersSeeder');
+        $this->call('EmployeeMasterSeeder');
 
         Model::reguard();
     }
@@ -55,11 +58,11 @@ class UsersSeeder extends Seeder
         DB::table('users')->delete();
 
         User::create([
-            'name' => 'admin',
-            'kana' => 'アドミニ',
+            'name' => '管理者',
+            'kana' => '管理者',
             'email' => 'admin@oic.jp',
             'password' => bcrypt('root'),
-            'postel' => 5900014,
+            'postal' => 5900014,
             'address1' => '大阪府堺市堺区登坂町',
             'address2' => '8-5',
             'address3' => '910号室',
@@ -69,11 +72,11 @@ class UsersSeeder extends Seeder
             'authority_id' => 1,
         ]);
         User::create([
-            'name' => '兵頭もっぷ',
-            'kana' => 'ヒョウドウモップ',
+            'name' => '兵頭佑一',
+            'kana' => 'ヒョウドウユウイチ',
             'email' => 'B5123@oic.jp',
             'password' => bcrypt('19970221'),
-            'postel' => 5320003,
+            'postal' => 5320003,
             'address1' => '大阪府大阪市淀川区宮原町',
             'address2' => '2-8-1',
             'address3' => '312号室',
@@ -87,7 +90,7 @@ class UsersSeeder extends Seeder
             'kana' => 'ハマダマサキ',
             'email' => 'B5163@oic.jp',
             'password' => bcrypt('djmasaki'),
-            'postel' => 5550011,
+            'postal' => 5550011,
             'address1' => '大阪府大阪市大正区北恩加島',
             'address2' => '2-8-1',
             'address3' => null,
@@ -101,7 +104,7 @@ class UsersSeeder extends Seeder
             'kana' => 'チカザワクニヒコ',
             'email' => 'B5164@oic.jp',
             'password' => bcrypt('zawatika'),
-            'postel' => 5550012,
+            'postal' => 5550012,
             'address1' => '大阪府大阪市大正区北恩加島',
             'address2' => '2-8-2',
             'address3' => null,
@@ -110,6 +113,56 @@ class UsersSeeder extends Seeder
             'birthday' => 19960607,
             'authority_id' => 4,
         ]);
+
+        $faker = Faker::create('ja_JP');
+
+        for ($i=0; $i < 20; $i++) {
+
+            User::create([
+                'name' => $faker->name,
+                'kana' => 'テスト',
+                'email' => $faker->safeEmail,
+                'password' => bcrypt('faker'),
+                'postal' => $faker->postcode,
+                'address1' => $faker->prefecture.$faker->city,
+                'address2' => $faker->streetAddress,
+                'address3' => null,
+                'phone' => $faker->phoneNumber,
+                'gender_id' => rand(1, 2),
+                'birthday' => $faker->dateTimeBetween('-80 years', '-20years')->format('Ymd'),
+                'authority_id' => 4,
+            ]);
+
+        }
+
+    }
+}
+
+class EmployeeMasterSeeder extends Seeder
+{
+
+    public function run()
+    {
+        DB::table('employees_master')->delete();
+
+        Employee::create([
+            'users_id' => 1,
+            'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
+            'emoloyee_agreement_enddate' => null,
+        ]);
+
+        Employee::create([
+            'users_id' => 3,
+            'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
+            'emoloyee_agreement_enddate' => null,
+        ]);
+
+        Employee::create([
+            'users_id' => 2,
+            'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
+            'emoloyee_agreement_enddate' => null,
+        ]);
+
     }
 }
 
@@ -166,7 +219,7 @@ class CouponsMasterSeeder extends Seeder
             'product_id' => 1,
             'coupon_start_date' => Carbon::today(),
             'coupon_end_date' => null,
-            'coupon_number' => 00000001,
+            'coupon_number' => '00000001',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => null,
         ]);
@@ -177,7 +230,7 @@ class CouponsMasterSeeder extends Seeder
             'product_id' => 1,
             'coupon_start_date' => Carbon::today(),
             'coupon_end_date' => null,
-            'coupon_number' => 00000002,
+            'coupon_number' => '00000002',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => null,
         ]);
@@ -188,7 +241,7 @@ class CouponsMasterSeeder extends Seeder
             'product_id' => 2,
             'coupon_start_date' => Carbon::today(),
             'coupon_end_date' => null,
-            'coupon_number' => 00000003,
+            'coupon_number' => '00000003',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => null,
         ]);
@@ -240,7 +293,7 @@ class AuthoritiesMasterSeeder extends Seeder
 }
 
 //商品
-class ProducstMasterSeeder extends Seeder
+class ProductsMasterSeeder extends Seeder
 {
 
     public function run()
@@ -253,7 +306,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/1.jpg',
             'product_text' => '大きくカットしたポテトにコーンとベーコンをトッピングして、明太クリームソース、バター、チーズを合わせた、家族で楽しめるピザです。',
             'genre_id' => 1,
-            'sales_start_date' => Carbon::now(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -262,7 +315,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/2.jpg',
             'product_text' => 'ホクホクのポテトと旨味が凝縮されたベーコンを特製マヨソースで味わって頂く商品です。バター風味豊かなキューブチーズが食材の味を一層引き立てます。',
             'genre_id' => 1,
-            'sales_start_date' => Carbon::tomorrow(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -271,7 +324,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/3.jpg',
             'product_text' => '生クリームを加えたバジルの香り豊かなジェノベーゼソースと、まろやかでクセのないフレッシュモッツァレラの香りと濃厚チーズの組み合わせが大人向けの商品',
             'genre_id' => 1,
-            'sales_start_date' => Carbon::today(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -280,7 +333,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/4.jpg',
             'product_text' => '少量を食べたいときにおすすめ。皮つきのうまさ！外はカリッ、中はホックリ！お子様にも大人気です！口に運べば、バターの風味とポテトの旨みが広がります。',
             'genre_id' => 2,
-            'sales_start_date' => Carbon::today(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -289,7 +342,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/5.jpg',
             'product_text' => 'コーンをふんだんに入れ、濃厚で上品な甘さが特徴のスープです。北海道十勝産スイートコーンを使用したクリーミーなスープに仕上げました。',
             'genre_id' => 2,
-            'sales_start_date' => Carbon::today(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -298,7 +351,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/6.jpg',
             'product_text' => '旨みたっぷりの骨付き鶏肉をガーリックなどの香辛料とハーブで味付けし、表面はパリｯと、中はジューシーにローストしたクリスマスにぴったりのローストチキンです。',
             'genre_id' => 2,
-            'sales_start_date' => Carbon::today(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -307,7 +360,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/7.jpg',
             'product_text' => '税抜き150円',
             'genre_id' => 3,
-            'sales_start_date' => Carbon::today(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -316,7 +369,7 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/8.jpg',
             'product_text' => '税抜き150円',
             'genre_id' => 3,
-            'sales_start_date' => Carbon::today(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
         Product::create([
@@ -325,8 +378,17 @@ class ProducstMasterSeeder extends Seeder
             'product_image' => '/images/product/9.jpg',
             'product_text' => '税抜き150円',
             'genre_id' => 3,
-            'sales_start_date' => Carbon::today(),
+            'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
+        ]);
+        Product::create([
+            'product_name' => 'もち明太グラタン',
+            'price_id' => 10,
+            'product_image' => '/images/product/10.jpg',
+            'product_text' => 'まろやかな明太子クリームソースとホワイトソースを一緒に味わって頂く商品です。',
+            'genre_id' => 2,
+            'sales_start_date' => Carbon::parse('2016-10-10'),
+            'sales_end_date' => Carbon::yesterday(),
         ]);
     }
 }
@@ -342,63 +404,70 @@ class ProductsPricesMasterSeeder extends Seeder
         ProductPrice::create([
             'product_id' => 1,
             'product_price' => '1990',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 1,
         ]);
         ProductPrice::create([
             'product_id' => 2,
             'product_price' => '2200',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 2,
         ]);
         ProductPrice::create([
             'product_id' => 3,
             'product_price' => '1800',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
         ProductPrice::create([
             'product_id' => 4,
             'product_price' => '410',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
         ProductPrice::create([
             'product_id' => 5,
             'product_price' => '400',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
         ProductPrice::create([
             'product_id' => 6,
             'product_price' => '734',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
         ProductPrice::create([
             'product_id' => 7,
             'product_price' => '162',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
         ProductPrice::create([
             'product_id' => 8,
             'product_price' => '162',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
         ProductPrice::create([
             'product_id' => 9,
             'product_price' => '162',
-            'price_change_startdate' => Carbon::today(),
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
+            'price_change_enddate' => null,
+            'employee_id' => 3,
+        ]);
+        ProductPrice::create([
+            'product_id' => 10,
+            'product_price' => '680',
+            'price_change_startdate' => Carbon::parse('2016-10-10'),
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
@@ -435,21 +504,30 @@ class OrdersMasterSeeder extends Seeder
             'order_date' => Carbon::now(),
             'order_appointment_date' => Carbon::tomorrow(),
             'coupon_id' => 1,
-            'state_id' => 1
+            'state_id' => 1,
+            'user_id' => 4,
         ]);
         Order::create([
             'order_date' => Carbon::now(),
             'order_appointment_date' => Carbon::tomorrow(),
-            'coupon_id' => 2,
-            'state_id' => 2
+            'coupon_id' => null,
+            'state_id' => 1,
+            'user_id' => 5,
         ]);
         Order::create([
             'order_date' => Carbon::now(),
             'order_appointment_date' => Carbon::tomorrow(),
-            'coupon_id' => 2,
-            'state_id' => 1
+            'coupon_id' => null,
+            'state_id' => 1,
+            'user_id' => 6,
         ]);
-
+        Order::create([
+            'order_date' => Carbon::now(),
+            'order_appointment_date' => Carbon::tomorrow(),
+            'coupon_id' => null,
+            'state_id' => 1,
+            'user_id' => 4,
+        ]);
     }
 }
 
@@ -462,18 +540,45 @@ class OrdersDetailsTableSeeder extends Seeder
         DB::table('orders_details_table')->delete();
 
         OrderDetail::create([
-            'product_id' => 1,
+            'id' => 1,
+            'price_id' => 1,
             'number' => 1,
         ]);
         OrderDetail::create([
-            'product_id' => 2,
+            'id' => 1,
+            'price_id' => 2,
             'number' => 2,
         ]);
         OrderDetail::create([
-            'product_id' => 3,
+            'id' => 1,
+            'price_id' => 3,
             'number' => 3,
         ]);
-
+        OrderDetail::create([
+            'id' => 2,
+            'price_id' => 4,
+            'number' => 3,
+        ]);
+        OrderDetail::create([
+            'id' => 2,
+            'price_id' => 7,
+            'number' => 3,
+        ]);
+        OrderDetail::create([
+            'id' => 3,
+            'price_id' => 8,
+            'number' => 3,
+        ]);
+        OrderDetail::create([
+            'id' => 4,
+            'price_id' => 1,
+            'number' => 3,
+        ]);
+        OrderDetail::create([
+            'id' => 4,
+            'price_id' => 2,
+            'number' => 3,
+        ]);
     }
 }
 

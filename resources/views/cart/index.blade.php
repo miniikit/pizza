@@ -25,16 +25,45 @@
                 </form>
             </div>
 
-            @foreach ($productMap as $product)
-                <ul>
-                    <li><img src="{{$product->product_image}}" alt="" /></li>
-                    <li>{{$product->product_name}}</li>
-                    <li>{{$product->product_text}}</li>
-                    <li>{{$product->productPrice->product_price}}</li>
-                    <li>{{$productCount[$product->id]}}</li>
-                    <li>{{number_format($productCount[$product->id] * $product->productPrice->product_price)}}</li>
-                </ul>
-            @endforeach
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>商品名</th>
+                        <th>詳細</th>
+                        <th>金額</th>
+                        <th>数量</th>
+                        <th>小計</th>
+                        <th>削除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach ($products as $product)
+                    <tr>
+                        <td><img src="{{$product->product_image}}" alt="" /></td>
+                        <td>{{$product->product_name}}</td>
+                        <td>{{$product->product_text}}</td>
+                        <td>{{number_format($product->productPrice->product_price)}}円</td>
+                        <td class="btn">
+                            <form class="" action="/cart/edit/" method="post">
+                                <span>
+                                    <select class="sum" name="sum">
+                                        <option value="{{$productCount[$product->id]}}">{{$productCount[$product->id]}}</option>
+                                        @for ($i=1; $i <= 10 ; $i++)
+                                        <option value="{{$i}}">{{$i}}</option>
+                                        @endfor
+                                    </select>
+                                </span>
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                {{ csrf_field() }}
+                            </form>
+                        </td>
+                        <td>{{number_format($productCount[$product->id] * $product->productPrice->product_price)}}円</td>
+                        <td><form action="/cart/clear/{{$product->id}}" method="post"><div class="form-bottom"><a><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>{{ csrf_field() }}</form></td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
 
             <div class="total">
                 <p>合計金額: <span>{{ number_format($total) }}</span>円</p>
@@ -59,5 +88,10 @@
 @endsection
 
 @section('script')
-
+    <script type="text/javascript">
+    $(".sum").change(function(){
+        var form = $(this).parent().parent();
+        $(form).submit();
+    });
+    </script>
 @endsection

@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use \App\Service\CartService;
 
-class ApisController extends Controller {
+class ApisController extends Controller
+{
 
-    public function countCartContents() {
+    public function countCartContents()
+    {
         return CartService::countCartContents();
     }
 }
