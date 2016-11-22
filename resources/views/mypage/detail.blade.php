@@ -40,6 +40,7 @@
             </table>
             <form class="submit" action="/mypage/edit" method="post">
                 <a class="form-bottom" href="#">編集</a>
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             </form>
         </div>
     </div>
