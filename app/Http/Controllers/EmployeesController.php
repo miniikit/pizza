@@ -18,7 +18,7 @@ class EmployeesController extends Controller
     //  従業員一覧ページ
     public function index()  {
 
-        $employees = Employee::with('user')->get();
+        $employees = Employee::find(1)->with('user.gender')->get();
 
         return view('pizzzzza/employee.index',compact('employees'));
     }

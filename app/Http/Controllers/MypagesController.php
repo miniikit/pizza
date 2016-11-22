@@ -60,7 +60,7 @@ class MypagesController extends Controller
             $userId = Auth::user()->id;
 
             //お客様情報を取得
-            $users = DB::table('users')->where('users.id', $userId)->select('users.name', 'users.kana', 'users.postel', 'users.address1', 'users.address2', 'users.address3', 'users.phone')->get();
+            $users = DB::table('users')->where('users.id', $userId)->select('users.name', 'users.kana', 'users.postal', 'users.address1', 'users.address2', 'users.address3', 'users.phone')->get();
 
             //注文情報を取得（日時・注文ID・割引金額・合計金額）
             $orders = DB::table('orders_master')->leftjoin('coupons_master', 'coupons_master.coupon_number', '=', 'orders_master.coupon_id')->join('users', 'users.id', '=', 'orders_master.user_id')->join('orders_details_table', 'orders_details_table.id', '=', 'orders_master.id')->join('products_prices_master', 'products_prices_master.id', '=', 'orders_details_table.price_id')->where('users.id', $userId)->where('orders_details_table.id', '=', $id)->select('orders_master.order_date', 'coupons_master.coupon_discount', DB::raw('SUM(products_prices_master.product_price * orders_details_table.number) as total_price'), 'coupons_master.coupon_name')->groupby('orders_master.order_date', 'coupons_master.coupon_discount', 'coupons_master.coupon_name')->get();
@@ -79,13 +79,37 @@ class MypagesController extends Controller
     //登録情報確認ページ
     public function detail()
     {
-        return view('mypage.detail');
+        //認証済み？
+        if (Auth::check()) {
+            //ユーザIDを取得
+            $userId = Auth::user()->id;
+
+            //お客様情報（性別やメールアドレス・パスワード）を取得
+            $users = DB::table('users')->where('users.id', $userId)->select('users.name', 'users.kana', 'users.postal', 'users.address1', 'users.address2', 'users.address3', 'users.phone','users.gender_id','users.birthday','users.email')->get();
+
+            //return view('mypage.order.detail');
+            return view('mypage.detail', ["users" => $users]);
+        } else {
+            return 'ログインしてください！';
+        }
     }
 
     //登録情報編集ページ
     public function edit()
     {
-        return view('mypage.edit');
+        //認証済み？
+        if (Auth::check()) {
+            //ユーザIDを取得
+            $userId = Auth::user()->id;
+
+            //お客様情報（性別やメールアドレス・パスワード）を取得
+            $users = DB::table('users')->where('users.id', $userId)->select('users.name', 'users.kana', 'users.postal', 'users.address1', 'users.address2', 'users.address3', 'users.phone','users.gender_id','users.birthday','users.email')->get();
+
+            //return view('mypage.order.detail');
+            return view('mypage.edit', ["users" => $users]);
+        } else {
+            return 'ログインしてください！';
+        }
     }
 
     //更新確認ページ
