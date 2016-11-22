@@ -13,30 +13,17 @@
 
 @section('main')
     <div class="container wrap">
-        <h1>お問い合わせ</h1>
+        <h2>お問い合わせ</h2>
          <div id="contact">
           <form action="/contact" method="post">
               <ul id="from-group">
-                <li>
-                  <label>メールアドレス(必須)</label>
-                </li>
-                <li>
-                  <input type="text" name="email" label="email" class="form-mail">
-                </li>
-                <li>
-                  <label>内容文</label>
-                </li>
-                <li>
-                  <textarea name="textarea" label="text" rows="10" cols="100"></textarea>
-                </li>
-                <li class="checkbox">
-                  <label>
-                      <input type="checkbox">XXXXに同意します
-                  </label>
-                </li>
-                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                <button type="submit">送信</button>
+                <li>メールアドレス</li>
+                <li><input type="text" name="email" label="email" class="form-mail"></li>
+                <li>内容</li>
+                <li><textarea name="textarea" label="text" rows="10" cols="100"></textarea></li>
               </ul>
+              <div class="form-bottom"><a>送信</a></div>
+              {{ csrf_field() }}
           </form>
         </div>
     </div>
