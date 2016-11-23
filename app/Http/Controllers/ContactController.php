@@ -2,32 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
-use Mail;
-use App\Mail\Contacted;
+use App\Service\ContactService;
 
 class ContactController extends Controller
 {
     //
 
     public function index() {
+
       return view('contact.index');
+
     }
 
-   public function send(Request $request)
+   public function send(ContactRequest $request)
    {
 
-       $this->validate($request, [
-           'email' => 'required|email',
-           'body' => 'required',
-       ]);
+       $data = $request->all();
 
-        $data = $request->all();
-        Mail::send(['text' => 'mail.contact'], $data, function($message) use($data){ // useを追加
-        $message->to($data["email"])->subject('お問い合わせ');
-        });
+
+       $contact = new ContactService();
+
+       $contact->send($data);
+
        return view('contact.complete');
+
    }
 
 }
