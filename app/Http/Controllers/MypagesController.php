@@ -292,7 +292,7 @@ class MypagesController extends Controller
 
         //更新内容があれば
         if(isset($update)) {
-            $query = DB::table('users')->where('id', $userId)->update($update);
+           // $query = DB::table('users')->where('id', $userId)->update($update);
         }
 
 
@@ -320,14 +320,14 @@ class MypagesController extends Controller
         //データベースの旧パスワード
         $dbPassword = "";
 
-        return view('mypage.confirm' ,[]);
+        return view('mypage.confirm' ,[$user]);
     }
 
 
 
 
     //更新確認ページを経て、更新SQLを実際に走らせる
-    public function do(Request $request){
+    public function update(Request $request){
         //
         //  ログイン確認
         //

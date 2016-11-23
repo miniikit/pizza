@@ -34,9 +34,9 @@ Route::get('/faq', 'PagesController@faq');
 Route::get('/mypage/order/history','MypagesController@orderHistory');
 Route::get('/mypage/order/detail/{id}','MypagesController@orderDetail');
 Route::get('/mypage/detail','MypagesController@detail');
-Route::post('/mypage/edit','MypagesController@edit');
+Route::get('/mypage/edit','MypagesController@edit');
 Route::post('/mypage/confirm','MypagesController@confirm');
-Route::post('/mypage/do','MypagesController@do');
+Route::post('/mypage/update','MypagesController@update');
 
 // コンタクト
 Route::get('/contact','ContactController@index');
