@@ -1,7 +1,6 @@
 <?php
 
     namespace App\Service;
-    use Illuminate\Support\Facades\DB;
     use App\Product;
 
     /**
@@ -66,9 +65,7 @@
              session()->flush();
          }
 
-         /**
-          * @return int
-          */
+
          static public function countCartContents() {
 
              $productCount = session()->get("productCount",[]);
