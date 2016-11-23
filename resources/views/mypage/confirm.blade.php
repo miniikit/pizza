@@ -32,7 +32,8 @@
                     <tr><th>メールアドレス</th><td class="{{ $class["email"] }}">{{ $user["email"] }}</td></tr>
                     <tr><th>新しいパスワード</th><td class="{{ $class["new_password"] }}">{{ $user["new_password"] }}</td></tr>
                 </table>
-                <a class="form-bottom" href="#">編集</a>
+                <a href="/mypage/detail">戻る</a>
+                <a class="form-bottom" href="#">更新</a>
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             </form>
         </div>

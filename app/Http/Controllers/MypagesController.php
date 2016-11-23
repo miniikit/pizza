@@ -129,6 +129,7 @@ class MypagesController extends Controller
     //更新確認ページ
     public function confirm(Request $request)
     {
+
         //
         //  ログイン確認
         //
@@ -164,33 +165,6 @@ class MypagesController extends Controller
             //変更用パスワードエラー時の処理
             return "変更用パスワードが違います";
         }
-
-
-        //
-        //  バリデーションチェック
-        //
-        //
-
-        //バリデーションチェック　その２（エラー。項目はこれで良くて、チェック内容はもう少し増える）
-        /*
-            $this->validate($request, [
-            //$validator =Validator::make($request->all(),[
-                 //  required : 必須
-                'name' => 'required|unique:posts|max:255',
-                'name_katakana' => 'required|unique:posts|',
-                'postal' => 'required|unique:posts|size:7|integer',
-                'address1' => 'required|unique:posts|',
-                'address2' => 'required|unique:posts|',
-                'address3' => 'unique:posts|',
-                'birthday' => 'required|unique:posts|',
-                'phone' => 'required|unique:posts|integer',
-                'gender' => 'required|unique:posts|',
-                'email' => 'required|unique:posts|email',
-                'new_password' => 'required|unique:posts|new_password_confirm|min:6',
-                'new_password_confirm' => 'required|unique:posts|new_password',
-                'confirm_password' => 'required|unique:posts|'
-            ]);
-        */
 
 
         //
@@ -237,46 +211,6 @@ class MypagesController extends Controller
         session(['UpdatePostData' => $userPost]);
         $data = $request->session()->all();
 
-
-
-        /*
-        if(is_null($user["name"])){
-            $user["name"] = "a";
-        }
-        if(is_null($user["name_katakana"])){
-            $user["name_katakana"] = "b";
-        }
-        if(is_null($user["postal"])){
-            $user["postal"] = "b";
-        }
-        if(is_null($user["address1"])){
-            $user["address1"] = "b";
-        }
-        if(is_null($user["address2"])){
-            $user["address2"] = "b";
-        }
-        if(is_null($user["address3"])){
-            $user["address3"] = "b";
-        }
-        if(is_null($user["birthday"])){
-            $user["birthday"] = "b";
-        }
-        if(is_null($user["phone"])){
-            $user["phone"] = "b";
-        }
-        if(is_null($user["gender"])){
-            $user["gender"] = "b";
-        }
-        if(is_null($user["email"])){
-            $user["email"] = "b";
-        }
-        if(is_null($user["gender"])){
-            $user["gender"] = "b";
-        }
-        if(is_null($user["gender"])){
-            $user["gender"] = "b";
-        }
-        */
 
         //
         //  性別を、int型に
@@ -389,6 +323,8 @@ class MypagesController extends Controller
 
 
 
+
+
     //更新確認ページを経て、更新SQLを実際に走らせる
     public function update(Request $request){
         //
@@ -411,7 +347,6 @@ class MypagesController extends Controller
         $tmpUserDb = DB::table('users')->where('users.id', $userId)->select('users.name', 'users.kana', 'users.email', 'users.password', 'users.postal', 'users.address1', 'users.address2', 'users.address3', 'users.phone', 'users.gender_id', 'users.birthday', 'users.email')->get();
         //DBの結果を、$tmpUser->の形で参照できるように。
         list($tmpUser) = $tmpUserDb;
-
 
 
         //
@@ -450,11 +385,8 @@ class MypagesController extends Controller
 
 
         //
-        //  更新SQL　値のセット　（変更箇所の「色」と「SQL文」を設定。（色は、view側でクラスを付与することで実現）
+        //  更新SQL　値のセット（変更箇所のみ）
         //
-
-        //SQLの確認ログ取得用。実行された後の生文がみれる
-        DB::enableQueryLog();
 
         //$update[]に、更新内容が入る。
         $update = array();
@@ -493,18 +425,18 @@ class MypagesController extends Controller
         }
 
 
-
         //
         //  更新SQL　Run
         //
 
         //更新内容があれば
         if(isset($update)) {
+            //更新を実行
             $query = DB::table('users')->where('id', $userId)->update($update);
+            return redirect('mypage/detail')->with('updateStatus', "更新完了");
+        }else{
+            //更新内容がない
+            return redirect('mypage/detail')->with('updateStatus', 'エラー！');
         }
-        //SQLログ確認用　セットで使う。
-         dd(DB::getQueryLog());
-
-
     }
 }

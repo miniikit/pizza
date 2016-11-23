@@ -13,7 +13,7 @@
 @endsection
 @section('main')
     <div class="container wrap">
-        <div class="fonts"><h2>会員情報確認</h2></div>
+        <div class="fonts"><h2>会員情報更新</h2></div>
         <div class="register">
             <form class="submit" action="/mypage/confirm" method="post">
             <table id="table">
@@ -40,7 +40,8 @@
                 @endforeach
 
             </table>
-                <a class="form-bottom" href="#">編集</a>
+                <a class="form-bottom" href="/mypage/detail">キャンセル</a>
+                <a class="form-bottom" href="#">確認へ</a>
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             </form>
         </div>

@@ -14,18 +14,23 @@
 @section('main')
     <div class="container wrap">
         <div class="fonts"><h2>会員情報確認</h2></div>
+        @if(session()->has('updateStatus'))
+            <div class="update-message">
+                <h3>{{ session()->get('updateStatus') }}</h3>
+            </div>
+        @endif
         <div class="register">
             <table id="table">
                 @foreach($users as $user)
-                            {{-- 郵便番号にハイフンを合体。いっそ関数にしても？ --}}
+                    {{-- 郵便番号にハイフンを合体。いっそ関数にしても？ --}}
                     <?php
-                            $zip = $user->postal;
-                            $postal = substr($zip, 0, 3).'-'.substr($zip, 3);
-                            $gender = "男";
+                    $zip = $user->postal;
+                    $postal = substr($zip, 0, 3).'-'.substr($zip, 3);
+                    $gender = "男";
+                    if($user->gender_id == 2){
+                        $gender = "女";
+                    }
                     ?>
-                    @if($user->gender_id == 2)
-                        $gender = 女
-                    @endif
                 <tr><th>名前</th><td>{{ $user->name }}</td></tr>
                 <tr><th>フリガナ</th><td>{{ $user->kana }}</td></tr>
                 <tr><th>郵便番号</th><td>〒{{ $postal }}</td></tr>
