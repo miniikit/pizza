@@ -25,7 +25,7 @@ Route::post('/cart/edit/','CartsController@edit');
 Route::post('/cart/clear','CartsController@clear');
 
 //　注文
-Route::get('/order/confirm/','OrdersController@index');
+Route::get('/order/confirm/','OrdersController@index')->name('order');
 Route::post('/order/complete/','OrdersController@complete');
 
 // etc..

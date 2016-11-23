@@ -202,7 +202,8 @@
     background-color: #424242;
     letter-spacing: 5px;
     transition: ease-in 0.2s;
-    border: solid 1px #424242
+    border: solid 1px #424242;
+    cursor: pointer;
 }
 
 .btn .inner a:hover {
@@ -220,15 +221,11 @@
     box-sizing: border-box;
 }
 
-.clear.btn {
-    text-align: right;
-    margin-bottom: 50px;
-}
-
-.clear.btn a {
-    text-align: center;
-    background-color: #888888;
-    font-size: 12px;
-    border: none;
-    cursor: pointer;
+.alert.error {
+    background-color: #b73b3b;
+    color: #eee;
+    font-size: 15px;
+    padding: 15px;
+    margin: 10px 0;
+    display: inline-block;
 }
