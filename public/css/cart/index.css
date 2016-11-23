@@ -35,8 +35,16 @@ h2::after {
     letter-spacing: 2px;
 }
 
+#table th:nth-child(1) {
+    width: 25%;
+}
+
 #table th:nth-child(2) {
     width: 15%;
+}
+
+#table th:nth-child(3) {
+    width: 25%;
 }
 
 #table th:nth-child(4) {

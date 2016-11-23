@@ -1,0 +1,153 @@
+
+.container.wrap {
+    padding: 100px 10px;
+    box-sizing: border-box;
+}
+
+.container h2 {
+    text-align: center;
+    letter-spacing: 8px;
+    font-size: 40px;
+    margin-bottom: 80px;
+    color: #656565;
+    position: relative;
+}
+.container h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    background: #656565;
+    height: 3px;
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    margin-left: -25px;
+}
+
+.userInfo {
+    background-color: #cccccc;
+    padding: 25px;
+    letter-spacing: -.4em;
+    margin-bottom: 50px;
+}
+
+.userInfo div {
+    box-sizing: border-box;
+    padding-right: 30px;
+}
+
+.userInfo div:nth-child(1) {
+    display: inline-block;
+    vertical-align: top;
+    width: 40%;
+}
+.userInfo div:nth-child(2) {
+    display: inline-block;
+    vertical-align: top;
+    width: 60%;
+}
+
+.userInfo li.cap {
+    background: none;
+    font-size: 10px;
+    margin: 2px 0;
+}
+
+.userInfo li {
+    color: #151515;
+    margin: 10px 0;
+    font-size: 15px;
+    letter-spacing: 2px;
+}
+
+.userInfo .title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: black;
+}
+
+.userInfo .special {
+    width: 100%;
+    padding-right: 0;
+    margin-top: 35px;
+}
+
+.special input {
+    width: 350px;
+    border: 0;
+    padding: 10px 0;
+    font-size: 1em;
+    color: #1c1c1c;
+    border: solid 1px #ccc;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.special span {
+    padding: 12px 10px;
+    background-color: #9c9c9c;
+}
+
+@media screen and (max-width: 500px) {
+    .special span {
+        display: block;
+        text-align: center;
+    }
+    .special input {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .userInfo div {
+        width: 100% !important;
+        padding-right: 0px;
+    }
+
+    .userInfo li {
+        font-size: 12px;
+    }
+
+    .userInfo .title {
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: black;
+    }
+}
+
+.coupon {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.coupon .inner {
+    background-color: #4c4c4c;
+    padding: 10px;
+}
+
+.coupon h3 {
+    text-align: center;
+    font-size: 20px;
+    color: #eee;
+    letter-spacing: 4px;
+}
+
+.coupon .input {
+    background-color: #d7d7d7;
+    padding: 10px 20px;
+}
+
+.coupon input {
+    width: 80%;
+    border: 0;
+    padding: 10px 0;
+    font-size: 1em;
+    color: #1c1c1c;
+    border: solid 1px #ccc;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+}

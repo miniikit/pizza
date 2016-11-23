@@ -70,7 +70,7 @@
             </div>
             <div class="btn">
                 <div class="inner special"><a href="/menu">買い物を続ける</a></div>
-                <div class="inner"><a href="/menu">レジに進む</a></div>
+                <div class="inner"><a href="/menu">注文へ進む</a></div>
             </div>
         @else
             <div class="empty">

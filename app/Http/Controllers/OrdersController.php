@@ -15,12 +15,12 @@ use App\Http\Requests;
 class OrdersController extends Controller
 {
     //  注文確認ページ
-    public function orderConfirm(){
-        return view('order.confirm');
+    public function index(){
+        return view('order.index');
     }
 
     //  注文完了ページ
-    public function orderComplete(){
+    public function complete(){
         return view('order.complete');
     }
 }
