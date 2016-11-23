@@ -62,7 +62,10 @@
 
          // カートの中身を空にする
          static public function clear() {
-             session()->flush();
+
+             session()->forget('products');
+             session()->forget('productCount');
+
          }
 
 
