@@ -117,37 +117,118 @@
     }
 }
 
-.coupon {
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
+.sum {
+    letter-spacing: normal;
+    text-align: right;
+    margin: 20px 0;
+    padding-right: 0px !important;
 }
 
-.coupon .inner {
-    background-color: #4c4c4c;
-    padding: 10px;
-}
-
-.coupon h3 {
-    text-align: center;
+.sum h3 {
     font-size: 20px;
-    color: #eee;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
+}
+.userInfo .cap {
+    padding-right: 0px !important;
 }
 
-.coupon .input {
-    background-color: #d7d7d7;
-    padding: 10px 20px;
+.coupon {
+    margin: 30px 0 50px;
 }
 
 .coupon input {
-    width: 80%;
+    width: 250px;
     border: 0;
     padding: 10px 0;
-    font-size: 1em;
+    font-size: 12px;
     color: #1c1c1c;
     border: solid 1px #ccc;
     box-sizing: border-box;
     padding: 10px;
     text-align: center;
+}
+
+.products {
+    background-color: #cccccc;
+    padding: 25px;
+    margin-bottom: 80px;
+}
+
+.products .title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: black;
+}
+
+#table th {
+    background-color: #4c4c4c;
+    padding: 15px;
+    text-align: center;
+    color: #eee;
+    width: 25%;
+    letter-spacing: 2px;
+}
+
+#table th:nth-child(1) {
+    width: 30%;
+}
+
+#table td {
+    background-color: #fff;
+    vertical-align: middle;
+    text-align: center;
+    border: solid 1px #eee;
+    box-sizing: border-box;
+    font-size: 15px;
+    letter-spacing: 2px;
+    padding: 5px;
+}
+
+.btn {
+    text-align: center;
+    margin-top: 50px;
+}
+.btn .inner {
+    display: inline-block;
+    width: 200px;
+    font-size: 15px;
+}
+
+.btn .inner a {
+    display: block;
+    padding: 20px;
+    color: #fff;
+    background-color: #424242;
+    letter-spacing: 5px;
+    transition: ease-in 0.2s;
+    border: solid 1px #424242
+}
+
+.btn .inner a:hover {
+    letter-spacing: 6px;
+    opacity: 0.8;
+}
+
+.btn .inner.special {
+    margin-right: 2%;
+}
+
+.btn .inner.special a {
+    background-color: #fff;
+    color: #424242;
+    box-sizing: border-box;
+}
+
+.clear.btn {
+    text-align: right;
+    margin-bottom: 50px;
+}
+
+.clear.btn a {
+    text-align: center;
+    background-color: #888888;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
 }

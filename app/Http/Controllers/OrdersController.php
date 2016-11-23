@@ -8,15 +8,24 @@
  */
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use App\Service\CartService;
 
-use App\Http\Requests;
 
 class OrdersController extends Controller
 {
     //  注文確認ページ
     public function index(){
-        return view('order.index');
+
+        $id = Auth::user()->id;
+        $user = User::find($id);
+
+        $cart = new CartService();
+        list($products,$productCount,$total) = $cart->showCart();
+
+        return view('order.index',compact('user','products','productCount','total'));
+
     }
 
     //  注文完了ページ
