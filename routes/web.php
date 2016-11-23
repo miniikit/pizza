@@ -36,7 +36,7 @@ Route::get('/mypage/order/detail/{id}','MypagesController@orderDetail');
 Route::get('/mypage/detail','MypagesController@detail');
 Route::post('/mypage/edit','MypagesController@edit');
 Route::post('/mypage/confirm','MypagesController@confirm');
-
+Route::post('/mypage/do','MypagesController@do');
 
 // コンタクト
 Route::get('/contact','ContactController@index');
