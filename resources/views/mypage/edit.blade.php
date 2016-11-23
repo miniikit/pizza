@@ -15,6 +15,7 @@
     <div class="container wrap">
         <div class="fonts"><h2>会員情報確認</h2></div>
         <div class="register">
+            <form class="submit" action="/mypage/confirm" method="post">
             <table id="table">
                 @foreach($users as $user)
                     {{-- 郵便番号にハイフンを合体。いっそ関数にしても？ --}}
@@ -39,7 +40,6 @@
                 @endforeach
 
             </table>
-            <form class="submit" action="/mypage/confirm" method="post">
                 <a class="form-bottom" href="#">編集</a>
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             </form>
