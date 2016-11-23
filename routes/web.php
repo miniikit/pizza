@@ -24,6 +24,10 @@ Route::post('/cart/clear/{id}','CartsController@pop');
 Route::post('/cart/edit/','CartsController@edit');
 Route::post('/cart/clear','CartsController@clear');
 
+//　注文
+Route::get('/order/confirm/','OrdersController@index');
+Route::post('/order/complete/','OrdersController@complete');
+
 // etc..
 Route::get('/company', 'PagesController@company');
 Route::get('/privacypolicy', 'PagesController@privacypolicy');
