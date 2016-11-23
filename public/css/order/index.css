@@ -229,3 +229,22 @@
     margin: 10px 0;
     display: inline-block;
 }
+
+
+#complete {
+    text-align: center;
+}
+
+#complete .inner {
+    display: inline-block;
+    font-size: 20px;
+    letter-spacing: 5px;
+    background-color: #c1c1c1;
+    color: #000000;
+    padding: 60px;
+}
+
+#complete i {
+    font-size: 125px;
+    margin-bottom: 30px;
+}

@@ -12,8 +12,10 @@
 namespace App\Service;
 
 use App\Order;
+use App\OrderDetail;
 use Carbon\Carbon;
 use App\Service\CartService;
+use
 
 class OrderService
 {
@@ -28,6 +30,11 @@ class OrderService
             'state_id' => 100,
             'user_id' => $userId,
         ]);
+
+        foreach ($products as $product) {
+        }
+        
+
 
         CartService::clear();
 

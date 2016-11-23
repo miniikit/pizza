@@ -34,8 +34,7 @@ class OrdersController extends Controller
 
     }
 
-    //  注文完了ページ
-    public function complete(Request $request){
+    public function insert(Request $request) {
 
         // リクエストゲット
         $date = $request->input('date');
@@ -63,6 +62,12 @@ class OrdersController extends Controller
         $order = new OrderService();
         $order->insert($products,$productCount,$userId,$datetime);
 
+        return redirect()->route('complete');
+    }
+
+
+    //  注文完了ページ
+    public function complete(){
 
         return view('order.complete');
 

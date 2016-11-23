@@ -26,7 +26,8 @@ Route::post('/cart/clear','CartsController@clear');
 
 //　注文
 Route::get('/order/confirm/','OrdersController@index')->name('order');
-Route::post('/order/complete/','OrdersController@complete');
+Route::post('/order/confirm/insert','OrdersController@insert');
+Route::get('/order/complete/','OrdersController@complete')->name('complete');
 
 // etc..
 Route::get('/company', 'PagesController@company');
