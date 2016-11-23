@@ -1,8 +1,3 @@
-/*  フォーム下のスペース　*/
-.space{
-    margin : 10px 0;
-}
-
 
 
 .register{
@@ -102,8 +97,55 @@ table {
     text-align: left;
 }
 
+
+/* 更新時　*/
+#table td.update{
+    /* background-color: powderblue; */
+    background-color: palegoldenrod;
+    opacity:0.7;
+}
+#table td.update:hover{
+    opacity:0.9;
+}
+
+/* 更新メッセージ */
+.update-message{
+    width: 70%;
+    text-align: center;
+    background-color: yellowgreen;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    border-style: dashed;
+    border: 1px solid rgba(200,200,200,0.5);
+    border-radius: 4px;
+    font-size: 2em;
+    color: white;
+    letter-spacing: 0.5em;
+    text-indent: 0.5em;
+
+    -webkit-animation-duration: 1.5s;
+    -moz-animation-duration: 1.5s;
+    -o-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+    -webkit-animation-name: slidein;
+    -moz-animation-name: slidein;
+    -o-animation-name: slidein;
+    animation-name: slidein;
+}
+
+
 @media screen and (max-width: 470px) {
     .submit a{
         width: 150px;
+    }
+    .update-message{
+        font-size:1em;
+        letter-spacing:0.3em;
+        text-indent:0.3em;
+        padding-top:10px;
+        padding-bottom:10px;
+        margin-bottom:20px;
     }
 }

@@ -129,6 +129,7 @@ class MypagesController extends Controller
     //更新確認ページ
     public function confirm(Request $request)
     {
+
         //
         //  ログイン確認
         //
@@ -167,60 +168,48 @@ class MypagesController extends Controller
 
 
         //
-        //  バリデーションチェック
-        //
-        //
-
-        //バリデーションチェック　その１（エラー）
-
-            $rules = [
-                'name' => 'required' ,
-                'email' => 'required|email'
-            ];
-            $this->validate($request, $rules);
-
-        //バリデーションチェック　その２（エラー。項目はこれで良くて、チェック内容はもう少し増える）
-        /*
-            $this->validate($request, [
-            //$validator =Validator::make($request->all(),[
-                 //  required : 必須
-                'name' => 'required|unique:posts|max:255',
-                'name_katakana' => 'required|unique:posts|',
-                'postal' => 'required|unique:posts|size:7|integer',
-                'address1' => 'required|unique:posts|',
-                'address2' => 'required|unique:posts|',
-                'address3' => 'unique:posts|',
-                'birthday' => 'required|unique:posts|',
-                'phone' => 'required|unique:posts|integer',
-                'gender' => 'required|unique:posts|',
-                'email' => 'required|unique:posts|email',
-                'new_password' => 'required|unique:posts|new_password_confirm|min:6',
-                'new_password_confirm' => 'required|unique:posts|new_password',
-                'confirm_password' => 'required|unique:posts|'
-            ]);
-        */
-
-
-        //
         //  POSTデータを$userに
         //
 
         //$userに、POSTデータをセットする。
         $user = array();
         //POSTデータの受け取り
-        $user['name'] = $request->input('name');
-        $user['name_katakana'] = $request->input('name_katakana');
-        $user['postal'] = $request->input('postal');
-        $user['address1'] = $request->input('address1');
-        $user['address2'] = $request->input('address2');
-        $user['address3'] = $request->input('address3');
-        $user['birthday'] = $request->input('$birthday');
-        $user['phone'] = $request->input('phone');
-        $user['gender'] = $request->input('gender');
-        $user['email'] = $request->input('email');
-        $user['new_password'] = $request->input('new_password');
-        $user['new_password_confirm'] = $request->input('new_password_confirm');
-        $user['confirm_password'] = $request->input('confirm_password');
+        $user["name"] = $request->input('name');
+
+        $user["name_katakana"] = $request->input('name_katakana');
+        $user["postal"] = $request->input('postal');
+        $user["address1"] = $request->input('address1');
+        $user["address2"] = $request->input('address2');
+        $user["address3"] = $request->input('address3');
+        $user["birthday"] = $request->input('birthday');
+        $user["phone"] = $request->input('phone');
+        $user["gender"] = $request->input('gender');
+        $user["email"] = $request->input('email');
+        $user["new_password"] = $request->input('new_password');
+        $user["new_password_confirm"] = $request->input('new_password_confirm');
+        $user["confirm_password"] = $request->input('confirm_password');
+
+        //
+        //  セッションにもPOSTされたデータを保存（/mypage/update処理で使用）
+        //
+
+        $userPost = array(
+            "name" => $user["name"],
+            "name_katakana" =>$user["name_katakana"],
+            "postal" => $user["postal"],
+            "address1" => $user["address1"],
+            "address2" => $user["address2"],
+            "address3" => $user["address3"],
+            "birthday" => $user["birthday"],
+            "phone" => $user["phone"],
+            "gender" => $user["gender"],
+            "email" => $user["email"],
+            "new_password" => $user["new_password"],
+            "new_password_confirm" => $user["new_password_confirm"],
+            "confirm_password" => $user["confirm_password"]
+        );
+        session(['UpdatePostData' => $userPost]);
+        $data = $request->session()->all();
 
 
         //
@@ -229,9 +218,9 @@ class MypagesController extends Controller
 
         //性別だけ、POST時に値が「男」「女」になっているので、それをDB格納用（int 1or2）に変更。
         if($user['gender'] == "男"){
-            $gender_id = 1;
+            $user['gender_id'] = 1;
         }else{
-            $gender_id = 2;
+            $user['gender_id'] = 2;
         }
 
 
@@ -239,60 +228,68 @@ class MypagesController extends Controller
         //  更新SQL　値のセット　（変更箇所の「色」と「SQL文」を設定。（色は、view側でクラスを付与することで実現）
         //
 
-        //$update[]に、更新内容が入る。
+        //$class[]に、更新内容が入る。
         $update = array();
         if ($tmpUser->name != $user['name']) {
-            $update['name'] = $user['name'];
             $class["name"] = "update";
+        }else{
+            $class["name"] = "";
         }
         if ($tmpUser->kana != $user['name_katakana']) {
-            $update['kana'] = $user['name_katakana'];
             $class["name_katakana"] = "update";
+        }else{
+            $class["name_katakana"] = "";
         }
         if ($tmpUser->email != $user['email']) {
-            $update['email'] = $user['email'];
             $class["email"] = "update";
+        }else{
+            $class["email"] = "";
         }
         //パスワードが、new_passwordと異なる場合
         if ($tmpUser->password != $user['new_password']) {
-            //BCRYPTで暗号化
-            $hash_new_password = password_hash($user['new_password'],PASSWORD_DEFAULT);
-            $update['password'] = $hash_new_password;
             $class["new_password"] = "update";
+        }else{
+            $class["new_password"] = "";
+        }
+        //new_passwordが、空の場合
+        if(!is_null($user["new_password"]) || $user["new_password"] != "") {
+            $user["new_password"] = "未変更";
+            $class["new_password"] = "";
         }
         if ($tmpUser->postal != $user['postal']) {
-            $update['postal'] = $user['postal'];
             $class["postal"] = "update";
+        }else{
+            $class["postal"] = "";
         }
         if ($tmpUser->address1 != $user['address1']) {
-            $update['address1'] = $user['address1'];
             $class["address1"] = "update";
+        }else{
+            $class["address1"] = "";
         }
         if ($tmpUser->address2 != $user['address2']) {
-            $update['address2'] = $user['address2'];
             $class["address2"] = "update";
+        }else{
+            $class["address2"] = "";
         }
         if ($tmpUser->address3 != $user['address3']) {
-            $update['address3'] = $user['address3'];
             $class["address3"] = "update";
+        }else{
+            $class["address3"] = "";
+        }
+        if ($tmpUser->birthday != $user['birthday']) {
+            $class["birthday"] = "update";
+        }else{
+            $class["birthday"] = "";
         }
         if ($tmpUser->phone != $user['phone']) {
-            $update['phone'] = $user['phone'];
             $class["phone"] = "update";
+        }else{
+            $class["phone"] = "";
         }
         if ($tmpUser->gender_id != $user['gender_id']) {
-            $update['gender_id'] = $user['gender_id'];
             $class["gender"] = "update";
-        }
-
-
-        //
-        //  更新SQL　Run
-        //
-
-        //更新内容があれば
-        if(isset($update)) {
-           // $query = DB::table('users')->where('id', $userId)->update($update);
+        }else{
+            $class["gender"] = "";
         }
 
 
@@ -311,17 +308,19 @@ class MypagesController extends Controller
         //POSTされた値
         if(isset($user)){
             //顧客からPOSTされた、更新する生の値
-            $user = array();
+       //     $user = array();
         }
         //パスワード変更時のハッシュ化されたNewパスワード
-        if(issset($hash_new_password)){
+        if(isset($hash_new_password)){
             $hash_new_password = "";
         }
         //データベースの旧パスワード
         $dbPassword = "";
 
-        return view('mypage.confirm' ,[$user]);
+        return view('mypage.confirm' ,["user" => $user,"class" =>$class]);
     }
+
+
 
 
 
@@ -351,94 +350,93 @@ class MypagesController extends Controller
 
 
         //
-        //  パスワード照合（変更用パスワードと、DBのパスワードの一致確認）
-        //
-
-        //DBのパスワードを、変数に
-        $dbPassword = $tmpUser->password;
-        //POSTされたパスワードを変数に
-        $confirm_password = $request->input('confirm_password');
-        //パスワード照合処理本体。（！つけているので、間違っていた時の処理を書く。）
-        if (!password_verify($confirm_password, $dbPassword)) {
-            //変更用パスワードエラー時の処理
-            return "変更用パスワードが違います";
-        }
-
-        //
         //  POSTデータを$userに
         //
 
         //$userに、POSTデータをセットする。
         $user = array();
         //POSTデータの受け取り
-        $user['name'] = $request->input('name');
-        $user['name_katakana'] = $request->input('name_katakana');
-        $user['postal'] = $request->input('postal');
-        $user['address1'] = $request->input('address1');
-        $user['address2'] = $request->input('address2');
-        $user['address3'] = $request->input('address3');
-        $user['birthday'] = $request->input('$birthday');
-        $user['phone'] = $request->input('phone');
-        $user['gender'] = $request->input('gender');
-        $user['email'] = $request->input('email');
-        $user['new_password'] = $request->input('new_password');
-        $user['new_password_confirm'] = $request->input('new_password_confirm');
-        $user['confirm_password'] = $request->input('confirm_password');
+        $user['data'] = $request->session()->pull('UpdatePostData', 'name');
 
+        $name = "";
+        $name = $user["data"]["name"];
+        $name_katakana = $user["data"]["name_katakana"];
+        $postal = $user["data"]["postal"];
+        $address1 = $user["data"]["address1"];
+        $address2 = $user["data"]["address2"];
+        $address3 = $user["data"]["address3"];
+        $phone = $user["data"]["phone"];
+        $gender = $user["data"]["gender"];
+        $email = $user["data"]["email"];
+        $new_password = $user["data"]["new_password"];
+        $new_password_confirm = $user["data"]["new_password_confirm"];
+        $confirm_password = $user["data"]["confirm_password"];
 
-        //SQLの確認ログ取得用。実行された後の生文がみれる
-        DB::enableQueryLog();
 
         //
-        //  更新SQL　値のセット　（変更箇所の「色」と「SQL文」を設定。（色は、view側でクラスを付与することで実現）
+        //  genderを、gender_idに変換
         //
+
+        if($gender === "男"){
+          $gender_id = 1;
+        }else{
+            $gender_id = 2;
+        }
+
+
+        //
+        //  更新SQL　値のセット（変更箇所のみ）
+        //
+
         //$update[]に、更新内容が入る。
         $update = array();
-        if ($tmpUser->name != $user['name']) {
-            $update['name'] = $user['name'];
+        if ($tmpUser->name != $name) {
+            $update['name'] = $name;
         }
-        if ($tmpUser->kana != $user['name_katakana']) {
-            $update['kana'] = $user['name_katakana'];
+        if ($tmpUser->kana != $name_katakana) {
+            $update['kana'] = $name_katakana;
         }
-        if ($tmpUser->email != $user['email']) {
-            $update['email'] = $user['email'];
+        if ($tmpUser->email != $email) {
+            $update['email'] = $email;
         }
         //パスワードが、new_passwordと異なる場合
-        if ($tmpUser->password != $user['new_password']) {
+        if ($tmpUser->password != $new_password) {
             //BCRYPTで暗号化
-            $hash_new_password = password_hash($user['new_password'],PASSWORD_DEFAULT);
+            $hash_new_password = password_hash($new_password,PASSWORD_DEFAULT);
             $update['password'] = $hash_new_password;
         }
-        if ($tmpUser->postal != $user['postal']) {
-            $update['postal'] = $user['postal'];
+        if ($tmpUser->postal != $postal) {
+            $update['postal'] = $postal;
         }
-        if ($tmpUser->address1 != $user['address1']) {
-            $update['address1'] = $user['address1'];
+        if ($tmpUser->address1 != $address1) {
+            $update['address1'] = $address1;
         }
-        if ($tmpUser->address2 != $user['address2']) {
-            $update['address2'] = $user['address2'];
+        if ($tmpUser->address2 != $address2) {
+            $update['address2'] = $address2;
         }
-        if ($tmpUser->address3 != $user['address3']) {
-            $update['address3'] = $user['address3'];
+        if ($tmpUser->address3 != $address3) {
+            $update['address3'] = $address3;
         }
-        if ($tmpUser->phone != $user['phone']) {
-            $update['phone'] = $user['phone'];
+        if ($tmpUser->phone != $phone) {
+            $update['phone'] = $phone;
         }
-        if ($tmpUser->gender_id != $user['gender_id']) {
-            $update['gender_id'] = $user['gender_id'];
+        if ($tmpUser->gender_id != $gender_id) {
+            $update['gender_id'] = $gender_id;
         }
 
 
         //
         //  更新SQL　Run
         //
+
         //更新内容があれば
         if(isset($update)) {
+            //更新を実行
             $query = DB::table('users')->where('id', $userId)->update($update);
+            return redirect('mypage/detail')->with('updateStatus', "更新完了");
+        }else{
+            //更新内容がない
+            return redirect('mypage/detail')->with('updateStatus', 'エラー！');
         }
-        //SQLログ確認用　セットで使う。
-        // dd(DB::getQueryLog());
-
-
     }
 }
