@@ -18,6 +18,7 @@
     letter-spacing:15px;
     text-indent:15px;
     text-align:center;
+    margin:10px;
 }
 .submit a:hover {
     opacity: 0.8;
@@ -98,6 +99,21 @@ table {
 }
 
 
+
+/* 更新時　入力値エラー　*/
+.error{
+    background-color: tomato;
+    text-align: center;
+    padding-top: 10px;
+}
+.error-message{
+    color:white;
+}
+.edit-password{
+    vertical-align: middle;
+}
+
+
 /* 更新時　*/
 #table td.update{
     /* background-color: powderblue; */
@@ -106,6 +122,10 @@ table {
 }
 #table td.update:hover{
     opacity:0.9;
+}
+
+#table span.required{
+    color: red;
 }
 
 /* 更新メッセージ */
@@ -138,7 +158,14 @@ table {
 
 @media screen and (max-width: 470px) {
     .submit a{
-        width: 150px;
+        width: 100px;
+        text-indent:0.2em;
+        letter-spacing: 0.2em;
+        margin:5px;
+    }
+    .submit a:hover{
+        text-indent:0.4em;
+        letter-spacing: 0.4em;
     }
     .update-message{
         font-size:1em;

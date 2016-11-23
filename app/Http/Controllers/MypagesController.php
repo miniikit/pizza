@@ -18,12 +18,10 @@ use Illuminate\Routing\Controller;
 use App\Http\Requests;
 use App\Service\MypageService;
 
+use Illuminate\Support\Facades\Session;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
-//バリデーション
-use Illuminate\Support\ServiceProvider;
-
 
 use Illuminate\Support\Facades\DB;  //サービスに移植後削除
 
@@ -127,7 +125,7 @@ class MypagesController extends Controller
 
 
     //更新確認ページ
-    public function confirm(Request $request)
+    public function confirm(Requests\MypageForm $request)
     {
 
         //
@@ -151,6 +149,16 @@ class MypagesController extends Controller
         //DBの結果を、$tmpUser->の形で参照できるように。
         list($tmpUser) = $tmpUserDb;
 
+        //
+        //  バリデーションチェック
+        //
+
+        //フリガナが、カタカナでなければ
+        if (!preg_match("/^[ァ-ヶー]+$/u", $request->input('name_katakana'))) {
+            \Session::flash('flash_message', 'フリガナはカタカナで入力してください！');
+            return redirect('/mypage/edit');
+        }
+
 
         //
         //  パスワード照合（変更用パスワードと、DBのパスワードの一致確認）
@@ -163,7 +171,8 @@ class MypagesController extends Controller
         //パスワード照合処理本体。（！つけているので、間違っていた時の処理を書く。）
         if (!password_verify($confirm_password, $dbPassword)) {
             //変更用パスワードエラー時の処理
-            return "変更用パスワードが違います";
+            \Session::flash('flash_message', '現在のパスワードが違います！');
+            return redirect('/mypage/edit');
         }
 
 
@@ -175,7 +184,6 @@ class MypagesController extends Controller
         $user = array();
         //POSTデータの受け取り
         $user["name"] = $request->input('name');
-
         $user["name_katakana"] = $request->input('name_katakana');
         $user["postal"] = $request->input('postal');
         $user["address1"] = $request->input('address1');
@@ -188,6 +196,7 @@ class MypagesController extends Controller
         $user["new_password"] = $request->input('new_password');
         $user["new_password_confirm"] = $request->input('new_password_confirm');
         $user["confirm_password"] = $request->input('confirm_password');
+
 
         //
         //  セッションにもPOSTされたデータを保存（/mypage/update処理で使用）
@@ -252,9 +261,12 @@ class MypagesController extends Controller
             $class["new_password"] = "";
         }
         //new_passwordが、空の場合
-        if(!is_null($user["new_password"]) || $user["new_password"] != "") {
-            $user["new_password"] = "未変更";
+        if(is_null($user["new_password"]) || $user["new_password"] == "") {
+            $user["new_password"] = "【未変更】";
             $class["new_password"] = "";
+        }else{
+            $user["new_password"] = "【変更】";
+            $class["new_password"] = "update";
         }
         if ($tmpUser->postal != $user['postal']) {
             $class["postal"] = "update";
@@ -433,7 +445,7 @@ class MypagesController extends Controller
         if(isset($update)) {
             //更新を実行
             $query = DB::table('users')->where('id', $userId)->update($update);
-            return redirect('mypage/detail')->with('updateStatus', "更新完了");
+            return redirect('mypage/detail')->with('updateStatus', "更新完了！");
         }else{
             //更新内容がない
             return redirect('mypage/detail')->with('updateStatus', 'エラー！');
