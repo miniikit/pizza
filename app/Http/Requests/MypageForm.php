@@ -24,19 +24,27 @@ class MypageForm extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:posts|max:255',
-            'name_katakana' => 'required|unique:posts|',
-            'postal' => 'required|unique:posts|size:7|integer',
-            'address1' => 'required|unique:posts|',
-            'address2' => 'required|unique:posts|',
-            'address3' => 'unique:posts|',
-            'birthday' => 'required|unique:posts|',
-            'phone' => 'required|unique:posts|integer',
-            'gender' => 'required|unique:posts|',
-            'email' => 'required|unique:posts|email',
-            'new_password' => 'required|unique:posts|new_password_confirm|min:6',
-            'new_password_confirm' => 'required|unique:posts|new_password',
-            'confirm_password' => 'required|unique:posts|'
+            //
+            'name' => 'required|max:50',
+            'name_katakana' => 'required|max:100',
+            'postal' => 'required|size:7|string',
+            'address1' => 'required|max:255',
+            'address2' => 'required|max:255',
+            'address3' => 'max:255',
+            'birthday' => 'required|date',
+            'phone' => 'required|string|between:10,11',
+            'gender' => 'required',
+            'email' => 'required|email',
+            'new_password' => 'min:8|regex:/\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,128}+\z/|same:new_password_confirm|different:confirm_password|max:128',
+            'new_password_confirm' => 'different:confirm_password',
+            'confirm_password' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+
         ];
     }
 }
