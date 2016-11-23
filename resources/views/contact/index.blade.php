@@ -13,7 +13,7 @@
 
 @section('main')
     <div class="container wrap">
-        <h2>お問い合わせ</h2>
+        <h2>CONTACT</h2>
         @if (count($errors) > 0)
             <div class="error">
                 <ul>
