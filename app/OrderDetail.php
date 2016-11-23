@@ -8,10 +8,10 @@ class OrderDetail extends Model
 {
     protected $table = 'orders_details_table';
 
-    protected $primaryKey = ['id', 'product_id'];
+    protected $primaryKey = ['id', 'price_id'];
 
     public $incrementing = false;
 
-    protected $fillable = ['id','product_id','number'];
+    protected $fillable = ['id','price_id','number'];
 
 }

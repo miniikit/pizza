@@ -15,7 +15,6 @@ use App\Order;
 use App\OrderDetail;
 use Carbon\Carbon;
 use App\Service\CartService;
-use
 
 class OrderService
 {
@@ -27,14 +26,27 @@ class OrderService
             'order_date' => Carbon::now(),
             'order_appointment_date' => $datetime,
             'coupon_id' => null,
-            'state_id' => 100,
+            'state_id' => 1,
             'user_id' => $userId,
         ]);
 
-        foreach ($products as $product) {
-        }
-        
+        $order = Order::orderBy('id', 'desc')->where('user_id','=',$userId)->take(1)->get();
 
+        list($order) = $order;
+
+        foreach ($products as $product) {
+
+//            dd($order->id,$product->price_id,(int)$productCount[$product->id]);
+
+            OrderDetail::create([
+                'id' => $order->id,
+                'price_id' => $product->price_id,
+                'number' => (int)$productCount[$product->id],
+            ]);
+
+
+
+        }
 
         CartService::clear();
 
