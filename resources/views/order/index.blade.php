@@ -46,7 +46,7 @@
                 <div class="coupon">
                     <ul>
                         <li class="title">クーポン</li>
-                        <li><input type="text" name="coupon" value="" placeholder="クーポンコードを入力してください"><a id="coupon-btn" class="input-btn" href="#">適用</a></li>
+                        <li><input id="coupon_text" type="text" name="coupon" value="" placeholder="クーポンコードを入力してください"><a id="coupon-btn" class="input-btn" href="#">適用</a></li>
 
                     </ul>
                 </div>
@@ -85,6 +85,9 @@
             </div>
             {{ csrf_field() }}
         </form>
+        <form id="post_coupon" action="/order/coupon/" method="post">
+            <input id="post_coupon_num" type="hidden" name="coupon_num" value="">
+        </form>
     </div>
 @endsection
 
@@ -94,19 +97,25 @@
         $('#post').submit();
     })
 
-    $(function() {
-        $("#coupon-btn").click(function(){
-            $.ajax({
-                type: "POST",
-                url: "ajax.php",
-                data: {
-                    "page": 2
-                },
-                success: function(j_data){
-                    // 処理を記述
-                }
-            });
-        });
-    });
+    $('#coupon-btn').on('click',function () {
+        var num = $('#coupon_text').val();
+        $('#post_coupon_num').val(num)
+        // $('#post_coupon').submit();
+    })
+
+    // $(function() {
+    //     $("#coupon-btn").click(function(){
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "ajax.php",
+    //             data: {
+    //                 "page": 2
+    //             },
+    //             success: function(j_data){
+    //                 // 処理を記述
+    //             }
+    //         });
+    //     });
+    // });
 </script>
 @endsection
