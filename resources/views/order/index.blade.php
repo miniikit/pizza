@@ -4,6 +4,7 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/order/index.css" media="all" title="no title">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('plug')
@@ -85,7 +86,7 @@
             </div>
             {{ csrf_field() }}
         </form>
-        <form id="post_coupon" action="/order/coupon/" method="post">
+        <form id="post_coupon" action="/order/confirm/coupon/" method="post">
             <input id="post_coupon_num" type="hidden" name="coupon_num" value="">
         </form>
     </div>
@@ -103,19 +104,43 @@
         // $('#post_coupon').submit();
     })
 
-    // $(function() {
-    //     $("#coupon-btn").click(function(){
-    //         $.ajax({
-    //             type: "POST",
-    //             url: "ajax.php",
-    //             data: {
-    //                 "page": 2
-    //             },
-    //             success: function(j_data){
-    //                 // 処理を記述
-    //             }
-    //         });
-    //     });
-    // });
+
+    $(function()
+    {
+        $('#coupon-btn').click(function()
+        {
+            {{-- トークンをmetaに設定し、送る --}}
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            {{-- 入力値をdataに設定 --}}
+            var data = {number : $('#post_coupon_num').val()};
+
+            $.ajax(
+                    {
+                        type:"POST",
+                        url: "/order/confirm/coupon",
+                        data: data,
+                        success: function(data, dataType)
+                        {
+                            //デバッグ用 アラートとコンソール
+                            alert(data);
+                            console.log(data);
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown)
+                        {
+                            alert('Error : ' + errorThrown);
+                            $("#XMLHttpRequest").html("XMLHttpRequest : " + XMLHttpRequest.status);
+                            $("#textStatus").html("textStatus : " + textStatus);
+                            $("#errorThrown").html("errorThrown : " + errorThrown);
+                        }
+                    });
+            //ページをリロードしない
+            return false;
+        });
+    });
 </script>
 @endsection
