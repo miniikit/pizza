@@ -278,38 +278,6 @@ class OrdersController extends Controller
         $coupon["name"] = $name;   //クーポン名
 
         return $coupon;
-
-
-
-        /*
-        +"id": 1
-        +"coupon_name": "500円値引きクーポン"
-        +"coupon_discount": 500
-        +"coupon_conditions_money": 3000
-        +"product_id": 1
-        +"coupon_start_date": "2016-11-24"
-        +"coupon_end_date": null
-        +"coupon_number": "00000001"
-        +"coupon_conditions_count": 1
-        +"coupon_conditions_first": null
-        +"created_at": "2016-11-24 11:32:04"
-        +"updated_at": "2016-11-24 11:32:04"
-        +"deleted_at": null
-        */
-
-        dd($input_coupon,$dbCoupon);
-
-        // Ajax理解用。残しといて
-        header("Content-type: text/plain; charset=UTF-8");
-        if (isset($heisei['request']))
-        {
-            //ここに何かしらの処理を書く（DB登録やファイルへの書き込みなど）
-            echo "OK";
-        }
-        else
-        {
-            echo 'The parameter of "request" is not found.';
-        }
     }
 
 

@@ -129,22 +129,16 @@
                             //alert(message);
                             //値引き後金額
                             if(message["status"] == "error"){
-                                $("#coupon-message").css('display','inline-block');
-                                $("#coupon-message").removeClass('coupon-true');
-                                $("#coupon-message").addClass('coupon-false');
+                                $("#coupon-message").css('display','inline-block').removeClass('coupon-true').addClass('coupon-false');
                                 $('#coupon-message').text(message["message"]);
                             }else if(message["status"] == "ok"){
-                                $("#coupon-message").css('display','inline-block');
-                                $("#coupon-message").removeClass('coupon-false');
-                                $("#coupon-message").addClass('coupon-true');
+                                $("#coupon-message").css('display','inline-block').removeClass('coupon-false').addClass('coupon-true');
                                 $('#coupon-message').text(message["message"]);
                                 var newTotal = String(message["newTotal"]).toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,');
                                 $("#total").text(newTotal + "円");
                             }else{
                                 //なにも設定されていない
-                                $("#coupon-message").css('display','inline-block');
-                                $("#coupon-message").removeClass('coupon-true');
-                                $("#coupon-message").addClass('coupon-false');
+                                $("#coupon-message").css('display','inline-block').removeClass('coupon-true').addClass('coupon-false');
                                 $('#coupon-message').text("クーポンコードが不正です");
                             }
                         },
