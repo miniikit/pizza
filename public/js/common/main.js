@@ -41,6 +41,17 @@
             });
         });
 
+		// $(function(){
+        //     $('#mypage,#mypage .list').on({
+		// 	    'mouseenter':function(){
+		// 	        $('#mypage .list').fadeIn();
+		// 	    },
+		// 	    'mouseleave':function(){
+		// 	    	$('#mypage .list').fadeOut();
+		// 	    }
+		// 	});
+        // });
+
 		$.ajax({
 			type: 'GET',
 			url: '/app/countCartContents',

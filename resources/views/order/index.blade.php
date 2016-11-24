@@ -13,7 +13,7 @@
 @section('main')
     <div class="container wrap">
         <h2 class="title">ORDER</h2>
-        <form id="post" action="/order/confirm/insert" method="post">
+        <form id="post" action="/order/complete/" method="post">
             @if (Session::has('error_text'))
             <div class="alert error">{{ Session::get('error_text') }}</div>
             @endif
@@ -38,8 +38,8 @@
                 <div class="special">
                     <ul>
                         <li class="title">配達希望日時</li>
-                        <li><label for=""><span>日付</span><input type="date" name="date" value="{{ $date->toDateString() }}"></label></li>
-                        <li><label for=""><span>時刻</span><input type="time" name="time" value="{{ $date->format('H:i') }}"></label></li>
+                        <li><label for=""><span>日付</span><input type="date" name="date" value="{{ \Carbon\Carbon::now()->toDateString() }}"></label></li>
+                        <li><label for=""><span>時刻</span><input type="time" name="time" value="{{ \Carbon\Carbon::now()->addHour()->format('H:i') }}"></label></li>
                         <li class="cap">※デフォルトでは現在時刻の1時間後になっております</li>
                     </ul>
                 </div>
