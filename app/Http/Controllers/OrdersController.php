@@ -66,6 +66,18 @@ class OrdersController extends Controller
     }
 
 
+    public function coupon(Request $request){
+
+        $data = $request['page'];
+        dd($data);
+
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data);
+
+
+    }
+
+
     //  注文完了ページ
     public function complete(){
 

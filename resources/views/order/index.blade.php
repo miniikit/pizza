@@ -46,7 +46,8 @@
                 <div class="coupon">
                     <ul>
                         <li class="title">クーポン</li>
-                        <li><input type="text" name="coupon" value="" placeholder="クーポンコードを入力してください"></li>
+                        <li><input type="text" name="coupon" value="" placeholder="クーポンコードを入力してください"><a id="coupon-btn" class="input-btn" href="#">適用</a></li>
+
                     </ul>
                 </div>
                 <div class="sum">
@@ -92,5 +93,20 @@
     $('#submit').on('click',function () {
         $('#post').submit();
     })
+
+    $(function() {
+        $("#coupon-btn").click(function(){
+            $.ajax({
+                type: "POST",
+                url: "ajax.php",
+                data: {
+                    "page": 2
+                },
+                success: function(j_data){
+                    // 処理を記述
+                }
+            });
+        });
+    });
 </script>
 @endsection
