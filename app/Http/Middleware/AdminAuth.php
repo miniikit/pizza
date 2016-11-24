@@ -17,9 +17,11 @@ class AdminAuth
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/pizzzzza/login'); 
-        }
+       if (Auth::check()){ //ログインしていなければリダイレクトされるが、顧客もアクセスできてしまう
+        
+    }else{
+        return redirect('/pizzzzza/login');
+    }
 
         return $next($request);
     }

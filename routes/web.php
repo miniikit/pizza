@@ -62,7 +62,7 @@ Route::post('/logout','auth\LoginController@logout');
 
 // --------------------------- 管理者用 ---------------------------------------
 
-//Route::group(['middleware' => ['adminauth']], function () {
+Route::group(['middleware' => ['adminauth']], function () {
 
 //管理者用ページ
 Route::get('/pizzzzza/employee', 'EmployeesController@index'); //従業員一覧
@@ -70,7 +70,6 @@ Route::get('/pizzzzza/employee/edit', 'EmployeesController@edit'); //従業員�
 Route::get('/pizzzzza/employee/add', 'EmployeesController@add'); //従業員追加
 
 Route::get('/pizzzzza/order/top','AdminController@orderTop'); //注文確認ページ
-Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理画面トップ
 
 Route::get('/pizzzzza/menu', 'AdminMenusController@index'); //従業員用メニュー一覧
 Route::get('/pizzzzza/menu/edit', 'AdminMenusController@edit'); //従業員用メニュー編集
@@ -106,11 +105,12 @@ Route::get('/pizzzzza/analysis/earning','AnalysisController@analysisEarning');
 //Auth
 Route::post('/pizzzzza/logout', 'auth\AdminLoginController@logout'); //管理者用ログアウトページ
 
-//});
+});
 
 Auth::routes();
 
 Route::get('/pizzzzza/login', 'auth\AdminLoginController@form'); //管理画面ログインページ
+Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理画面トップ
 
 
 
