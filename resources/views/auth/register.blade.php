@@ -90,18 +90,18 @@
                             </div>
                         </div>
 
- <div class="form-group{{ $errors->has('zip1') ? ' has-error' : '' }}">
+ <div class="form-group{{ $errors->has('postal') ? ' has-error' : '' }}">
   <label for="postal" class="col-md-4 control-label">郵便番号 (半角)</label>
 
    <div class="col-md-2">
-    <input type="text" class="form-control" name="zip1" size="4" maxlength="3">
+    <input type="text" class="form-control" name="postal" size="4" maxlength="3">
     </div>
 
     <div class="col-md-2">
-     <input type="text" class="form-control" name="zip2" size="5" maxlength="4">
+     <input type="text" class="form-control" name="postal" size="5" maxlength="4">
       </div>
-      <input type="button" class="btn btn-default" value="〒→変換" onClick="AjaxZip3.zip2addr('zip','zip2','pref','address1','address2')"
-                    onkeyup="AjaxZip3.zip2addr('zip1','zip2','pref','address1','address2');">
+      <input type="button" class="btn btn-default" value="〒→変換" onClick="AjaxZip3.zip2addr('postal','postal','pref','address1','address2')"
+                    onkeyup="AjaxZip3.zip2addr('postal','postal','pref','address1','address2');">
     </div>
 
 
@@ -182,6 +182,41 @@
    <input type="text" class="form-control" name="address3" size="40">
 </div>
 </div>
+
+      <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                            <label for="phone" class="col-md-4 control-label">電話番号</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="number" class="form-control" name="phone" value="{{ old('phone') }}" required>
+
+                            </div>
+                        </div>
+
+
+<div class="form-group{{ $errors->has('gender_id') ? ' has-error' : '' }}">
+  <label for="gender_id" class="col-md-4 control-label">性別</label> 
+       <div class="col-sm-3">
+                 <input type="radio" name="gender_id" value="1" />男性
+        </div>
+        <div class="col-sm-3">
+             <label class="radio-inline">
+                  <input type="radio" name="gender_id" value="2"  />女性
+         </div>
+   </div>
+
+   <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
+                            <label for="birthday" class="col-md-4 control-label">誕生日</label>
+
+                            <div class="col-md-6">
+                                <input type="date" class="form-control" name="birthday" value="{{ old('birthday') }}" required>
+
+                            </div>
+                        </div>
+
+   <div class="form-group{{ $errors->has('authority_id') ? ' has-error' : '' }}">
+   <input type="hidden" name="authority_id" value="4">
+   </div>
+
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

@@ -50,9 +50,9 @@ Route::get('/app/countCartContents','ApisController@countCartContents');
 Route::post('/logout','auth\LoginController@logout');
 
 
-
 // --------------------------- 管理者用 ---------------------------------------
 
+Route:: group(['prefix' => 'users', 'middleware' => 'auth'], function() {
 
 //管理者用ページ
 Route::get('/pizzzzza/employee', 'EmployeesController@index'); //従業員一覧
@@ -88,7 +88,11 @@ Route::get('/pizzzzza/order/accept/customer/input','PhoneOrdersController@phoneR
 Route::get('/pizzzzza/order/accept/item/select','PhoneOrdersController@phoneOrderSelect'); //商品入力・選択ページ
 Route::get('/pizzzzza/order/accept/item/confirm','PhoneOrdersController@phoneOrderConfirm'); //注文情報確認ページ
 
+//売上・売れ筋
+Route::get('/pizzzzza/analysis/populer','AnalysisController@');
+Route::get('/pizzzzza/analysis/earning','AnalysisController@');
 
+});
 
 //auth
 Auth::routes();
