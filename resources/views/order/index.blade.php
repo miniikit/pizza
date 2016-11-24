@@ -105,25 +105,24 @@
     })
 
 
-
-
     $(function()
     {
         $('#coupon-btn').click(function()
         {
-
+            {{-- トークンをmetaに設定し、送る --}}
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
-
+            {{-- 入力値をdataに設定 --}}
             var data = {number : $('#post_coupon_num').val()};
+
             $.ajax(
                     {
                         type:"POST",
-                        url: "/order/confirm/coupon", // /heiseisendにアクセスしてheiseicon.phpが発動
+                        url: "/order/confirm/coupon",
                         data: data,
                         success: function(data, dataType)
                         {
@@ -143,37 +142,5 @@
             return false;
         });
     });
-
-
-
-
-    /*
-        $(function() {
-            $("#coupon-btn").click(function(){
-                $.ajax({
-                    type : "POST",
-                    url  : "/order/confirm/coupon",
-                    data : {"test":"hoge"},
-                    scriptCharset : "UTF-8",
-                    success : function(msg, status){
-                        var json	= eval(msg);
-                        var result	= Boolean(json['result']);
-                        var message	= json['message'];
-
-                        if(result){
-                            alert(result);
-                        }else{
-                            alert(message);
-                        }
-                    },
-                    error : function(msg, status){
-                        alert('通信ができない状態です。');
-                    }
-                });
-
-        });
-        });
-        */
-
 </script>
 @endsection
