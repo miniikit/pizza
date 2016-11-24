@@ -36,6 +36,8 @@ Route::get('/privacypolicy', 'PagesController@privacypolicy');
 Route::get('/agreement', 'PagesController@agreement');
 Route::get('/faq', 'PagesController@faq');
 
+Route::group(['middleware' => ['auth']], function () {
+
 //マイページ
 Route::get('/mypage/order/history','MypagesController@orderHistory');
 Route::get('/mypage/order/detail/{id}','MypagesController@orderDetail');
@@ -43,6 +45,8 @@ Route::get('/mypage/detail','MypagesController@detail');
 Route::get('/mypage/edit','MypagesController@edit');
 Route::post('/mypage/confirm','MypagesController@confirm');
 Route::post('/mypage/update','MypagesController@update');
+
+});
 
 // コンタクト
 Route::get('/contact','ContactController@index');
@@ -56,9 +60,9 @@ Route::get('/app/countCartContents','ApisController@countCartContents');
 Route::post('/logout','auth\LoginController@logout');
 
 
-
 // --------------------------- 管理者用 ---------------------------------------
 
+Route::group(['middleware' => ['adminauth']], function () {
 
 //管理者用ページ
 Route::get('/pizzzzza/employee', 'EmployeesController@index'); //従業員一覧
@@ -94,10 +98,20 @@ Route::get('/pizzzzza/order/accept/customer/input','PhoneOrdersController@phoneR
 Route::get('/pizzzzza/order/accept/item/select','PhoneOrdersController@phoneOrderSelect'); //商品入力・選択ページ
 Route::get('/pizzzzza/order/accept/item/confirm','PhoneOrdersController@phoneOrderConfirm'); //注文情報確認ページ
 
+//売上・売れ筋
+Route::get('/pizzzzza/analysis/populer','AnalysisController@analysisPopuler');
+Route::get('/pizzzzza/analysis/earning','AnalysisController@analysisEarning');
 
+//Auth
+Route::post('/pizzzzza/logout', 'auth\AdminLoginController@logout'); //管理者用ログアウトページ
 
-//auth
+});
+
 Auth::routes();
 
 Route::get('/pizzzzza/login', 'auth\AdminLoginController@form'); //管理画面ログインページ
 Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理画面トップ
+
+
+
+

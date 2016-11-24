@@ -34,6 +34,7 @@
             <div class="wrap">
             @if (Auth::guest())
                 <a href="/login"><i class="fa fa-lock" aria-hidden="true"></i>ログイン</a>
+                <a href="/register">新規会員登録</a>
                 @else
                 <div id="mypage">
                     <a href="/mypage/order/history"><i class="fa fa-user" aria-hidden="true"></i>{{ Auth::user()->name }} 様</a>
