@@ -1,7 +1,6 @@
 <?php
 
     namespace App\Service;
-    use Illuminate\Support\Facades\DB;
     use App\Product;
 
     /**
@@ -63,12 +62,13 @@
 
          // カートの中身を空にする
          static public function clear() {
-             session()->flush();
+
+             session()->forget('products');
+             session()->forget('productCount');
+
          }
 
-         /**
-          * @return int
-          */
+
          static public function countCartContents() {
 
              $productCount = session()->get("productCount",[]);

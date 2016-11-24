@@ -24,6 +24,12 @@ Route::post('/cart/clear/{id}','CartsController@pop');
 Route::post('/cart/edit/','CartsController@edit');
 Route::post('/cart/clear','CartsController@clear');
 
+//　注文
+Route::get('/order/confirm/','OrdersController@index')->name('order');
+Route::post('/order/confirm/insert','OrdersController@insert');
+Route::get('/order/complete/','OrdersController@complete')->name('complete');
+Route::post('/order/confirm/coupon','OrderController@coupon');
+
 // etc..
 Route::get('/company', 'PagesController@company');
 Route::get('/privacypolicy', 'PagesController@privacypolicy');
@@ -34,9 +40,9 @@ Route::get('/faq', 'PagesController@faq');
 Route::get('/mypage/order/history','MypagesController@orderHistory');
 Route::get('/mypage/order/detail/{id}','MypagesController@orderDetail');
 Route::get('/mypage/detail','MypagesController@detail');
-Route::post('/mypage/edit','MypagesController@edit');
-Route::get('/mypage/confirm','MypagesController@confirm');
-
+Route::get('/mypage/edit','MypagesController@edit');
+Route::post('/mypage/confirm','MypagesController@confirm');
+Route::post('/mypage/update','MypagesController@update');
 
 // コンタクト
 Route::get('/contact','ContactController@index');

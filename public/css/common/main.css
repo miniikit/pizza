@@ -27,6 +27,14 @@
        opacity: 0.7;
    }
 
+   .ar {
+       text-align: right;
+   }
+
+   .ls {
+       letter-spacing: 2px;
+   }
+
 @media only screen and (min-width: 0) {
    img {
        max-width: 100%;
@@ -89,7 +97,6 @@
        color: #666666;
        font-size: 10px;
        line-height: 15px;
-       font-family: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
    }
    .cap {
        padding-top: 5px;
@@ -158,6 +165,59 @@
 }
 
 #info a:hover {
+    text-decoration: underline;
+}
+
+#info i {
+    margin-right: 5px;
+    vertical-align: top;
+}
+
+#mypage {
+    display: inline-block;
+    position: relative;
+}
+
+#mypage .list {
+    background-color: #e6e6e6;
+    padding: 15px 5px;
+    position: absolute;
+    color: #505050;
+    font-size: 15px;
+    letter-spacing: 2px;
+    top: 30px;
+    left: -85px;
+    width: 200px;
+    opacity: 0.9;
+    text-align: left;
+    display: none;
+}
+
+#mypage .list:after {
+    border-bottom: 15px solid #e6e6e6;
+    border-right: 15px solid transparent;
+    border-left: 15px solid transparent;
+    content: '';
+    margin-left: -10px;
+    position: absolute;
+    top: -12px;
+    left: 70%;
+}
+
+#mypage .list li {
+    margin: 10px 15px;
+    border-bottom: solid 2px #bdbdbd;
+    padding-bottom: 10px;
+}
+
+#mypage .list li a {
+    margin: 0;
+    padding-left: 5px;
+    display: block;
+    text-decoration: none;
+}
+
+#mypage .list li a:hover {
     text-decoration: underline;
 }
 
