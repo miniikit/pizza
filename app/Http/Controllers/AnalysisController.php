@@ -13,10 +13,10 @@ class AnalysisController extends Controller
     }
 
     public function analysisPopuler(){
-        return view('pizzzzza.analysis.Populer');
+        return view('pizzzzza.analysis.populer');
     }
 
     public function analysisEarning(){
-        return view('pizzzzza.analysis.Earning');
+        return view('pizzzzza.analysis.earning');
     }
 }
