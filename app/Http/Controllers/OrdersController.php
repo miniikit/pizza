@@ -58,12 +58,19 @@ class OrdersController extends Controller
         $cart = new CartService();
         list($products,$productCount,$total) = $cart->showCart();
 
+        //クーポンIDを取得
+        $couponId = NULL;
+        if(session()->has('used_coupon_id')) {
+            $couponId = session()->pull('used_coupon_id');
+        }
+
         // オーダする
 
         $userId = Auth::user()->id;
 
         $order = new OrderService();
-        $order->insert($products,$productCount,$userId,$datetime);
+        $order->insert($products,$productCount,$userId,$datetime,$couponId);
+
 
         return redirect()->route('complete');
     }
@@ -271,11 +278,15 @@ class OrdersController extends Controller
         $newTotal = $total - $dbCoupon->coupon_discount;    //値引き後金額
         $name = $dbCoupon->coupon_name;     //クーポン名
 
+        //セッションにクーポンIDを保存
+        session()->put('used_coupon_id', $couponId);
+
         $coupon["status"] = "ok";
         $coupon["message"] = "クーポンを適用しました！";
         $coupon["total"] = $total;  //値引き前金額
         $coupon["newTotal"] = $newTotal;   //値引き後金額
         $coupon["name"] = $name;   //クーポン名
+
 
         return $coupon;
     }
