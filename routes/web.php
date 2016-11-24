@@ -36,7 +36,7 @@ Route::get('/privacypolicy', 'PagesController@privacypolicy');
 Route::get('/agreement', 'PagesController@agreement');
 Route::get('/faq', 'PagesController@faq');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['userauth']], function () {
 
 //マイページ
 Route::get('/mypage/order/history','MypagesController@orderHistory');
