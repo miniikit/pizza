@@ -41,16 +41,16 @@
             });
         });
 
-		// $(function(){
-        //     $('#mypage,#mypage .list').on({
-		// 	    'mouseenter':function(){
-		// 	        $('#mypage .list').fadeIn();
-		// 	    },
-		// 	    'mouseleave':function(){
-		// 	    	$('#mypage .list').fadeOut();
-		// 	    }
-		// 	});
-        // });
+		$(function(){
+            $('#mypage,#mypage .list').on({
+			    'mouseenter':function(){
+			        $('#mypage .list').stop().show().css('opacity', 0).animate({opacity: 1}, 100);
+			    },
+			    'mouseleave':function(){
+			    	$('#mypage .list').stop().animate({opacity: 0}, 100, function() {$('#mypage .list').hide();});
+			    }
+			});
+        });
 
 		$.ajax({
 			type: 'GET',
