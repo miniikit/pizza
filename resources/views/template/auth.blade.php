@@ -5,6 +5,7 @@
 
 <title>@yield('title') | 会員 </title>
 
+@yield('head')
 <meta name="description" itemprop="description" content="@yield('description')">
 <meta name="keywords" itemprop="keywords" content="@yield('keywords')">
 <link href="/css/common/font-awesome.min.css" rel="stylesheet">

@@ -8,18 +8,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-
-class AdminLoginController extends Controller{
+class AdminLoginController extends Controller
+{
 
 public function form(){
-    return view('/pizzzzza/login');
+    return view('pizzzzza/login');
 }
 
 public function login(Request $request) {
     //リクエストを取得
     $email = $request->get('email');
     $password = $request->get('password');
-    
 
     //DBからメアドが一致するやつを取得
     $pizza = DB::table('users')->where('users.email',$email)->get();;
@@ -39,7 +38,7 @@ public function login(Request $request) {
     if($authId === 1 || $authId === 2 || $authId === 3){
         if(Auth::attempt(['email' => $email, 'password' => $password ])){
 
-            return redirect('/pizzzzza/order/top'); //メール、パスワード、権限がすべて一致した場合
+            return redirect('pizzzzza/order/top'); //メール、パスワード、権限がすべて一致した場合
 
         }else{
             return "メールアドレスまたはパスワードが間違っています"; //メール、パスワードが一致していない場合
@@ -52,13 +51,8 @@ public function login(Request $request) {
 }
 
     public function logout(Request $request){ //ログアウト処理
-        $this->guard()->logout();
-
-        $request->session()->flush();
-
-        $request->session()->regenerate();
-
-        return redirect('/');
+        Auth::logout();
+        return redirect('/pizzzzza/login');
     }
 
 }
