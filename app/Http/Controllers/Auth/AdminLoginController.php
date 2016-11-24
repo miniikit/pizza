@@ -16,6 +16,7 @@ public function form(){
 }
 
 public function login(Request $request) {
+
     //リクエストを取得
     $email = $request->get('email');
     $password = $request->get('password');
@@ -38,8 +39,9 @@ public function login(Request $request) {
     if($authId === 1 || $authId === 2 || $authId === 3){
         if(Auth::attempt(['email' => $email, 'password' => $password ])){
 
+            session()->put('auth_id',$authId);
             return redirect('pizzzzza/order/top'); //メール、パスワード、権限がすべて一致した場合
-
+            
         }else{
             return "メールアドレスまたはパスワードが間違っています"; //メール、パスワードが一致していない場合
         }

@@ -111,7 +111,3 @@ Auth::routes();
 
 Route::get('/pizzzzza/login', 'auth\AdminLoginController@form'); //管理画面ログインページ
 Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理画面トップ
-
-
-
-
