@@ -4,6 +4,7 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/order/index.css" media="all" title="no title">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('plug')
@@ -85,7 +86,7 @@
             </div>
             {{ csrf_field() }}
         </form>
-        <form id="post_coupon" action="/order/coupon/" method="post">
+        <form id="post_coupon" action="/order/confirm/coupon/" method="post">
             <input id="post_coupon_num" type="hidden" name="coupon_num" value="">
         </form>
     </div>
@@ -103,19 +104,76 @@
         // $('#post_coupon').submit();
     })
 
-    // $(function() {
-    //     $("#coupon-btn").click(function(){
-    //         $.ajax({
-    //             type: "POST",
-    //             url: "ajax.php",
-    //             data: {
-    //                 "page": 2
-    //             },
-    //             success: function(j_data){
-    //                 // 処理を記述
-    //             }
-    //         });
-    //     });
-    // });
+
+
+
+    $(function()
+    {
+        $('#coupon-btn').click(function()
+        {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+            var data = {number : $('#post_coupon_num').val()};
+            $.ajax(
+                    {
+                        type:"POST",
+                        url: "/order/confirm/coupon", // /heiseisendにアクセスしてheiseicon.phpが発動
+                        data: data,
+                        success: function(data, dataType)
+                        {
+                            //デバッグ用 アラートとコンソール
+                            alert(data);
+                            console.log(data);
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown)
+                        {
+                            alert('Error : ' + errorThrown);
+                            $("#XMLHttpRequest").html("XMLHttpRequest : " + XMLHttpRequest.status);
+                            $("#textStatus").html("textStatus : " + textStatus);
+                            $("#errorThrown").html("errorThrown : " + errorThrown);
+                        }
+                    });
+            //ページをリロードしない
+            return false;
+        });
+    });
+
+
+
+
+    /*
+        $(function() {
+            $("#coupon-btn").click(function(){
+                $.ajax({
+                    type : "POST",
+                    url  : "/order/confirm/coupon",
+                    data : {"test":"hoge"},
+                    scriptCharset : "UTF-8",
+                    success : function(msg, status){
+                        var json	= eval(msg);
+                        var result	= Boolean(json['result']);
+                        var message	= json['message'];
+
+                        if(result){
+                            alert(result);
+                        }else{
+                            alert(message);
+                        }
+                    },
+                    error : function(msg, status){
+                        alert('通信ができない状態です。');
+                    }
+                });
+
+        });
+        });
+        */
+
 </script>
 @endsection

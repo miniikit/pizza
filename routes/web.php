@@ -28,7 +28,7 @@ Route::post('/cart/clear','CartsController@clear');
 Route::get('/order/confirm/','OrdersController@index')->name('order');
 Route::post('/order/confirm/insert','OrdersController@insert');
 Route::get('/order/complete/','OrdersController@complete')->name('complete');
-Route::post('/order/confirm/coupon','OrderController@coupon');
+Route::any('/order/confirm/coupon','OrdersController@coupon');
 
 // etc..
 Route::get('/company', 'PagesController@company');

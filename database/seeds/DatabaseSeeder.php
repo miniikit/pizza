@@ -244,7 +244,28 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => null,
         ]);
-
+        Coupon::create([
+            'coupon_name' => 'ピザ無料クーポン',
+            'coupon_discount' => 2200,
+            'coupon_conditions_money' => 1,
+            'product_id' => 2,
+            'coupon_start_date' => Carbon::yesterday(),
+            'coupon_end_date' => Carbon::yesterday(),
+            'coupon_number' => 'MARTIN',
+            'coupon_conditions_count' => 1,
+            'coupon_conditions_first' => 1,
+        ]);
+        Coupon::create([
+            'coupon_name' => 'プレゼントクーポン',
+            'coupon_discount' => 2200,
+            'coupon_conditions_money' => 1,
+            'product_id' => 2,
+            'coupon_start_date' => Carbon::today()->subMonth(),
+            'coupon_end_date' => Carbon::today()->subDay(),
+            'coupon_number' => 'MARTIN',
+            'coupon_conditions_count' => 3,
+            'coupon_conditions_first' => 1,
+        ]);
     }
 }
 
