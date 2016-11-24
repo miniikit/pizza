@@ -36,7 +36,7 @@ Route::get('/privacypolicy', 'PagesController@privacypolicy');
 Route::get('/agreement', 'PagesController@agreement');
 Route::get('/faq', 'PagesController@faq');
 
-Route::group(['middleware' => ['userauth']], function () {
+Route::group(['middleware' => ['auth']], function () {
 
 //マイページ
 Route::get('/mypage/order/history','MypagesController@orderHistory');
@@ -45,6 +45,9 @@ Route::get('/mypage/detail','MypagesController@detail');
 Route::get('/mypage/edit','MypagesController@edit');
 Route::post('/mypage/confirm','MypagesController@confirm');
 Route::post('/mypage/update','MypagesController@update');
+
+//お客様用ログアウト
+Route::post('/logout','auth\LoginController@logout');
 
 });
 
@@ -55,10 +58,6 @@ Route::post('/contact','ContactController@send');
 
 // API
 Route::get('/app/countCartContents','ApisController@countCartContents');
-
-//お客様用ログアウト
-Route::post('/logout','auth\LoginController@logout');
-
 
 // --------------------------- 管理者用 ---------------------------------------
 

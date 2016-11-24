@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class UserAuth
 {
@@ -18,7 +19,8 @@ class UserAuth
           if (!Auth::check()){
              return redirect('/login'); 
          }
-          $authid = session()->get('auth_id');
+
+          $authid = session()->all();
                  if(!$authid == 4){
                 return redirect('/'); //顧客以外のユーザーがアクセスされた場合,顧客側トップページに飛ばす
                  }

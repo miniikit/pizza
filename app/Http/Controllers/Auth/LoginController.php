@@ -65,6 +65,7 @@ class LoginController extends Controller
     if($authId == 4){
         if(Auth::attempt(['email' => $email, 'password' => $password ])){
 
+            session()->put('auth_id',$authId);
             return redirect('/'); //メール、パスワード、権限がすべて一致した場合
 
         }else{
