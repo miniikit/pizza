@@ -6,6 +6,7 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Requests\RegisterRequest;
 
 class RegisterController extends Controller
 {
@@ -76,7 +77,6 @@ class RegisterController extends Controller
             'birthday' => $data['birthday'],
             'authority_id' => $data['authority_id'],
 
-        
         ]);
     }
 }

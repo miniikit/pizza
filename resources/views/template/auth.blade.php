@@ -8,9 +8,9 @@
 @yield('head')
 <meta name="description" itemprop="description" content="@yield('description')">
 <meta name="keywords" itemprop="keywords" content="@yield('keywords')">
+<link href="/css/common/reset.css" rel="stylesheet">
 <link href="/css/common/font-awesome.min.css" rel="stylesheet">
 <link href="/css/common/bootstrap.min.css" rel="stylesheet">
-<link href="/css/common/reset.css" rel="stylesheet">
 <link href="/css/common/admin.css"  rel="stylesheet">
 
 @yield('css')

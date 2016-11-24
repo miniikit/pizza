@@ -1,9 +1,10 @@
-@extends('template.auth')
+@extends('template.master')
 
 @section('title', '新規登録')
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+    <link rel="stylesheet" href="/css/mypage/detail.css" media="all" title="no title">
 @endsection
 
 @section('js')
@@ -24,7 +25,7 @@
                             <label for="name" class="col-md-4 control-label">氏名</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" maxlength="50" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -38,7 +39,7 @@
                             <label for="kana" class="col-md-4 control-label">カナ</label>
 
                             <div class="col-md-6">
-                                <input id="kana" type="text" class="form-control" name="kana" value="{{ old('name') }}" required autofocus>
+                                <input id="kana" type="text" class="form-control" name="kana" maxlength="100" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('kana'))
                                     <span class="help-block">
@@ -52,7 +53,7 @@
                             <label for="email" class="col-md-4 control-label">Eメールアドレス</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" maxlength="256" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -66,7 +67,7 @@
                             <label for="password" class="col-md-4 control-label">パスワード</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password" maxlength="128" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -80,7 +81,7 @@
                             <label for="password-confirm" class="col-md-4 control-label">確認パスワード</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" maxlength="128" required>
 
                                 @if ($errors->has('password_confirmation'))
                                     <span class="help-block">
