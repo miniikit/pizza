@@ -248,3 +248,22 @@
     font-size: 125px;
     margin-bottom: 30px;
 }
+
+
+.coupon .input-btn{
+    margin-left: 15px;
+    background-color: #9c9c9c;
+    padding: 10px;
+    padding-bottom: 11px;
+    font-size: 15px;
+    width: 70px;
+    display: inline-block;
+    text-align: center;
+    letter-spacing: 5px;
+    text-indent: 5px;
+}
+.coupon .input-btn:hover{
+    background-color:rgba(150,150,150,0.7);
+    letter-spacing: 7px;
+    text-indent: 7px
+}
