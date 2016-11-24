@@ -46,6 +46,9 @@ Route::get('/mypage/edit','MypagesController@edit');
 Route::post('/mypage/confirm','MypagesController@confirm');
 Route::post('/mypage/update','MypagesController@update');
 
+//お客様用ログアウト
+Route::post('/logout','auth\LoginController@logout');
+
 });
 
 // コンタクト
@@ -55,10 +58,6 @@ Route::post('/contact','ContactController@send');
 
 // API
 Route::get('/app/countCartContents','ApisController@countCartContents');
-
-//お客様用ログアウト
-Route::post('/logout','auth\LoginController@logout');
-
 
 // --------------------------- 管理者用 ---------------------------------------
 
@@ -111,7 +110,3 @@ Auth::routes();
 
 Route::get('/pizzzzza/login', 'auth\AdminLoginController@form'); //管理画面ログインページ
 Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理画面トップ
-
-
-
-
