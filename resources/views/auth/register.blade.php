@@ -1,9 +1,10 @@
-@extends('template.auth')
+@extends('template.master')
 
 @section('title', '新規登録')
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+    <link rel="stylesheet" href="/css/mypage/detail.css" media="all" title="no title">
 @endsection
 
 @section('js')
@@ -94,11 +95,11 @@
   <label for="postal" class="col-md-4 control-label">郵便番号 (半角)</label>
 
    <div class="col-md-2">
-    <input type="text" class="form-control" name="postal1" size="4" maxlength="3">
+    <input type="text" class="form-control" name="postal" size="4" maxlength="3">
     </div>
 
     <div class="col-md-2">
-     <input type="text" class="form-control" name="postal2" size="5" maxlength="4">
+     <input type="text" class="form-control" name="postal" size="5" maxlength="4">
       </div>
       <input type="button" class="btn btn-default" value="〒→変換" onClick="AjaxZip3.zip2addr('postal','postal','pref','address1','address2')"
                     onkeyup="AjaxZip3.zip2addr('postal','postal','pref','address1','address2');">

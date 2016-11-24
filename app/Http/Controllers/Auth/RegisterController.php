@@ -77,7 +77,6 @@ class RegisterController extends Controller
             'birthday' => $data['birthday'],
             'authority_id' => $data['authority_id'],
 
-        
         ]);
     }
 }
