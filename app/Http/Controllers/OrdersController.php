@@ -91,7 +91,7 @@ class OrdersController extends Controller
         //クーポンが見つからなければ終了する
         if(!count($dbTmp) > 0){
             header("Content-type: text/plain; charset=UTF-8");
-            echo 'クーポンが見つかりませんでした。';
+            echo 'ご入力いただいたクーポンが見つかりませんでした。';
         }
 
 
@@ -110,18 +110,20 @@ class OrdersController extends Controller
         if(is_null($dbCoupon->coupon_end_date)){
             //クーポン終了日がNULLであった場合の処理
             if($dbCoupon->coupon_start_date <= $today){
-                echo "期間内です";
+                echo "クーポン開催期間内です";
+                echo "終了日NULL";
             }else{
                 //エラーメッセージで処理終了
-                echo "期間外です";
+                echo "クーポン開催期間外です";
             }
         }else{
             //クーポン終了日が設定されていた場合の処理
             if($dbCoupon->coupon_start_date <= $today && $dbCoupon->coupon_end_date >= $today){
-                echo "期間内です";
+                echo "クーポン開催期間内です";
+                echo "終了日：" . $dbCoupon->coupon_end_date;
             }else{
                 //エラーメッセージで処理終了
-                echo "期間外です";
+                echo "クーポン開催期間外です";
             }
         }
 
@@ -145,10 +147,6 @@ class OrdersController extends Controller
         +"updated_at": "2016-11-24 11:32:04"
         +"deleted_at": null
         */
-
-
-
-
 
         dd($input_coupon,$dbCoupon);
 
