@@ -262,7 +262,7 @@ class CouponsMasterSeeder extends Seeder
             'product_id' => 2,
             'coupon_start_date' => Carbon::today()->subMonth(),
             'coupon_end_date' => Carbon::today()->subDay(),
-            'coupon_number' => 'MARTIN',
+            'coupon_number' => 'SUMMER',
             'coupon_conditions_count' => 3,
             'coupon_conditions_first' => 1,
         ]);

@@ -21,7 +21,7 @@ class CouponsMaster extends Migration
         $table->integer('product_id');//->references('id')->on('products_master'); //商品ID
         $table->date('coupon_start_date'); //クーポン開始日
         $table->date('coupon_end_date')->nullable(); //クーポン終了日
-        $table->string('coupon_number',15); //クーポン番号
+        $table->string('coupon_number',15)->unique(); //クーポン番号
         $table->integer('coupon_conditions_count')->nullable(); //クーポン使用条件回数
         $table->integer('coupon_conditions_first')->nullable(); //クーポン使用条件初回
         $table->timestamps();  //登録・更新日
