@@ -24,7 +24,7 @@
                             <label for="name" class="col-md-4 control-label">氏名</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" maxlength="50" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -38,7 +38,7 @@
                             <label for="kana" class="col-md-4 control-label">カナ</label>
 
                             <div class="col-md-6">
-                                <input id="kana" type="text" class="form-control" name="kana" value="{{ old('name') }}" required autofocus>
+                                <input id="kana" type="text" class="form-control" name="kana" maxlength="100" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('kana'))
                                     <span class="help-block">
@@ -52,7 +52,7 @@
                             <label for="email" class="col-md-4 control-label">Eメールアドレス</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" maxlength="256" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -66,7 +66,7 @@
                             <label for="password" class="col-md-4 control-label">パスワード</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password" maxlength="128" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -80,7 +80,7 @@
                             <label for="password-confirm" class="col-md-4 control-label">確認パスワード</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" maxlength="128" required>
 
                                 @if ($errors->has('password_confirmation'))
                                     <span class="help-block">
@@ -94,11 +94,11 @@
   <label for="postal" class="col-md-4 control-label">郵便番号 (半角)</label>
 
    <div class="col-md-2">
-    <input type="text" class="form-control" name="postal" size="4" maxlength="3">
+    <input type="text" class="form-control" name="postal1" size="4" maxlength="3">
     </div>
 
     <div class="col-md-2">
-     <input type="text" class="form-control" name="postal" size="5" maxlength="4">
+     <input type="text" class="form-control" name="postal2" size="5" maxlength="4">
       </div>
       <input type="button" class="btn btn-default" value="〒→変換" onClick="AjaxZip3.zip2addr('postal','postal','pref','address1','address2')"
                     onkeyup="AjaxZip3.zip2addr('postal','postal','pref','address1','address2');">
