@@ -48,11 +48,11 @@
                     <ul>
                         <li class="title">クーポン</li>
                         <li><input id="coupon_text" type="text" name="coupon" value="" placeholder="クーポンコードを入力してください"><a id="coupon-btn" class="input-btn" href="#">適用</a></li>
-
+                        <li><div id="coupon-message"></div></li>
                     </ul>
                 </div>
                 <div class="sum">
-                    <h3>合計金額 <span>{{ number_format($total) }} 円</span></h3>
+                    <h3>合計金額 <span id="total">{{ number_format($total) }} 円</span></h3>
                 </div>
                 <div class="cap ar ls">※24時間いつでも。どこでも配達いたします。</div>
             </div>
@@ -124,11 +124,29 @@
                         type:"POST",
                         url: "/order/confirm/coupon",
                         data: data,
-                        success: function(data, dataType)
+                        success: function(message, dataType)
                         {
-                            //デバッグ用 アラートとコンソール
-                            alert(data);
-                            console.log(data);
+                            //alert(message);
+                            //値引き後金額
+                            if(message["status"] == "error"){
+                                $("#coupon-message").css('display','inline-block');
+                                $("#coupon-message").removeClass('coupon-true');
+                                $("#coupon-message").addClass('coupon-false');
+                                $('#coupon-message').text(message["message"]);
+                            }else if(message["status"] == "ok"){
+                                $("#coupon-message").css('display','inline-block');
+                                $("#coupon-message").removeClass('coupon-false');
+                                $("#coupon-message").addClass('coupon-true');
+                                $('#coupon-message').text(message["message"]);
+                                var newTotal = String(message["newTotal"]).toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+                                $("#total").text(newTotal + "円");
+                            }else{
+                                //なにも設定されていない
+                                $("#coupon-message").css('display','inline-block');
+                                $("#coupon-message").removeClass('coupon-true');
+                                $("#coupon-message").addClass('coupon-false');
+                                $('#coupon-message').text("クーポンコードが不正です");
+                            }
                         },
                         error: function(XMLHttpRequest, textStatus, errorThrown)
                         {

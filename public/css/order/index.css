@@ -250,6 +250,9 @@
 }
 
 
+.coupon ul{
+    width: 100%;
+}
 .coupon .input-btn{
     margin-left: 15px;
     background-color: #9c9c9c;
@@ -266,4 +269,24 @@
     background-color:rgba(150,150,150,0.7);
     letter-spacing: 7px;
     text-indent: 7px
+}
+
+.coupon-message{
+    margin:0 auto;
+}
+#coupon-message{
+    display: none;
+    padding:10px;
+    margin:0 auto;
+    width:100%;
+    text-align: center;
+    font-weight:bold;
+}
+.coupon-true{
+    display:inline-block;
+    background-color:yellowgreen;
+}
+.coupon-false{
+    display:inline-block;
+    background-color:tomato;
 }
