@@ -54,6 +54,11 @@ public function login(Request $request) {
 
     public function logout(Request $request){ //ログアウト処理
         Auth::logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
         return redirect('/pizzzzza/login');
     }
 
