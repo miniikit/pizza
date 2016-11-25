@@ -3,14 +3,14 @@
 @section('title', '電話注文')
 
 @section('css')
-    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+    <link rel="stylesheet" href="/css/accept/index.css" media="all" title="no title">
 @endsection
 
 @section('main')
     <div class="wrap">
       <h1>お客様情報確認</h1>
       <div class="form-group table-responsive">
-        <table class="table">
+        <table class="table side">
           <tbody>
             <tr>
               <th class="text-center" ><label for="">登録日</label></th>
@@ -59,14 +59,13 @@
           </tbody>
 
         </table>
-        <div class="text-center">
-          <button type ="button" style="margin-top:20px;" class="btn btn-primary btn-lg"name="button">戻る</button>
-          <button type ="button" style="margin-top:20px;" class="btn btn-primary btn-lg"name="button">次へ</button>
-        </div>
-        <div class="text-right">
-          <button type ="button" style="margin-top:20px;" class="btn btn-primary btn-lg"name="button">編集</button>
-        </div>
-
+      </div>
+      <div class="text-center">
+        <button type ="button" style="margin-top:20px;" class="btn btn-primary btn-lg"name="button">戻る</button>
+        <button type ="button" style="margin-top:20px;" class="btn btn-primary btn-lg"name="button">次へ</button>
+      </div>
+      <div class="text-right">
+        <button type ="button" style="margin-top:20px;" class="btn btn-primary btn-lg"name="button">編集</button>
       </div>
     </div>
 @endsection
