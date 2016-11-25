@@ -199,17 +199,3 @@
     width: 100%;
     float: left;
 }
-
-
-
-/*電話番号受付画面*/
-
-#tel {
-    border: solid 1px #000000;
-    width: 70%;
-    padding-bottom: 40px;
-}
-
-.form-inline {
-    text-align: center;
-}
