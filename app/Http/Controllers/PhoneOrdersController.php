@@ -27,15 +27,19 @@ class PhoneOrdersController extends Controller
     public function show(phoneSearchRequest $request){
 
 
-        $number = $request->get('number');
+        $phone = $request->get('phone');
 
+        // 番号からUser情報を引き出す
         $phoneOrder = new PhoneOrderService();
-        $user = $phoneOrder->searchPhoneNumber($number);
+        $user = $phoneOrder->searchPhoneNumber($phone);
 
+        // もしNULLだったら新規登録にリダイレクト
+        if (is_null($user)) {
+            return redirect()->route('newCustomer');
+        }
 
-        dd($user);
+        return view('pizzzzza.order.accept.customer.detail', compact('user'));
 
-        return view('pizzzzza.order.accept.customer.detail');
     }
 
     //電話番号入力ページ＞お客様情報・注文履歴表示ページ＞お客様情報編集ページ
@@ -44,7 +48,7 @@ class PhoneOrdersController extends Controller
     }
 
     //電話番号入力ページ＞お客様情報入力ページ
-    public function phoneRegister(){
+    public function newCustomer(){
         return view('pizzzzza.order.accept.customer.input');
     }
 

@@ -6,9 +6,9 @@ use App\User;
 
 class PhoneOrderService
 {
-    public function searchPhoneNumber($number) {
+    public function searchPhoneNumber($phone) {
 
-        $user = User::with('gender')->where('phone','=',$number)->get();
+        $user = User::with('gender')->where('phone','=',$phone)->first();
 
         return $user;
 
