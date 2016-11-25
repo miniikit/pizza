@@ -19,13 +19,13 @@ use App\Service\CartService;
 class OrderService
 {
 
-    public function insert($products, $productCount,$userId,$datetime)
+    public function insert($products, $productCount,$userId,$datetime,$couponId)
     {
 
         Order::create([
             'order_date' => Carbon::now(),
             'order_appointment_date' => $datetime,
-            'coupon_id' => null,
+            'coupon_id' => $couponId,
             'state_id' => 1,
             'user_id' => $userId,
         ]);
