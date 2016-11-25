@@ -33,6 +33,13 @@ class UserAuth
             
             // auth_idが 1(管理者）　なら
             if($authid == 1){
+
+            Auth::logout();
+
+            $request->session()->flush();
+
+            $request->session()->regenerate();
+
                  return redirect('/');
             }
 
@@ -45,7 +52,6 @@ class UserAuth
             if($authid == 3){
                  return redirect('/');
             }
-
 
             //　 auth_idが 1/2/3（従業員）　なら 
             if($authid == 4){
