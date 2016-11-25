@@ -80,20 +80,36 @@ table {
     border-spacing: 0;
 }
 #table th {
-    background-color: rgba(255,255,255,0.4);
+    background-color: #787877;
     text-align: center;
     padding: 10px 0;
     color: #656565;
-    letter-spacing: 2px;
+    letter-spacing: 5px;
+    color: #eee;
+    border-bottom: solid 1px #eee;
+    padding: 15px 5px;
 }
 #table td {
     vertical-align: middle;
-    text-align: center;
+    text-align: left;
     background-color: rgba(100,100,100,0.1);
     border: solid 2px #eee;
     padding: 5px;
     color:  #656565;
 }
+
+#table td input {
+    padding: 5px;
+    font-size: 12px;
+}
+
+#table td span {
+    font-size: 10px;
+    display: block;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
 .font_left{
     text-align: left;
 }
