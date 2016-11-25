@@ -75,8 +75,10 @@
                         <li><a href="/pizzzzza/employee/add">従業員追加</a></li>
                     </ul>
                 </li>
-                <a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">ログアウト</a>
-                <form id="logout-form" action="{{ url('/pizzzzza/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">ログアウト</a></li>
+                <li><form id="logout-form" action="{{ url('/pizzzzza/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
