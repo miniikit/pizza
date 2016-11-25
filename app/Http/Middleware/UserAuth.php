@@ -30,18 +30,6 @@ class UserAuth
             if(session()->has('auth_id')){
                 $authid = session()->get('auth_id');
             }
-            
-            // auth_idが 1(管理者）　なら
-            if($authid == 1){
-
-            Auth::logout();
-
-            $request->session()->flush();
-
-            $request->session()->regenerate();
-
-                 return redirect('/');
-            }
 
             // auth_idが 2(権限付き従業員）　なら
             if($authid == 2){
@@ -53,8 +41,8 @@ class UserAuth
                  return redirect('/');
             }
 
-            //　 auth_idが 1/2/3（従業員）　なら 
-            if($authid == 4){
+            //　 auth_idが 1/4（管理者、顧客）　なら 
+            if($authid == 1 || $authid == 4){
                  //　正常時の処理
                 return $next($request);
             }
