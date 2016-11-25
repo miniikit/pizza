@@ -42,7 +42,7 @@ class OrdersController extends Controller
         // リクエストゲット
         $date = $request->input('date');
         $time = $request->input('time');
-
+        
         $datetime = $date .' '. $time;
 
         // もし現在時刻より前だったら
@@ -52,7 +52,6 @@ class OrdersController extends Controller
 
             return redirect()->route('order');
         }
-
 
         // カートの中身を取得
         $cart = new CartService();
@@ -73,6 +72,7 @@ class OrdersController extends Controller
 
 
         return redirect()->route('complete');
+
     }
 
 

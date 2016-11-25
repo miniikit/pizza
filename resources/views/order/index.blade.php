@@ -14,7 +14,7 @@
 @section('main')
     <div class="container wrap">
         <h2 class="title">ORDER</h2>
-        <form id="post" action="/order/complete/" method="post">
+        <form id="post" action="/order/confirm/insert" method="post">
             @if (Session::has('error_text'))
             <div class="alert error">{{ Session::get('error_text') }}</div>
             @endif
