@@ -21,13 +21,13 @@ Route::get('/menu','MenusController@index');
 Route::get('/cart','CartsController@index')->name('cart');
 Route::post('/cart/store','CartsController@store');
 Route::post('/cart/clear/{id}','CartsController@pop');
-Route::post('/cart/edit/','CartsController@edit');
+Route::post('/cart/edit','CartsController@edit');
 Route::post('/cart/clear','CartsController@clear');
 
 //　注文
-Route::get('/order/confirm/','OrdersController@index')->name('order');
+Route::get('/order/confirm','OrdersController@index')->name('order');
 Route::post('/order/confirm/insert','OrdersController@insert');
-Route::post('/order/complete/','OrdersController@complete')->name('complete');
+Route::get('/order/complete','OrdersController@complete')->name('complete');
 Route::any('/order/confirm/coupon','OrdersController@coupon');
 
 // etc..
