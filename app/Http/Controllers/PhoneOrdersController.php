@@ -13,18 +13,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Http\Requests\phoneSearchRequest;
+use App\Service\PhoneOrderService;
 
 class PhoneOrdersController extends Controller
 {
     //電話番号入力ページ
-    public function phoneInput(){
+    public function index(){
         return view('pizzzzza.order.accept.input');
     }
 
     //電話番号入力ページ＞お客様情報・注文履歴表示ページ
-    public function phoneDetail(){
+    public function show(phoneSearchRequest $request){
+
+
+        $number = $request->get('number');
+
+        $phoneOrder = new PhoneOrderService();
+        $user = $phoneOrder->searchPhoneNumber($number);
+
+
+        dd($user);
+
         return view('pizzzzza.order.accept.customer.detail');
     }
 

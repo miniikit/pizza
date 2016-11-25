@@ -14,21 +14,19 @@
           <tbody>
             <tr>
               <th class="text-center" style="padding-top:12px;"><label for="">名前(漢字)</label></th>
-              <td><input class="form-control" type="text" name="name" value="" placeholder="姓"></td>
-              <td><input class="form-control" type="text" name="name" value="" placeholder="名"></td>
+              <td>有村千賀</td>
             </tr>
             <tr>
               <th class="text-center" style="padding-top:12px;"><label for="">名前(カナ)</label></th>
-              <td><input class="form-control" type="text" name="name" value="" placeholder="セイ"></td>
-              <td><input class="form-control" type="text" name="name" value="" placeholder="メイ"></td>
+              <td>アリムラチカ</td>
             </tr>
             <tr>
               <th class="text-center" style="padding-top:12px;"><label for="">郵便番号</label></th>
-              <td><input class="form-control" style="width:30%;" maxlength="8" type="text" name="name" value="" placeholder="123-4567"></td>
+              <td>6801010</td>
             </tr>
             <tr>
               <th class="text-center" style="padding-top:12px;"><label for="">都道府県</label></th>
-              <td><input class="form-control" style="width:30%;" type="text" name="name" value="" placeholder=""></td>
+              <td>ほか移動</td>
             </tr>
             <tr>
               <th class="text-center" style="padding-top:12px;"><label for="">市区町村</label></th>
@@ -44,8 +42,6 @@
             </tr>
             <tr>
               <th class="text-center" style="padding-top:12px;"><label for="">電話番号</label></th>
-              <td><input class="form-control"  type="number" name="name" value="" placeholder=""></td>
-              <td><input class="form-control"  type="number" name="name" value="" placeholder=""></td>
               <td><input class="form-control"  type="number" name="name" value="" placeholder=""></td>
             </tr>
           </tbody>

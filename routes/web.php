@@ -88,8 +88,8 @@ Route::get('/pizzzzza/coupon/list/gift/edit','CouponsController@couponNowGiftEdi
 Route::get('/pizzzzza/coupon/history','CouponsController@couponHistory'); //過去のクーポン一覧ページ
 
 //電話注文
-Route::get('/pizzzzza/order/accept/input','PhoneOrdersController@phoneInput'); //電話番号入力ページ
-Route::get('/pizzzzza/order/accept/customer/detail','PhoneOrdersController@phoneDetail'); //お客様情報・注文履歴表示ページ
+Route::get('/pizzzzza/order/accept/input','PhoneOrdersController@index'); //電話番号入力ページ
+Route::post('/pizzzzza/order/accept/customer/detail','PhoneOrdersController@show'); //お客様情報・注文履歴表示ページ
 Route::get('/pizzzzza/order/accept/customer/edit','PhoneOrdersController@phoneEdit'); //登録済みの顧客情報編集ページ
 Route::get('/pizzzzza/order/accept/customer/input','PhoneOrdersController@phoneRegister'); //登録済み出ない場合のお客様情報入力ページ
 
