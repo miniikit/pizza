@@ -96,7 +96,7 @@ class AdminMenusController extends Controller
 
             //商品が選択されていない場合の処理
             if(!$request->has('id')){
-                //エラーメッセージを返す予定
+                //エラーメッセージ
                 $message["status"] = "error";
                 $message["text"] = "エラー：商品を選択してください";
                 $message["class"] = "menu menu-error";
@@ -234,6 +234,7 @@ class AdminMenusController extends Controller
         //
         //  エラー処理
         //
+            $message = array();
 
             //
             //  エラー１：販売終了日が、「本日より後」で「かつ」「販売開始日より後」になっていることを確認
@@ -241,25 +242,22 @@ class AdminMenusController extends Controller
                 if(!is_null($product_sales_end_day)) {
                     //販売終了日が過去である
                     if($product_sales_end_day <= $today){
-                        return redirect('/pizzzzza/menu')->with('error-message','販売終了日が過去の日付です。');
+                        $message["class"] = "menu menu-error";
+                        $message["text"] = "販売終了日が過去の日付です。";
+                        $request->session()->put('message', $message);
+                        //return redirect('/pizzzzza/menu')->with('error-message','販売終了日が過去の日付です。');
+                        return redirect('/pizzzzza/menu');
                     }
 
                     //販売開始日より、販売終了日が早い日になっている
                     if($product_sales_end_day <= $product_sales_start_day){
-                        return redirect('/pizzzzza/menu')->with('error-message','販売終了日と販売開始日が不正です。');
+                        $message["class"] = "menu menu-error";
+                        $message["text"] = "販売終了日と販売開始日が不正です。";
+                        $request->session()->put('message', $message);
+                        //return redirect('/pizzzzza/menu')->with('error-message','販売終了日と販売開始日が不正です。');
+                        return redirect('/pizzzzza/menu');
                     }
                 }
-
-            //
-            //  エラー２：販売終了日が、販売開始日より後の日付になっていることを確認
-            //
-
-            //
-            //  エラー３：このくらいか
-            //
-
-
-
 
 
         //
@@ -275,9 +273,6 @@ class AdminMenusController extends Controller
 
             //$update[]に、更新内容が入る。
             $update = array();
-
-
-
 
             if ($dbProduct->product_name != $product_name) {
                 $update['product_name'] = $product_name;
@@ -345,7 +340,7 @@ class AdminMenusController extends Controller
 
 
         //たどりつくことのないはずの処理
-        // return redirect('/pizzzzza/login');
+          return redirect('/pizzzzza/login');
     }
 
 
