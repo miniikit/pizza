@@ -6,6 +6,24 @@
     <link rel="stylesheet" href="/css/pizzzzza/menu/index.css" media="all" title="no title">
 @endsection
 
+@section('js')
+    <script>
+        {{--  自動実行  --}}
+        $(document).ready( function(){
+            @if(!is_null($products->deleted_at)) {{--  販売終了時、inputタグをdisable/readonlyに変更  --}}
+                function addDisable(){
+                    // 目的のオブジェクトを取得
+                    targetObj = document.getElementsByClassName('readonly');
+                    // オブジェクトに属性を付加
+                    targetObj.setAttribute('readonly','readonly');
+                }
+            @endif
+        });
+
+
+    </script>
+@endsection
+
 @section('main')
     <h1>商品情報　編集</h1>
 
@@ -22,33 +40,66 @@
                 </tr>
                 <tr>
                     <th>商品名</th>
-                    <td><input class="form-control" type="text" maxlengt="255" name="name" value="{{ $products->product_name }}">
-                    </td>
+                    @if(is_null($products->deleted_at))     {{-- 販売中 --}}
+                        <td><input class="form-control" type="text" maxlengt="255" name="name"
+                                   value="{{ $products->product_name }}">
+                        </td>
+                    @else   {{-- 販売終了 --}}
+                        <td><input class="form-control readonly" type="text" maxlengt="255" name="name"
+                                   value="{{ $products->product_name }}">
+                        </td>
+                    @endif
                 </tr>
                 <tr>
                     <th>商品説明</th>
-                    <td><input class="form-control" type="text" size="100" rows="1" value="{{ $products->product_text }}"></td>
+                    @if(is_null($products->deleted_at))     {{-- 販売中 --}}
+                         <td><input class="form-control" type="text" size="100" rows="1"
+                               value="{{ $products->product_text }}"></td>
+                    @else   {{-- 販売終了 --}}
+                        <td><input class="form-control" type="text" size="100" rows="1"
+                                   value="{{ $products->product_text }}" readonly="readonly"></td>
+                    @endif
                 </tr>
                 <tr>
                     <th>販売価格（税込）</th>
+                    @if(is_null($products->deleted_at))     {{-- 販売中 --}}
                     <td><input class="form-control" type="number" name="name" value="{{ $products->product_price }}"
-                               style=></td>
+                               ></td>
+                    @else   {{-- 販売終了 --}}
+                    <td><input class="form-control" type="number" name="name" value="{{ $products->product_price }}"
+                                readonly="readonly"></td>
+                    @endif
                 </tr>
                 <tr>
                     <th>商品ジャンル</th>
-                    <td><select name="genre_id" id="{{ $products->genre_id }}">
-                            @foreach($genres as $genre)
-                                @if($genre->id == $products->genre_id)
-                                    <option value="{{ $genre->id }}" selected>{{ $genre->genre_name }}</option>
-                                @else
-                                    <option value="{{ $genre->id }}">{{ $genre->genre_name }}</option>
-                                @endif
-                            @endforeach
-                        </select></td>
+                         <td><select name="genre_id" id="{{ $products->genre_id }}">
+                             @if(is_null($products->deleted_at))     {{-- 販売中 --}}
+                                 @foreach($genres as $genre)
+                                     @if($genre->id == $products->genre_id)
+                                         <option value="{{ $genre->id }}" selected>{{ $genre->genre_name }}</option>
+                                     @else
+                                         <option value="{{ $genre->id }}">{{ $genre->genre_name }}</option>
+                                     @endif
+                                 @endforeach
+                             @else   {{--  販売終了  --}}
+                                 @foreach($genres as $genre)
+                                     @if($genre->id == $products->genre_id)
+                                         <option value="{{ $genre->id }}" selected disabled="disabled">{{ $genre->genre_name }}</option>
+                                     @else
+                                         <option value="{{ $genre->id }}" disabled="disabled">{{ $genre->genre_name }}</option>
+                                     @endif
+                                 @endforeach
+                             @endif
+
+                             </select></td>
                 </tr>
                 <tr>
                     <th>画像の更新</th>
-                    <td><input type="file" name="pic"></td>
+                    @if(is_null($products->sales_end_date))     {{-- 販売中 --}}
+                        <td><input type="file" name="pic"></td>
+                    @else       {{-- 販売終了 --}}
+                        <td><input type="file" name="pic" disabled="disabled"></td>
+                    @endif
                 </tr>
                 <tr>
                     <th>販売開始日</th>
@@ -63,6 +114,7 @@
                     @endif
                 </tr>
                 <tr></tr>
+
             @else
                 エラー！一度ログアウトしてください
             @endif
