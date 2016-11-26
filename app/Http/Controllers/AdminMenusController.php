@@ -216,19 +216,9 @@ class AdminMenusController extends Controller
             $product_price = $request->product_price;
             $product_genre_id = $request->product_genre_id;
             $product_sales_start_day = $request->product_sales_start_day;
+            $product_sales_end_day = $request->product_sales_end_day;
+            $product_img = $request->product_img;
 
-            //NULL許可にしているためNULLチェック
-            if(!is_null($request->product_sales_end_day)) {
-                $product_sales_end_day = $request->product_sales_end_day;
-            }else{
-                $product_sales_end_day = NULL;
-            }
-            //NULL許可にしているためNULLチェック
-            if(!is_null($request->product_img)) {
-                $product_img = $request->product_img;
-            }else{
-                $product_img = NULL;
-            }
 
             //本日
                 $now = Carbon::now();
@@ -243,7 +233,7 @@ class AdminMenusController extends Controller
             //  エラー１：販売終了日が、「本日より後」で「かつ」「販売開始日より後」になっていることを確認
             //
 
-                if(!is_null($product_sales_end_day)) {
+                if(!isset($product_sales_end_day)) {
                     //販売終了日が過去である
                     if($product_sales_end_day <= $today){
                         $message["class"] = "menu menu-error";
