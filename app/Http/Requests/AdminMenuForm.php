@@ -31,7 +31,7 @@ class AdminMenuForm extends FormRequest
             'product_img' => 'mimes:jpg,jpeg,png,bmp|max:1500',
             'product_genre_id' => 'required',
             'product_sales_start_day' => 'required|date',
-            'product_sales_end_day' => 'date'
+            'product_sales_end_day' => 'date',
         ];
     }
 }
