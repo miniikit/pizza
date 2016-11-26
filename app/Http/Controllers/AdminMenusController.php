@@ -15,6 +15,7 @@ use App\Http\Requests;
 use App\Product;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;    //ログインユーザを判別
 use phpDocumentor\Reflection\Types\Integer;  //サービスに移植後削除
 use App\Http\Requests\AdminMenuForm;
 
@@ -204,26 +205,142 @@ class AdminMenusController extends Controller
         //      $request-> id >> 商品ID
 
 
-        //
-        //  バリデーション、
-        //
 
         //
         //  エラー処理
         //
 
+        //
+        //  エラー１：販売終了日が、「本日より後」で「かつ」「販売開始日より後」になっていることを確認
+        //
+
+        //
+        //  エラー２：販売終了日が、販売開始日より後の日付になっていることを確認
+        //
+
+        //
+        //  エラー３：このくらいか
+        //
+
 
 
         //
-        //  エラー１：
+        //  POSTデータを保管
         //
 
+            $product_id = $request->product_id;
+            $product_name = $request->product_name;
+            $product_text = $request->product_text;
+            $product_price = $request->product_price;
+            $product_genre_id = $request->product_genre_id;
+            $product_sales_start_day = $request->product_sales_start_day;
+
+            if(!is_null($request->product_sales_end_day)) {
+                $product_sales_end_day = $request->product_sales_end_day;
+            }else{
+                $product_sales_end_day = NULL;
+            }
+            if(!is_null($request->product_img)) {
+                $product_img = $request->product_img;
+            }else{
+                $product_img = NULL;
+            }
+
+
+        //
+        //  DBから更新前の商品情報を取得する。
+        //
+
+            $dbProduct = DB::table('products_master')->join('products_prices_master','products_master.price_id','=','products_prices_master.id')->where('products_master.id','=',$product_id)->first();
+
+
+        //
+        //  更新SQL　値のセット（変更箇所のみ）
+        //
+
+            //$update[]に、更新内容が入る。
+        $update = array();
+
+        //本日
+        $now = Carbon::now();
+        $today = Carbon::today();
+
+
+        if ($dbProduct->product_name != $product_name) {
+            $update['product_name'] = $product_name;
+        }
+
+        //価格変更時は処理が複雑
+        if ($dbProduct->product_price != $product_price) {
+            //価格が変更された場合、価格テーブルに価格を挿入する
+
+            $empId = Auth::user()->id;
+
+            // $product_sales_end_dayにNULLを設定して挿入するとエラーが帰ってくるので処理を分けて記述
+            if(is_null($product_sales_end_day)) {
+                $newPriceId = DB::table('products_prices_master')->insertGetId(['product_id' => $product_id, 'product_price' => $product_price, 'price_change_startdate' => NULL, 'price_change_enddate' => $product_sales_end_day,  //NULLor日付
+                    'employee_id' => $empId, 'created_at' => $now, 'updated_at' => $now,]);
+            }else{
+                $newPriceId = DB::table('products_prices_master')->insertGetId(['product_id' => $product_id, 'product_price' => $product_price, 'price_change_startdate' => $product_sales_start_day, 'price_change_enddate' => $product_sales_end_day,  //NULLor日付
+                    'employee_id' => $empId, 'created_at' => $now, 'updated_at' => $now,]);
+            }
+
+            if(!is_null($newPriceId)) {
+                $update['price_id'] = $newPriceId;
+            }else{
+                //価格表の挿入失敗
+                //エラーメッセージと共にeditページへ飛ばす
+            }
+        }
+        if ($dbProduct->product_text != $product_text) {
+            $update['product_text'] = $product_text;
+        }
+        if ($dbProduct->genre_id != $product_genre_id) {
+            $update['genre_id'] = $product_genre_id;
+        }
+        if ($dbProduct->sales_start_date != $product_sales_start_day) {
+            $update['sales_start_date'] = $product_sales_start_day;
+        }
+        if(!is_null($product_sales_end_day)) {
+            if ($dbProduct->sales_end_date != $product_sales_end_day) {
+                $update['sales_end_date'] = $product_sales_end_day;
+            }
+        }
+        if ($dbProduct->updated_at != $now) {
+            $update['updated_at'] = $now;
+        }
+        if(!is_null($product_img)) {
+            if ($dbProduct->product_image != $product_img) {
+                $update['product_image'] = $product_img;
+            }
+        }
+
+
+        //
+        //  更新SQL　Run
+        //
+
+       // dd($update);
+
+        DB::enableQueryLog();
+
+        //更新内容があれば
+        if(isset($update)) {
+            //更新を実行
+            $query = DB::table('products_master')->where('id', $product_id)->update($update);
+            //return redirect('/pizzzzza/menu')->with('updateStatus', "更新完了！");
+        }else{
+            //更新内容がない
+            //return redirect('/pizzzzza/menu')->with('updateStatus', '更新エラー！更新は完了していません。');
+        }
+        dd(DB::getQueryLog());
 
 
 
-        $a = $request->all();
-        dd($a);
 
+
+
+        return redirect('/pizzzzza/menu/edit');
     }
 
 

@@ -13,7 +13,7 @@ class AdminMenuForm extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,13 +24,13 @@ class AdminMenuForm extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|integer',
-            'product_name' => 'required|max:50',
-            'product_text' => 'required|max:100',
+            'product_id' => 'required|integer',
+            'product_name' => 'required|max:255',
+            'product_text' => 'required',
             'product_price' => 'required|integer',
-            'product_img' => 'mimes:jpg,jpeg,png,bmp',
+            'product_img' => 'mimes:jpg,jpeg,png,bmp|max:1500',
             'product_genre_id' => 'required',
-            'product_sales_start_day' => 'date',
+            'product_sales_start_day' => 'required|date',
             'product_sales_end_day' => 'date'
         ];
     }

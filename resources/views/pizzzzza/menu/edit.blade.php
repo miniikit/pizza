@@ -14,7 +14,12 @@
 @section('main')
     <h1>商品情報　編集</h1>
 
-    <form id="MenuEdit" method="post" action="" enctype="multipart/form-data">
+    @foreach ($errors->all() as $message)
+        <div class="error-message">
+        {{ $message }}
+        </div>
+    @endforeach
+    <form id="MenuEdit" method="post" action="/pizzzzza/menu/edit/do" enctype="multipart/form-data">
         <table id="edit-table" class="table">
             @if($products)
                 <tr>
@@ -83,7 +88,7 @@
                 <tr>
                     <th>画像の更新</th>
                     @if(is_null($products->deleted_at))     {{-- 販売中 --}}
-                        <td><input type="file" name="product_img"></td>
+                        <td><input type="file" name="product_img">※500KBまでのJPG/JPEG/PNG/BMPのみ</td>
                     @else       {{-- 販売終了 --}}
                         <td><input type="file" name="product_img" disabled="disabled"></td>
                     @endif
@@ -136,6 +141,7 @@
                 </div>
                 <div class="lightbox" id="menu-edit-do">
                     <h2>更新してよろしいですか？</h2>
+                    <p>　変更はすぐに反映されます。</p>
                     <div class="button">
                         <a id="edit-back" class="btn btn-danger btn-lg" type="button" onclick="$.featherlight.current().close();" name="button">キャンセル</a>
                         <a id="edit-go" class="btn btn-primary btn-lg" type="button" name="button" onclick="document.getElementById('MenuEdit').submit();">更新</a>
@@ -149,6 +155,7 @@
                 </div>
             </div>
         @endif
+        <input type="hidden" name="product_id" value="{{ $products->id }}">
         <input type="hidden" name="_token" value="{{  csrf_token()  }}">
         <input type="submit" name="" style="display:none">
     </form>
