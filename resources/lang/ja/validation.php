@@ -164,6 +164,7 @@ return [
         'product_img' => [
             'mimes' => 'アップロードできるのはJPG/JPEG/PNG/BMP形式の画像のみです。',
             'max' => 'アップロードできるのは1500KBまでのファイルのみです。',
+            'required' => '画像を選択してください',
         ],
         'product_genre_id' => [
             'required' => '商品ジャンルを選択してください',

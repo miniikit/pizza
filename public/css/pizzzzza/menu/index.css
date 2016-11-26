@@ -140,4 +140,37 @@ div#menu_button{
     border-radius: 5px;
     letter-spacing: 3px;
     text-indent: 3px;
+    list-style-type: none;
 }
+
+
+/*  商品情報追加  */
+#menu-add-table{
+    width:100%;
+    max-width:800px;
+    margin:0 auto;
+}
+#menu-add-table th{
+    text-align: center;
+    padding: 5px 0;
+    vertical-align: middle;
+}
+
+#menuadd .add-button{
+    width:200px;
+    margin-left:20px;
+    margin-top:20px;
+}
+
+@media screen and (max-width: 680px) {
+    #menuadd .add-button{
+        width:40%;
+        margin: 0;
+        margin-right: 3%;
+        margin-left: 3%;
+
+    }
+}
+
+
+

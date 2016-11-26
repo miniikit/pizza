@@ -72,7 +72,7 @@ Route::get('/pizzzzza/order/top','AdminController@orderTop'); //注文確認ペ�
 
 Route::get('/pizzzzza/menu', 'AdminMenusController@index'); //従業員用メニュー一覧
 Route::get('/pizzzzza/menu/edit', 'AdminMenusController@nav'); //従業員用メニュー　販売終了or編集へ飛ばす
-Route::post('/pizzzzza/menu/edit/do', 'AdminMenusController@edit'); //従業員用メニュー更新処理
+Route::post('/pizzzzza/menu/edit/do', 'AdminMenusController@editDo'); //従業員用メニュー更新処理
 Route::get('/pizzzzza/menu/add', 'AdminMenusController@add'); //従業員用メニュー追加
 Route::post('/pizzzzza/menu/add', 'AdminMenusController@push'); //従業員用メニュー追加処理
 

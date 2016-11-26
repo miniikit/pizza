@@ -28,7 +28,6 @@ class AdminMenusController extends Controller
         //　商品の情報と価格を連結
         //`
 
-
         $products = DB::table('products_master')->join('products_prices_master','products_master.price_id','=','products_prices_master.id')->get();
 
 
@@ -56,11 +55,15 @@ class AdminMenusController extends Controller
 
 
 
-
+    public function add()
+    {
+        $genres = DB::table('genres_master')->get();
+        return view('pizzzzza.menu.add',compact('genres'));
+    }
 
     //
-    public function push(){
-
+    public function push(Requests\AdminMenuAddForm $request){
+            dd('ok');
         return redirect('pizzzzza.menu');
     }
 
@@ -190,7 +193,7 @@ class AdminMenusController extends Controller
 
 
     //商品情報が編集され、更新ボタンが押された時の処理。
-    public function edit(Requests\AdminMenuForm $request){
+    public function editDo(Requests\AdminMenuForm $request){
         //  処理内容
         //      更新内容を基に、商品情報を更新する。
         //      エラーがあれば、編集ページへ戻す。
@@ -239,6 +242,7 @@ class AdminMenusController extends Controller
             //
             //  エラー１：販売終了日が、「本日より後」で「かつ」「販売開始日より後」になっていることを確認
             //
+
                 if(!is_null($product_sales_end_day)) {
                     //販売終了日が過去である
                     if($product_sales_end_day <= $today){
@@ -286,7 +290,7 @@ class AdminMenusController extends Controller
 
                 // $product_sales_end_dayにNULLを設定して挿入するとエラーが帰ってくるので処理を分けて記述
                 if(is_null($product_sales_end_day)) {
-                    $newPriceId = DB::table('products_prices_master')->insertGetId(['product_id' => $product_id, 'product_price' => $product_price, 'price_change_startdate' => NULL, 'price_change_enddate' => $product_sales_end_day,  //NULLor日付
+                    $newPriceId = DB::table('products_prices_master')->insertGetId(['product_id' => $product_id, 'product_price' => $product_price, 'price_change_startdate' => $product_sales_start_day, 'price_change_enddate' => NULL,  //NULLor日付
                         'employee_id' => $empId, 'created_at' => $now, 'updated_at' => $now,]);
                 }else{
                     $newPriceId = DB::table('products_prices_master')->insertGetId(['product_id' => $product_id, 'product_price' => $product_price, 'price_change_startdate' => $product_sales_start_day, 'price_change_enddate' => $product_sales_end_day,  //NULLor日付
@@ -343,11 +347,4 @@ class AdminMenusController extends Controller
           return redirect('/pizzzzza/login');
     }
 
-
-
-    public function add()
-    {
-
-        return view('pizzzzza.menu.add');
-    }
 }

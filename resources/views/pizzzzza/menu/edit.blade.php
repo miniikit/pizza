@@ -155,7 +155,7 @@
                 </div>
             </div>
         @endif
-        <input type="hidden" name="product_id" value="{{ $products->id }}">
+        <input type="hidden" name="product_id" value="{{ $products->product_id }}">
         <input type="hidden" name="_token" value="{{  csrf_token()  }}">
         <input type="submit" name="" style="display:none">
     </form>

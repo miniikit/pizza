@@ -77,9 +77,9 @@
                         @else
                             <tr class="menu-deleted">
                         @endif
-                            <td style="text-align: center;"><input type="radio" name="id" value="{{ $product->id }}">
+                            <td style="text-align: center;"><input type="radio" name="id" value="{{ $product->product_id }}">
                             </td>
-                            <td style="width:5%;text-align: center;">{{ $product->id }}</td>
+                            <td style="width:5%;text-align: center;">{{ $product->product_id }}</td>
                          @if(is_null($product->deleted_at))
                             <td style="width:20%;">{{ $product->product_name }}</td>
                          @else

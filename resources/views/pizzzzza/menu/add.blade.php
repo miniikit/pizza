@@ -3,60 +3,76 @@
 @section('title', 'メニュー追加画面')
 
 @section('css')
-    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">   {{-- たぶんこれ不要 --}}
+    <link rel="stylesheet" href="/css/pizzzzza/menu/index.css" media="all" title="no title">
+@endsection
+
+@section('js')
+    <script>
+        function postAdd() {
+            event.preventDefault();
+            document.getElementById('AddButton').submit();
+        }
+    </script>
 @endsection
 
 @section('main')
-    <h1>メニュー追加画面</h1>
+    <h1>商品 追加</h1>
     <div class="form-group table-responsive" id="menuadd">
-    <table class="table">
-<!--  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  -->
-  <tbody>
-   <tr>
-    <th class="text-center" style="padding-top:12px;"><label for="">商品名</label></th>
-    <th><input class="form-control" type="text" name="name" value="" style="width:50%;"></th>
-    </tr>
-     <tr>
-      <th class="text-center" style="padding-top:12px;"><label for="">価格</label></th>
-      <td><input class="form-control" type="number" name="name" value="" style="width:25%;"></td>
-    </tr>
-    <tr>
-      <th class="text-center" style="padding-top:12px;"><label for="">ジャンル</label></th>
-      <td><select name="example2">
-          <option value="">-----</option>
-          <option value="1">ピザ</option>
-          <option value="2">サイド</option>
-          <option value="3">ドリンク</option>
-        </select></td>
-    </tr>
-    <tr>
-    <th class="text-center" style="padding-top:12px;"><label for="example-date-input">販売開始日</label></th>
-    <th><input class="form-control" id="example-date-input" type="date" name="name" value="" size="5" style="width:30%"></th>
-    </tr>
-    <tr>
-    <th class="text-center" style="padding-top:12px;"><label for="example-date-input">販売終了日</label></th>
-    <th><input class="form-control" id="example-date-input" type="date" name="name" value="" size="5" style="width:30%"></th>
-    </tr>
-    <tr>
-    <th class="text-center" style="padding-top:12px;"><label for="">商品画像</label></th>
-    <th><input class="fotm-control" type="file" name"name" value""></th>
-    </tr>
-    <tr>
-    <th class="text-center" style="padding-top:12px;"><label for="">商品説明文</label></th>
-    <th><textarea class="form-control" id="exampleTextarea" rows="6" maxlength="255" style="width:65%;" ></textarea></th>
-    </tr>
-  </tbody>
-</table>
-</div>
-      <div id="menuedit_button">
-      <button type="button" class="btn btn-primary btn-lg"name="button">戻る</button>
-      <button type="button" class="btn btn-primary btn-lg"name="button">確認</button>
-      </div>
+        <form action="/pizzzzza/menu/add" method="post" id="AddButton" enctype=" multipart/form-data">
+            @if(count($errors) > 0)
+                <ul class="error-message">
+                @foreach ($errors->all() as $message)
+                           <li>{{ $message }}</li>
+                @endforeach
+                </ul>
+            @endif
+            <table id="menu-add-table" class="table">
+                <tbody>
+                <tr>
+                    <th>商品名</th>
+                    <td><input class="form-control" type="text" name="product_name" value=""></td>
+                </tr>
+                <tr>
+                    <th>価格</th>
+                    <td><input class="form-control" type="number" name="product_price" value=""></td>
+                </tr>
+                <tr>
+                    <th>ジャンル</th>
+                    <td><select name="product_genre_id">
+                            @foreach($genres as $genre)
+                                <option value="{{ $genre->id }}">{{  $genre->genre_name }}</option>
+                            @endforeach
+                        </select></td>
+                </tr>
+                <tr>
+                    <th>販売開始日</th>
+                    <td><input class="form-control" id="example-date-input" type="date" name="product_sales_start_day" value="" size="5">
+                    </td>
+                </tr>
+                <tr>
+                    <th>販売終了日</th>
+                    <td><input class="form-control" id="example-date-input" type="date" name="product_sales_end_day" value="" size="5">
+                    </td>
+                </tr>
+                <tr>
+                    <th>商品画像</th>
+                    <td><input type="file" name="product_img" value=""></td>
+                </tr>
+                <tr>
+                    <th>商品説明文</th>
+                    <th><textarea class="form-control" id="exampleTextarea" rows="6" name="product_text" maxlength="255"></textarea></th>
+                </tr>
+                </tbody>
+            </table>
+            <input type="hidden" name="_token" value="{{  csrf_token()  }}">
+            <input id="postButton" type="submit" name="post" style="display:none">
+        </form>
+        <div class="menu">
+            <a type="button" class="add-button btn btn-danger btn-lg" name="button">戻る</a>
+            <a type="button" class="add-button btn btn-primary btn-lg" name="button" onclick="postAdd()">確認</a>
+        </div>
+    </div>
+
 
 @endsection
