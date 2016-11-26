@@ -16,6 +16,7 @@ use App\Product;
 
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\Integer;  //サービスに移植後削除
+use App\Http\Requests\AdminMenuForm;
 
 class AdminMenusController extends Controller
 {
@@ -66,7 +67,7 @@ class AdminMenusController extends Controller
 
 
     // メニュー画面:: 編集 or 販売終了ボタンが押される。
-    public function edit(Request $request)
+    public function nav(Request $request)
     {
         //  処理内容
         //      「選択商品を販売終了（ソフトデリート）」または「選択商品の、編集ページへリダイレクト」する。
@@ -185,6 +186,45 @@ class AdminMenusController extends Controller
 
 
 
+
+
+
+    //商品情報が編集され、更新ボタンが押された時の処理。
+    public function edit(Requests\AdminMenuForm $request){
+        //  処理内容
+        //      更新内容を基に、商品情報を更新する。
+        //      エラーがあれば、編集ページへ戻す。
+        //  期待値
+        //      $request->name  >>  商品名
+        //      $request->item_text  >>  商品説明
+        //      $request-> item_price >> 商品価格
+        //      $request-> genre_id >> ジャンルID
+        //      $request-> item_start_day >> 販売開始日
+        //      $request-> item_end_day >> 販売終了日
+        //      $request-> id >> 商品ID
+
+
+        //
+        //  バリデーション、
+        //
+
+        //
+        //  エラー処理
+        //
+
+
+
+        //
+        //  エラー１：
+        //
+
+
+
+
+        $a = $request->all();
+        dd($a);
+
+    }
 
 
 

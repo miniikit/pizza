@@ -4,30 +4,17 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/pizzzzza/menu/index.css" media="all" title="no title">
+    <link href="css/featherlight.min.css" title="Featherlight Styles" rel="stylesheet" />
 @endsection
 
 @section('js')
-    <script>
-        {{--  自動実行  --}}
-        $(document).ready( function(){
-            @if(!is_null($products->deleted_at)) {{--  販売終了時、inputタグをdisable/readonlyに変更  --}}
-                function addDisable(){
-                    // 目的のオブジェクトを取得
-                    targetObj = document.getElementsByClassName('readonly');
-                    // オブジェクトに属性を付加
-                    targetObj.setAttribute('readonly','readonly');
-                }
-            @endif
-        });
-
-
-    </script>
+    <script src="js/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 @endsection
 
 @section('main')
     <h1>商品情報　編集</h1>
 
-    <form method="post" enctype="multipart/form-data">
+    <form id="MenuEdit" method="post" action="" enctype="multipart/form-data">
         <table id="edit-table" class="table">
             @if($products)
                 <tr>
@@ -41,38 +28,38 @@
                 <tr>
                     <th>商品名</th>
                     @if(is_null($products->deleted_at))     {{-- 販売中 --}}
-                        <td><input class="form-control" type="text" maxlengt="255" name="name"
+                        <td><input class="form-control" type="text" maxlengt="255" name="product_name"
                                    value="{{ $products->product_name }}">
                         </td>
                     @else   {{-- 販売終了 --}}
-                        <td><input class="form-control readonly" type="text" maxlengt="255" name="name"
-                                   value="{{ $products->product_name }}">
+                        <td><input class="form-control readonly" type="text" maxlengt="255" name="product_name"
+                                   value="{{ $products->product_name }}" readonly="readonly">
                         </td>
                     @endif
                 </tr>
                 <tr>
                     <th>商品説明</th>
                     @if(is_null($products->deleted_at))     {{-- 販売中 --}}
-                         <td><input class="form-control" type="text" size="100" rows="1"
+                         <td><input class="form-control" type="text" size="100" rows="1" name="product_text"
                                value="{{ $products->product_text }}"></td>
                     @else   {{-- 販売終了 --}}
-                        <td><input class="form-control" type="text" size="100" rows="1"
+                        <td><input class="form-control" type="text" size="100" rows="1" name="product_text"
                                    value="{{ $products->product_text }}" readonly="readonly"></td>
                     @endif
                 </tr>
                 <tr>
                     <th>販売価格（税込）</th>
                     @if(is_null($products->deleted_at))     {{-- 販売中 --}}
-                    <td><input class="form-control" type="number" name="name" value="{{ $products->product_price }}"
+                    <td><input class="form-control" type="number" name="product_price" value="{{ $products->product_price }}"
                                ></td>
                     @else   {{-- 販売終了 --}}
-                    <td><input class="form-control" type="number" name="name" value="{{ $products->product_price }}"
+                    <td><input class="form-control" type="number" name="product_price" value="{{ $products->product_price }}"
                                 readonly="readonly"></td>
                     @endif
                 </tr>
                 <tr>
                     <th>商品ジャンル</th>
-                         <td><select name="genre_id" id="{{ $products->genre_id }}">
+                         <td><select name="product_genre_id" id="{{ $products->genre_id }}">
                              @if(is_null($products->deleted_at))     {{-- 販売中 --}}
                                  @foreach($genres as $genre)
                                      @if($genre->id == $products->genre_id)
@@ -95,39 +82,75 @@
                 </tr>
                 <tr>
                     <th>画像の更新</th>
-                    @if(is_null($products->sales_end_date))     {{-- 販売中 --}}
-                        <td><input type="file" name="pic"></td>
+                    @if(is_null($products->deleted_at))     {{-- 販売中 --}}
+                        <td><input type="file" name="product_img"></td>
                     @else       {{-- 販売終了 --}}
-                        <td><input type="file" name="pic" disabled="disabled"></td>
+                        <td><input type="file" name="product_img" disabled="disabled"></td>
                     @endif
                 </tr>
                 <tr>
                     <th>販売開始日</th>
-                    <td><input type="date" value="{{ $products->sales_start_date }}"></td>
+                    @if(is_null($products->deleted_at))     {{-- 販売中 --}}
+                        <td><input type="date" name="product_sales_start_day" value="{{ $products->sales_start_date }}"></td>
+                    @else       {{-- 販売終了 --}}
+                        <td><input type="date" name="product_sales_start_day" value="{{ $products->sales_start_date }}" disabled="disabled"></td>
+                    @endif
                 </tr>
                 <tr>
                     <th>販売終了日</th>
-                    @if(is_null($products->sales_end_date))
-                        <td><input type="date"><b>　※未設定</b></td>
-                    @else
-                        <td><input type="date" value="{{ $products->sales_end_date }}"></td>
+                    @if(is_null($products->deleted_at))     {{-- 販売中 --}}
+                        @if(is_null($products->sales_end_date))
+                            <td><input type="date" name="product_sales_end_day"><b>　※未設定</b></td>
+                        @else
+                            <td><input type="date" name="product_sales_end_day" value="{{ $products->sales_end_date }}"></td>
+                        @endif
+                    @else   {{--  販売終了  --}}
+                        @if(is_null($products->sales_end_date))
+                            <td><input type="date" name="product_sales_end_day" disabled="disabled">　※未設定・販売終了済み</td>
+                        @else
+                            <td><input type="date" name="product_sales_end_day" value="{{ $products->sales_end_date }}" disabled="disabled"></td>
+                        @endif
                     @endif
                 </tr>
-                <tr></tr>
+                <tr>
+                    <th>作成日</th>
+                    <td>{{ $products->created_at }}</td>
+                <tr>
+                    <th>更新日</th>
+                    <td>{{ $products->updated_at }}</td>
+                </tr>
 
             @else
                 エラー！一度ログアウトしてください
             @endif
 
         </table>
-        <div class="menu-edit">
-            <div class="button">
-                <a id="edit-back" class="btn btn-danger btn-lg" type="button" href="/pizzzzza/menu" name="button">戻る</a>
+
+        @if(is_null($products->deleted_at))     {{-- 販売中 --}}
+            <div class="menu-edit">
+                <div class="button">
+                    <a id="edit-back" class="btn btn-danger btn-lg" type="button" href="/pizzzzza/menu" name="button">戻る</a>
+                </div>
+                <div class="button">
+                    <a id="edit-go" class="btn btn-primary btn-lg" type="button" name="button" data-featherlight="#menu-edit-do">確認画面へ</a>
+                </div>
+                <div class="lightbox" id="menu-edit-do">
+                    <h2>更新してよろしいですか？</h2>
+                    <div class="button">
+                        <a id="edit-back" class="btn btn-danger btn-lg" type="button" onclick="$.featherlight.current().close();" name="button">キャンセル</a>
+                        <a id="edit-go" class="btn btn-primary btn-lg" type="button" name="button" onclick="document.getElementById('MenuEdit').submit();">更新</a>
+                    </div>
+                </div>
             </div>
-            <div class="button">
-                <a id="edit-go" class="btn btn-primary btn-lg" type="button" name="button">確認画面へ</a>
+        @else   {{-- 販売終了 --}}
+            <div class="menu-edit">
+                <div class="button">
+                    <a id="edit-back" class="btn btn-danger btn-lg" type="button" href="/pizzzzza/menu" name="button">戻る</a>
+                </div>
             </div>
-        </div>
+        @endif
+        <input type="hidden" name="_token" value="{{  csrf_token()  }}">
+        <input type="submit" name="" style="display:none">
     </form>
 
     </div>

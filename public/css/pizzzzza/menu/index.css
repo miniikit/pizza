@@ -125,3 +125,6 @@ div#menu_button{
     text-align: center;
 }
 
+.lightbox{
+    display:none;
+}
