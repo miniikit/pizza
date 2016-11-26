@@ -4,11 +4,11 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/pizzzzza/menu/index.css" media="all" title="no title">
-    <link href="css/featherlight.min.css" title="Featherlight Styles" rel="stylesheet" />
+    <link href="/plug/featherlight/featherlight.css" title="Featherlight Styles" rel="stylesheet" />
 @endsection
 
 @section('js')
-    <script src="js/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/plug/featherlight/featherlight.js" type="text/javascript" charset="utf-8"></script>
 @endsection
 
 @section('main')
@@ -157,7 +157,7 @@
         @endif
         <input type="hidden" name="product_id" value="{{ $products->id }}">
         <input type="hidden" name="_token" value="{{  csrf_token()  }}">
-        <input type="submit" name="menu" style="display:none">
+        <input type="submit" name="" style="display:none">
     </form>
 
     </div>

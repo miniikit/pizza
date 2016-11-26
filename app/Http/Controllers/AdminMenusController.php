@@ -68,7 +68,7 @@ class AdminMenusController extends Controller
 
 
     // メニュー画面:: 編集 or 販売終了ボタンが押される。
-    public function end(Request $request)
+    public function nav(Request $request)
     {
         //  処理内容
         //      「選択商品を販売終了（ソフトデリート）」または「選択商品の、編集ページへリダイレクト」する。
@@ -203,7 +203,6 @@ class AdminMenusController extends Controller
         //      $request-> item_end_day >> 販売終了日
         //      $request-> id >> 商品ID
 
-
         //
         //  POSTデータを保管
         //
@@ -242,11 +241,12 @@ class AdminMenusController extends Controller
                 if(!is_null($product_sales_end_day)) {
                     //販売終了日が過去である
                     if($product_sales_end_day <= $today){
-                        return redirect('/pizzzzza/menu/edit')->with('error-message','販売終了日が過去の日付です。');
+                        return redirect('/pizzzzza/menu')->with('error-message','販売終了日が過去の日付です。');
                     }
+
                     //販売開始日より、販売終了日が早い日になっている
                     if($product_sales_end_day <= $product_sales_start_day){
-                        return redirect('/pizzzzza/menu/edit')->with('error-message','販売終了日と販売開始日が不正です。');
+                        return redirect('/pizzzzza/menu')->with('error-message','販売終了日と販売開始日が不正です。');
                     }
                 }
 
