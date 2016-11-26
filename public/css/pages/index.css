@@ -166,36 +166,3 @@
     padding: 10px;
     border-bottom: medium solid black;
 }
-
-
-/*メニュー編集画面*/
-
-#menuedit_button {
-    text-align: center;
-}
-
-#menuadd label {
-    margin-right: 30px;
-    width: 100%;
-    float: left;
-}
-
-
-/*メニュー追加画面*/
-
-.form-price {
-    width: 25%;
-}
-
-
-/*メニュー編集画面*/
-
-#menuedit_button {
-    text-align: center;
-}
-
-#menuadd label {
-    margin-right: 30px;
-    width: 100%;
-    float: left;
-}

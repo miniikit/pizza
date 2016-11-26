@@ -143,6 +143,39 @@ return [
         'confirm_password' => [
             'required' => '現在のパスワード（必須）が入力されていません',
         ],
+        //
+        //  管理者　メニュー編集
+        //
+        'product_id' => [
+            'required' => '処理エラー！　メニュー 一覧へ一度お戻りください',
+            'integer' => '処理エラー！ メニュー 一覧へ一度お戻りください',
+        ],
+        'product_name' => [
+            'required' => '商品名を入力してください',
+            'max' => '商品名は２５５文字以下で入力してください',
+        ],
+        'product_text' => [
+            'required' => '商品説明を入力してください',
+        ],
+        'product_price' => [
+            'required' => '商品価格を入力してください',
+            'integer' => '商品価格は半角数字で入力してください',
+        ],
+        'product_img' => [
+            'mimes' => 'アップロードできるのはJPG/JPEG/PNG/BMP形式の画像のみです。',
+            'max' => 'アップロードできるのは1500KBまでのファイルのみです。',
+            'required' => '画像を選択してください',
+        ],
+        'product_genre_id' => [
+            'required' => '商品ジャンルを選択してください',
+        ],
+        'product_sales_start_day' => [
+            'date' => '販売開始日エラー！ 一度メニューへお戻りください',
+            'required' => '販売開始日を選択してください',
+        ],
+        'product_sales_end_day' => [
+            'date' => '販売開始日エラー！ 一度メニューへお戻りください',
+        ],
     ],
 
     /*

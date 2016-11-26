@@ -16,3 +16,161 @@
 .delete .button a {
     margin: 5px;
 }
+
+
+/**
+*       /pizzzzza/menu status message
+**/
+.menu{
+    padding: 20px;
+    font-weight: bold;
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    font-size: 1.6em;
+    letter-spacing: 5px;
+    text-indent: 5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    margin-bottom: 30px;
+}
+.menu-end-complete{
+    background-color:yellowgreen;
+}
+.menu-error{
+    background-color: tomato;
+}
+/*　ボタン　*/
+div#menu_button{
+    text-align: left;
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 40px;
+}
+.btn.btn-primary.btn-lg{
+    margin-right:20px;
+}
+.btn.btn-danger.btn-lg{
+    margin-left: 20px;
+}
+/*　削除済みは背景カラーを変更　*/
+.menu-deleted{
+    background-color: #eee;
+}
+.red{
+    color: red;
+}
+
+/**
+*       /pizzzzza/menu/edit
+**/
+.menu-edit{
+    margin-top:40px;
+    width:100%;
+    text-align: center;
+}
+.menu-edit .button{
+    width:48%;
+    text-align: center;
+    display:inline-block;
+}
+.menu-edit .button .btn{
+    width:250px;
+}
+
+/* 編集ページ　テーブル */
+#edit-table{
+    width:80%;
+    max-width: 700px;
+    margin:0 auto;
+}
+
+#edit-table tr{
+    width:100%;
+    margin-bottom:20px;
+}
+#edit-table th{
+    width:20%;
+    margin-left:5%;
+    margin-right:5%;
+    text-align: center;
+    vertical-align: middle;
+}
+#edit-table td{
+    width:65%;
+    max-width:400px;
+}
+
+#edit-table #sales_status{
+    width:100%;
+    height:100%;
+    text-align: center;
+    font-weight:bold;
+    letter-spacing:2em;
+    text-indent:2em;
+}
+#edit-table #sales_status.sales_status_on{
+    background-color:yellowgreen;
+}
+#edit-table #sales_status.sales_status_off{
+    background-color:tomato;
+}
+
+#edit-table img{
+    max-width:200px;
+    height:auto;
+}
+.center{
+    text-align: center;
+}
+
+.lightbox{
+    display:none;
+}
+/* 商品編集画面　エラー*/
+.error-message{
+    background-color: tomato;
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    padding: 20px;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    letter-spacing: 3px;
+    text-indent: 3px;
+    list-style-type: none;
+}
+
+
+/*  商品情報追加  */
+#menu-add-table{
+    width:100%;
+    max-width:800px;
+    margin:0 auto;
+}
+#menu-add-table th{
+    text-align: center;
+    padding: 5px 0;
+    vertical-align: middle;
+}
+
+#menuadd .add-button{
+    width:200px;
+    margin-left:20px;
+    margin-top:20px;
+}
+
+@media screen and (max-width: 680px) {
+    #menuadd .add-button{
+        width:40%;
+        margin: 0;
+        margin-right: 3%;
+        margin-left: 3%;
+
+    }
+}
+
+
+

@@ -42,7 +42,7 @@ class OrdersController extends Controller
         // リクエストゲット
         $date = $request->input('date');
         $time = $request->input('time');
-        
+
         $datetime = $date .' '. $time;
 
         // もし現在時刻より前だったら
