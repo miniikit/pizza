@@ -61,3 +61,67 @@ div#menu_button{
 .red{
     color: red;
 }
+
+/**
+*       /pizzzzza/menu/edit
+**/
+.menu-edit{
+    margin-top:40px;
+    width:100%;
+    text-align: center;
+}
+.menu-edit .button{
+    width:48%;
+    text-align: center;
+    display:inline-block;
+}
+.menu-edit .button .btn{
+    width:250px;
+}
+
+/* 編集ページ　テーブル */
+#edit-table{
+    width:80%;
+    max-width: 700px;
+    margin:0 auto;
+}
+
+#edit-table tr{
+    width:100%;
+    margin-bottom:20px;
+}
+#edit-table th{
+    width:20%;
+    margin-left:5%;
+    margin-right:5%;
+    text-align: center;
+    vertical-align: middle;
+}
+#edit-table td{
+    width:65%;
+    max-width:400px;
+}
+
+#edit-table #sales_status{
+    width:100%;
+    height:100%;
+    text-align: center;
+    font-weight:bold;
+    letter-spacing:2em;
+    text-indent:2em;
+}
+#edit-table #sales_status.sales_status_on{
+    background-color:yellowgreen;
+}
+#edit-table #sales_status.sales_status_off{
+    background-color:tomato;
+}
+
+#edit-table img{
+    max-width:200px;
+    height:auto;
+}
+.center{
+    text-align: center;
+}
+

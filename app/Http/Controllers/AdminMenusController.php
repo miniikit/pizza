@@ -121,10 +121,23 @@ class AdminMenusController extends Controller
             if($judge == "edit"){
 
                 // DBから該当商品の情報を取得
-                $products = DB::table('products_master')->where('id','=',$productId)->first();
+                $products = DB::table('products_master')->join('products_prices_master','products_master.price_id','=','products_prices_master.id')->where('products_master.id','=',$productId)->first();
 
-                dd($products);
-                return redirect('pizzzzza/menu/edit')->with('products',$products);
+                //ジャンル情報を取得
+                $genres = DB::table('genres_master')->get();
+
+                //販売状況を取得
+                $sales_status = array();
+                if(is_null($products->deleted_at)){
+                    $sales_status["status"] = "販売中";
+                    $sales_status["class"] = "sales_status_on";
+                }else{
+                    $sales_status["status"] = "販売終了";
+                    $sales_status["class"] = "sales_status_off";
+                }
+
+                return view('/pizzzzza/menu/edit',compact('products','genres','sales_status'));
+                //return redirect('pizzzzza/menu/edit')->with('products',$products);
             }
 
 
