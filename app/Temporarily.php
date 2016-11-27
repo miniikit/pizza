@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Temporarily extends Model
 {
-    protected $table = 'temporaries_members_master';
-    protected $fillable = ['temporary_member_name','temporary_member_kana','temporary_member_postal','temporary_member_address1','temporary_member_address2','temporary_member_address3','temporary_member_tel'];
+    protected $table = 'temporaries_users_master';
+    protected $fillable = ['temporary_user_name','temporary_user_kana','temporary_user_postal','temporary_user_address1','temporary_user_address2','temporary_user_address3','temporary_user_tel'];
 }

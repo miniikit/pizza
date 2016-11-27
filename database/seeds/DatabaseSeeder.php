@@ -17,6 +17,7 @@ use App\OrderDetail;
 use App\Campaign;
 use App\User;
 use App\Employee;
+use App\Temporarily;
 
 
 class DatabaseSeeder extends Seeder
@@ -43,6 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->call('CampaignesMasterSeeder');
         $this->call('UsersSeeder');
         $this->call('EmployeeMasterSeeder');
+        $this->call('TemporariesUsersMasterSeeder');
 
         Model::reguard();
     }
@@ -638,5 +640,39 @@ class CampaignesMasterSeeder extends Seeder
             'campaign_end_day' => null,
         ]);
 
+    }
+}
+
+//  一時会員マスタ
+class TemporariesUsersMasterSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('temporaries_users_master')->delete();
+
+        Temporarily::create([
+            'id' => 1,
+            'temporary_user_name' => '野比のび太',
+            'temporary_user_kana' => 'ノビノビタ',
+            'temporary_user_postal' => '3651104',
+            'temporary_user_address1' => '滋賀県大津市石山寺',
+            'temporary_user_address2' => '3-3-3',
+            'temporary_user_address3' => NULL,
+            'temporary_user_tel' => '01203940049',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        Temporarily::create([
+            'id' => 2,
+            'temporary_user_name' => '野比静香',
+            'temporary_user_kana' => 'ノビシズカ',
+            'temporary_user_postal' => '3651104',
+            'temporary_user_address1' => '滋賀県大津市石山寺',
+            'temporary_user_address2' => '3-3-3',
+            'temporary_user_address3' => '５号室',
+            'temporary_user_tel' => '01203940049',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
     }
 }

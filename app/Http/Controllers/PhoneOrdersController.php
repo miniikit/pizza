@@ -36,7 +36,7 @@ class PhoneOrdersController extends Controller
         $user = $phoneOrder->searchPhoneNumber($phone);
 
         // Temporary Tableから値を取り出す
-        $tmpuser = DB::table('')
+        $tmpuser = DB::table('temporaries_users_master');
 
         // もしNULLだったら新規登録にリダイレクト
         if (is_null($user)) {
