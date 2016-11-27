@@ -340,7 +340,7 @@ class AdminMenusController extends Controller
                 $empId = Auth::user()->id;
 
                 // $product_sales_end_dayにNULLを設定して挿入するとエラーが帰ってくるので処理を分けて記述
-                if(is_null($product_sales_end_day)) {
+                if(empty($product_sales_end_day)) {
                     $newPriceId = DB::table('products_prices_master')->insertGetId(['product_id' => $product_id, 'product_price' => $product_price, 'price_change_startdate' => $product_sales_start_day, 'price_change_enddate' => NULL,  //NULLor日付
                         'employee_id' => $empId, 'created_at' => $now, 'updated_at' => $now,]);
                 }else{

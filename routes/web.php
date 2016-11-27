@@ -94,14 +94,16 @@ Route::get('/pizzzzza/coupon/list/gift/edit','CouponsController@couponNowGiftEdi
 Route::get('/pizzzzza/coupon/history','CouponsController@couponHistory'); //過去のクーポン一覧ページ
 
 //電話注文
+Route::post('/pizzzzza/order/accept/customer/handler','PhoneOrdersController@handler'); // POSTデータの処理振り分け
 Route::get('/pizzzzza/order/accept/input','PhoneOrdersController@index')->name('telSearch'); //電話番号入力ページ
-Route::post('/pizzzzza/order/accept/customer/detail','PhoneOrdersController@show'); //お客様情報・注文履歴表示ページ
-Route::get('/pizzzzza/order/accept/customer/edit','PhoneOrdersController@phoneEdit'); //登録済みの顧客情報編集ページ
+Route::post('/pizzzzza/order/accept/customer/check','PhoneOrdersController@input'); //お客様情報・注文履歴表示ページ（入力ページからの遷移用）
+Route::get('/pizzzzza/order/accept/customer/detail','PhoneOrdersController@show');  //お客様情報・注文履歴表示ページ（戻るボタンなどでの遷移用）
+Route::get('/pizzzzza/order/accept/customer/edit','PhoneOrdersController@edit'); //登録済みの顧客情報編集ページ
 Route::get('/pizzzzza/order/accept/customer/input','PhoneOrdersController@newCustomer')->name('newCustomer'); //登録済み出ない場合のお客様情報入力ページ
 
 //電話注文　注文処理
-Route::get('/pizzzzza/order/accept/item/select','PhoneOrdersController@phoneOrderSelect'); //商品入力・選択ページ
-Route::get('/pizzzzza/order/accept/item/confirm','PhoneOrdersController@phoneOrderConfirm'); //注文情報確認ページ
+Route::get('/pizzzzza/order/accept/item/select','PhoneOrdersController@orderSelect'); //商品入力・選択ページ
+Route::get('/pizzzzza/order/accept/item/confirm','PhoneOrdersController@orderConfirm'); //注文情報確認ページ
 
 //売上・売れ筋
 Route::get('/pizzzzza/analysis/populer','AnalysisController@analysisPopuler');

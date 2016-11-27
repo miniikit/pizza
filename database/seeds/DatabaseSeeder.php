@@ -17,6 +17,7 @@ use App\OrderDetail;
 use App\Campaign;
 use App\User;
 use App\Employee;
+use App\Temporarily;
 
 
 class DatabaseSeeder extends Seeder
@@ -43,6 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->call('CampaignesMasterSeeder');
         $this->call('UsersSeeder');
         $this->call('EmployeeMasterSeeder');
+        $this->call('TemporariesUsersMasterSeeder');
 
         Model::reguard();
     }
@@ -703,5 +705,35 @@ class CampaignesMasterSeeder extends Seeder
             'campaign_end_day' => null,
         ]);
 
+    }
+}
+
+//  一時会員マスタ
+class TemporariesUsersMasterSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('temporaries_users_master')->delete();
+
+        Temporarily::create([
+            'id' => 1,
+            'name' => '野比のび太',
+            'kana' => 'ノビノビタ',
+            'postal' => '3651104',
+            'address1' => '滋賀県大津市石山寺',
+            'address2' => '3-3-3',
+            'address3' => NULL,
+            'phone' => '01203940049',
+        ]);
+        Temporarily::create([
+            'id' => 2,
+            'name' => '野比静香',
+            'kana' => 'ノビシズカ',
+            'postal' => '3651104',
+            'address1' => '滋賀県大津市石山寺',
+            'address2' => '3-3-3',
+            'address3' => NULL,
+            'phone' => '01203940049',
+        ]);
     }
 }

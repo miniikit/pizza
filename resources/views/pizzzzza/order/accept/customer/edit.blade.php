@@ -6,56 +6,91 @@
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
 @endsection
 
+@section('pankuzu')
+    <ol class="breadcrumb">
+        <li><a href="/pizzzzza/order/top">ホーム</a></li>
+        <li class="active"><a href="/pizzzzza/order/accept/input">電話番号入力</a></li>
+        <li class="active">お客様情報確認</li>
+        <li class="active">編集</li>
+    </ol>
+@endsection
+
 @section('main')
     <div class="wrap">
-      <h1>お客様情報編集</h1>
-      <div class="form-group table-responsive">
-        <table class="table">
-          <tbody>
-            <tr>
-              <th class="text-center" style="padding-top:12px;"><label for="">名前(漢字)</label></th>
-              <td><input class="form-control" type="text" name="name" value="" placeholder="姓"></td>
-              <td><input class="form-control" type="text" name="name" value="" placeholder="名"></td>
-            </tr>
-            <tr>
-              <th class="text-center" style="padding-top:12px;"><label for="">名前(カナ)</label></th>
-              <td><input class="form-control" type="text" name="name" value="" placeholder="セイ"></td>
-              <td><input class="form-control" type="text" name="name" value="" placeholder="メイ"></td>
-            </tr>
-            <tr>
-              <th class="text-center" style="padding-top:12px;"><label for="">郵便番号</label></th>
-              <td><input class="form-control" style="width:30%;" maxlength="8" type="text" name="name" value="" placeholder="123-4567"></td>
-            </tr>
-            <tr>
-              <th class="text-center" style="padding-top:12px;"><label for="">都道府県</label></th>
-              <td><input class="form-control" style="width:30%;" type="text" name="name" value="" placeholder=""></td>
-            </tr>
-            <tr>
-              <th class="text-center" style="padding-top:12px;"><label for="">市区町村</label></th>
-              <td><input class="form-control" type="text" name="name" value="" placeholder="市区町村"></td>
-            </tr>
-            <tr>
-              <th class="text-center" style="padding-top:12px;"><label for="">番地</label></th>
-              <td><input class="form-control" type="text" name="name" value="" placeholder="番地"></td>
-            </tr>
-            <tr>
-              <th class="text-center" style="padding-top:12px;"><label for="">建物名</label></th>
-              <td><input class="form-control" type="text" name="name" value="" placeholder="建物名"></td>
-            </tr>
-            <tr>
-              <th class="text-center" style="padding-top:12px;"><label for="">電話番号</label></th>
-              <td><input class="form-control"  type="number" name="name" value="" placeholder=""></td>
-              <td><input class="form-control"  type="number" name="name" value="" placeholder=""></td>
-              <td><input class="form-control"  type="number" name="name" value="" placeholder=""></td>
-            </tr>
-          </tbody>
+        <h1>お客様情報編集</h1>
 
-        </table>
-        <div class="text-center">
-          <button type ="button" style="margin-top:20px;" class="btn btn-primary btn-lg"name="button">戻る</button>
-          <button type ="button" style="margin-top:20px;" class="btn btn-primary btn-lg"name="button">完了</button>
-        </div>
+        @if(isset($user))
+        <form action="/pizzzzza/order/accept/customer/handler" method="post">
+            <div class="form-group table-responsive">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th class="text-center"><label for="">氏名(漢字)</label></th>
+                        <td><input class="form-control" type="text" name="name" value="{{ $user->name }}" placeholder="姓"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center"><label for="">氏名(カナ)</label></th>
+                        <td><input class="form-control" type="text" name="name_katakana" value="{{ $user->kana }}" placeholder="セイ"></td>
+                    </tr>
+                    @if(isset($user->birthday) || isset($user->gender_name))
+                        <tr>
+                            <th class="text-center"><label for="">生年月日</label></th>
+                            <td><input type="date" name="birthday" value="{{ $user->birthday }}"></td>
+                        </tr>
+                        <tr>
+                            <th class="text-center"><label for="">性別</label></th>
+                            <td><select name="gender_id">
+                                    @foreach($genders as $gender)
+                                        @if($gender->id == $user->gender_id)
+                                            <option value="{{$gender->id}}" selected>{{ $gender->gender_name }}</option>
+                                        @else
+                                            <option value="{{$gender->id}}">{{ $gender->gender_name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select></td>
+                        </tr>
+                    @endif
+                    <tr>
+                        <th class="text-center"><label for="">郵便番号</label></th>
+                        <td><input class="form-control" maxlength="8" type="text" name="postal" size="10" maxlength="8" value="{{ $user->postal }}"
+                                   placeholder="ハイフンなし" onKeyUp="AjaxZip3.zip2addr(this,'','address1','address1');"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center"><label for="">住所</label></th>
+                        <td><input class="form-control" type="text" name="address1" value="{{ $user->address1 }}" size="60" placeholder="市区町村"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center"><label for="">番地</label></th>
+                        <td><input class="form-control" type="text" name="address2" value="{{ $user->address2 }}" placeholder="番地"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center"><label for="">建物名</label></th>
+                        <td><input class="form-control" type="text" name="address3" value="{{ $user->address3 }}" placeholder="建物名"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center"><label for="">電話番号</label></th>
+                        <td><input class="form-control" type="number" name="phone" value="{{ $user->phone }}" placeholder=""></td>
+                    </tr>
+                    @if(isset($user->email))
+                        <tr>
+                            <th class="text-center"><label for="">メールアドレス</label></th>
+                            <td><input type="email" name="email" value="{{ $user->email }}"></td>
+                        </tr>
+                    @endif
+                    </tbody>
 
-      </div>
+                </table>
+                <div class="text-center">
+                    <input type="submit" class="btn btn-danger btn-lg" name="editPost" value="戻る">
+                    <input type="submit" class="btn btn-primary btn-lg" name="editPost" value="更新">
+                </div>
+            </div>
+            {{  csrf_field()  }}
+        </form>
+        @endif
     </div>
+@endsection
+
+@section('script')
+    <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 @endsection
