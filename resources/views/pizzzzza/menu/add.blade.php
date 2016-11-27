@@ -1,6 +1,6 @@
 @extends('template/admin')
 
-@section('title', 'メニュー追加画面')
+@section('title', 'メニュー追加')
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">   {{-- たぶんこれ不要 --}}
@@ -17,9 +17,9 @@
 @endsection
 
 @section('main')
-    <h1>商品 追加</h1>
+    <h1>メニュー追加</h1>
     <div class="form-group table-responsive" id="menuadd">
-        <form action="/pizzzzza/menu/add" method="post" id="AddButton" enctype=" multipart/form-data">
+        <form action="/pizzzzza/menu/add" method="post" id="AddButton" enctype="multipart/form-data">
             @if(count($errors) > 0)
                 <ul class="error-message">
                 @foreach ($errors->all() as $message)

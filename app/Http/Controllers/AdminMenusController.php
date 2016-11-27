@@ -63,8 +63,78 @@ class AdminMenusController extends Controller
 
     //
     public function push(Requests\AdminMenuAddForm $request){
-            dd('ok');
-        return redirect('pizzzzza.menu');
+        //
+        //  DBへ情報をINSERTする処理
+        //
+        //  商品マスタ・価格マスタは相互依存関係にあるので、
+        //  １．価格マスタに対し、「商品ID:1」「価格開始日:今日+1日後」でデータを挿入
+        //  ２．商品マスタに対し、商品情報を登録。価格IDは１で挿入したものを設定
+        //  ３．価格マスタに対し、「商品ID」「価格開始日」をRequest通りのものに変更
+        //  という流れを踏む必要がある。
+
+
+        //
+        //  POSTデータの受け取り
+        //
+            $product_name = $request->product_name;
+            $product_price = $request->product_price;
+            $product_genre_id = $request->product_genre_id;
+            $product_sales_start_day = $request->product_sales_start_day;
+            $product_sales_end_day = $request->product_sales_end_day;
+            $product_text = $request->product_text;
+            $product_img = $request->product_img;
+
+            //本日
+            $now = Carbon::now();
+            $today = Carbon::today();
+            $nowAddMonth = Carbon::now()->addMonth();
+
+
+        //
+        //  処理１：商品価格テーブルに、価格情報をINSERTする（商品IDと価格開始日は適当なデータを挿入する）
+        //
+
+            $empId = Auth::user()->id;
+
+            // $product_sales_end_dayにNULLを設定して挿入するとエラーが帰ってくるので処理を分けて記述
+            if(is_null($product_sales_end_day)) {
+                $newPriceId = DB::table('products_prices_master')->insertGetId(['product_id' => 1, 'product_price' => $product_price, 'price_change_startdate' => $nowAddMonth, 'price_change_enddate' => $product_sales_end_day,  //NULLor日付
+                    'employee_id' => $empId, 'created_at' => $now, 'updated_at' => $now,]);
+            }else{
+                $newPriceId = DB::table('products_prices_master')->insertGetId(['product_id' => 1, 'product_price' => $product_price, 'price_change_startdate' => $nowAddMonth, 'price_change_enddate' => NULL,  //NULLor日付
+                    'employee_id' => $empId, 'created_at' => $now, 'updated_at' => $now,]);
+            }
+
+            if(!is_null($newPriceId)) {
+                $update['price_id'] = $newPriceId;
+            }else{
+                //DB接続時にエラーの可能性。
+                $message["class"] = "menu menu-error";
+                $message["text"] = "DBエラー 再試行してください";
+                $request->session()->put('message', $message);
+                return redirect('/pizzzzza/menu');
+            }
+
+
+        //
+        //  処理２：商品マスタに商品情報を挿入
+        //
+
+        if(is_null($product_sales_end_day)) {
+            $newProductId = DB::table('products_master')->insertGetId(['product_name' => $product_name, 'price_id' => $newPriceId, 'product_image' => $product_img, 'product_text' => $product_text, 'genre_id' => $product_genre_id, 'sales_start_date' => $product_sales_start_day, 'sales_end_date' => $product_sales_end_day, 'created_at' => $now, 'updated_at' => $now, 'deleted_at' => NULL]);
+        }else{
+            $newProductId = DB::table('products_master')->insertGetId(['product_name' => $product_name, 'price_id' => $newPriceId, 'product_image' => $product_img, 'product_text' => $product_text, 'genre_id' => $product_genre_id, 'sales_start_date' => $product_sales_start_day, 'sales_end_date' => NULL, 'created_at' => $now, 'updated_at' => $now, 'deleted_at' => NULL]);
+        }
+
+        //
+        //　処理３：価格マスタを修正
+        //
+            DB::table('products_prices_master')->where('id','=',$newPriceId)->update(['product_id' => $newProductId,'price_change_startdate' => $product_sales_start_day]);
+
+            $message["class"] = "menu menu-end-complete";
+            $message["text"] = "商品を登録しました。";
+            $request->session()->put('message', $message);
+            return redirect('/pizzzzza/menu');
     }
 
 
@@ -230,21 +300,12 @@ class AdminMenusController extends Controller
             $message = array();
 
             //
-            //  エラー１：販売終了日が、「本日より後」で「かつ」「販売開始日より後」になっていることを確認
+            //  エラー１：販売終了日が、「販売開始日より後」になっていることを確認
             //
 
-                if(!isset($product_sales_end_day)) {
-                    //販売終了日が過去である
-                    if($product_sales_end_day <= $today){
-                        $message["class"] = "menu menu-error";
-                        $message["text"] = "販売終了日が過去の日付です。";
-                        $request->session()->put('message', $message);
-                        //return redirect('/pizzzzza/menu')->with('error-message','販売終了日が過去の日付です。');
-                        return redirect('/pizzzzza/menu');
-                    }
-
+                if(!empty($product_sales_end_day)) {
                     //販売開始日より、販売終了日が早い日になっている
-                    if($product_sales_end_day <= $product_sales_start_day){
+                    if($product_sales_end_day < $product_sales_start_day){
                         $message["class"] = "menu menu-error";
                         $message["text"] = "販売終了日と販売開始日が不正です。";
                         $request->session()->put('message', $message);
@@ -308,14 +369,13 @@ class AdminMenusController extends Controller
                     $update['sales_end_date'] = $product_sales_end_day;
                 }
             }
-            if ($dbProduct->updated_at != $now) {
-                $update['updated_at'] = $now;
-            }
             if(!is_null($product_img)) {
                 if ($dbProduct->product_image != $product_img) {
                     $update['product_image'] = $product_img;
                 }
             }
+            //更新日時は、更新SQL Runの箇所でセットする。
+
 
 
         //
@@ -324,12 +384,22 @@ class AdminMenusController extends Controller
 
             //更新内容があれば
             if(isset($update)) {
+                //更新日時をセットする
+                if ($dbProduct->updated_at != $now) {
+                    $update['updated_at'] = $now;
+                }
                 //更新を実行
                 $query = DB::table('products_master')->where('id', $product_id)->update($update);
-                return redirect('/pizzzzza/menu')->with('updateStatus', "更新完了！");
+                $message["class"] = "menu menu-end-complete";
+                $message["text"] = "商品情報を更新しました";
+                $request->session()->put('message', $message);
+                return redirect('/pizzzzza/menu');
             }else{
                 //更新内容がない
-                return redirect('/pizzzzza/menu')->with('updateStatus', '更新エラー！更新は完了していません。');
+                $message["class"] = "menu menu-error";
+                $message["text"] = "内容が変更されていないため更新されませんでした";
+                $request->session()->put('message', $message);
+                return redirect('/pizzzzza/menu');
             }
 
 

@@ -1,6 +1,6 @@
 @extends('template/admin')
 
-@section('title', 'メニュー追加画面')
+@section('title', 'メニュー一覧')
 
 @section('css')
     <link rel="stylesheet" href="/css/pizzzzza/menu/index.css" media="all" title="no title">
@@ -24,7 +24,7 @@
 @endsection
 
 @section('main')
-    <h1>メニュー管理画面</h1>
+    <h1>メニュー一覧</h1>
 
     <div class="form-group table-responsive">
 

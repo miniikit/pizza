@@ -1,6 +1,6 @@
 @extends('template/admin')
 
-@section('title', 'メニュー追加画面')
+@section('title', 'メニュー編集')
 
 @section('css')
     <link rel="stylesheet" href="/css/pizzzzza/menu/index.css" media="all" title="no title">
@@ -12,7 +12,7 @@
 @endsection
 
 @section('main')
-    <h1>商品情報　編集</h1>
+    <h1>メニュー　編集</h1>
 
     @foreach ($errors->all() as $message)
         <div class="error-message">
@@ -88,7 +88,7 @@
                 <tr>
                     <th>画像の更新</th>
                     @if(is_null($products->deleted_at))     {{-- 販売中 --}}
-                        <td><input type="file" name="product_img">※500KBまでのJPG/JPEG/PNG/BMPのみ</td>
+                        <td><input type="file" name="product_img">※1500KBまでのJPG/JPEG/PNG/BMPのみ</td>
                     @else       {{-- 販売終了 --}}
                         <td><input type="file" name="product_img" disabled="disabled"></td>
                     @endif
