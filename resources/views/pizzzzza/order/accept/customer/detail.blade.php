@@ -10,8 +10,7 @@
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order/top">ホーム</a></li>
         <li class="active"><a href="/pizzzzza/order/accept/input">電話番号入力</a></li>
-        <li class="active"><a href="/pizzzzza/order/accept/detail">お客様情報確認</a></li>
-        <li class=""><a href="/pizzzzza/order/accept/edit">編集</a></li>
+        <li class="active">お客様情報確認</li>
     </ol>
 @endsection
 
@@ -19,7 +18,7 @@
     <div class="wrap">
         <h1>お客様情報確認</h1>
         <div class="form-group table-responsive">
-            <form action="/pizzzzza/order/accept/item/select">
+            <form action="/pizzzzza/order/accept/customer/handler" method="post">
                 <table class="table side">
                     <tbody>
                     <tr>
@@ -65,22 +64,23 @@
                         <td>{{ $user->phone }}</td>
                     </tr>
                     @if(isset($user->email))
-                        <tr>
+                    <tr>
                         <th class="text-center"><label for="">メールアドレス</label></th>
                         <td>{{ $user->email }}</td>
                     </tr>
                     @endif
                     </tbody>
                 </table>
+                <div class="text-center">
+                    <input type="submit" class="btn btn-danger btn-lg" name="detailPost" value="戻る">
+                    <input type="submit" class="btn btn-primary btn-lg" name="detailPost" value="注文へ">
+                </div>
+                <div class="text-right">
+                    <input type="submit" class="btn btn-primary btn-lg" name="detailPost" value="編集">
+                </div>
+                <input type="hidden" name="customer_id" value="{{ $user->id }}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
             </form>
-        </div>
-        <div class="text-center">
-            <button type="button" class="btn btn-primary btn-lg" name="button">戻る</button>
-            <button type="button" class="btn btn-primary btn-lg" name="button">次へ</button>
-        </div>
-        <div class="text-right">
-            <a href="/pizzzzza/order/accept/customer/edit" type="button" class="btn btn-primary btn-lg"
-               name="button">編集</a>
         </div>
     </div>
 @endsection
