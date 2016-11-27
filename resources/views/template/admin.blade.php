@@ -82,9 +82,9 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+@yield('pankuzu')
 <main class="main">
 <div class="container">
-
 @yield('main')
 </main>
 </div>

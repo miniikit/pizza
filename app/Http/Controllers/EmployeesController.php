@@ -18,10 +18,17 @@ class EmployeesController extends Controller
     //  従業員一覧ページ
     public function index()  {
 
-        $employees = Employee::find(1)->with('user.gender')->get();
+        $employees = Employee::with('user.gender')->get();
 
         return view('pizzzzza/employee.index',compact('employees'));
     }
+
+    //  従業員詳細
+    public function show()  {
+        $employee = Employee::with('user.gender')->find(1);
+        return view('pizzzzza/employee.show',compact('employee'));
+    }
+
 
     //  従業員編集ページ
     public function edit()  {

@@ -54,11 +54,15 @@ class UsersSeeder extends Seeder
 
     public function run()
     {
+
+        $faker = Faker::create('ja_JP');
+
+        
         DB::table('users')->delete();
 
         User::create([
             'name' => '管理者',
-            'kana' => '管理者',
+            'kana' => 'カンリシャ',
             'email' => 'admin@oic.jp',
             'password' => bcrypt('root'),
             'postal' => 5900014,
@@ -69,20 +73,6 @@ class UsersSeeder extends Seeder
             'gender_id' => 1,
             'birthday' => 19961111,
             'authority_id' => 1,
-        ]);
-        User::create([
-            'name' => '兵頭佑一',
-            'kana' => 'ヒョウドウユウイチ',
-            'email' => 'B5123@oic.jp',
-            'password' => bcrypt('19970221'),
-            'postal' => 5320003,
-            'address1' => '大阪府大阪市淀川区宮原町',
-            'address2' => '2-8-1',
-            'address3' => '312号室',
-            'phone' => '09019384468',
-            'gender_id' => 1,
-            'birthday' => 19970221,
-            'authority_id' => 3,
         ]);
         User::create([
             'name' => '濱田真旗',
@@ -99,6 +89,63 @@ class UsersSeeder extends Seeder
             'authority_id' => 2,
         ]);
         User::create([
+            'name' => '兵頭佑一',
+            'kana' => 'ヒョウドウユウイチ',
+            'email' => 'B5123@oic.jp',
+            'password' => bcrypt('19970221'),
+            'postal' => 5320003,
+            'address1' => '大阪府大阪市淀川区宮原町',
+            'address2' => '2-8-1',
+            'address3' => '312号室',
+            'phone' => '09019384468',
+            'gender_id' => 1,
+            'birthday' => 19970221,
+            'authority_id' => 3,
+        ]);
+        User::create([
+            'name' => '土屋百合',
+            'kana' => 'ツチヤユリ',
+            'email' => 'tsuchiya@oic.jp',
+            'password' => bcrypt('tsuchiya'),
+            'postal' => 8099999,
+            'address1' => $faker->prefecture.$faker->city,
+            'address2' => $faker->streetAddress,
+            'address3' => null,
+            'phone' => '09019384468',
+            'gender_id' => 2,
+            'birthday' => 19970221,
+            'authority_id' => 3,
+        ]);
+        User::create([
+            'name' => '森山みくり',
+            'kana' => 'モリヤマミクリ',
+            'email' => 'moriyama@oic.jp',
+            'password' => bcrypt('moriyama'),
+            'postal' => 4532255,
+            'address1' => $faker->prefecture.$faker->city,
+            'address2' => $faker->streetAddress,
+            'address3' => null,
+            'phone' => '09019384468',
+            'gender_id' => 2,
+            'birthday' => 19970221,
+            'authority_id' => 3,
+        ]);
+        User::create([
+            'name' => '津崎 平匡',
+            'kana' => 'ツザキヒロマサ',
+            'email' => 'tsuzaki@oic.jp',
+            'password' => bcrypt('tsuzaki'),
+            'postal' => 4532255,
+            'address1' => $faker->prefecture.$faker->city,
+            'address2' => $faker->streetAddress,
+            'address3' => null,
+            'phone' => '09019384468',
+            'gender_id' => 1,
+            'birthday' => 19970221,
+            'authority_id' => 3,
+        ]);
+
+        User::create([
             'name' => '近沢邦彦',
             'kana' => 'チカザワクニヒコ',
             'email' => 'B5164@oic.jp',
@@ -113,14 +160,13 @@ class UsersSeeder extends Seeder
             'authority_id' => 4,
         ]);
 
-        $faker = Faker::create('ja_JP');
 
-        for ($i=0; $i < 20; $i++) {
+        for ($i=0; $i < 200; $i++) {
 
             User::create([
                 'name' => $faker->name,
                 'kana' => 'テスト',
-                'email' => $faker->email,
+                'email' => $i.$faker->email,
                 'password' => bcrypt('faker'),
                 'postal' => $faker->postcode,
                 'address1' => $faker->prefecture.$faker->city,
@@ -151,16 +197,35 @@ class EmployeeMasterSeeder extends Seeder
         ]);
 
         Employee::create([
+            'users_id' => 2,
+            'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
+            'emoloyee_agreement_enddate' => null,
+        ]);
+
+        Employee::create([
             'users_id' => 3,
             'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
             'emoloyee_agreement_enddate' => null,
         ]);
 
         Employee::create([
-            'users_id' => 2,
+            'users_id' => 4,
             'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
             'emoloyee_agreement_enddate' => null,
         ]);
+
+        Employee::create([
+            'users_id' => 5,
+            'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
+            'emoloyee_agreement_enddate' => null,
+        ]);
+
+        Employee::create([
+            'users_id' => 6,
+            'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
+            'emoloyee_agreement_enddate' => null,
+        ]);
+
 
     }
 }

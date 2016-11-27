@@ -57,7 +57,6 @@
               <td>{{ $user->email }}</td>
             </tr>
           </tbody>
-
         </table>
       </div>
       <div class="text-center">
