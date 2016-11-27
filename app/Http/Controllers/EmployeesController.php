@@ -65,11 +65,11 @@ class EmployeesController extends Controller
         dd($data);
 
         User::create([
-            'name' => '近沢邦彦',
-            'kana' => 'チカザワクニヒコ',
-            'email' => 'B5164@oic.jp',
+            'name' => $data->name,
+            'kana' => $data->kana,
+            'email' => $data->email,
             'password' => bcrypt('zawatika'),
-            'postal' => 5550012,
+            'postal' => $data->postal,
             'address1' => '大阪府大阪市大正区北恩加島',
             'address2' => '2-8-2',
             'address3' => null,
