@@ -11,7 +11,6 @@
         <h1>電話注文</h1>
         <div id="tel">
             @if (count($errors) > 0)
-
                 @foreach ($errors->all() as $error)
                     <div class="alert alert-danger">{{ $error }}</div>
                 @endforeach

@@ -195,5 +195,9 @@ return [
         'published_at' => '公開日',
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'address1' => '住所',
+        'emoloyee_agreement_date' => '契約開始日',
+        'kana' => 'フリガナ',
+        'name' => '名前',
     ],
 ];

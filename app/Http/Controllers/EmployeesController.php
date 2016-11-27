@@ -11,7 +11,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Employee;
-use App\Http\Requests;
+use App\User;
+use App\Http\Requests\EmployeeRequest;
 
 class EmployeesController extends Controller
 {
@@ -23,9 +24,26 @@ class EmployeesController extends Controller
         return view('pizzzzza/employee.index',compact('employees'));
     }
 
+    public function handler(Request $request,$id) {
+
+        if ($request->has('delete')) {
+
+            $this->destroy($id);
+
+            return redirect()->route('employees');
+
+        }else{
+
+        }
+
+    }
+
+
     //  従業員詳細
-    public function show()  {
-        $employee = Employee::with('user.gender')->find(1);
+    public function show($id)  {
+
+        $employee = Employee::with('user.gender')->find($id);
+
         return view('pizzzzza/employee.show',compact('employee'));
     }
 
@@ -39,4 +57,35 @@ class EmployeesController extends Controller
     public function add()  {
         return view('pizzzzza/employee.add');
     }
+
+    public function store(EmployeeRequest $request)  {
+
+        $data = $request->all();
+
+        dd($data);
+
+        User::create([
+            'name' => $data->name,
+            'kana' => $data->kana,
+            'email' => $data->email,
+            'password' => bcrypt('zawatika'),
+            'postal' => $data->postal,
+            'address1' => '大阪府大阪市大正区北恩加島',
+            'address2' => '2-8-2',
+            'address3' => null,
+            'phone' => '08037401939',
+            'gender_id' => 1,
+            'birthday' => 19960607,
+            'authority_id' => 3,
+        ]);
+
+    }
+
+    public function destroy($id) {
+
+        $employee = Employee::with('user.gender')->find($id);
+        $employee->delete();
+
+    }
+
 }

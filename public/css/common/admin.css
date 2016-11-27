@@ -34,5 +34,13 @@ main.main {
 }
 
 .navbar {
-    margin-bottom: 0; 
+    margin-bottom: 0;
+}
+
+tr.link {
+    cursor: pointer;
+}
+
+tr.link:hover{
+    background-color: #efefef;
 }
