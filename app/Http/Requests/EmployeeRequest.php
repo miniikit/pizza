@@ -28,14 +28,15 @@ class EmployeeRequest extends FormRequest
             'name' => 'required|max:50',
             'kana' => 'required|max:100',
             'birthday' => 'required|date',
-            'gender' => 'required',
-            'postal' => 'required|size:3|string',
+            'gender_id' => 'required',
+            'postal' => 'required|size:7|string',
             'address1' => 'required|max:255',
             'address2' => 'required|max:255',
             'address3' => 'max:255',
             'phone' => 'required|string|between:10,11',
             'email' => 'required|email',
-            'emoloyee_agreement_date' => 'required|date',
+            'password' => 'required|min:8|regex:/\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,128}+\z/|same:password_confirm|max:128',
+            'password_confirm' => 'required',
         ];
     }
 }

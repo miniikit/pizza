@@ -44,3 +44,27 @@ tr.link {
 tr.link:hover{
     background-color: #efefef;
 }
+
+.ma {
+    margin: o auto;
+}
+
+.mt {
+    margin-top: 20px;
+}
+
+.mb {
+    margin-bottom: 20px;
+}
+
+.al {
+    text-align: left;
+}
+
+.ac {
+    text-align: center;
+}
+
+.ar {
+    text-align: right;
+}

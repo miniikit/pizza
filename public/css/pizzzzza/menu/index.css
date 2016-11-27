@@ -1,22 +1,3 @@
-.delete {
-    display: none;
-    text-align: center;
-}
-
-.delete .inner {
-    padding: 30px 50px 20px;
-}
-
-.delete .button {
-    margin-top: 50px;
-    display: block;
-    text-align: center;
-}
-
-.delete .button a {
-    margin: 5px;
-}
-
 
 /**
 *       /pizzzzza/menu status message
@@ -172,5 +153,21 @@ div#menu_button{
     }
 }
 
+.delete {
+    display: none;
+    text-align: center;
+}
 
+#delete .inner {
+    padding: 30px 50px 20px;
+}
 
+#delete .button {
+    margin-top: 50px;
+    display: block;
+    text-align: center;
+}
+
+#delete .button a {
+    margin: 5px;
+}

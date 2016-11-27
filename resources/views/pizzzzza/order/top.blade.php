@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/pizzzzza/order/index.css" media="all" title="no title">
 @endsection
 
-@section('js')
+@section('script')
     <script>
         $(function()
         {

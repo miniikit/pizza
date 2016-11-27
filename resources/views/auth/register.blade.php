@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/mypage/detail.css" media="all" title="no title">
 @endsection
 
-@section('js')
+@section('script')
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 @endsection
 

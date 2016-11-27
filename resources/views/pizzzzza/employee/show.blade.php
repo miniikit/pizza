@@ -60,7 +60,7 @@
 <tbody>
 <tr>
 <th class="text-center" >従業員ID</th>
-<td>{{ $employee->users_id }}</td>
+<td>{{ $employee->id }}</td>
 </tr>
 <tr>
 <th class="text-center" >契約開始日</th>
@@ -80,13 +80,13 @@
 </tr>
 </tbody>
 </table>
-<form action="/pizzzzza/employee/handler/{{$employee->users_id}}" method="post">
+<form class="ar" action="/pizzzzza/employee/handler/{{$employee->id}}" method="post">
     <input class="btn btn-default btn-sm" type="submit" name="edit" value="編集">
     <input class="btn btn-danger btn-sm" type="submit" name="delete" value="削除">
     {{ csrf_field() }}
 </form>
 </div>
-<div class="col-md-4 col-md-offset-4">
+<div class="col-md-4 col-md-offset-4 mt">
     <a href="/pizzzzza/employee" class="btn btn-default btn-lg btn-block">戻る</a>
 </div>
 </div>
