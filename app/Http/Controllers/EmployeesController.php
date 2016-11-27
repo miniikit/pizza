@@ -10,6 +10,7 @@
 namespace App\Http\Controllers;
 
 use DebugBar\DebugBar;
+use Laracasts\Flash\Flash;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Employee;
@@ -89,6 +90,9 @@ class EmployeesController extends Controller
             'emoloyee_agreement_date' => Carbon::today(),
             'emoloyee_agreement_enddate' => null,
         ]);
+
+
+        Flash::success('新規登録完了しました。');
 
 
         return redirect()->route('employees');
