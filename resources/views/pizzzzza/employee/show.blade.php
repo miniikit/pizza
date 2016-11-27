@@ -6,66 +6,88 @@
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
 @endsection
 
+@section('pankuzu')
+<ol class="breadcrumb">
+<li><a href="/pizzzzza/order/top">ホーム</a></li>
+<li><a href="/pizzzzza/employee">従業員一覧</a></li>
+<li class="active">詳細</li>
+</ol>
+@endsection
+
 @section('main')
-<h1>従業員管理画面</h1>
+<h1>従業員管理</h1>
 <div class="row">
-<form class="" action="index.html" method="post">
-<div class="col-md-9">
-<table class="table side">
+<div class="col-md-7">
+<table class="table table-bordered">
 <tbody>
 <tr>
-<th class="text-center" ><label for="">登録日</label></th>
-<td>{{ $user->created_at }}</td>
+<th class="text-center" >名前</th>
+<td>{{ $employee->user->name }}</td>
 </tr>
 <tr>
-<th class="text-center" ><label for="">名前(漢字)</label></th>
-<td>{{ $user->name }}</td>
+<th class="text-center" >フリガナ</th>
+<td>{{ $employee->user->kana }}</td>
 </tr>
 <tr>
-<th class="text-center" ><label for="">名前(カナ)</label></th>
-<td>{{ $user->kana }}</td>
+<th class="text-center" >生年月日</th>
+<td>{{ $employee->user->birthday }}</td>
 </tr>
 <tr>
-<th class="text-center" ><label for="">生年月日</label></th>
-<td>{{ $user->birthday }}</td>
+<th class="text-center" >性別</th>
+<td>{{ $employee->user->gender->gender_name }}</td>
 </tr>
 <tr>
-<th class="text-center" ><label for="">性別</label></th>
-<td>{{ $user->gender->gender_name }}</td>
+<th class="text-center" >郵便番号</th>
+<td>{{ $employee->user->postal }}</td>
 </tr>
 <tr>
-<th class="text-center" ><label for="">郵便番号</label></th>
-<td>{{ $user->postal }}</td>
+<th class="text-center" >住所</th>
+<td>{{ $employee->user->address1.$employee->user->address2.$employee->user->address3 }}</td>
 </tr>
 <tr>
-<th class="text-center" ><label for="">住所1</label></th>
-<td>{{ $user->address1 }}</td>
+<th class="text-center" >電話番号</th>
+<td>{{ $employee->user->phone }}</td>
 </tr>
 <tr>
-<th class="text-center" ><label for="">住所2</label></th>
-<td>{{ $user->address2 }}</td>
-</tr>
-<tr>
-<th class="text-center" ><label for="">住所3</label></th>
-<td>{{ $user->address3 }}</td>
-</tr>
-<tr>
-<th class="text-center" ><label for="">電話番号</label></th>
-<td>{{ $user->phone }}</td>
-</tr>
-<tr>
-<th class="text-center" ><label for="">メールアドレス</label></th>
-<td>{{ $user->email }}</td>
+<th class="text-center" >メールアドレス</th>
+<td>{{ $employee->user->email }}</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="col-md-3">
-<button type="button" class="btn btn-default btn-lg btn-block">詳細</button>
-<button type="button" class="btn btn-danger btn-lg btn-block">削除</button>
-</div>
+<div class="col-md-5">
+<table class="table table-bordered">
+<tbody>
+<tr>
+<th class="text-center" >従業員ID</th>
+<td>{{ $employee->users_id }}</td>
+</tr>
+<tr>
+<th class="text-center" >契約開始日</th>
+<td>{{ $employee->emoloyee_agreement_date }}</td>
+</tr>
+<tr>
+<th class="text-center" >契約終了日</th>
+<td>{{ $employee->emoloyee_agreement_enddate }}</td>
+</tr>
+<tr>
+<th class="text-center" >登録日</th>
+<td>{{ $employee->created_at }}</td>
+</tr>
+<tr>
+<th class="text-center" >更新日</th>
+<td>{{ $employee->updated_at }}</td>
+</tr>
+</tbody>
+</table>
+<form action="/pizzzzza/employee/handler/{{$employee->users_id}}" method="post">
+    <input class="btn btn-default btn-sm" type="submit" name="edit" value="編集">
+    <input class="btn btn-danger btn-sm" type="submit" name="delete" value="削除">
+    {{ csrf_field() }}
 </form>
 </div>
-
-
+<div class="col-md-4 col-md-offset-4">
+    <a href="/pizzzzza/employee" class="btn btn-default btn-lg btn-block">戻る</a>
+</div>
+</div>
 @endsection

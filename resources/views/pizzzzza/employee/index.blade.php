@@ -16,12 +16,9 @@
 @section('main')
 <h1>従業員管理画面</h1>
 <div class="row">
-<form class="" action="index.html" method="post">
-<div class="col-md-9">
 <table class="table">
 <thead>
 <tr>
-<th></th>
 <th>ID</th>
 <th>氏名</th>
 <th>契約開始日</th>
@@ -31,8 +28,7 @@
 </thead>
 <tbody>
 @foreach($employees as $employee)
-<tr>
-<td><input type="radio" name="id" value="{{ $employee->id }}"></td>
+<tr class="link" data-href="/pizzzzza/employee/show/{{$employee->id}}" >
 <td>{{ $employee->id }}</td>
 <td>{{ $employee->user->name }}</td>
 <td>{{ $employee->emoloyee_agreement_date }}</td>
@@ -49,12 +45,19 @@
 </tbody>
 </table>
 </div>
-<div class="col-md-3">
-<button type="button" class="btn btn-defaultm btn-lg btn-block">詳細</button>
-<button type="button" class="btn btn-danger btn-lg btn-block">削除</button>
 </div>
-</form>
-</div>
+@endsection
 
-
+@section('script')
+    <script type="text/javascript">
+    $('.table tr[data-href]').addClass('clickable').click( function() {
+window.location = $(this).attr('data-href');
+}).find('a').hover( function() {
+$(this).parents('tr').unbind('click');
+}, function() {
+$(this).parents('tr').click( function() {
+window.location = $(this).attr('data-href');
+});
+});
+    </script>
 @endsection

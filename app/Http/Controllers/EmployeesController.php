@@ -11,7 +11,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Employee;
-use App\Http\Requests;
 
 class EmployeesController extends Controller
 {
@@ -23,9 +22,26 @@ class EmployeesController extends Controller
         return view('pizzzzza/employee.index',compact('employees'));
     }
 
+    public function handler(Request $request,$id) {
+
+        if ($request->has('delete')) {
+
+            $this->destroy($id);
+
+            return redirect()->route('employees');
+
+        }else{
+
+        }
+
+    }
+
+
     //  従業員詳細
-    public function show()  {
-        $employee = Employee::with('user.gender')->find(1);
+    public function show($id)  {
+
+        $employee = Employee::with('user.gender')->find($id);
+
         return view('pizzzzza/employee.show',compact('employee'));
     }
 
@@ -39,4 +55,12 @@ class EmployeesController extends Controller
     public function add()  {
         return view('pizzzzza/employee.add');
     }
+
+    public function destroy($id) {
+
+        $employee = Employee::with('user.gender')->find($id);
+        $employee->delete();
+
+    }
+
 }
