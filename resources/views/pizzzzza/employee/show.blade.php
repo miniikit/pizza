@@ -82,7 +82,9 @@
 </table>
 <form class="ar" action="/pizzzzza/employee/handler/{{$employee->id}}" method="post">
     <input class="btn btn-default btn-sm" type="submit" name="edit" value="編集">
-    <input class="btn btn-danger btn-sm" type="submit" name="delete" value="削除">
+    @if ($employee->user->authority_id != 1)
+    <input class="btn btn-danger btn-sm ml" type="submit" name="delete" value="削除">
+    @endif
     {{ csrf_field() }}
 </form>
 </div>

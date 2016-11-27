@@ -59,7 +59,7 @@ class UsersSeeder extends Seeder
 
         $faker = Faker::create('ja_JP');
 
-        
+
         DB::table('users')->delete();
 
         User::create([
@@ -102,7 +102,7 @@ class UsersSeeder extends Seeder
             'phone' => '09019384468',
             'gender_id' => 1,
             'birthday' => 19970221,
-            'authority_id' => 3,
+            'authority_id' => 2,
         ]);
         User::create([
             'name' => '土屋百合',
@@ -116,7 +116,7 @@ class UsersSeeder extends Seeder
             'phone' => '09019384468',
             'gender_id' => 2,
             'birthday' => 19970221,
-            'authority_id' => 3,
+            'authority_id' => 2,
         ]);
         User::create([
             'name' => '森山みくり',
@@ -130,7 +130,7 @@ class UsersSeeder extends Seeder
             'phone' => '09019384468',
             'gender_id' => 2,
             'birthday' => 19970221,
-            'authority_id' => 3,
+            'authority_id' => 2,
         ]);
         User::create([
             'name' => '津崎 平匡',
@@ -144,7 +144,7 @@ class UsersSeeder extends Seeder
             'phone' => '09019384468',
             'gender_id' => 1,
             'birthday' => 19970221,
-            'authority_id' => 3,
+            'authority_id' => 2,
         ]);
 
         User::create([
@@ -159,7 +159,7 @@ class UsersSeeder extends Seeder
             'phone' => '08037401939',
             'gender_id' => 1,
             'birthday' => 19960607,
-            'authority_id' => 4,
+            'authority_id' => 3,
         ]);
 
 
@@ -177,7 +177,7 @@ class UsersSeeder extends Seeder
                 'phone' => str_replace(array('-', 'ー'), '', $faker->phoneNumber),
                 'gender_id' => rand(1, 2),
                 'birthday' => $faker->dateTimeBetween('-80 years', '-20years')->format('Ymd'),
-                'authority_id' => 4,
+                'authority_id' => 3,
             ]);
 
         }

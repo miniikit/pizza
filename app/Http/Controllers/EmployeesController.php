@@ -33,6 +33,8 @@ class EmployeesController extends Controller
 
             $this->destroy($id);
 
+            Flash::error('削除しました。');
+
             return redirect()->route('employees');
 
         }else{
@@ -93,7 +95,6 @@ class EmployeesController extends Controller
 
 
         Flash::success('新規登録完了しました。');
-
 
         return redirect()->route('employees');
 
