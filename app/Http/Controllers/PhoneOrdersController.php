@@ -33,15 +33,19 @@ class PhoneOrdersController extends Controller
     }
 
 
-
+    //電話番号入力ページ
+    public function input(phoneSearchRequest $request){
+        $this->show();
+    }
 
     //電話番号入力ページ＞お客様情報・注文履歴表示ページ
-    public function show(phoneSearchRequest $request){
+    public function show(Request $request){
 
         //電話番号入力ページからアクセスした場合
         if(isset($request->phone)) {
             $phone = $request->get('phone');
             session()->put('phone',$phone);
+            //
         }else if(session()->has('phone')){
             $phone = session()->get('phone');
         }else{  //電話番号入力なし＆セッションに保存されているわけでもない不正なアクセス
