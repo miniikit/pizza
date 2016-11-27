@@ -43,6 +43,15 @@ class PhoneOrdersController extends Controller
 
 
 
+    //メモ::タスク、バリデーションチェックを、もう１つつくってUSRとTMP両方で使えるように
+
+    //電話番号入力ページ＞会員情報確認＞会員情報編集＞バリデーションチェック処理
+    public function editInput(Request $request){
+        $this->show($request);
+        return redirect('/pizzzzza/order/accept/customer/detail');
+    }
+
+
 
 
 

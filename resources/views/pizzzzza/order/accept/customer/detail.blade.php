@@ -25,7 +25,7 @@
         @endif
         <div class="form-group table-responsive">
             <form action="/pizzzzza/order/accept/customer/handler" method="post">
-                <table class="table side">
+                <table class="table table-bordered">
                     <tbody>
                     <tr>
                         <th class="text-center"><label for="">登録日</label></th>

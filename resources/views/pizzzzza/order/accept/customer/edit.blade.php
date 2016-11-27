@@ -22,7 +22,7 @@
         @if(isset($user))
         <form action="/pizzzzza/order/accept/customer/handler" method="post">
             <div class="form-group table-responsive">
-                <table class="table">
+                <table class="table table-bordered">
                     <tbody>
                     <tr>
                         <th class="text-center"><label for="">氏名(漢字)</label></th>
