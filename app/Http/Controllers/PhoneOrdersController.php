@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\phoneSearchRequest;
 use App\Service\PhoneOrderService;
 
+use Illuminate\Support\Facades\DB;  //サービスに移植後削除
+
 class PhoneOrdersController extends Controller
 {
     //電話番号入力ページ
@@ -33,6 +35,9 @@ class PhoneOrdersController extends Controller
         $phoneOrder = new PhoneOrderService();
         $user = $phoneOrder->searchPhoneNumber($phone);
 
+        // Temporary Tableから値を取り出す
+        $tmpuser = DB::table('')
+
         // もしNULLだったら新規登録にリダイレクト
         if (is_null($user)) {
             return redirect()->route('newCustomer');
@@ -44,6 +49,11 @@ class PhoneOrdersController extends Controller
 
     //電話番号入力ページ＞お客様情報・注文履歴表示ページ＞お客様情報編集ページ
     public function phoneEdit(){
+
+       // $user = DB::table('users')->where('')->get();
+
+        DB::table('temporaries_members_master')->get();
+
         return view('pizzzzza.order.accept.customer.edit');
     }
 
