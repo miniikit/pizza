@@ -652,27 +652,23 @@ class TemporariesUsersMasterSeeder extends Seeder
 
         Temporarily::create([
             'id' => 1,
-            'temporary_user_name' => '野比のび太',
-            'temporary_user_kana' => 'ノビノビタ',
-            'temporary_user_postal' => '3651104',
-            'temporary_user_address1' => '滋賀県大津市石山寺',
-            'temporary_user_address2' => '3-3-3',
-            'temporary_user_address3' => NULL,
-            'temporary_user_tel' => '01203940049',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'name' => '野比のび太',
+            'kana' => 'ノビノビタ',
+            'postal' => '3651104',
+            'address1' => '滋賀県大津市石山寺',
+            'address2' => '3-3-3',
+            'address3' => NULL,
+            'phone' => '01203940049',
         ]);
         Temporarily::create([
             'id' => 2,
-            'temporary_user_name' => '野比静香',
-            'temporary_user_kana' => 'ノビシズカ',
-            'temporary_user_postal' => '3651104',
-            'temporary_user_address1' => '滋賀県大津市石山寺',
-            'temporary_user_address2' => '3-3-3',
-            'temporary_user_address3' => '５号室',
-            'temporary_user_tel' => '01203940049',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'name' => '野比静香',
+            'kana' => 'ノビシズカ',
+            'postal' => '3651104',
+            'address1' => '滋賀県大津市石山寺',
+            'address2' => '3-3-3',
+            'address3' => NULL,
+            'phone' => '01203940049',
         ]);
     }
 }
