@@ -20,3 +20,19 @@ main.main {
 .menu_wrap li {
     margin-bottom: 20px;
 }
+
+.table {
+    font-size: 12px;
+}
+
+.table th {
+    background-color: #5a5a5a;
+    color: #fff;
+    letter-spacing: 2px;
+    border-bottom: none !important;
+    font-weight: normal;
+}
+
+.navbar {
+    margin-bottom: 0; 
+}

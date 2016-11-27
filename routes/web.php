@@ -65,7 +65,8 @@ Route::group(['middleware' => ['adminauth']], function () {
 
 //管理者用ページ
 Route::get('/pizzzzza/employee', 'EmployeesController@index'); //従業員一覧
-Route::get('/pizzzzza/employee/edit', 'EmployeesController@edit'); //従業員編集
+Route::get('/pizzzzza/employee/show', 'EmployeesController@show'); //従業員編集
+Route::post('/pizzzzza/employee/edit', 'EmployeesController@edit'); //従業員編集
 Route::get('/pizzzzza/employee/add', 'EmployeesController@add'); //従業員追加
 
 Route::get('/pizzzzza/order/top','AdminController@orderIndex'); //注文確認ページ
