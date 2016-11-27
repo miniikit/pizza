@@ -7,7 +7,7 @@
     <link href="/plug/featherlight/featherlight.css" title="Featherlight Styles" rel="stylesheet" />
 @endsection
 
-@section('js')
+@section('script')
     <script src="/plug/featherlight/featherlight.js" type="text/javascript" charset="utf-8"></script>
 @endsection
 

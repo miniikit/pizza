@@ -16,10 +16,6 @@
 <script src="/plug/featherlight/featherlight.js" charset="utf-8"></script>
 @yield('css')
 
-
-
-@yield('js')
-
 </head>
 <body>
 <nav class="navbar navbar-default">

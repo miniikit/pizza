@@ -199,5 +199,6 @@ return [
         'emoloyee_agreement_date' => '契約開始日',
         'kana' => 'フリガナ',
         'name' => '名前',
+        'password_confirm' => 'パスワード(確認)',
     ],
 ];

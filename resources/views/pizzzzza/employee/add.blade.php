@@ -33,7 +33,7 @@
                     </tr>
                     <tr>
                         <th class="text-center" >フリガナ</th>
-                        <td><input class="form-control" type="text" name="kane" value=""></td>
+                        <td><input class="form-control" type="text" name="kana" value=""></td>
                     </tr>
                     <tr>
                         <th class="text-center" >生年月日</th>
@@ -41,7 +41,7 @@
                     </tr>
                     <tr>
                         <th class="text-center" >性別</th>
-                        <td><input class="" type="radio" name="gender_id" value="男"> 男 <input class="" type="radio" name="gender_id" value="女"> 女 </td>
+                        <td><input class="" type="radio" name="gender_id" value="1"> 男 <input class="" type="radio" name="gender_id" value="2"> 女 </td>
                     </tr>
                     <tr>
                         <th class="text-center" >郵便番号</th>
@@ -68,12 +68,16 @@
                         <td><input class="form-control" type="text" name="email" value="" ></td>
                     </tr>
                     <tr>
-                        <th class="text-center" >契約開始日</th>
-                        <td><input class="form-control" id="example-date-input" type="date" name="emoloyee_agreement_date" value="" ></td>
+                        <th class="text-center" >パスワード</th>
+                        <td><input class="form-control" id="example-date-input" type="password" name="password" value="" ></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" >パスワード(確認)</th>
+                        <td><input class="form-control" id="example-date-input" type="password" name="password_confirm" value="" ></td>
                     </tr>
                     </tbody>
                 </table>
-                <div class="col-md-4 col-md-offset-4">
+                <div class="col-md-4 col-md-offset-4 ac">
                     <a class="btn btn-default btn-lg">戻る</a>
                     <input type="submit" class="btn btn-primary btn-lg" name="store" value="追加">
                 </div>

@@ -9,6 +9,8 @@
  */
 namespace App\Http\Controllers;
 
+use DebugBar\DebugBar;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Employee;
 use App\User;
@@ -62,22 +64,34 @@ class EmployeesController extends Controller
 
         $data = $request->all();
 
-        dd($data);
+        if (empty($data['address3'])) {
+            $data['address3'] = NULL;
+        }
 
-        User::create([
-            'name' => $data->name,
-            'kana' => $data->kana,
-            'email' => $data->email,
-            'password' => bcrypt('zawatika'),
-            'postal' => $data->postal,
-            'address1' => '大阪府大阪市大正区北恩加島',
-            'address2' => '2-8-2',
-            'address3' => null,
-            'phone' => '08037401939',
-            'gender_id' => 1,
-            'birthday' => 19960607,
-            'authority_id' => 3,
+        $user = User::create([
+            'name' => $data['name'],
+            'kana' => $data['kana'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'postal' => $data['postal'],
+            'address1' => $data['address1'],
+            'address2' => $data['address2'],
+            'address3' => $data['address3'],
+            'phone' => $data['phone'],
+            'gender_id' => $data['gender_id'],
+            'birthday' => $data['birthday'],
+            'authority_id' => 2,
         ]);
+
+
+        Employee::create([
+            'users_id' => $user->id,
+            'emoloyee_agreement_date' => Carbon::today(),
+            'emoloyee_agreement_enddate' => null,
+        ]);
+
+
+        return redirect()->route('employees');
 
     }
 
