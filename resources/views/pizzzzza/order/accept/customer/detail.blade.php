@@ -17,6 +17,12 @@
 @section('main')
     <div class="wrap">
         <h1>お客様情報確認</h1>
+
+        @if (count($errors) > 0)
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger">{{ $error }}</div>
+            @endforeach
+        @endif
         <div class="form-group table-responsive">
             <form action="/pizzzzza/order/accept/customer/handler" method="post">
                 <table class="table side">
@@ -33,14 +39,14 @@
                         <th class="text-center"><label for="">名前(カナ)</label></th>
                         <td>{{ $user->kana }}</td>
                     </tr>
-                    @if(isset($user->birthday) || isset($user->gender))
+                    @if(isset($user->birthday) || isset($user->gender_name))
                     <tr>
                         <th class="text-center"><label for="">生年月日</label></th>
                         <td>{{ $user->birthday }}</td>
                     </tr>
                     <tr>
                         <th class="text-center"><label for="">性別</label></th>
-                        <td>{{ $user->gender->gender_name }}</td>
+                        <td>{{ $user->gender_name }}</td>
                     </tr>
                     @endif
                     <tr>
