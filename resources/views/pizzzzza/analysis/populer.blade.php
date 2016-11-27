@@ -26,6 +26,7 @@
         <td>523425</td>
       </tr>
       <?php } ?>
+
     </tbody>
   </table>
 </div>

@@ -69,6 +69,7 @@ Route::get('/pizzzzza/employee/show/{id}', 'EmployeesController@show'); //従業
 Route::post('/pizzzzza/employee/handler/{id}', 'EmployeesController@handler'); //ハンドラー
 Route::post('/pizzzzza/employee/edit', 'EmployeesController@edit'); //従業員編集
 Route::get('/pizzzzza/employee/add', 'EmployeesController@add'); //従業員追加
+Route::post('/pizzzzza/employee/add/store', 'EmployeesController@store'); //従業員追加処理
 
 Route::get('/pizzzzza/order/top','AdminController@orderIndex'); //注文確認ページ
 Route::any('/pizzzzza/order/get','AdminController@orderGet'); //注文確認ページ処理用
