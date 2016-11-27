@@ -37,13 +37,17 @@
                 <li><a href="/pizzzzza/order/top">注文確認</a></li>
                 <li><a href="/pizzzzza/order/accept/input">電話注文</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">売上&売れ筋<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">クーポン<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/pizzzzza/analysis/earning">売上</a></li>
+                        <li><a href="/pizzzzza/coupon/list">開催中のクーポン一覧</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/pizzzzza/analysis/populer">売れ筋</a></li>
+                        <li><a href="/pizzzzza/coupon/menu">クーポン新規発行</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/pizzzzza/coupon/history">クーポン履歴</a></li>
                     </ul>
                 </li>
+
+                @if (Session::get('auth_id') == 1)
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">メニュー<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -53,13 +57,11 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">クーポン<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">売上&売れ筋<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/pizzzzza/coupon/list">開催中のクーポン一覧</a></li>
+                        <li><a href="/pizzzzza/analysis/earning">売上</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/pizzzzza/coupon/menu">クーポン新規発行</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="/pizzzzza/coupon/history">クーポン履歴</a></li>
+                        <li><a href="/pizzzzza/analysis/populer">売れ筋</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -70,6 +72,8 @@
                         <li><a href="/pizzzzza/employee/add">従業員追加</a></li>
                     </ul>
                 </li>
+                @endif
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">ログアウト</a></li>
