@@ -35,7 +35,8 @@ class PhoneOrdersController extends Controller
 
     //電話番号入力ページ
     public function input(phoneSearchRequest $request){
-        $this->show();
+        $this->show($request);
+        return redirect('/pizzzzza/order/accept/customer/detail');
     }
 
     //電話番号入力ページ＞お客様情報・注文履歴表示ページ

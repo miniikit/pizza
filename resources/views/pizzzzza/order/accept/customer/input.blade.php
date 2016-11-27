@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
 @endsection
 
+@section('pankuzu')
+  <ol class="breadcrumb">
+    <li><a href="/pizzzzza/order/top">ホーム</a></li>
+    <li class="active"><a href="">電話番号入力</a></li>
+    <li class="active">新規登録</li>
+  </ol>
+@endsection
+
 @section('main')
     <div class="wrap">
       <h1>お客様情報登録</h1>

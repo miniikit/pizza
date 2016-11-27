@@ -15,7 +15,7 @@
                     <div class="alert alert-danger">{{ $error }}</div>
                 @endforeach
             @endif
-            <form class="" action="/pizzzzza/order/accept/customer/detail" method="post">
+            <form class="" action="/pizzzzza/order/accept/customer/check" method="post">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="電話番号を入力してください" name="phone" value="">
                 </div>
