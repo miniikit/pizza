@@ -15,7 +15,6 @@
             <tr>
               <th class="text-center" style="padding-top:12px;"><label for="">名前(漢字)</label></th>
               <td><input class="form-control" type="text" name="name" value="" placeholder="姓"></td>
-              <td><input class="form-control" type="text" name="name" value="" placeholder="名"></td>
             </tr>
             <tr>
               <th class="text-center" style="padding-top:12px;"><label for="">名前(カナ)</label></th>
