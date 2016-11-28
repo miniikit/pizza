@@ -29,11 +29,18 @@ class EmployeesController extends Controller
         return view('pizzzzza/employee.index',compact('employees'));
     }
 
+    public function history()  {
+
+        $employees = Employee::withTrashed()->with('user.gender')->get();
+
+        return view('pizzzzza/employee.history',compact('employees'));
+    }
+
 
     //  従業員詳細
     public function show($id)  {
 
-        $employee = Employee::with('user.gender')->find($id);
+        $employee = Employee::withTrashed()->with('user.gender')->find($id);
         return view('pizzzzza/employee.show',compact('employee'));
 
     }
@@ -42,7 +49,7 @@ class EmployeesController extends Controller
     //  従業員編集ページ
     public function edit($id)  {
 
-        $employee = Employee::with('user.gender')->find($id);
+        $employee = Employee::withTrashed()->with('user.gender')->find($id);
         return view('pizzzzza/employee.edit',compact('employee'));
 
     }
@@ -92,6 +99,10 @@ class EmployeesController extends Controller
     public function destroy($id) {
 
         $employee = Employee::with('user.gender')->find($id);
+
+        $employee->emoloyee_agreement_enddate = Carbon::today();
+        $employee->save();
+
         $employee->delete();
 
         Flash::success('削除しました。');
@@ -102,7 +113,7 @@ class EmployeesController extends Controller
 
     public function update(EmployeeUpdateRequest $request,$id) {
 
-        $employee = Employee::with('user.gender')->find($id);
+        $employee = Employee::withTrashed()->with('user.gender')->find($id);
 
         $data = $request->all();
 
