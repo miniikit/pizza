@@ -45,12 +45,79 @@ class PhoneOrdersController extends Controller
 
     //メモ::タスク、バリデーションチェックを、もう１つつくってUSRとTMP両方で使えるように
 
-    //電話番号入力ページ＞会員情報確認＞会員情報編集＞バリデーションチェック処理
-    public function editInput(Request $request){
-        $this->show($request);
-        return redirect('/pizzzzza/order/accept/customer/detail');
+    //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞バリデーションチェック処理
+    public function updateWeb(Request $request){
+
+        //
+        //  handlerで、会員情報編集画面から、更新ボタンが押された時：WEB会員バージョン
+        //
+
+
+        $user_update = session()->get('request');
+
+
+        //POSTデータの受取
+        $name = $user_update['name'];
+        $name_katakana = $user_update['name_katakana'];
+        $postal = $user_update['postal'];
+        $address1 = $user_update['address1'];
+        $address2 = $user_update['address2'];
+        $address3 = $user_update['address3'];
+        $phone = $user_update['phone'];
+
+
+        //Web会員か、PHONE会員か、会員IDは何番か。
+        $userType = session()->get('phone_order_user_type');
+        $userId = session()->get('customer_id');
+
+
+        if($userType == "web"){    //Web会員
+            //追加POSTデータの受取
+            $birthday = $request['birthday'];
+            $email = $request['email'];
+            $gender_id = $request['gender_id'];
+            DB::table('users')->where('users.id','=',$userId)->update(['name' => $name,'kana' => $name_katakana,'email' => $email, 'gender_id' => $gender_id, 'birthday' => $birthday, 'postal' => $postal, 'address1' => $address1, 'address2' => $address2, 'address3' => $address3, 'phone' => $phone]);
+            Flash::success('会員情報の更新が完了しました。');
+
+        }else{
+            Flash::error('エラーが発生しました。');
+        }
+
+        return ('aaa');
+
     }
 
+    //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞バリデーションチェック処理
+    public function updatePhone(Request $request){
+
+        //
+        //  handlerで、会員情報編集画面から、更新ボタンが押された時：電話会員バージョン
+        //
+
+        //POSTデータの受取
+        $name = $request->name;
+        $name_katakana = $request->name_katakana;
+        $postal = $request->postal;
+        $address1 = $request->address1;
+        $address2 = $request->address2;
+        $address3 = $request->address3;
+        $phone = $request->phone;
+
+
+        //Web会員か、PHONE会員か、会員IDは何番か。
+        $userType = session()->get('phone_order_user_type');
+        $userId = session()->get('customer_id');
+
+
+        if($userType == "phone"){
+            DB::table('temporaries_users_master')->where('temporaries_users_master.id','=',$userId)->update(['name' => $name,'kana' => $name_katakana,'postal' => $postal, 'address1' => $address1, 'address2' => $address2, 'address3' => $address3, 'phone' => $phone]);
+            Flash::success('会員情報の更新が完了しました。');
+
+        }else{
+            Flash::error('エラーが発生しました。');
+        }
+        return redirect('/pizzzzza/order/accept/customer/detail');
+    }
 
 
 
@@ -114,83 +181,67 @@ class PhoneOrdersController extends Controller
 
 
     // POSTデータの受け皿。
-    public function handler(Request $request){
+    public function handler(Request $request)
+{
 
-        //
-        //  顧客情報確認画面からの遷移であれば
-        //
-        //　※ 想定値 : $request -> detailPost ->  "戻る" / "注文へ" / "編集"
-        //
+    //
+    //  顧客情報確認画面からの遷移であれば
+    //
+    //　※ 想定値 : $request -> detailPost ->  "戻る" / "注文へ" / "編集"
+    //
 
 
-        if(isset($request->detailPost)) {
+    if (isset($request->detailPost)) {
 
-            if($request->detailPost == "戻る"){
-                return redirect('/pizzzzza/order/accept/input');
-            }else if($request->detailPost == "注文へ"){
-                $this->orderSelect($request);
-                return redirect('/pizzzzza/order/accept/item/select');
-            }else if($request->detailPost == "編集"){
-                if(session()->has('customer_id')) {
-                    session()->forget('customer_id');
-                }
-                session()->put('customer_id',$request->customer_id);
-                return redirect('/pizzzzza/order/accept/customer/edit');
-            }else{
-                Flash::error('エラーが発生しました。');
-                return redirect('/pizzzzza/order/top');
+        if ($request->detailPost == "戻る") {
+            return redirect('/pizzzzza/order/accept/input');
+        } else if ($request->detailPost == "注文へ") {
+            $this->orderSelect($request);
+            return redirect('/pizzzzza/order/accept/item/select');
+        } else if ($request->detailPost == "編集") {
+            if (session()->has('customer_id')) {
+                session()->forget('customer_id');
             }
-
+            session()->put('customer_id', $request->customer_id);
+            return redirect('/pizzzzza/order/accept/customer/edit');
+        } else {
+            Flash::error('エラーが発生しました。');
+            return redirect('/pizzzzza/order/top');
         }
 
-
-        //
-        //  編集画面からの遷移であれば
-        //
-        //  ※　想定値 : $request -> editPost -> "戻る" / "更新"
-
-        if(isset($request->editPost)){
-
-            if($request->editPost == "戻る"){
-                return redirect('/pizzzzza/order/accept/customer/detail');
-
-            }else if($request->editPost == "更新"){
-
-                //dd($request->all(),session()->all());
-                //POSTデータの受取
-                $name = $request->name;
-                $name_katakana = $request->name_katakana;
-                $postal = $request->postal;
-                $address1 = $request->address1;
-                $address2 = $request->address2;
-                $address3 = $request->address3;
-                $phone = $request->phone;
+    }
 
 
-                //Web会員か、PHONE会員か、会員IDは何番か。
-                $userType = session()->get('phone_order_user_type');
-                $userId = session()->get('customer_id');
+    //
+    //  編集画面からの遷移であれば
+    //
+    //  ※　想定値 : $request -> editPost -> "戻る" / "更新"
 
+    if (isset($request->editPost)) {
 
-                if($userType == "web"){    //Web会員
-                    //追加POSTデータの受取
-                    $birthday = $request->birthday;
-                    $email = $request->email;
-                    $gender_id = $request->gender_id;
-                    DB::table('users')->where('users.id','=',$userId)->update(['name' => $name,'kana' => $name_katakana,'email' => $email, 'gender_id' => $gender_id, 'birthday' => $birthday, 'postal' => $postal, 'address1' => $address1, 'address2' => $address2, 'address3' => $address3, 'phone' => $phone]);
-                    Flash::success('会員情報の更新が完了しました。');
+        if ($request->editPost == "戻る") {
+            return redirect('/pizzzzza/order/accept/customer/detail');
 
-                }else if($userType == "phone"){
-                    DB::table('temporaries_users_master')->where('temporaries_users_master.id','=',$userId)->update(['name' => $name,'kana' => $name_katakana,'postal' => $postal, 'address1' => $address1, 'address2' => $address2, 'address3' => $address3, 'phone' => $phone]);
-                    Flash::success('会員情報の更新が完了しました。');
+        } else if ($request->editPost == "更新") {
 
-                }else{
-                    Flash::error('エラーが発生しました。');
-                }
-                return redirect('/pizzzzza/order/accept/customer/detail');
+            $customer_id = session()->get('customer_id');
+            $customer_type = session()->get('phone_order_user_type');
+
+            if ($customer_type == "web"){
+                session()->put('request', $request->all());
+                 $this->updateWeb($request);
+                 return redirect('/pizzzzza/order/accept/customer/update/web');
+            } else if ($customer_type == "phone") {
+                 $this->updatePhone($request);
+                 return redirect('/pizzzzza/order/accept/customer/update/phone');
+            } else {
+                dd('会員種別が不定');
             }
+
+
         }
     }
+}
 
 
 
