@@ -10,7 +10,7 @@
 <ol class="breadcrumb">
 <li><a href="/pizzzzza/order/top">ホーム</a></li>
 <li><a href="/pizzzzza/employee">従業員一覧</a></li>
-<li class="active">詳細</li>
+<li class="active">{{$employee->user->name}}</li>
 </ol>
 @endsection
 

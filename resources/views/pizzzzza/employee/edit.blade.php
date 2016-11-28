@@ -6,6 +6,15 @@
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
 @endsection
 
+@section('pankuzu')
+<ol class="breadcrumb">
+<li><a href="/pizzzzza/order/top">ホーム</a></li>
+<li><a href="/pizzzzza/employee">従業員一覧</a></li>
+<li><a href="/pizzzzza/employee/{{$employee->id}}/show">{{$employee->user->name}}</a></li>
+<li class="active">編集</li>
+</ol>
+@endsection
+
 @section('main')
     <h1>従業員編集画面</h1>
     @if (count($errors) > 0)
