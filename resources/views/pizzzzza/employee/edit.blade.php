@@ -8,44 +8,106 @@
 
 @section('main')
     <h1>従業員編集画面</h1>
-      <div class="container">
-        <div class="table-responsive">
-  <table class="table"> <!-- サンプル -->
-    <thead>
-      <div class="row">
-      <tr>
-        <th style="width:6%">ID</th>
-        <th style="width:11%">氏名</th>
-        <th style="width:14%">フリガナ</th>
-        <th style="width:3%">生年月日</th>
-        <th style="width:4%">性別</th>
-        <th style="width:7%">契約開始日</th>
-        <th style="width:7%">契約終了日</th>
-        <th style="width:4%">登録日時</th>
-        <th style="width:4%">更新日時</th>
-        <th style="width:21%">住所</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-          <td><input type="text" class="form-control" value="001"/></td>
-          <td><input type="text" class="form-control" value="近澤"/></td>
-          <td><input type="text" class="form-control" value="チカザワ"/></td>
-          <td>16600101</td>
-          <td>M</td>
-          <td>19991212</td>
-          <td>25101212</td>
-          <td>00000000</td>
-          <td>00000000</td>
-          <td><input type="text" class="form-control" value="aaaaaaaaaaaaaa"/></td>
-      </tr>
-      </tbody>
-  </div>
-  </table>
-<div class="text-right">
-  <a href="#"><input type="button" class="btn btn-primary btn-lg" name="name" value="戻る"></a>
-  <a href="#"><input type="button" class="btn btn-primary btn-lg" name="name" value="決定"></a>
-</div>
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <form action="/pizzzzza/employee/edit/{{ $employee->id }}" method="post">
+        <div class="row">
+            <div class="col-md-8">
+                <table class="table table-bordered ">
+                    <tbody>
+                    <tr>
+                        <th class="text-center" >氏名</th>
+                        <td><input class="form-control" type="text" name="name" value="{{ $employee->user->name }}" placeholder="例）山田太郎"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" >フリガナ</th>
+                        <td><input class="form-control" type="text" name="kana" value="{{ $employee->user->kana }}" placeholder="例）ヤマダタロウ"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" >生年月日</th>
+                        <td><input class="form-control" type="date" name="birthday" value="{{ $employee->user->birthday }}" ></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" >性別</th>
+                        <td>
+                            @if($employee->user->gender_id == 1)
+                            <input class="" type="radio" name="gender_id" value="1" checked> 男
+                            <input class="" type="radio" name="gender_id" value="2"> 女
+                            @else
+                            <input class="" type="radio" name="gender_id" value="1"> 男
+                            <input class="" type="radio" name="gender_id" value="2" checked> 女
+                            @endif
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" >郵便番号</th>
+                        <td><input class="form-control" type="text" name="postal" value="{{ $employee->user->postal }}" placeholder="ハイフン抜き"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" >住所</th>
+                        <td><input class="form-control" type="text" name="address1" value="{{ $employee->user->address1 }}" placeholder="例）大阪府大阪市天王寺区"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" >番地</th>
+                        <td><input class="form-control" type="text" name="address2" value="{{ $employee->user->address2 }}" placeholder="例）１−１−１"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" >建物名</th>
+                        <td><input class="form-control" type="text" name="address3" value="{{ $employee->user->address3 }}" placeholder="例）東マンション　５０２号室"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" >電話番号</th>
+                        <td><input class="form-control" type="text" name="phone" value="{{ $employee->user->phone }}" placeholder="例）08012345678"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" >メールアドレス</th>
+                        <td><input class="form-control" type="text" name="email" value="{{ $employee->user->email }}" placeholder="例）example@example.com" ></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <th class="text-center" >従業員ID</th>
+                        <td>{{ $employee->id }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" >契約開始日</th>
+                        <td>{{ $employee->emoloyee_agreement_date }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" >契約終了日</th>
+                        <td><input class="form-control" type="date" name="email" value="{{ $employee->emoloyee_agreement_enddate }}" ></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" >登録日</th>
+                        <td>{{ $employee->created_at }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center" >更新日</th>
+                        <td>{{ $employee->updated_at }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-md-offset-4 ac">
+            <a class="btn btn-default btn-lg mr" href="/pizzzzza/employee" >戻る</a>
+            <input type="submit" class="btn btn-primary btn-lg" name="update" value="更新">
+        </div>
+        {{ csrf_field() }}
+    </form>
 </div>
 
 @endsection

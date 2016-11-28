@@ -48,14 +48,17 @@ class EmployeesController extends Controller
     public function show($id)  {
 
         $employee = Employee::with('user.gender')->find($id);
-
         return view('pizzzzza/employee.show',compact('employee'));
+
     }
 
 
     //  従業員編集ページ
-    public function edit()  {
-        return view('pizzzzza/employee.edit');
+    public function edit($id)  {
+
+        $employee = Employee::with('user.gender')->find($id);
+        return view('pizzzzza/employee.edit',compact('employee'));
+
     }
 
     //  従業員追加ページ
@@ -104,6 +107,19 @@ class EmployeesController extends Controller
 
         $employee = Employee::with('user.gender')->find($id);
         $employee->delete();
+
+    }
+
+    public function update($id) {
+
+        $employee = Employee::with('user.gender')->find($id);
+
+
+        $employee->user->gender->save();
+
+        Flash::success('更新完了しました。');
+
+        return redirect()->route('employees');
 
     }
 
