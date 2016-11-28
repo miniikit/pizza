@@ -76,6 +76,7 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a>ユーザー名 : {{ Auth::user()->name }}</a></li>
                 <li><a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">ログアウト</a></li>
                 <li><form id="logout-form" action="{{ url('/pizzzzza/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form></li>
             </ul>

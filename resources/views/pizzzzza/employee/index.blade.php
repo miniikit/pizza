@@ -28,7 +28,7 @@
             </thead>
             <tbody>
             @foreach($employees as $employee)
-                <tr class="link" data-href="/pizzzzza/employee/show/{{$employee->id}}">
+                <tr class="link" data-href="/pizzzzza/employee/{{$employee->id}}/show">
                     <td>{{ $employee->id }}</td>
                     <td>{{ $employee->user->name }}</td>
                     <td>{{ $employee->emoloyee_agreement_date }}</td>

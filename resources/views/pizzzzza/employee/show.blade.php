@@ -10,7 +10,7 @@
 <ol class="breadcrumb">
 <li><a href="/pizzzzza/order/top">ホーム</a></li>
 <li><a href="/pizzzzza/employee">従業員一覧</a></li>
-<li class="active">詳細</li>
+<li class="active">{{$employee->user->name}}</li>
 </ol>
 @endsection
 
@@ -80,8 +80,8 @@
 </tr>
 </tbody>
 </table>
-<form class="ar" action="/pizzzzza/employee/handler/{{$employee->id}}" method="post">
-    <input class="btn btn-default btn-sm" type="submit" name="edit" value="編集">
+<form class="ar" action="/pizzzzza/employee/{{$employee->id}}/delete" method="post">
+    <a href="/pizzzzza/employee/{{$employee->id}}/edit" class="btn btn-default btn-sm" >編集</a>
     @if ($employee->user->authority_id != 1)
     <input class="btn btn-danger btn-sm ml" type="submit" name="delete" value="削除">
     @endif
