@@ -12,7 +12,7 @@
 @endsection
 
 @section('main')
-    <h1>メニュー　編集</h1>
+    <h1>商品編集</h1>
 
     @foreach ($errors->all() as $message)
         <div class="error-message">

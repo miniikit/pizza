@@ -24,7 +24,7 @@
 @endsection
 
 @section('main')
-    <h1>メニュー一覧</h1>
+    <h1>商品一覧</h1>
 
     <div class="form-group table-responsive">
 

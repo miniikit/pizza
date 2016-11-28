@@ -60,12 +60,6 @@ div#menu_button{
     width:250px;
 }
 
-/* 編集ページ　テーブル */
-#edit-table{
-    width:80%;
-    max-width: 700px;
-    margin:0 auto;
-}
 
 #edit-table tr{
     width:100%;
@@ -124,13 +118,6 @@ div#menu_button{
     list-style-type: none;
 }
 
-
-/*  商品情報追加  */
-#menu-add-table{
-    width:100%;
-    max-width:800px;
-    margin:0 auto;
-}
 #menu-add-table th{
     text-align: center;
     padding: 5px 0;
