@@ -6,6 +6,7 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Requests\RegisterRequest;
 
 class RegisterController extends Controller
 {
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/Registercomplete';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -71,7 +72,10 @@ class RegisterController extends Controller
             'address1' => $data['address1'],
             'address2' => $data['address2'],
             'address3' => $data['address3'],
-           // 'phone' => $data['phone'],
+            'phone' => $data['phone'],
+            'gender_id' => $data['gender_id'],
+            'birthday' => $data['birthday'],
+            'authority_id' => $data['authority_id'],
 
         ]);
     }

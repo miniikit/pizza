@@ -4,7 +4,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Faker\Factory as Faker;
 use Carbon\Carbon;
-
 use App\Genre;
 use App\Gender;
 use App\Coupon;
@@ -18,6 +17,7 @@ use App\OrderDetail;
 use App\Campaign;
 use App\User;
 use App\Employee;
+use App\Temporarily;
 
 
 class DatabaseSeeder extends Seeder
@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->call('CampaignesMasterSeeder');
         $this->call('UsersSeeder');
         $this->call('EmployeeMasterSeeder');
+        $this->call('TemporariesUsersMasterSeeder');
 
         Model::reguard();
     }
@@ -55,11 +56,15 @@ class UsersSeeder extends Seeder
 
     public function run()
     {
+
+        $faker = Faker::create('ja_JP');
+
+
         DB::table('users')->delete();
 
         User::create([
             'name' => '管理者',
-            'kana' => '管理者',
+            'kana' => 'カンリシャ',
             'email' => 'admin@oic.jp',
             'password' => bcrypt('root'),
             'postal' => 5900014,
@@ -72,20 +77,6 @@ class UsersSeeder extends Seeder
             'authority_id' => 1,
         ]);
         User::create([
-            'name' => '兵頭佑一',
-            'kana' => 'ヒョウドウユウイチ',
-            'email' => 'B5123@oic.jp',
-            'password' => bcrypt('19970221'),
-            'postal' => 5320003,
-            'address1' => '大阪府大阪市淀川区宮原町',
-            'address2' => '2-8-1',
-            'address3' => '312号室',
-            'phone' => '012345678910',
-            'gender_id' => 1,
-            'birthday' => 19970221,
-            'authority_id' => 3,
-        ]);
-        User::create([
             'name' => '濱田真旗',
             'kana' => 'ハマダマサキ',
             'email' => 'B5163@oic.jp',
@@ -94,11 +85,68 @@ class UsersSeeder extends Seeder
             'address1' => '大阪府大阪市大正区北恩加島',
             'address2' => '2-8-1',
             'address3' => null,
-            'phone' => '012345678911',
+            'phone' => '07038461049',
             'gender_id' => 1,
             'birthday' => 19960607,
             'authority_id' => 2,
         ]);
+        User::create([
+            'name' => '兵頭佑一',
+            'kana' => 'ヒョウドウユウイチ',
+            'email' => 'B5123@oic.jp',
+            'password' => bcrypt('19970221'),
+            'postal' => 5320003,
+            'address1' => '大阪府大阪市淀川区宮原町',
+            'address2' => '2-8-1',
+            'address3' => '312号室',
+            'phone' => '09019384468',
+            'gender_id' => 1,
+            'birthday' => 19970221,
+            'authority_id' => 2,
+        ]);
+        User::create([
+            'name' => '土屋百合',
+            'kana' => 'ツチヤユリ',
+            'email' => 'tsuchiya@oic.jp',
+            'password' => bcrypt('tsuchiya'),
+            'postal' => 8099999,
+            'address1' => $faker->prefecture.$faker->city,
+            'address2' => $faker->streetAddress,
+            'address3' => null,
+            'phone' => '09019384468',
+            'gender_id' => 2,
+            'birthday' => 19970221,
+            'authority_id' => 2,
+        ]);
+        User::create([
+            'name' => '森山みくり',
+            'kana' => 'モリヤマミクリ',
+            'email' => 'moriyama@oic.jp',
+            'password' => bcrypt('moriyama'),
+            'postal' => 4532255,
+            'address1' => $faker->prefecture.$faker->city,
+            'address2' => $faker->streetAddress,
+            'address3' => null,
+            'phone' => '09019384468',
+            'gender_id' => 2,
+            'birthday' => 19970221,
+            'authority_id' => 2,
+        ]);
+        User::create([
+            'name' => '津崎 平匡',
+            'kana' => 'ツザキヒロマサ',
+            'email' => 'tsuzaki@oic.jp',
+            'password' => bcrypt('tsuzaki'),
+            'postal' => 4532255,
+            'address1' => $faker->prefecture.$faker->city,
+            'address2' => $faker->streetAddress,
+            'address3' => null,
+            'phone' => '09019384468',
+            'gender_id' => 1,
+            'birthday' => 19970221,
+            'authority_id' => 2,
+        ]);
+
         User::create([
             'name' => '近沢邦彦',
             'kana' => 'チカザワクニヒコ',
@@ -108,29 +156,28 @@ class UsersSeeder extends Seeder
             'address1' => '大阪府大阪市大正区北恩加島',
             'address2' => '2-8-2',
             'address3' => null,
-            'phone' => '012345678912',
+            'phone' => '08037401939',
             'gender_id' => 1,
             'birthday' => 19960607,
-            'authority_id' => 4,
+            'authority_id' => 3,
         ]);
 
-        $faker = Faker::create('ja_JP');
 
-        for ($i=0; $i < 20; $i++) {
+        for ($i=0; $i < 200; $i++) {
 
             User::create([
                 'name' => $faker->name,
                 'kana' => 'テスト',
-                'email' => $faker->safeEmail,
+                'email' => $i.$faker->email,
                 'password' => bcrypt('faker'),
                 'postal' => $faker->postcode,
                 'address1' => $faker->prefecture.$faker->city,
                 'address2' => $faker->streetAddress,
                 'address3' => null,
-                'phone' => $faker->phoneNumber,
+                'phone' => str_replace(array('-', 'ー'), '', $faker->phoneNumber),
                 'gender_id' => rand(1, 2),
                 'birthday' => $faker->dateTimeBetween('-80 years', '-20years')->format('Ymd'),
-                'authority_id' => 4,
+                'authority_id' => 3,
             ]);
 
         }
@@ -152,16 +199,35 @@ class EmployeeMasterSeeder extends Seeder
         ]);
 
         Employee::create([
+            'users_id' => 2,
+            'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
+            'emoloyee_agreement_enddate' => null,
+        ]);
+
+        Employee::create([
             'users_id' => 3,
             'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
             'emoloyee_agreement_enddate' => null,
         ]);
 
         Employee::create([
-            'users_id' => 2,
+            'users_id' => 4,
             'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
             'emoloyee_agreement_enddate' => null,
         ]);
+
+        Employee::create([
+            'users_id' => 5,
+            'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
+            'emoloyee_agreement_enddate' => null,
+        ]);
+
+        Employee::create([
+            'users_id' => 6,
+            'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
+            'emoloyee_agreement_enddate' => null,
+        ]);
+
 
     }
 }
@@ -245,7 +311,28 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => null,
         ]);
-
+        Coupon::create([
+            'coupon_name' => 'ピザ無料クーポン',
+            'coupon_discount' => 2200,
+            'coupon_conditions_money' => 1,
+            'product_id' => 2,
+            'coupon_start_date' => Carbon::yesterday(),
+            'coupon_end_date' => Carbon::yesterday(),
+            'coupon_number' => 'MARTIN',
+            'coupon_conditions_count' => 1,
+            'coupon_conditions_first' => 1,
+        ]);
+        Coupon::create([
+            'coupon_name' => 'プレゼントクーポン',
+            'coupon_discount' => 2200,
+            'coupon_conditions_money' => 1,
+            'product_id' => 2,
+            'coupon_start_date' => Carbon::today()->subMonth(),
+            'coupon_end_date' => Carbon::today()->subDay(),
+            'coupon_number' => 'SUMMER',
+            'coupon_conditions_count' => 3,
+            'coupon_conditions_first' => 1,
+        ]);
     }
 }
 
@@ -628,5 +715,35 @@ class CampaignesMasterSeeder extends Seeder
         ]);
 
 
+    }
+}
+
+//  一時会員マスタ
+class TemporariesUsersMasterSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('temporaries_users_master')->delete();
+
+        Temporarily::create([
+            'id' => 1,
+            'name' => '野比のび太',
+            'kana' => 'ノビノビタ',
+            'postal' => '3651104',
+            'address1' => '滋賀県大津市石山寺',
+            'address2' => '3-3-3',
+            'address3' => NULL,
+            'phone' => '01203940049',
+        ]);
+        Temporarily::create([
+            'id' => 2,
+            'name' => '野比静香',
+            'kana' => 'ノビシズカ',
+            'postal' => '3651104',
+            'address1' => '滋賀県大津市石山寺',
+            'address2' => '3-3-3',
+            'address3' => NULL,
+            'phone' => '01203940049',
+        ]);
     }
 }

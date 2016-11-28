@@ -1,11 +1,16 @@
+img {
+    max-width: 100%;
+}
+
 main.main {
-    padding: 100px 0;
+    padding: 50px 0;
 }
 
 .container h1 {
     text-align: center;
     font-size: 30px;
     margin-bottom: 50px;
+    margin-top: 60px;
 }
 
 #menu_button {
@@ -21,3 +26,58 @@ main.main {
     margin-bottom: 20px;
 }
 
+.table {
+    font-size: 12px;
+}
+
+.table th {
+    background-color: #5a5a5a;
+    color: #fff;
+    letter-spacing: 2px;
+    border-bottom: none !important;
+    font-weight: normal;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+tr.link {
+    cursor: pointer;
+}
+
+tr.link:hover{
+    background-color: #efefef;
+}
+
+.ma {
+    margin: o auto;
+}
+
+.mt {
+    margin-top: 20px;
+}
+
+.ml {
+    margin-left: 20px;
+}
+
+.mr {
+    margin-right: 20px;
+}
+
+.mb {
+    margin-bottom: 20px;
+}
+
+.al {
+    text-align: left;
+}
+
+.ac {
+    text-align: center;
+}
+
+.ar {
+    text-align: right;
+}

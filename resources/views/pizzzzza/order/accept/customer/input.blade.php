@@ -1,16 +1,20 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>お客様情報登録画面</title>
-    <link rel="stylesheet" href="css/common/main.css" charset="utf-8">
-    <link rel="stylesheet" href="css/common/reset.css" charset="utf-8">
-    <link rel="stylesheet" href="css/common/bootstrap.min.css" charset="utf-8">
-    <link rel="stylesheet" href="css/pages/index.css" charset="utf-8">
-    <script src="js/common/bootstrap.min.js" charset="utf-8"></script>
-    <script src="http://ajaxzip3.googlecode.com/svn/trunk/ajaxzip3/ajaxzip3.js" charset="UTF-8"></script>
-  </head>
-  <body>
+@extends('template.admin')
+
+@section('title', '電話注文')
+
+@section('css')
+    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+@endsection
+
+@section('pankuzu')
+  <ol class="breadcrumb">
+    <li><a href="/pizzzzza/order/top">ホーム</a></li>
+    <li class="active"><a href="">電話番号入力</a></li>
+    <li class="active">新規登録</li>
+  </ol>
+@endsection
+
+@section('main')
     <div class="wrap">
       <h1>お客様情報登録</h1>
       <div class="form-group table-responsive">
@@ -61,5 +65,4 @@
 
       </div>
     </div>
-  </body>
-</html>
+@endsection

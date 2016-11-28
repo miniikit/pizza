@@ -8,26 +8,20 @@
 
 @section('main')
     <div class="wrap">
-      <h1>電話番号受付</h1>
-      <div id="tel">
-        <h2 class="text-center">顧客情報確認</h2>
-        <h3 class="text-center">電話番号入力</h3>
-        <form class="form-inline">
-
-          <div class="form-group">
-              <input class="form-control"  type="text" name="name" value="">-
-          </div>
-
-          <div class="form-group">
-              <input type="text" name="password" class="form-control">-
-          </div>
-
-          <div class="form-group">
-              <input type="text" name="password" class="form-control">
-          </div>
-            <button type style="margin-top:20px;" ="button" class="btn btn-primary btn-lg"name="button">確認</button>
-          </form>
-
-      </div>
+        <h1>電話注文</h1>
+        <div id="tel">
+            @if (count($errors) > 0)
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger">{{ $error }}</div>
+                @endforeach
+            @endif
+            <form class="" action="/pizzzzza/order/accept/customer/check" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="電話番号を入力してください" name="phone" value="">
+                </div>
+                <input type="submit" class="btn btn-primary btn-lg btn-block">
+                {{ csrf_field() }}
+            </form>
+        </div>
     </div>
 @endsection

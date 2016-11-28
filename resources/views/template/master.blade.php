@@ -33,10 +33,21 @@
         <div id="info">
             <div class="wrap">
             @if (Auth::guest())
-                <a href="/login">ログイン</a>
+                <a href="/login"><i class="fa fa-lock" aria-hidden="true"></i>ログイン</a>
+                <a href="/register">新規会員登録</a>
                 @else
-                <a href="/mypage/order/history">{{ Auth::user()->name }} 様</a>
-                <a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">ログアウト</a>
+                <div id="mypage">
+                    <a href="/mypage/order/history"><i class="fa fa-user" aria-hidden="true"></i>{{ Auth::user()->name }} 様</a>
+                    <div class="list">
+                        <ul>
+                            <li><a href="/mypage/detail">会員情報確認</a></li>
+                            <li><a href="/mypage/edit?">会員情報更新</a></li>
+                            <li><a href="/mypage/order/history">注文履歴</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-unlock-alt" aria-hidden="true"></i>ログアウト</a>
                 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                 @endif
             </div>

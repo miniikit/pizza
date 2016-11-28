@@ -7,19 +7,14 @@
 
 <meta name="description" itemprop="description" content="@yield('description')">
 <meta name="keywords" itemprop="keywords" content="@yield('keywords')">
-<link href="/css/common/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/plug/fontawesome/css/font-awesome.min.css" media="screen" title="no title">
 <link href="/css/common/bootstrap.min.css" rel="stylesheet">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/js/common/bootstrap.min.js"></script>
-<link href="/css/common/reset.css" rel="stylesheet">
 <link href="/css/common/admin.css"  rel="stylesheet">
 <link rel="stylesheet" href="/plug/featherlight/featherlight.css">
 <script src="/plug/featherlight/featherlight.js" charset="utf-8"></script>
 @yield('css')
-
-
-
-@yield('js')
 
 </head>
 <body>
@@ -33,22 +28,26 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/pizzzzza/order/">管理画面</a>
+            <a class="navbar-brand" href="/pizzzzza/order/top">管理画面</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/pizzzzza/order/">注文確認</a></li>
-                <li><a href="/pizzzzza/order/accept">電話注文</a></li>
+                <li><a href="/pizzzzza/order/top">注文確認</a></li>
+                <li><a href="/pizzzzza/order/accept/input">電話注文</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">売上&売れ筋<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">クーポン<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/pizzzzza/analysis/earning">売上</a></li>
+                        <li><a href="/pizzzzza/coupon/list">開催中のクーポン一覧</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/pizzzzza/analysis/popular">売れ筋</a></li>
+                        <li><a href="/pizzzzza/coupon/menu">クーポン新規発行</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/pizzzzza/coupon/history">クーポン履歴</a></li>
                     </ul>
                 </li>
+
+                @if (Session::get('auth_id') == 1)
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">メニュー<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -58,13 +57,11 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">クーポン<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">売上&売れ筋<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/pizzzzza/coupon/list">クーポン一覧</a></li>
+                        <li><a href="/pizzzzza/analysis/earning">売上</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/pizzzzza/coupon/add">クーポン新規発行</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="/pizzzzza/coupon/history">クーポン履歴</a></li>
+                        <li><a href="/pizzzzza/analysis/populer">売れ筋</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -75,19 +72,27 @@
                         <li><a href="/pizzzzza/employee/add">従業員追加</a></li>
                     </ul>
                 </li>
+                @endif
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a>ユーザー名 : {{ Auth::user()->name }}</a></li>
+                <li><a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">ログアウト</a></li>
+                <li><form id="logout-form" action="{{ url('/pizzzzza/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+@yield('pankuzu')
 <main class="main">
 <div class="container">
-
+@include('flash::message')
 @yield('main')
 </main>
 </div>
 
 </div>
 </main>
-
+@yield('script')
 </body>
 </html>

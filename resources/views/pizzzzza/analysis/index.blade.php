@@ -8,7 +8,9 @@
 
 @section('main')
     <div class="container">
+
         <h1>売上・売れ筋</h1>
+
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             売上
@@ -21,16 +23,18 @@
           </ul>
         </div>
 
-        <table class="table">
-          <thead>
+      <div class="row">
+        <div class="col-md-8">
+          <table class="table">
+            <thead>
             <tr>
               <th>#</th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Username</th>
             </tr>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             <tr>
               <th scope="row">1</th>
               <td>Mark</td>
@@ -49,7 +53,12 @@
               <td>the Bird</td>
               <td>@twitter</td>
             </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+
+
     </div>
 @endsection

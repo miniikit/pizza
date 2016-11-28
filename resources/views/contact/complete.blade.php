@@ -13,9 +13,13 @@
 
 @section('main')
     <div class="container wrap">
-
-        <h1>送信完了しました。</h1>
-        
+        <h2>CONTACT</h2>
+        <div id="complete">
+            <div class="inner">
+                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                <h3>お問い合わせありがとうございます</h3>
+            </div>
+       </div>
     </div>
 @endsection
 
