@@ -37,6 +37,10 @@ Route::get('/mypage/detail','MypagesController@detail');
 Route::post('/mypage/edit','MypagesController@edit');
 Route::get('/mypage/confirm','MypagesController@confirm');
 
+//トピック
+Route::get('/topic','CampaignesController@index');
+Route::get('/topicdetail','CampaignesController@campaignDetail');
+
 
 // コンタクト
 Route::get('/contact','ContactController@index');
