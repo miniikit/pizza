@@ -18,7 +18,7 @@ use App\Service\PhoneOrderService;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\DB;  //サービスに移植後削除
 
-
+use App\Http\Requests\AdminPhoneUserEditRequest;
 
 
 class PhoneOrdersController extends Controller
@@ -46,7 +46,7 @@ class PhoneOrdersController extends Controller
     //メモ::タスク、バリデーションチェックを、もう１つつくってUSRとTMP両方で使えるように
 
     //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞バリデーションチェック処理
-    public function updateWeb(Request $request){
+    public function updateWeb(AdminPhoneUserEditRequest $request){
 
         //
         //  handlerで、会員情報編集画面から、更新ボタンが押された時：WEB会員バージョン
@@ -73,9 +73,9 @@ class PhoneOrdersController extends Controller
 
         if($userType == "web"){    //Web会員
             //追加POSTデータの受取
-            $birthday = $request['birthday'];
-            $email = $request['email'];
-            $gender_id = $request['gender_id'];
+            $birthday = $user_update['birthday'];
+            $email = $user_update['email'];
+            $gender_id = $user_update['gender_id'];
             DB::table('users')->where('users.id','=',$userId)->update(['name' => $name,'kana' => $name_katakana,'email' => $email, 'gender_id' => $gender_id, 'birthday' => $birthday, 'postal' => $postal, 'address1' => $address1, 'address2' => $address2, 'address3' => $address3, 'phone' => $phone]);
             Flash::success('会員情報の更新が完了しました。');
 
@@ -83,31 +83,34 @@ class PhoneOrdersController extends Controller
             Flash::error('エラーが発生しました。');
         }
 
-        return ('aaa');
+        return redirect('/pizzzzza/order/accept/customer/detail');
 
     }
 
     //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞バリデーションチェック処理
-    public function updatePhone(Request $request){
+    public function updatePhone(AdminPhoneUserEditRequest $request){
 
         //
-        //  handlerで、会員情報編集画面から、更新ボタンが押された時：電話会員バージョン
+        //  handlerで、会員情報編集画面から、更新ボタンが押された時：WEB会員バージョン
         //
+
+
+        $user_update = session()->get('request');
+
 
         //POSTデータの受取
-        $name = $request->name;
-        $name_katakana = $request->name_katakana;
-        $postal = $request->postal;
-        $address1 = $request->address1;
-        $address2 = $request->address2;
-        $address3 = $request->address3;
-        $phone = $request->phone;
+        $name = $user_update['name'];
+        $name_katakana = $user_update['name_katakana'];
+        $postal = $user_update['postal'];
+        $address1 = $user_update['address1'];
+        $address2 = $user_update['address2'];
+        $address3 = $user_update['address3'];
+        $phone = $user_update['phone'];
 
 
         //Web会員か、PHONE会員か、会員IDは何番か。
         $userType = session()->get('phone_order_user_type');
         $userId = session()->get('customer_id');
-
 
         if($userType == "phone"){
             DB::table('temporaries_users_master')->where('temporaries_users_master.id','=',$userId)->update(['name' => $name,'kana' => $name_katakana,'postal' => $postal, 'address1' => $address1, 'address2' => $address2, 'address3' => $address3, 'phone' => $phone]);
@@ -228,11 +231,12 @@ class PhoneOrdersController extends Controller
             $customer_type = session()->get('phone_order_user_type');
 
             if ($customer_type == "web"){
-                session()->put('request', $request->all());
+                 session()->put('request', $request->all());
                  $this->updateWeb($request);
                  return redirect('/pizzzzza/order/accept/customer/update/web');
             } else if ($customer_type == "phone") {
-                 $this->updatePhone($request);
+                 session()->put('request', $request->all());
+                 $this->updatePhone($requestData);
                  return redirect('/pizzzzza/order/accept/customer/update/phone');
             } else {
                 dd('会員種別が不定');
