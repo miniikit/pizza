@@ -15,7 +15,7 @@
 @endsection
 
 @section('main')
-<h1>従業員管理</h1>
+<h1>従業員詳細</h1>
 <div class="row">
 <div class="col-md-7">
 <table class="table table-bordered">

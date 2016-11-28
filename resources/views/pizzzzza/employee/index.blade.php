@@ -14,7 +14,7 @@
 @endsection
 
 @section('main')
-    <h1>従業員管理画面</h1>
+    <h1>従業員一覧</h1>
     <div class="row">
         <table class="table">
             <thead>

@@ -69,6 +69,8 @@
                     <ul class="dropdown-menu">
                         <li><a href="/pizzzzza/employee">従業員一覧</a></li>
                         <li role="separator" class="divider"></li>
+                        <li><a href="/pizzzzza/employee/history">従業員履歴一覧</a></li>
+                        <li role="separator" class="divider"></li>
                         <li><a href="/pizzzzza/employee/add">従業員追加</a></li>
                     </ul>
                 </li>
