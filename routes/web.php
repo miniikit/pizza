@@ -64,6 +64,7 @@ Route::get('/app/countCartContents','ApisController@countCartContents');
 Route::group(['middleware' => ['adminauth']], function () {
 
 //管理者用ページ
+
 Route::get('/pizzzzza/employee', 'EmployeesController@index')->name('employees'); //従業員一覧
 Route::get('/pizzzzza/employee/{id}/show', 'EmployeesController@show'); //従業員詳細
 Route::post('/pizzzzza/employee/{id}/delete', 'EmployeesController@destroy'); //従業員削除
@@ -71,6 +72,7 @@ Route::get('/pizzzzza/employee/{id}/edit', 'EmployeesController@edit'); //従業
 Route::get('/pizzzzza/employee/add', 'EmployeesController@add'); //従業員追加
 Route::post('/pizzzzza/employee/add/store', 'EmployeesController@store'); //従業員追加処理
 Route::post('/pizzzzza/employee/{id}/update', 'EmployeesController@update'); //従業員更新処理
+
 
 Route::get('/pizzzzza/order/top','AdminController@orderIndex'); //注文確認ページ
 Route::any('/pizzzzza/order/get','AdminController@orderGet'); //注文確認ページ処理用
@@ -81,8 +83,6 @@ Route::get('/pizzzzza/menu/edit', 'AdminMenusController@nav'); //従業員用メ
 Route::post('/pizzzzza/menu/edit/do', 'AdminMenusController@editDo'); //従業員用メニュー更新処理
 Route::get('/pizzzzza/menu/add', 'AdminMenusController@add'); //従業員用メニュー追加
 Route::post('/pizzzzza/menu/add', 'AdminMenusController@push'); //従業員用メニュー追加処理
-
-Route::get('/pizzzzza/analysis','AnalysisController@index'); //売り上げ・売れ筋ページ
 
 Route::get('/pizzzzza/coupon/menu','CouponsController@couponMenu'); //クーポンメニュー
 Route::get('/pizzzzza/coupon/add','CouponsController@couponNew'); //クーポン種別選択ページ
@@ -108,7 +108,7 @@ Route::get('/pizzzzza/order/accept/item/confirm','PhoneOrdersController@orderCon
 
 //売上・売れ筋
 Route::get('/pizzzzza/analysis/populer','AnalysisController@analysisPopuler');
-Route::get('/pizzzzza/analysis/earning','AnalysisController@analysisEarning');
+Route::get('/pizzzzza/analysis/earning','AnalysisController@index');
 
 //Auth
 Route::post('/pizzzzza/logout', 'auth\AdminLoginController@logout'); //管理者用ログアウトページ

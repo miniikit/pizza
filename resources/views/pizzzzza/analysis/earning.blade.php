@@ -8,26 +8,23 @@
 @endsection
 
 @section('main')
-    <div class="wrap">
     <h1>売上確認</h1>
-    <form class="text" action="#" method="post" class="">
-      <div class="text-right">
-    <div class="btn-group" data-toggle="buttons">
-  <label class="active">
-    <input type="submit" autocomplete="off" value="性別" class="btn btn-primary">
-  </label>
-  <label class="">
-    <input type="submit" autocomplete="off" value="年代" class="btn btn-success">
-  </label>
-  <label class="">
-    <input type="submit" autocomplete="off" value="期間" class="btn btn-danger">
-  </label>
-</div>
-</div>
-</form>
-<div class="">
-  <img src="images/test/earnings.png" alt="" />
-</div>
+    <div class="dropdown mb">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        性別
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">性別</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">年代</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">期間</a></li>
+      </ul>
+    </div>
+    <div class="ac">
+        <img src="http://nmbr.jp/wp/wp-content/uploads/2015/02/mcdonaldhdjp.png" alt="" />
+    </div>
 <div class="">
   <table class="table">
     <thead>
@@ -52,6 +49,5 @@
       <?php } ?>
     </tbody>
   </table>
-</div>
 </div>
 @endsection

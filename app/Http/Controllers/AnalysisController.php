@@ -9,14 +9,11 @@ use App\Http\Requests;
 class AnalysisController extends Controller
 {
     public function index() {
-        return view('pizzzzza.analysis.index');
+        return view('pizzzzza.analysis.earning');
     }
 
-    public function analysisPopuler(){
+    public function populer(){
         return view('pizzzzza.analysis.populer');
     }
 
-    public function analysisEarning(){
-        return view('pizzzzza.analysis.earning');
-    }
 }
