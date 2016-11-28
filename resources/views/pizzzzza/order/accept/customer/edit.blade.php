@@ -20,7 +20,7 @@
         <h1>お客様情報編集</h1>
 
         @if(isset($user))
-        <form action="/pizzzzza/order/accept/customer/handler" method="post">
+        <form id="updateForm" action="a.html" method="post">
             <div class="form-group table-responsive">
                 <table class="table table-bordered">
                     <tbody>
@@ -82,7 +82,7 @@
                 </table>
                 <div class="text-center">
                     <input type="submit" class="btn btn-danger btn-lg" name="editPost" value="戻る">
-                    <input type="submit" class="btn btn-primary btn-lg" name="editPost" value="更新">
+                    <input id="submit" type="submit" class="btn btn-primary btn-lg" name="editPost" value="更新" onclick="changeData()">
                 </div>
             </div>
             {{  csrf_field()  }}
@@ -93,4 +93,38 @@
 
 @section('script')
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+    <script>
+        $(function(){
+            //なにかしらの処理
+
+            @if(session()->get('phone_order_user_type') == "web")
+                var status = "web";
+            alert('webだね');
+            @else
+                var status = "phone";
+            alert('phoneだね');
+            @endif
+
+
+/*
+            $('#submit').click(function() {
+                $(this).parents('form').attr('action', $(this).data('/pizzzzza/order/accept/customer/update/phone'));
+                $(this).parents('form').submit();
+                alert('submitがおされた！処理する');
+            });
+            */
+
+            if(status  == "phone")
+            {
+                alert('phone');
+                var element = document.getElementById("updateForm");
+                element.setAttribute("action", "/pizzzzza/order/accept/customer/update/phone");
+            }else if(status == "web"){
+                alert('web');
+                var element = document.getElementById("updateForm");
+                element.setAttribute("action", "/pizzzzza/order/accept/customer/update/web");
+            }
+        });
+
+    </script>
 @endsection
