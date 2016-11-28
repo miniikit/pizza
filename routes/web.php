@@ -65,12 +65,12 @@ Route::group(['middleware' => ['adminauth']], function () {
 
 //管理者用ページ
 Route::get('/pizzzzza/employee', 'EmployeesController@index')->name('employees'); //従業員一覧
-Route::get('/pizzzzza/employee/show/{id}', 'EmployeesController@show'); //従業員詳細
-Route::post('/pizzzzza/employee/handler/{id}', 'EmployeesController@handler'); //ハンドラー
-Route::get('/pizzzzza/employee/edit/{id}', 'EmployeesController@edit'); //従業員編集
+Route::get('/pizzzzza/employee/{id}/show', 'EmployeesController@show'); //従業員詳細
+Route::post('/pizzzzza/employee/{id}/delete', 'EmployeesController@destroy'); //従業員削除
+Route::get('/pizzzzza/employee/{id}/edit', 'EmployeesController@edit'); //従業員編集
 Route::get('/pizzzzza/employee/add', 'EmployeesController@add'); //従業員追加
 Route::post('/pizzzzza/employee/add/store', 'EmployeesController@store'); //従業員追加処理
-Route::post('/pizzzzza/employee/edit/update', 'EmployeesController@update'); //従業員更新処理
+Route::post('/pizzzzza/employee/{id}/update', 'EmployeesController@update'); //従業員更新処理
 
 Route::get('/pizzzzza/order/top','AdminController@orderIndex'); //注文確認ページ
 Route::any('/pizzzzza/order/get','AdminController@orderGet'); //注文確認ページ処理用

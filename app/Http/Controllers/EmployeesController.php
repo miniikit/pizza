@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 use App\Employee;
 use App\User;
 use App\Http\Requests\EmployeeRequest;
+use App\Http\Requests\EmployeeUpdateRequest;
+
 
 class EmployeesController extends Controller
 {
@@ -25,22 +27,6 @@ class EmployeesController extends Controller
         $employees = Employee::with('user.gender')->get();
 
         return view('pizzzzza/employee.index',compact('employees'));
-    }
-
-    public function handler(Request $request,$id) {
-
-        if ($request->has('delete')) {
-
-            $this->destroy($id);
-
-            Flash::error('削除しました。');
-
-            return redirect()->route('employees');
-
-        }else{
-
-        }
-
     }
 
 
@@ -108,14 +94,39 @@ class EmployeesController extends Controller
         $employee = Employee::with('user.gender')->find($id);
         $employee->delete();
 
+        Flash::success('削除しました。');
+
+        return redirect()->route('employees');
+
     }
 
-    public function update($id) {
+    public function update(EmployeeUpdateRequest $request,$id) {
 
         $employee = Employee::with('user.gender')->find($id);
 
+        $data = $request->all();
 
-        $employee->user->gender->save();
+        $employee->user->name = $data['name'];
+        $employee->user->kana = $data['kana'];
+        $employee->user->birthday = $data['birthday'];
+        $employee->user->gender_id = $data['gender_id'];
+        $employee->user->postal = $data['postal'];
+        $employee->user->address1 = $data['address1'];
+        $employee->user->address2 = $data['address2'];
+        $employee->user->address3 = $data['address3'];
+        $employee->user->phone = $data['phone'];
+        $employee->user->email = $data['email'];
+
+
+        if (empty($data['emoloyee_agreement_enddate'])){
+            $employee->emoloyee_agreement_enddate = NULL;
+        }else{
+            $employee->emoloyee_agreement_enddate = $data['emoloyee_agreement_enddate'];
+
+        }
+
+        $employee->user->save();
+        $employee->save();
 
         Flash::success('更新完了しました。');
 

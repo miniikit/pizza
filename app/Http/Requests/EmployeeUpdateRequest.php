@@ -13,7 +13,7 @@ class EmployeeUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,17 @@ class EmployeeUpdateRequest extends FormRequest
     {
         return [
             //
+            'name' => 'required|max:50',
+            'kana' => 'required|max:100',
+            'birthday' => 'required|date',
+            'gender_id' => 'required',
+            'postal' => 'required|size:7|string',
+            'address1' => 'required|max:255',
+            'address2' => 'required|max:255',
+            'address3' => 'max:255',
+            'phone' => 'required|string|between:10,11',
+            'email' => 'required|email',
+            'emoloyee_agreement_enddate' => 'date',
         ];
     }
 }

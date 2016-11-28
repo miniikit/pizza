@@ -17,7 +17,7 @@
             </ul>
         </div>
     @endif
-    <form action="/pizzzzza/employee/edit/{{ $employee->id }}" method="post">
+    <form action="/pizzzzza/employee/{{ $employee->id }}/update" method="post">
         <div class="row">
             <div class="col-md-8">
                 <table class="table table-bordered ">
@@ -87,7 +87,7 @@
                     </tr>
                     <tr>
                         <th class="text-center" >契約終了日</th>
-                        <td><input class="form-control" type="date" name="email" value="{{ $employee->emoloyee_agreement_enddate }}" ></td>
+                        <td><input class="form-control" type="date" name="emoloyee_agreement_enddate" value="{{ $employee->emoloyee_agreement_enddate }}" ></td>
                     </tr>
                     <tr>
                         <th class="text-center" >登録日</th>
