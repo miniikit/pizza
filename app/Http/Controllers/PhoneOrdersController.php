@@ -12,6 +12,7 @@
  */
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminPhoneUserEditRequestForWeb;
 use Illuminate\Http\Request;
 use App\Http\Requests\phoneSearchRequest;
 use App\Service\PhoneOrderService;
@@ -46,13 +47,11 @@ class PhoneOrdersController extends Controller
     //メモ::タスク、バリデーションチェックを、もう１つつくってUSRとTMP両方で使えるように
 
     //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞バリデーションチェック処理
-    public function updateWeb(AdminPhoneUserEditRequest $request){
+    public function updateWeb(AdminPhoneUserEditRequestForWeb $request){
 
-        dd('web');
         //
         //  handlerで、会員情報編集画面から、更新ボタンが押された時：WEB会員バージョン
         //
-
 
         $user_update = $request->all();
 
@@ -76,7 +75,7 @@ class PhoneOrdersController extends Controller
             //追加POSTデータの受取
             $birthday = $user_update['birthday'];
             $email = $user_update['email'];
-            $gender_id = $user_update['gender_id'];
+            $gender_id = $user_update['gender'];
             DB::table('users')->where('users.id','=',$userId)->update(['name' => $name,'kana' => $name_katakana,'email' => $email, 'gender_id' => $gender_id, 'birthday' => $birthday, 'postal' => $postal, 'address1' => $address1, 'address2' => $address2, 'address3' => $address3, 'phone' => $phone]);
             Flash::success('会員情報の更新が完了しました。');
 
@@ -131,7 +130,6 @@ class PhoneOrdersController extends Controller
     //電話番号入力ページ＞お客様情報・注文履歴表示ページ
     // ※処理内容：電話番号が見つかれば会員情報を表示し、見つからなければ新規登録ページへリダイレクトする
     public function show(Request $request){
-
 
         //
         //  どのページから遷移してきたかによって、$phoneに設定する値を変更する
