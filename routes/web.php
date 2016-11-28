@@ -100,8 +100,8 @@ Route::get('/pizzzzza/order/accept/input','PhoneOrdersController@index')->name('
 Route::post('/pizzzzza/order/accept/customer/check','PhoneOrdersController@input'); //お客様情報・注文履歴表示ページ（入力ページからの遷移用）
 Route::get('/pizzzzza/order/accept/customer/detail','PhoneOrdersController@show');  //お客様情報・注文履歴表示ページ（戻るボタンなどでの遷移用）
 Route::get('/pizzzzza/order/accept/customer/edit','PhoneOrdersController@edit'); //登録済みの顧客情報編集ページ
-Route::get('/pizzzzza/order/accept/customer/update/phone','PhoneOrdersController@updatePhone'); //登録済みの顧客情報編集＞電話会員＞更新処理
-Route::get('/pizzzzza/order/accept/customer/update/web','PhoneOrdersController@updateWeb'); //登録済みの顧客情報編集＞WEB会員＞更新処理
+Route::post('/pizzzzza/order/accept/customer/update/phone','PhoneOrdersController@updatePhone'); //登録済みの顧客情報編集＞電話会員＞更新処理
+Route::post('/pizzzzza/order/accept/customer/update/web','PhoneOrdersController@updateWeb'); //登録済みの顧客情報編集＞WEB会員＞更新処理
 Route::get('/pizzzzza/order/accept/customer/input','PhoneOrdersController@newCustomer')->name('newCustomer'); //登録済み出ない場合のお客様情報入力ページ
 
 //電話注文　注文処理

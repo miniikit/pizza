@@ -48,12 +48,13 @@ class PhoneOrdersController extends Controller
     //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞バリデーションチェック処理
     public function updateWeb(AdminPhoneUserEditRequest $request){
 
+        dd('web');
         //
         //  handlerで、会員情報編集画面から、更新ボタンが押された時：WEB会員バージョン
         //
 
 
-        $user_update = session()->get('request');
+        $user_update = $request->all();
 
 
         //POSTデータの受取
@@ -94,8 +95,9 @@ class PhoneOrdersController extends Controller
         //  handlerで、会員情報編集画面から、更新ボタンが押された時：WEB会員バージョン
         //
 
+        dd('phone');
 
-        $user_update = session()->get('request');
+        $user_update = $request->all();
 
 
         //POSTデータの受取
@@ -227,6 +229,8 @@ class PhoneOrdersController extends Controller
 
         } else if ($request->editPost == "更新") {
 
+
+            /*
             $customer_id = session()->get('customer_id');
             $customer_type = session()->get('phone_order_user_type');
 
@@ -241,7 +245,7 @@ class PhoneOrdersController extends Controller
             } else {
                 dd('会員種別が不定');
             }
-
+            */
 
         }
     }
