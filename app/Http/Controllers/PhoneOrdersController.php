@@ -44,9 +44,7 @@ class PhoneOrdersController extends Controller
 
 
 
-    //メモ::タスク、バリデーションチェックを、もう１つつくってUSRとTMP両方で使えるように
-
-    //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞バリデーションチェック処理
+    //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞Webの、バリデーションチェック＆更新処理
     public function updateWeb(AdminPhoneUserEditRequestForWeb $request){
 
         //
@@ -80,14 +78,14 @@ class PhoneOrdersController extends Controller
             Flash::success('会員情報の更新が完了しました。');
 
         }else{
-            Flash::error('エラーが発生しました。');
+            Flash::error('セッションエラーが発生しました。');
         }
 
         return redirect('/pizzzzza/order/accept/customer/detail');
 
     }
 
-    //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞バリデーションチェック処理
+    //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞バリデーションチェック＆更新処理
     public function updatePhone(AdminPhoneUserEditRequest $request){
 
         //
@@ -213,40 +211,21 @@ class PhoneOrdersController extends Controller
         }
 
     }
-
-
-    //
-    //  編集画面からの遷移であれば
-    //
-    //  ※　想定値 : $request -> editPost -> "戻る" / "更新"
-
-    if (isset($request->editPost)) {
-
-        if ($request->editPost == "戻る") {
-            return redirect('/pizzzzza/order/accept/customer/detail');
-
-        } else if ($request->editPost == "更新") {
-
-
-            /*
-            $customer_id = session()->get('customer_id');
-            $customer_type = session()->get('phone_order_user_type');
-
-            if ($customer_type == "web"){
-                 session()->put('request', $request->all());
-                 $this->updateWeb($request);
-                 return redirect('/pizzzzza/order/accept/customer/update/web');
-            } else if ($customer_type == "phone") {
-                 session()->put('request', $request->all());
-                 $this->updatePhone($requestData);
-                 return redirect('/pizzzzza/order/accept/customer/update/phone');
-            } else {
-                dd('会員種別が不定');
-            }
-            */
-
-        }
-    }
+//
+//
+//    //
+//    //  編集画面からの遷移であれば
+//    //
+//    //  ※　想定値 : $request -> editPost -> "戻る" / "更新"
+//
+//    if (isset($request->editPost)) {
+//
+//        if ($request->editPost == "戻る") {
+//            return redirect('/pizzzzza/order/accept/customer/detail');
+//
+//        } else if ($request->editPost == "更新") {
+//        }
+//    }
 }
 
 
@@ -296,8 +275,12 @@ class PhoneOrdersController extends Controller
 
     //商品入力・選択ページ
     public function orderSelect(){
-        return view('pizzzzza.order.accept.item.select');
+
+        $products = DB::table('products_master')->join('products_prices_master','products_master.price_id','=','products_prices_master.id')->join('genres_master','genres_master.id','=','products_master.genre_id')->orderBy('genre_id','asc')->get();
+
+        return view('pizzzzza.order.accept.item.select', compact('products'));
     }
+
 
 
 

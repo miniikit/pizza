@@ -4,6 +4,13 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
+/*
+ *
+ *  電話注文時、既に会員情報が登録されている場合に、それを編集する処理（電話会員）
+ *
+ * */
+
 class AdminPhoneUserEditRequest extends FormRequest
 {
     /**
@@ -31,11 +38,6 @@ class AdminPhoneUserEditRequest extends FormRequest
             'address2' => 'required|max:255',
             'address3' => 'max:255',
             'phone' => 'required|string|between:10,11',
-            'gender' => 'required',
-            'email' => 'required|email',
-            'new_password' => 'min:8|regex:/\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,128}+\z/|same:new_password_confirm|different:confirm_password|max:128',
-            'new_password_confirm' => 'different:confirm_password',
-            'confirm_password' => 'required'
         ];
     }
 }
