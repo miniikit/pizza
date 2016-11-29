@@ -16,7 +16,7 @@
 @endsection
 
 @section('main')
-    <h1>従業員編集画面</h1>
+    <h1>従業員編集</h1>
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>

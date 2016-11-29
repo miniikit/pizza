@@ -70,6 +70,7 @@ Route::group(['middleware' => ['adminauth']], function () {
 //管理者用ページ
 
 Route::get('/pizzzzza/employee', 'EmployeesController@index')->name('employees'); //従業員一覧
+Route::get('/pizzzzza/employee/history', 'EmployeesController@history')->name('historyEmployees'); //従業員一覧
 Route::get('/pizzzzza/employee/{id}/show', 'EmployeesController@show'); //従業員詳細
 Route::post('/pizzzzza/employee/{id}/delete', 'EmployeesController@destroy'); //従業員削除
 Route::get('/pizzzzza/employee/{id}/edit', 'EmployeesController@edit'); //従業員編集
