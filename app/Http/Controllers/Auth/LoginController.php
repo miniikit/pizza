@@ -62,7 +62,7 @@ class LoginController extends Controller
     //権限を取得。
     $authId = $userinfo->authority_id;
     
-    if($authId == 4){
+    if($authId == 3){
         if(Auth::attempt(['email' => $email, 'password' => $password ])){
 
             session()->put('auth_id',$authId);
