@@ -107,7 +107,7 @@ class EmployeesController extends Controller
 
         Flash::success('削除しました。');
 
-        return redirect()->route('employees');
+        return redirect()->route('AdminMenu');
 
     }
 
