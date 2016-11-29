@@ -18,9 +18,10 @@
  */
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use App\Coupon;
 
 class CouponsController extends Controller
 {
@@ -56,7 +57,9 @@ class CouponsController extends Controller
 
     //  開催中クーポン一覧ページ
     public function couponNowList()  {
-        return view('pizzzzza.coupon.list');
+        $coupons = DB::table('coupons_master')->get();
+        //dd($coupons);
+        return view('pizzzzza.coupon.list',compact('coupons'));
     }
 
     //  開催中クーポン一覧ページ＞値引きクーポン編集ページ
@@ -72,5 +75,11 @@ class CouponsController extends Controller
     //  過去クーポン一覧ページ
     public function couponHistory()  {
         return view('pizzzzza.coupon.history');
+    }
+
+    //  クーポン詳細ページ
+    public function show($id)  {
+        $coupon = Coupon::with('couponType')->find($id);
+        return view('pizzzzza.coupon.show',compact('coupon'));
     }
 }

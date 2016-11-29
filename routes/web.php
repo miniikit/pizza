@@ -89,9 +89,11 @@ Route::post('/pizzzzza/menu/edit/do', 'AdminMenusController@editDo'); //従業�
 Route::get('/pizzzzza/menu/add', 'AdminMenusController@add'); //従業員用メニュー追加
 Route::post('/pizzzzza/menu/add', 'AdminMenusController@push'); //従業員用メニュー追加処理
 
+//クーポン
 Route::get('/pizzzzza/coupon/menu','CouponsController@couponMenu'); //クーポンメニュー
 Route::get('/pizzzzza/coupon/add','CouponsController@couponNew'); //クーポン種別選択ページ
 Route::get('/pizzzzza/coupon/list','CouponsController@couponNowList'); //開催中クーポン一覧ページ
+Route::get('/pizzzzza/coupon/{id}/show', 'CouponsController@show'); //クーポン詳細
 Route::get('/pizzzzza/coupon/add/discount/input','CouponsController@couponNewDiscount'); //クーポン値引き入力ページ
 Route::get('/pizzzzza/coupon/add/gift/input','CouponsController@couponNewGiftInput'); //プレゼントクーポン条件入力ページ
 Route::get('/pizzzzza/coupon/add/gift/select','CouponsController@couponNewGiftSelect'); //プレゼントクーポン商品選択ページ(未完成)
