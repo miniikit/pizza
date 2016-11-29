@@ -679,7 +679,8 @@ class CampaignesMasterSeeder extends Seeder
 
         Campaign::create([
             'campaign_title' => '○○引きクーポン',
-            'campaign_image' => '/images/campaign/4.jpg',
+            'campaign_banner' => '',
+            'campaign_image' => '/images/campaign/1.jpg',
             'campaign_text' => '期間限定12月まで使用可能です。3000円以上お買い上げのお客様に合計から○○円OFF！',
             'campaign_note' => 'テキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいります',
             'campaign_subject' => 'allユーザー',
@@ -688,6 +689,7 @@ class CampaignesMasterSeeder extends Seeder
         ]);
         Campaign::create([
             'campaign_title' => '秋の贅沢サプライズ４',
+            'campaign_banner' => '',
             'campaign_image' => '/images/campaign/4.jpg',
             'campaign_text' => 'このトッピングでこの贅沢がお手頃価格で登場！ポケット状の ‘みみ’部分に4分の1ずつ異なるビーフステーキや北海道産チーズなど贅沢な4種の具材を包み、…',
             'campaign_note' => '秋限定です。',
@@ -697,6 +699,7 @@ class CampaignesMasterSeeder extends Seeder
         ]);
         Campaign::create([
             'campaign_title' => '濃厚ゴージャス4',
+            'campaign_banner' => '',
             'campaign_image' => '/images/campaign/4.jpg',
             'campaign_text' => '[期間限定】「パリッとソーセージクラスト」Ｍサイズが今なら\880もお得！「厚切イベリコ」、「贅沢フォルマッジ」「ピザハット・シュ…',
             'campaign_note' => '秋限定です。',
@@ -706,6 +709,7 @@ class CampaignesMasterSeeder extends Seeder
         ]);
         Campaign::create([
             'campaign_title' => '家族の満足4',
+            'campaign_banner' => '',
             'campaign_image' => '/images/campaign/4.jpg',
             'campaign_text' => '【期間限定】「ゴールデンチーズクラスト」Ｍサイズが今なら\640もお得！「ほっくりポテマヨ」「ペパロニ・シュプリーム」「もちポテ明…',
             'campaign_note' => '秋限定です。',
