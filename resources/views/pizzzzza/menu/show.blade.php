@@ -25,8 +25,24 @@
             <table class="table table-bordered">
                 <tbody>
                 <tr>
-                    <th class="text-center">名前</th>
+                    <th class="text-center" style="width:15%">名前</th>
                     <td>{{ $product->product_name }}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">画像</th>
+                    <td><img src="{{ $product->product_image }}" alt=""></td>
+                </tr>
+                <tr>
+                    <th class="text-center">内容</th>
+                    <td>{{ $product->product_text }}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">ジャンル</th>
+                    <td>{{ $product->genre_id }}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">金額</th>
+                    <td>{{ number_format($product->productPrice->product_price) }}円</td>
                 </tr>
                 </tbody>
             </table>
@@ -35,8 +51,20 @@
             <table class="table table-bordered">
                 <tbody>
                 <tr>
-                    <th class="text-center">従業員ID</th>
-                    <td>{{ $product->productPrice->id }}</td>
+                    <th class="text-center">販売開始日</th>
+                    <td>{{ $product->sales_start_date }}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">販売終了日</th>
+                    <td>{{ $product->deleted_at }}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">登録日</th>
+                    <td>{{ $product->created_at }}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">更新日</th>
+                    <td>{{ $product->updated_at }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -49,7 +77,7 @@
             {{--</form>--}}
         </div>
         <div class="col-md-4 col-md-offset-4 mt">
-            <a href="/pizzzzza/employee" class="btn btn-default btn-lg btn-block">戻る</a>
+            <a href="/pizzzzza/menu" class="btn btn-default btn-lg btn-block">戻る</a>
         </div>
     </div>
 @endsection
