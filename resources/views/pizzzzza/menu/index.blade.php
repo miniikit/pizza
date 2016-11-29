@@ -36,23 +36,21 @@
             </tr>
             </thead>
             <tbody>
-            @if($products)
-                @foreach ($products as $product)
-                    <tr class="link" data-href="/pizzzzza/employee/{{ $product->product_id }}/show" >
-                        <td style="width:5%;text-align: center;">{{ $product->product_id }}</td>
-                        <td style="width:20%;">{{ $product->product_name }}</td>
-                        <td style="text-align: center;">{{ number_format($product->product_price )}}円</td>
-                        <td style="text-align: center;">{{ $product->sales_start_date }}</td>
-                        <td style="text-align: center;">
-                            @if ($product->sales_end_date == null)
-                                未設定
-                            @else
-                                {{ $product->sales_end_date }}
-                            @endif
-                        </td>
-                    </tr>
-                @endforeach
-            @endif
+            @foreach ($products as $product)
+                <tr class="link" data-href="/pizzzzza/menu/{{ $product->id }}/show">
+                    <td style="width:5%;text-align: center;">{{ $product->id }}</td>
+                    <td style="width:20%;">{{ $product->product_name }}</td>
+                    <td style="text-align: center;">{{ number_format($product->productPrice->product_price )}}円</td>
+                    <td style="text-align: center;">{{ $product->sales_start_date }}</td>
+                    <td style="text-align: center;">
+                        @if ($product->sales_end_date == null)
+                            未設定
+                        @else
+                            {{ $product->sales_end_date }}
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
