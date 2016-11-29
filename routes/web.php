@@ -51,6 +51,10 @@ Route::post('/logout','auth\LoginController@logout');
 
 });
 
+//トピック
+Route::get('/topic','CampaignesController@index');
+Route::get('/topicdetail','CampaignesController@campaignDetail');
+
 // コンタクト
 Route::get('/contact','ContactController@index');
 Route::post('/contact','ContactController@send');
