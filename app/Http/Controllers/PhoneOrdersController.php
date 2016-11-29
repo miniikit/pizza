@@ -278,9 +278,9 @@ class PhoneOrdersController extends Controller
 
         $products = DB::table('products_master')->join('products_prices_master','products_master.price_id','=','products_prices_master.id')->join('genres_master','genres_master.id','=','products_master.genre_id')->orderBy('genre_id','asc')->get();
 
-
         return view('pizzzzza.order.accept.item.select', compact('products'));
     }
+
 
 
 
