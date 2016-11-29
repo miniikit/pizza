@@ -16,19 +16,15 @@
       <h1>キャンペーン一覧</h1>
         @foreach ($campaigns as $campaign)
         <div class="campaignBox">
-        <ul>
-          <li class="box1"><a href="/topicdetail?id={{ $campaign->id }}"><img class="image"  src="{{ $campaign->campaign_image }}" alt="" /></li></a>
-          <li class="box2">
-            <div class="box">
-              <div class="title">
-                <h1>{{ $campaign->campaign_title }}</h1>
-              </div>
-              <div class="note">
-                <h1>{{ $campaign->campaign_note }}</h1>
-              </div>
+          <div class="media">
+            <div class="media__image">
+                <a href="/topicdetail?id={{ $campaign->id }}"><img class="image"  src="{{ $campaign->campaign_image }}" alt="" /></a>
             </div>
-          </li>
-       </ul>
+            <div class="media__summary">
+                <h2 class="media__heading">{{ $campaign->campaign_title }}</h2>
+                <p class="media__text">{{ $campaign->campaign_note }}</p>
+            </div>
+          </div>
        </div>
         @endforeach
 

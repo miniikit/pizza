@@ -13,15 +13,17 @@
 
 @section('main')
     <div class="container wrap">
-      <h1>キャンペーン詳細</h1>
+      <div class="title">
+        <h1>キャンペーン詳細</h1>
+      </div>
         <div class="campaignBox">
         <ul>
           <li class="box1">
             <img class="image" src="{{ $campaign->campaign_image }}" alt="" />
           </li>
           <li class="box2">
-            <div class="title">
-              <h1>{{ $campaign->campaign_title }}</h1>
+            <div class="campaigntitle">
+              <h1>キャンペーンタイトル:{{ $campaign->campaign_title }}</h1>
             </div>
           </li>
           <li class="box3">
@@ -46,8 +48,6 @@
           </li>
        </ul>
        </div>
-
-
     </div>
 @endsection
 
