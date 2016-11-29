@@ -67,7 +67,7 @@
                     </tr>
                     <tr>
                         <th class="text-center">販売終了日</th>
-                        <td><input class="form-control" type="text" value="{{$product->sales_end_date }}"></td>
+                        <td><input class="form-control" type="date" value="{{$product->sales_end_date }}"></td>
                     </tr>
                     <tr>
                         <th class="text-center">登録日</th>
