@@ -24,34 +24,19 @@ class AdminMenusController extends Controller
 
     public function index()
     {
-        //
-        //　商品の情報と価格を連結
-        //`
 
-        $products = DB::table('products_master')->join('products_prices_master','products_master.price_id','=','products_prices_master.id')->get();
-
-
-        /*
-          +"id": 1
-          +"product_name": "明太バターチーズ"
-          +"price_id": 1
-          +"product_image": "/images/product/1.jpg"
-          +"product_text": "大きくカットしたポテトにコーンとベーコンをトッピングして、明太クリームソース、バター、チーズを合わせた、家族で楽しめるピザです。"
-          +"genre_id": 1
-          +"sales_start_date": "2016-10-10"
-          +"sales_end_date": null
-          +"created_at": "2016-11-24 17:47:35"
-          +"updated_at": "2016-11-24 17:47:35"
-          +"deleted_at": null
-          +"product_id": 1
-          +"product_price": 1990
-          +"price_change_startdate": "2016-10-10"
-          +"price_change_enddate": null
-          +"employee_id": 1
-         */
+        $products = Product::with('productPrice','genre')->get();
 
         return view('pizzzzza.menu.index', compact('products') );
     }
+
+    public function show($id) {
+
+        $product = Product::with('productPrice','genre')->find($id);
+
+        return view('pizzzzza.menu.show',compact('product'));
+    }
+
 
 
 

@@ -1,0 +1,23 @@
+.container .wrap {
+    padding: 80px 10px;
+    width: 100%;
+}
+.container .title{
+  text-align: center;
+}
+.container h1 {
+    font-size: 25px;
+    margin-bottom: 50px;
+}
+.campaignBox{
+  background-color: #fff;
+  padding: 20px;
+}
+
+.box1{
+  width: 100%;
+  text-align: center;
+}
+.box1 .image{
+  margin-bottom: 30px;
+}

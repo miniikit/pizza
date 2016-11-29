@@ -60,7 +60,7 @@
 
                         <li id="gTop"><a href="/">TOP</a></li>
                         <li id="gMenu"><a href="/menu">MENU</a></li>
-                        <li id="gTopics"><a href="#">TOPICS</a></li>
+                        <li id="gTopics"><a href="/topic">TOPICS</a></li>
                         <li id="gContact"><a href="/contact">CONTACT</a></li>
                         <li id="cart"><a href="/cart">
                             <div id="cartCount"></div>
