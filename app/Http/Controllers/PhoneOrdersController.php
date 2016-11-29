@@ -18,6 +18,7 @@ use App\Http\Requests\phoneSearchRequest;
 use App\Service\PhoneOrderService;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\DB;  //サービスに移植後削除
+use App\Product;
 
 use App\Http\Requests\AdminPhoneUserEditRequest;
 
@@ -275,10 +276,11 @@ class PhoneOrdersController extends Controller
 
     //商品入力・選択ページ
     public function orderSelect(){
-
         $products = DB::table('products_master')->join('products_prices_master','products_master.price_id','=','products_prices_master.id')->join('genres_master','genres_master.id','=','products_master.genre_id')->orderBy('genre_id','asc')->get();
-
-        return view('pizzzzza.order.accept.item.select', compact('products'));
+        $pizzacnt = Product::where('genre_id',1)->count();
+        $sidecnt = Product::where('genre_id',2)->count();
+        $drinkcnt = Product::where('genre_id',3)->count();
+        return view('pizzzzza.order.accept.item.select', compact('products','pizzacnt','sidecnt','drinkcnt'));
     }
 
 
