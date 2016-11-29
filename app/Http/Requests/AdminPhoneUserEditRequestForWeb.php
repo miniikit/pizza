@@ -4,6 +4,13 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
+/*
+ *
+ *  電話注文時、既に会員情報が登録されている場合に、それを編集する処理（Web）
+ *
+ * */
+
 class AdminPhoneUserEditRequestForWeb extends FormRequest
 {
     /**
