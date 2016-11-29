@@ -4,32 +4,70 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+    <link rel="stylesheet" href="/css/pizzzzza/coupon/index.css" media="all" title="no title">
+@endsection
+
+@section('pankuzu')
+    <ol class="breadcrumb">
+        <li><a href="/pizzzzza/order/top">ホーム</a></li>
+        <li class="active">開催中クーポン一覧</li>
+    </ol>
 @endsection
 
 @section('main')
     <div class="wrap">
     <h1>開催中クーポン</h1>
-      <div class="container">
-        <div class="row">
-          <?php for ($i=0; $i < 5; $i++) {  ?>
-        <form class="" action="#" method="post">
-          <table class="table table-bordered" style="margin-top:70px"> <!-- サンプル -->
-            <tr><th>ID:</th><td>001</td><th>クーポン名:</th><td>マルゲリータピザ無料!</td><th>担当者:</th><td>001</td></tr>
-            <tr><th>シリアル:</th><td>0724545194194</td><th>条件:</th><td>2500</td><th></th><td><input type="submit" name="name" class="btn btn-primary btn-lg" value="削除"></td></tr>
-            <tr><th>値引き金額:</th><td>900</td><th>商品プレゼント:</th><td>001</td><th></th><td><input type="submit" name="name" class="btn btn-primary btn-lg" value="編集"></td></tr>
-            <tr><th>開始日:</th><td>2016/05/30</td><th>終了日:</th><td>2017/11/23</td><th>制限:</th><td>1回</td></tr>
-            <tr><th>登録日時:</th><td>2150/11/11 22:55:44</td><th>更新日時:</th><td>5566/44//99 65:44:55</td><th>対象:</th><td>初回のみ</td></tr>
-          </table>
-          <?php } ?>
-        </form>
-        </div>
-<div class="text-center" style="margin-top:50px">
-  <a href="#" class="btn btn-primary btn-lg">戻る</a>
-</div>
-    </div><tbody>
-      <td>
 
-      </td>
-    </tbody>
+    <div class="container">
+     <div class="row">
+      <div class="form-group table-responsive">
+          <table class="table" style="margin-top:70px">
+          <thead>
+          <tr>
+          <th class="text-center">クーポン番号</th>
+          <th class="text-center">クーポン名</th>
+          <th class="text-center">値引額</th>
+          <th class="text-center">開始日</th>
+          <th class="text-center">終了日</th>
+          <th class="text-center">登録日時</th>
+          <th class="text-center">更新日時</th>
+          <th class="text-center">利用上限回数</th>
+          <th class="text-center">対象者</th>
+          </tr>
+          </thead>
+           <tbody>
+                 @foreach ($coupons as $coupon)
+                  <tr class="link" data-href="/pizzzzza/coupon/{{ $coupon->id }}/show">
+                   <td class="number text-center">{{ $coupon->coupon_number }}</td>
+                   <td class="name text-center">{{ $coupon->coupon_name }}</td>
+                   <td class="discount text-center">{{ $coupon->coupon_discount }}</td>
+                   <td class="date text-center">{{ $coupon->coupon_start_date }}</td>
+                   <td class="date text-center">{{ $coupon->coupon_end_date }}</td>
+                   <td class="date text-center">{{ $coupon->created_at }}</td>
+                   <td class="date text-center">{{ $coupon->updated_at }}</td>
+                   <td class="number text-center">{{ $coupon->coupon_conditions_count }}</td>
+                   <td class="number text-center">{{ $coupon->coupon_conditions_first }}</td>
+                   </td>
+                 </tr>
+                @endforeach
+          </form>
+          </tbody>
+          </table>
+           </div>
+ </div>
   </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        $('.table tr[data-href]').addClass('clickable').click(function () {
+            window.location = $(this).attr('data-href');
+        }).find('a').hover(function () {
+            $(this).parents('tr').unbind('click');
+        }, function () {
+            $(this).parents('tr').click(function () {
+                window.location = $(this).attr('data-href');
+            });
+        });
+    </script>
 @endsection

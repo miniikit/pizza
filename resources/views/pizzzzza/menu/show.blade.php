@@ -56,7 +56,13 @@
                 </tr>
                 <tr>
                     <th class="text-center">販売終了日</th>
-                    <td>{{ $product->deleted_at }}</td>
+                    <td>
+                        @if ($product->sales_end_date == null)
+                            未設定
+                        @else
+                            {{ $product->sales_end_date }}
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <th class="text-center">登録日</th>
@@ -68,13 +74,13 @@
                 </tr>
                 </tbody>
             </table>
-            {{--<form class="ar" action="/pizzzzza/employee/{{$employee->id}}/delete" method="post">--}}
-                {{--<a href="/pizzzzza/employee/{{$employee->id}}/edit" class="btn btn-default btn-sm">編集</a>--}}
-                {{--@if ($employee->user->authority_id != 1 && is_null($employee->deleted_at))--}}
-                    {{--<input class="btn btn-danger btn-sm ml" type="submit" name="delete" value="削除">--}}
-                {{--@endif--}}
-                {{--{{ csrf_field() }}--}}
-            {{--</form>--}}
+            <form class="ar" action="/pizzzzza/menu/{{$product->id}}/delete" method="post">
+                <a href="/pizzzzza/menu/{{$product->id}}/edit" class="btn btn-default btn-sm">編集</a>
+                @if (is_null($product->deleted_at))
+                    <input class="btn btn-danger btn-sm ml" type="submit" name="delete" value="削除">
+                @endif
+                {{ csrf_field() }}
+            </form>
         </div>
         <div class="col-md-4 col-md-offset-4 mt">
             <a href="/pizzzzza/menu" class="btn btn-default btn-lg btn-block">戻る</a>
