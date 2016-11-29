@@ -31,6 +31,7 @@
                 <th style="text-align: center;">ID</th>
                 <th>メニュー名</th>
                 <th style="text-align: center;">価格</th>
+                <th style="text-align: center;">ジャンル</th>
                 <th style="text-align: center;">販売開始日</th>
                 <th style="text-align: center;">販売終了日</th>
             </tr>
@@ -41,6 +42,7 @@
                     <td style="width:5%;text-align: center;">{{ $product->id }}</td>
                     <td style="width:20%;">{{ $product->product_name }}</td>
                     <td style="text-align: center;">{{ number_format($product->productPrice->product_price )}}円</td>
+                    <td style="text-align: center;">{{ $product->genre->genre_name }}</td>
                     <td style="text-align: center;">{{ $product->sales_start_date }}</td>
                     <td style="text-align: center;">
                         @if ($product->sales_end_date == null)

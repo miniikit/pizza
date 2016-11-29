@@ -25,14 +25,14 @@ class AdminMenusController extends Controller
     public function index()
     {
 
-        $products = Product::with('productPrice')->get();
+        $products = Product::with('productPrice','genre')->get();
 
         return view('pizzzzza.menu.index', compact('products') );
     }
 
     public function show($id) {
 
-        $product = Product::with('productPrice')->find($id);
+        $product = Product::with('productPrice','genre')->find($id);
 
         return view('pizzzzza.menu.show',compact('product'));
     }

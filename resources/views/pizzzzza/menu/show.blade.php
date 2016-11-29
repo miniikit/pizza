@@ -38,7 +38,7 @@
                 </tr>
                 <tr>
                     <th class="text-center">ジャンル</th>
-                    <td>{{ $product->genre_id }}</td>
+                    <td>{{ $product->genre->genre_name }}</td>
                 </tr>
                 <tr>
                     <th class="text-center">金額</th>
