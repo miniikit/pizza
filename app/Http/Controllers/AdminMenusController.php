@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Requests;
 use App\Product;
-
+use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;    //ログインユーザを判別
 use phpDocumentor\Reflection\Types\Integer;  //サービスに移植後削除
@@ -28,6 +28,21 @@ class AdminMenusController extends Controller
         $products = Product::with('productPrice', 'genre')->get();
 
         return view('pizzzzza.menu.index', compact('products'));
+    }
+
+    public function destroy($id) {
+
+        $product = Product::with('productPrice', 'genre')->find($id);
+
+        $product->sales_end_date = Carbon::today();
+        $product->save();
+
+        $product->delete();
+
+        Flash::success('削除しました。');
+
+        return redirect()->route('employees');
+
     }
 
     public function history()
