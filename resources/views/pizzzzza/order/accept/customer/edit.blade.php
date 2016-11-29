@@ -10,7 +10,7 @@
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order/top">ホーム</a></li>
         <li class="active"><a href="/pizzzzza/order/accept/input">電話番号入力</a></li>
-        <li class="active">お客様情報確認</li>
+        <li class="active"><a href="/pizzzzza/order/accept/customer/detail">お客様情報確認</a></li>
         <li class="active">編集</li>
     </ol>
 @endsection
@@ -18,6 +18,16 @@
 @section('main')
     <div class="wrap">
         <h1>お客様情報編集</h1>
+
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         @if(isset($user))
         <form id="updateForm" action="a.html" method="post">
@@ -39,15 +49,15 @@
                         </tr>
                         <tr>
                             <th class="text-center"><label for="">性別</label></th>
-                            <td><select name="gender_id">
+                            <td>
                                     @foreach($genders as $gender)
                                         @if($gender->id == $user->gender_id)
-                                            <option value="{{$gender->id}}" selected>{{ $gender->gender_name }}</option>
+                                            <input type="radio" name="gender" value="{{$gender->id}}" checked>{{ $gender->gender_name }}
                                         @else
-                                            <option value="{{$gender->id}}">{{ $gender->gender_name }}</option>
+                                            <input type="radio" name="gender" value="{{$gender->id}}">{{ $gender->gender_name }}
                                         @endif
                                     @endforeach
-                                </select></td>
+                                </td>
                         </tr>
                     @endif
                     <tr>
@@ -99,10 +109,8 @@
 
             @if(session()->get('phone_order_user_type') == "web")
                 var status = "web";
-            alert('webだね');
             @else
                 var status = "phone";
-            alert('phoneだね');
             @endif
 
 
@@ -116,11 +124,9 @@
 
             if(status  == "phone")
             {
-                alert('phone');
                 var element = document.getElementById("updateForm");
                 element.setAttribute("action", "/pizzzzza/order/accept/customer/update/phone");
             }else if(status == "web"){
-                alert('web');
                 var element = document.getElementById("updateForm");
                 element.setAttribute("action", "/pizzzzza/order/accept/customer/update/web");
             }
