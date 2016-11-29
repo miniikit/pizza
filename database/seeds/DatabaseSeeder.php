@@ -279,6 +279,7 @@ class CouponsMasterSeeder extends Seeder
         DB::table('coupons_master')->delete();
 
         Coupon::create([
+            'coupons_types_id' => '1',
             'coupon_name' => '500円値引きクーポン',
             'coupon_discount' => 500,
             'coupon_conditions_money' => 3000,
@@ -290,6 +291,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_first' => null,
         ]);
         Coupon::create([
+            'coupons_types_id' => '1',
             'coupon_name' => '1000円値引きクーポン',
             'coupon_discount' => 1000,
             'coupon_conditions_money' => 5000,
@@ -301,6 +303,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_first' => null,
         ]);
         Coupon::create([
+            'coupons_types_id' => '2',
             'coupon_name' => 'プレゼントクーポン',
             'coupon_discount' => 2200,
             'coupon_conditions_money' => 1,
@@ -312,6 +315,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_first' => null,
         ]);
         Coupon::create([
+            'coupons_types_id' => '2',
             'coupon_name' => 'ピザ無料クーポン',
             'coupon_discount' => 2200,
             'coupon_conditions_money' => 1,
@@ -323,6 +327,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_first' => 1,
         ]);
         Coupon::create([
+            'coupons_types_id' => '2',
             'coupon_name' => 'プレゼントクーポン',
             'coupon_discount' => 2200,
             'coupon_conditions_money' => 1,
@@ -345,13 +350,10 @@ class CouponsTypesMasterSeeder extends Seeder
         DB::table('coupons_types_master')->delete();
 
         CouponType::create([
-            'coupon_type' => 'sample01'
+            'coupon_type' => 'discount'
         ]);
         CouponType::create([
-            'coupon_type' => 'sample02'
-        ]);
-        CouponType::create([
-            'coupon_type' => 'sample03'
+            'coupon_type' => 'present'
         ]);
     }
 }
@@ -678,42 +680,42 @@ class CampaignesMasterSeeder extends Seeder
         DB::table('campaigns_master')->delete();
 
         Campaign::create([
-            'campaign_title' => '○○引きクーポン',
-            'campaign_banner' => '',
+            'campaign_title' => '500円引きクーポン',
+            'campaign_banner' => '/images/campaign_banner/1.jpg',
             'campaign_image' => '/images/campaign/1.jpg',
-            'campaign_text' => '期間限定12月まで使用可能です。3000円以上お買い上げのお客様に合計から○○円OFF！',
-            'campaign_note' => 'テキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいります',
-            'campaign_subject' => 'allユーザー',
+            'campaign_text' => '期間限定8月４日〜12月25日までおひとり様一回限り使用可能です。3000円以上お買い上げのお客様に合計金額より500円引き！',
+            'campaign_note' => 'テキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいります',
+            'campaign_subject' => '全ユーザー対象',
             'campaign_start_day' => Carbon::today(),
             'campaign_end_day' => null,
         ]);
         Campaign::create([
-            'campaign_title' => '秋の贅沢サプライズ４',
-            'campaign_banner' => '',
-            'campaign_image' => '/images/campaign/4.jpg',
-            'campaign_text' => 'このトッピングでこの贅沢がお手頃価格で登場！ポケット状の ‘みみ’部分に4分の1ずつ異なるビーフステーキや北海道産チーズなど贅沢な4種の具材を包み、…',
-            'campaign_note' => '秋限定です。',
-            'campaign_subject' => 'allユーザー',
+            'campaign_title' => 'ポテト無料クーポン！',
+            'campaign_banner' => '/images/campaign_banner/2.jpg',
+            'campaign_image' => '/images/campaign/2.jpg',
+            'campaign_text' => '期間限定2017年10月18日までおひとり様一回限り使用可能です。2000円以上お買い上げのお客様にポテト一つ無料で差し上げます！',
+            'campaign_note' => 'おひとり様一回限り有効です',
+            'campaign_subject' => '全ユーザー対象',
             'campaign_start_day' => Carbon::today(),
             'campaign_end_day' => null,
         ]);
         Campaign::create([
-            'campaign_title' => '濃厚ゴージャス4',
-            'campaign_banner' => '',
-            'campaign_image' => '/images/campaign/4.jpg',
-            'campaign_text' => '[期間限定】「パリッとソーセージクラスト」Ｍサイズが今なら\880もお得！「厚切イベリコ」、「贅沢フォルマッジ」「ピザハット・シュ…',
+            'campaign_title' => '1000円引きクーポン',
+            'campaign_banner' => '/images/campaign_banner/3.jpg',
+            'campaign_image' => '/images/campaign/3.jpg',
+            'campaign_text' => '5000円以上購入のお客様限定で、合計金額より1000円引き！',
             'campaign_note' => '秋限定です。',
-            'campaign_subject' => 'allユーザー',
+            'campaign_subject' => '全ユーザー対象',
             'campaign_start_day' => Carbon::today(),
             'campaign_end_day' => null,
         ]);
         Campaign::create([
-            'campaign_title' => '家族の満足4',
-            'campaign_banner' => '',
+            'campaign_title' => 'コーラ一本無料クーポン',
+            'campaign_banner' => '/images/campaign_banner/4.jpg',
             'campaign_image' => '/images/campaign/4.jpg',
-            'campaign_text' => '【期間限定】「ゴールデンチーズクラスト」Ｍサイズが今なら\640もお得！「ほっくりポテマヨ」「ペパロニ・シュプリーム」「もちポテ明…',
-            'campaign_note' => '秋限定です。',
-            'campaign_subject' => 'allユーザー',
+            'campaign_text' => '2500円以上購入のお客様限定でおひとり様一回限り、コーラ一本無料で差し上げます！',
+            'campaign_note' => 'おひとり様一回限り有効です',
+            'campaign_subject' => '全ユーザー対象',
             'campaign_start_day' => Carbon::today(),
             'campaign_end_day' => null,
         ]);
