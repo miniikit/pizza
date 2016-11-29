@@ -54,6 +54,17 @@ class AdminMenusController extends Controller
         return view('/pizzzzza.menu.edit', compact('product'));
     }
 
+    public function update(EmployeeUpdateRequest $request,$id) {
+
+        $product = Product::withTrashed()->with('productPrice', 'genre')->find($id);
+
+
+        Flash::success('更新完了しました。');
+
+        return redirect()->route('employees');
+
+    }
+
 
     public function add()
     {

@@ -87,7 +87,7 @@ Route::get('/pizzzzza/menu', 'AdminMenusController@index'); //従業員用メニ
 Route::get('/pizzzzza/menu/history', 'AdminMenusController@history'); //従業員用メニュー履歴一覧
 Route::get('/pizzzzza/menu/{id}/show', 'AdminMenusController@show'); //従業員用メニュー詳細
 Route::get('/pizzzzza/menu/{id}/edit', 'AdminMenusController@edit'); //従業員用メニュー編集
-Route::post('/pizzzzza/menu/edit/do', 'AdminMenusController@editDo'); //従業員用メニュー更新処理
+Route::post('/pizzzzza/menu/edit/update', 'AdminMenusController@editDo'); //従業員用メニュー更新処理
 Route::get('/pizzzzza/menu/add', 'AdminMenusController@add'); //従業員用メニュー追加
 Route::post('/pizzzzza/menu/add', 'AdminMenusController@push'); //従業員用メニュー追加処理
 

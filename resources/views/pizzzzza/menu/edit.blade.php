@@ -29,7 +29,7 @@
                     <tbody>
                     <tr>
                         <th class="text-center" style="width:15%">名前</th>
-                        <td>{{ $product->product_name }}</td>
+                        <td><input class="form-control" type="text" value="{{ $product->product_name }}"></td>
                     </tr>
                     <tr>
                         <th class="text-center">画像</th>
@@ -37,15 +37,23 @@
                     </tr>
                     <tr>
                         <th class="text-center">内容</th>
-                        <td>{{ $product->product_text }}</td>
+                        <td><textarea class="form-control" rows="5" >{{ $product->product_text }}</textarea></td>
                     </tr>
                     <tr>
                         <th class="text-center">ジャンル</th>
-                        <td>{{ $product->genre->genre_name }}</td>
+                        <td>
+                            <select name="language">
+                                <option value="{{ $product->genre->id }}" selected>{{ $product->genre->genre_name }}</option>
+                                ----
+                                <option value="1">ピザ</option>
+                                <option value="2">サイド</option>
+                                <option value="3">ドリンク</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <th class="text-center">金額</th>
-                        <td>{{ number_format($product->productPrice->product_price) }}円</td>
+                        <td><input class="form-control" type="text" value="{{ $product->productPrice->product_price }}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -59,13 +67,7 @@
                     </tr>
                     <tr>
                         <th class="text-center">販売終了日</th>
-                        <td>
-                            @if ($product->sales_end_date == null)
-                                未設定
-                            @else
-                                {{ $product->sales_end_date }}
-                            @endif
-                        </td>
+                        <td><input class="form-control" type="text" value="{{$product->sales_end_date }}"></td>
                     </tr>
                     <tr>
                         <th class="text-center">登録日</th>
