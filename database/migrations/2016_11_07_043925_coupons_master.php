@@ -15,6 +15,7 @@ class CouponsMaster extends Migration
     {
       Schema::create('coupons_master', function (Blueprint $table) {
         $table->increments('id');//->primary(); //クーポンID
+        $table->integer('coupons_types_id'); //クーポン種別ID
         $table->string('coupon_name'); //クーポン名
         $table->integer('coupon_discount'); //クーポン値引き額
         $table->integer('coupon_conditions_money'); //使用金額条件

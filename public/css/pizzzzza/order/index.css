@@ -1,4 +1,4 @@
-#GetAddress{
+#GetAddress {
     padding: 10px;
     background-color: yellowgreen;
     border-radius: 5px;
@@ -9,7 +9,7 @@
 
 /*
   商品選択
-*/
+
 .wrap{
     width:100%;
     position: relative;
@@ -77,7 +77,37 @@
     font-size:20px;
 }
 
+*/
 
+.space {
+    padding: 10px;
+}
 
+.list-none {
+    list-style-type: none;
+}
 
+.title {
+    letter-spacing: 5px;
+}
 
+.title-space {
+    margin-top: 150px;
+}
+
+.list {
+    padding: 3px;
+    margin-left: 45px;
+}
+
+.item {
+    background: #ecf0f1;
+}
+
+.menu-space {
+    margin-left: 6px;
+}
+
+.paddingnone {
+    padding: 0px;
+}
