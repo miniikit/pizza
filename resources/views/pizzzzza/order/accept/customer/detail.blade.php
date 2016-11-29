@@ -39,14 +39,20 @@
                         <th class="text-center"><label for="">名前(カナ)</label></th>
                         <td>{{ $user->kana }}</td>
                     </tr>
-                    @if(isset($user->birthday) || isset($user->gender_name))
+                    @if(isset($user->birthday) || isset($user->gender_id))
                     <tr>
                         <th class="text-center"><label for="">生年月日</label></th>
                         <td>{{ $user->birthday }}</td>
                     </tr>
                     <tr>
                         <th class="text-center"><label for="">性別</label></th>
-                        <td>{{ $user->gender_name }}</td>
+                        @if($user->gender_id == 1)
+                            <td>男</td>
+                        @elseif($user->gender_id == 2)
+                            <td>女</td>
+                        @else
+                            <td>その他</td>
+                        @endif
                     </tr>
                     @endif
                     <tr>
