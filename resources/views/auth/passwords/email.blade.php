@@ -1,7 +1,12 @@
-@extends('layouts.app')
+@extends('template.auth')
 
-<!-- Main Content -->
-@section('content')
+@section('title', 'ログイン')
+
+@section('css')
+    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+@endsection
+
+@section('main')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
