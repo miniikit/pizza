@@ -79,7 +79,56 @@ class CouponsController extends Controller
 
     //  クーポン詳細ページ
     public function show($id)  {
-        $coupon = Coupon::with('couponType')->find($id);
+
+        // $idのクーポン詳細情報を、クーポン種別と共に取得
+        $coupon = DB::table('coupons_master')->join('coupons_types_master','coupons_master.coupons_types_id','=','coupons_types_master.id')->where('coupons_master.id','=',$id)->first();
+//
+//        //
+//        //  クーポン編集ボタンが押された時、IDをセッションに保存（編集画面で使用）
+//        //
+//            // セッションにすでにあれば削除
+//            if(session()->has('coupon_selected_item')){
+//                session()->forget('coupon_selected_item');
+//            }
+//            // クーポン編集ボタンが押された時にこの値を参照する。
+//            session()->put('coupon_selected_item',$coupon->id);
+
         return view('pizzzzza.coupon.show',compact('coupon'));
+    }
+
+    //  クーポン編集ページ
+    public function edit($id) {
+        // 処理内容：クーポンの編集画面を表示。（値引き・プレゼント両対応）
+        //  クーポンIDを取得し、DBから値を取得
+        //  viewで表示する内容が若干異なるので、クーポン種別が何か判別
+        //  渡されたIDを基にviewのform>input>valueに初期値を設定
+
+//
+//        //クーポンID取得
+//            if(session()->has('coupon_selected_item')) {
+//                $coupon_id = session()->get('coupon_selected_item');
+//            }else{
+//                //セッションエラー
+//                return redirect('/pizzzzza/coupon/list');
+//            }
+
+        //DBから取得
+            $coupon = Coupon::with('productName')->find($id);
+
+        //クーポン種別を取得
+
+
+        return view('pizzzzza.coupon.list.edit',compact('coupon'));
+
+    }
+
+    public function update($id){
+
+    }
+
+    public function delete($id){
+
+
+
     }
 }

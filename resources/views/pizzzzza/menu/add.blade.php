@@ -25,7 +25,7 @@
 </div>
 @endif
 <div class="form-group" id="menuadd">
-<form action="/pizzzzza/menu/add" method="post" id="AddButton" enctype="multipart/form-data">
+<form action="/pizzzzza/menu/store" method="post" id="AddButton" enctype="multipart/form-data">
 <table id="menu-add-table" class="table table-bordered">
 <tbody>
 <tr>
@@ -38,11 +38,13 @@
 </tr>
 <tr>
 <th>ジャンル</th>
-<td><select name="product_genre_id">
-@foreach($genres as $genre)
-<option value="{{ $genre->id }}">{{  $genre->genre_name }}</option>
-@endforeach
-</select></td>
+<td>
+<select name="product_genre_id">
+<option value="1">ピザ</option>
+<option value="2">サイド</option>
+<option value="3">ドリンク</option>
+</select>
+</td>
 </tr>
 <tr>
 <th>販売開始日</th>
@@ -64,12 +66,12 @@
 </tr>
 </tbody>
 </table>
-<input type="hidden" name="_token" value="{{  csrf_token()  }}">
 <input id="postButton" type="submit" name="post" style="display:none">
     <div class="menu">
         <a href="/pizzzzza/menu/" class="add-button btn btn-default btn-lg" name="button">戻る</a>
-        <a class="add-button btn btn-primary btn-lg" name="button" onclick="postAdd()">確認</a>
+        <input type="submit" class="add-button btn btn-primary btn-lg" name="submit" value="追加">
     </div>
+    {{ csrf_field() }}
 </form>
 
 </div>
@@ -78,10 +80,5 @@
 @endsection
 
 @section('script')
-    <script>
-        function postAdd() {
-            event.preventDefault();
-            document.getElementById('AddButton').submit();
-        }
-    </script>
+
 @endsection

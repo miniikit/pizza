@@ -128,13 +128,12 @@ class EmployeesController extends Controller
         $employee->user->phone = $data['phone'];
         $employee->user->email = $data['email'];
 
-
         if (empty($data['emoloyee_agreement_enddate'])){
             $employee->emoloyee_agreement_enddate = NULL;
         }else{
             $employee->emoloyee_agreement_enddate = $data['emoloyee_agreement_enddate'];
-
         }
+
 
         $employee->user->save();
         $employee->save();
