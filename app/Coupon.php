@@ -14,4 +14,8 @@ class Coupon extends Model
 
     protected $dates = ['deleted_at'];
 
+    public function couponType() {
+        return $this->belongsTo('App\CouponType','coupon_type');
+    }
+
 }

@@ -12,11 +12,13 @@
  */
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminPhoneUserEditRequestForWeb;
 use Illuminate\Http\Request;
 use App\Http\Requests\phoneSearchRequest;
 use App\Service\PhoneOrderService;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\DB;  //サービスに移植後削除
+use App\Product;
 
 use App\Http\Requests\AdminPhoneUserEditRequest;
 
@@ -43,16 +45,12 @@ class PhoneOrdersController extends Controller
 
 
 
-    //メモ::タスク、バリデーションチェックを、もう１つつくってUSRとTMP両方で使えるように
+    //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞Webの、バリデーションチェック＆更新処理
+    public function updateWeb(AdminPhoneUserEditRequestForWeb $request){
 
-    //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞バリデーションチェック処理
-    public function updateWeb(AdminPhoneUserEditRequest $request){
-
-        dd('web');
         //
         //  handlerで、会員情報編集画面から、更新ボタンが押された時：WEB会員バージョン
         //
-
 
         $user_update = $request->all();
 
@@ -76,19 +74,19 @@ class PhoneOrdersController extends Controller
             //追加POSTデータの受取
             $birthday = $user_update['birthday'];
             $email = $user_update['email'];
-            $gender_id = $user_update['gender_id'];
+            $gender_id = $user_update['gender'];
             DB::table('users')->where('users.id','=',$userId)->update(['name' => $name,'kana' => $name_katakana,'email' => $email, 'gender_id' => $gender_id, 'birthday' => $birthday, 'postal' => $postal, 'address1' => $address1, 'address2' => $address2, 'address3' => $address3, 'phone' => $phone]);
             Flash::success('会員情報の更新が完了しました。');
 
         }else{
-            Flash::error('エラーが発生しました。');
+            Flash::error('セッションエラーが発生しました。');
         }
 
         return redirect('/pizzzzza/order/accept/customer/detail');
 
     }
 
-    //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞バリデーションチェック処理
+    //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞バリデーションチェック＆更新処理
     public function updatePhone(AdminPhoneUserEditRequest $request){
 
         //
@@ -131,7 +129,6 @@ class PhoneOrdersController extends Controller
     //電話番号入力ページ＞お客様情報・注文履歴表示ページ
     // ※処理内容：電話番号が見つかれば会員情報を表示し、見つからなければ新規登録ページへリダイレクトする
     public function show(Request $request){
-
 
         //
         //  どのページから遷移してきたかによって、$phoneに設定する値を変更する
@@ -215,40 +212,21 @@ class PhoneOrdersController extends Controller
         }
 
     }
-
-
-    //
-    //  編集画面からの遷移であれば
-    //
-    //  ※　想定値 : $request -> editPost -> "戻る" / "更新"
-
-    if (isset($request->editPost)) {
-
-        if ($request->editPost == "戻る") {
-            return redirect('/pizzzzza/order/accept/customer/detail');
-
-        } else if ($request->editPost == "更新") {
-
-
-            /*
-            $customer_id = session()->get('customer_id');
-            $customer_type = session()->get('phone_order_user_type');
-
-            if ($customer_type == "web"){
-                 session()->put('request', $request->all());
-                 $this->updateWeb($request);
-                 return redirect('/pizzzzza/order/accept/customer/update/web');
-            } else if ($customer_type == "phone") {
-                 session()->put('request', $request->all());
-                 $this->updatePhone($requestData);
-                 return redirect('/pizzzzza/order/accept/customer/update/phone');
-            } else {
-                dd('会員種別が不定');
-            }
-            */
-
-        }
-    }
+//
+//
+//    //
+//    //  編集画面からの遷移であれば
+//    //
+//    //  ※　想定値 : $request -> editPost -> "戻る" / "更新"
+//
+//    if (isset($request->editPost)) {
+//
+//        if ($request->editPost == "戻る") {
+//            return redirect('/pizzzzza/order/accept/customer/detail');
+//
+//        } else if ($request->editPost == "更新") {
+//        }
+//    }
 }
 
 
@@ -298,8 +276,13 @@ class PhoneOrdersController extends Controller
 
     //商品入力・選択ページ
     public function orderSelect(){
-        return view('pizzzzza.order.accept.item.select');
+        $products = DB::table('products_master')->join('products_prices_master','products_master.price_id','=','products_prices_master.id')->join('genres_master','genres_master.id','=','products_master.genre_id')->orderBy('genre_id','asc')->get();
+        $pizzacnt = Product::where('genre_id',1)->count();
+        $sidecnt = Product::where('genre_id',2)->count();
+        $drinkcnt = Product::where('genre_id',3)->count();
+        return view('pizzzzza.order.accept.item.select', compact('products','pizzacnt','sidecnt','drinkcnt'));
     }
+
 
 
 

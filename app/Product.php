@@ -17,4 +17,8 @@ class Product extends Model
         return $this->belongsTo('App\ProductPrice','price_id');
     }
 
+    public function genre() {
+        return $this->belongsTo('App\Genre','genre_id');
+    }
+
 }

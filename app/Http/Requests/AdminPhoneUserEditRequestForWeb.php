@@ -7,11 +7,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /*
  *
- *  電話注文時、既に会員情報が登録されている場合に、それを編集する処理（電話会員）
+ *  電話注文時、既に会員情報が登録されている場合に、それを編集する処理（Web）
  *
  * */
 
-class AdminPhoneUserEditRequest extends FormRequest
+class AdminPhoneUserEditRequestForWeb extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,7 +20,7 @@ class AdminPhoneUserEditRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -38,6 +38,8 @@ class AdminPhoneUserEditRequest extends FormRequest
             'address2' => 'required|max:255',
             'address3' => 'max:255',
             'phone' => 'required|string|between:10,11',
+            'gender' => 'required',
+            'email' => 'required|email',
         ];
     }
 }
