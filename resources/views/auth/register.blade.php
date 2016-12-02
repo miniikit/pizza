@@ -1,31 +1,51 @@
-@extends('template.master')
+@extends('template.auth')
 
 @section('title', '新規登録')
 
 @section('css')
-    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
-    <link rel="stylesheet" href="/css/mypage/detail.css" media="all" title="no title">
+    <link rel="stylesheet" href="/css/auth/login/index.css" media="all" title="no title">
 @endsection
 
-@section('script')
-    <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+@section('js')
+    <script type="text/javascript" src="https://ajaxzip3.github.io/ajaxzip3.js" charset="utf-8"></script>
+    <script type="text/javascript"><!--
+//関数 checkText の定義 (引数:テキストインプット)
+function checkText(txt_obj){
+    //テキストインプット内の入力値を変数化
+    var str = txt_obj.value;
+    //入力値に 0～9 以外があれば
+    if(str.match(/[^0-9]+/)){
+        alert("半角数字のみを入力してください。");
+        // 0～9 以外を削除
+        txt_obj.value = str.replace(/[^0-9]+/g,"");
+    }
+}
+// --></script>
 @endsection
 
 @section('main')
 <div class="container">
+  <div class="text-center">
+    <h1 style="">新規会員登録</h1>
+  </div>
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="">
+                <div class="">
+                    <form class="" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
-
+                        <div class="">
+                          下記の通りに入力してください
+                        </div>
+                        <table class="table">
+                          <tr>
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">氏名</label>
-
+                          <th>
+                            <label for="name" class="">氏名</label>
+                            </th>
+                            <td>
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" maxlength="50" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -33,13 +53,17 @@
                                     </span>
                                 @endif
                             </div>
+                            </td>
                         </div>
-
+                        </tr>
+                        <tr>
                             <div class="form-group{{ $errors->has('kana') ? ' has-error' : '' }}">
-                            <label for="kana" class="col-md-4 control-label">カナ</label>
-
+                              <th>
+                            <label for="kana" class="">カナ</label>
+                            </th>
+                            <td>
                             <div class="col-md-6">
-                                <input id="kana" type="text" class="form-control" name="kana" maxlength="100" value="{{ old('name') }}" required autofocus>
+                                <input id="kana" type="text" class="form-control" name="kana" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('kana'))
                                     <span class="help-block">
@@ -47,13 +71,17 @@
                                     </span>
                                 @endif
                             </div>
+                            </td>
                         </div>
-
+                        </tr>
+                        <tr>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">Eメールアドレス</label>
-
+                          <th>
+                            <label for="email" class="">Eメールアドレス</label>
+                            </th>
+                            <td>
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" maxlength="256" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -61,13 +89,16 @@
                                     </span>
                                 @endif
                             </div>
+                            </td>
                         </div>
-
+                      </tr><tr>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">パスワード</label>
-
+                          <th>
+                            <label for="password" class="">パスワード</label>
+                          </th>
+                          <td>
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" maxlength="128" required>
+                                <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -75,43 +106,42 @@
                                     </span>
                                 @endif
                             </div>
+                            </td>
                         </div>
-
+                      </tr><tr>
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">確認パスワード</label>
-
+                          <th>
+                            <label for="password-confirm" class="">確認パスワード</label>
+                            </th>
+                            <td>
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" maxlength="128" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
 
                                 @if ($errors->has('password_confirmation'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
                                 @endif
-                            </div>
-                        </div>
-
- <div class="form-group{{ $errors->has('postal') ? ' has-error' : '' }}">
-  <label for="postal" class="col-md-4 control-label">郵便番号 (半角)</label>
-
-   <div class="col-md-2">
-    <input type="text" class="form-control" name="postal" size="4" maxlength="3">
-    </div>
-
-    <div class="col-md-2">
-     <input type="text" class="form-control" name="postal" size="5" maxlength="4">
-      </div>
-      <input type="button" class="btn btn-default" value="〒→変換" onClick="AjaxZip3.zip2addr('postal','postal','pref','address1','address2')"
-                    onkeyup="AjaxZip3.zip2addr('postal','postal','pref','address1','address2');">
-    </div>
-
-
-
-<div class="form-group{{ $errors->has('pref') ? ' has-error' : '' }}">
- <label for="pref" class="col-md-4 control-label">都道府県</label>
-  <div class="col-md-6">
-            <select class="form-control" name="pref">
-            <option value="">-- 選択してください --</option>
+                            </div></td>
+                        </div></tr><tr>
+                        <div class="form-group{{ $errors->has('postal') ? ' has-error' : '' }}">
+                          <th>
+                          <label for="postal" class="">郵便番号 (半角)</label>
+                        </th><td>
+                          <div class="col-md-3">
+                            <input type="text" class="form-control" name="postal" onkeyup="checkText(this)" size="5" maxlength="7">
+                          </div>
+                          <input type="button" class="btn btn-default" value="〒→変換" onClick="AjaxZip3.zip2addr('postal','pref','address1','address2')"
+                    onkeyup="AjaxZip3.zip2addr('postal','pref','address1','address2');">
+                  </div>
+                </td></tr><tr>
+                  <div class="form-group{{ $errors->has('pref') ? ' has-error' : '' }}">
+                    <th>
+                    <label for="pref" class="">都道府県</label>
+                  </th><td>
+                    <div class="col-md-3">
+                      <select class="form-control" name="pref">
+            <option value="">--------------</option>
             <option value="北海道">北海道</option>
             <option value="青森県">青森県</option>
             <option value="岩手県">岩手県</option>
@@ -160,60 +190,66 @@
             <option value="鹿児島県">鹿児島県</option>
             <option value="沖縄県">沖縄県</option>
         </select>
-</div>
-</div>
-
+      </div>
+    </td>
+  </div>
+</tr><tr>
 <div class="form-group{{ $errors->has('address1') ? ' has-error' : '' }}">
- <label for="address1" class="col-md-4 control-label">市区町村 (全角)</label>
+  <th>
+ <label for="address1" class="">市区町村 (全角)</label>
+ </th><td>
   <div class="col-md-5">
    <input type="text" class="form-control" name="address1" size="40">
   </div>
+</td>
  </div>
-
+</tr><tr>
 <div class="form-group{{ $errors->has('address2') ? ' has-error' : '' }}">
-  <label for="address2" class="col-md-4 control-label">町名・番地 (全角)</label>
+  <th>
+  <label for="address2" class="">町名・番地 (全角)</label>
+</th><td>
    <div class="col-md-5">
     <input type="text" class="form-control" name="address2" size="40">
   </div>
- </div>
-
+</td>
+ </div></tr><tr>
 <div class="form-group{{ $errors->has('address2') ? ' has-error' : '' }}">
- <label for="address3" class="col-md-4 control-label">建物名 (全角)</label>
+  <th>
+ <label for="address3" class="">建物名 (全角)</label>
+ </th><td>
   <div class="col-md-5">
    <input type="text" class="form-control" name="address3" size="40">
 </div>
-</div>
-
+</td>
+</div></tr><tr>
       <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <label for="phone" class="col-md-4 control-label">電話番号</label>
-
+        <th>
+                            <label for="phone" class="">電話番号</label>
+                          </th><td>
                             <div class="col-md-6">
-                                <input id="phone" type="number" class="form-control" name="phone" value="{{ old('phone') }}" required>
-
+                                <input id="phone" type="text" class="form-control" name="phone" onkeyup="checkText(this)" maxlength="12" value="{{ old('phone') }}" required>
                             </div>
-                        </div>
-
-
-<div class="form-group{{ $errors->has('gender_id') ? ' has-error' : '' }}">
-  <label for="gender_id" class="col-md-4 control-label">性別</label> 
-       <div class="col-sm-3">
+                          </td></div></tr><tr>
+                            <div class="form-group{{ $errors->has('gender_id') ? ' has-error' : '' }}">
+                              <th>
+                              <label for="gender_id" class="">性別</label>
+                            </th><td>
+                              <div class="col-sm-3">
                  <input type="radio" name="gender_id" value="1" />男性
         </div>
         <div class="col-sm-3">
              <label class="radio-inline">
                   <input type="radio" name="gender_id" value="2"  />女性
-         </div>
-   </div>
-
-   <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                            <label for="birthday" class="col-md-4 control-label">誕生日</label>
-
+         </div></td></div></tr><tr>
+         <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
+           <th>
+                            <label for="birthday" class="">誕生日</label>
+                          </th><td>
                             <div class="col-md-6">
                                 <input type="date" class="form-control" name="birthday" value="{{ old('birthday') }}" required>
-
-                            </div>
-                        </div>
-
+                            </div></td>
+                        </div></tr>
+                      </table>
    <div class="form-group{{ $errors->has('authority_id') ? ' has-error' : '' }}">
    <input type="hidden" name="authority_id" value="4">
    </div>
