@@ -92,6 +92,14 @@ class AdminMenusController extends Controller
     public function store(AdminMenuAddForm $request)
     {
         $data = $request->all();
+        $carbon = Carbon::now();
+
+
+        $file = $request->file('product_img');
+
+        $filename = $carbon->format('Y-m-d-H-i-s') . '.jpg';
+        $file->move(public_path('images/product/'), $filename);
+
 
         if (empty($data['product_sales_end_day'])) {
             $endDate = NULL;
@@ -99,12 +107,11 @@ class AdminMenusController extends Controller
             $endDate = $data['product_sales_end_day'];
         }
 
-//        dd($data);
 
         $product = Product::create([
             'product_name' => $data['product_name'],
             'price_id' => 0,
-            'product_image' => '/images/product/10.jpg',
+            'product_image' => '/images/product/' . $filename,
             'product_text' => $data['product_text'],
             'genre_id' => $data['product_genre_id'],
             'sales_start_date' => $data['product_sales_start_day'],
