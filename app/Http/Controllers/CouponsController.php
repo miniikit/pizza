@@ -79,7 +79,9 @@ class CouponsController extends Controller
 
     //  クーポン詳細ページ
     public function show($id)  {
-        $coupon = Coupon::with('couponType')->find($id);
+
+        // $idのクーポン詳細情報を、クーポン種別と共に取得
+        $coupon = DB::table('coupons_master')->join('coupons_types_master','coupons_master.coupons_types_id','=','coupons_types_master.id')->where('coupons_master.id','=',$id)->first();
 //
 //        //
 //        //  クーポン編集ボタンが押された時、IDをセッションに保存（編集画面で使用）
@@ -121,6 +123,12 @@ class CouponsController extends Controller
     }
 
     public function update($id){
+
+    }
+
+    public function delete($id){
+
+
 
     }
 }

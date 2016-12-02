@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Coupontype extends Model
+class CouponType extends Model
 {
     protected $table = 'coupons_types_master';
-    protected $fillable = ['coupon_type'];
+    protected $fillable = ['id','coupon_type'];
 
 }

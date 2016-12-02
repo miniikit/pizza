@@ -9,8 +9,8 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order/top">ホーム</a></li>
-        <li><a href="/pizzzzza/coupon/list">開催中のクーポン一覧</a></li>
-        <li class="active"></li>
+        <li><a href="/pizzzzza/coupon/list">開催中クーポン一覧</a></li>
+        <li class="active">クーポン詳細</li>
     </ol>
 @endsection
 
@@ -84,7 +84,7 @@
             
             <form class="ar" action="/pizzzzza/coupon/{{$coupon->id}}/delete" method="post">
                 <a href="/pizzzzza/coupon/{{$coupon->id}}/edit" class="btn btn-default btn-sm">編集</a>
-                    <input class="btn btn-danger btn-sm ml" type="submit" name="delete" value="削除">
+                <input class="btn btn-danger btn-sm ml" type="submit" name="delete" value="削除">
                 {{ csrf_field() }}
             </form>
             
