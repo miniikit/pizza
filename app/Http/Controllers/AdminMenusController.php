@@ -75,11 +75,18 @@ class AdminMenusController extends Controller
 
         $product = Product::withTrashed()->find($id);
 
+//        $product->product_name = ;
+//        $product->product_image = ;
+//        $product->price_id = ;
+//        $product->product_text  = ;
+//        $product->genre_id = ;
+//        $product->sales_start_date = ;
+//        $product->sales_end_date = ;
 
 
         Flash::success('更新完了しました。');
 
-//        return redirect()->route('AdminMenu');
+        return redirect()->route('AdminMenu');
 
     }
 

@@ -15,7 +15,7 @@
 
 @section('main')
     <h1>従業員一覧</h1>
-    <div class="row">
+    <div class="table-responsive">
         <table class="table">
             <thead>
             <tr>
