@@ -22,6 +22,15 @@
 
 @section('main')
     <h1>商品編集</h1>
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="/pizzzzza/menu/{{ $product->id }}/update" method="post">
         <div class="row">
             <div class="col-md-7">
@@ -29,7 +38,7 @@
                     <tbody>
                     <tr>
                         <th class="text-center" style="width:15%">名前</th>
-                        <td><input class="form-control" type="text" value="{{ $product->product_name }}"></td>
+                        <td><input class="form-control" type="text" name="product_name" value="{{ $product->product_name }}"></td>
                     </tr>
                     <tr>
                         <th class="text-center">画像</th>
@@ -37,12 +46,12 @@
                     </tr>
                     <tr>
                         <th class="text-center">内容</th>
-                        <td><textarea class="form-control" rows="5" >{{ $product->product_text }}</textarea></td>
+                        <td><textarea class="form-control" name="product_text" rows="5" >{{ $product->product_text }}</textarea></td>
                     </tr>
                     <tr>
                         <th class="text-center">ジャンル</th>
                         <td>
-                            <select name="language">
+                            <select name="product_genre_id" >
                                 <option value="{{ $product->genre->id }}" selected>{{ $product->genre->genre_name }}</option>
                                 ----
                                 <option value="1">ピザ</option>
@@ -53,7 +62,7 @@
                     </tr>
                     <tr>
                         <th class="text-center">金額</th>
-                        <td><input class="form-control" type="text" value="{{ $product->productPrice->product_price }}"></td>
+                        <td><input class="form-control" type="text" name="product_price" value="{{ $product->productPrice->product_price }}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -63,11 +72,11 @@
                     <tbody>
                     <tr>
                         <th class="text-center">販売開始日</th>
-                        <td>{{ $product->sales_start_date }}</td>
+                        <td><input class="form-control" type="date" name="product_sales_start_day" value="{{$product->sales_start_date }}"></td>
                     </tr>
                     <tr>
                         <th class="text-center">販売終了日</th>
-                        <td><input class="form-control" type="date" value="{{$product->sales_end_date }}"></td>
+                        <td><input class="form-control" type="date" name="product_sales_end_day" value="{{$product->sales_end_date }}"></td>
                     </tr>
                     <tr>
                         <th class="text-center">登録日</th>

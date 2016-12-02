@@ -53,9 +53,10 @@
                     <ul class="dropdown-menu">
                         <li><a href="/pizzzzza/menu/">メニュー一覧</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/pizzzzza/menu/history">メニュー履歴一覧</a></li>
-                        <li role="separator" class="divider"></li>
                         <li><a href="/pizzzzza/menu/add">メニュー追加</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/pizzzzza/menu/history">メニュー履歴</a></li>
+
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -71,9 +72,9 @@
                     <ul class="dropdown-menu">
                         <li><a href="/pizzzzza/employee">従業員一覧</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/pizzzzza/employee/history">従業員履歴一覧</a></li>
-                        <li role="separator" class="divider"></li>
                         <li><a href="/pizzzzza/employee/add">従業員追加</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/pizzzzza/employee/history">従業員履歴</a></li>
                     </ul>
                 </li>
                 @endif
