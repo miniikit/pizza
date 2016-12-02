@@ -8,20 +8,7 @@
 @endsection
 
 @section('js')
-    <script type="text/javascript" src="https://ajaxzip3.github.io/ajaxzip3.js" charset="utf-8"></script>
-    <script type="text/javascript">　//半角数字以外を拒否
-//関数 checkText の定義 (引数:テキストインプット)
-function checkText(txt_obj){
-    //テキストインプット内の入力値を変数化
-    var str = txt_obj.value;
-    //入力値に 0～9 以外があれば
-    if(str.match(/[^0-9]+/)){
-        alert("半角数字のみを入力してください。");
-        // 0～9 以外を削除
-        txt_obj.value = str.replace(/[^0-9]+/g,"");
-    }
-}
-// --></script>
+<script type="text/javascript" src="https://ajaxzip3.github.io/ajaxzip3.js" charset="utf-8"></script>
 <script src="/js/common/autokana/jquery.autoKana.js" language="javascript" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(
