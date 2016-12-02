@@ -111,3 +111,9 @@
 .paddingnone {
     padding: 0px;
 }
+
+.cart {
+    position: fixed;
+    right: 2%;
+    bottom: 0px;
+}
