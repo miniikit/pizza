@@ -246,7 +246,7 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                         </div></tr>
                       </table>
    <div class="form-group{{ $errors->has('authority_id') ? ' has-error' : '' }}">
-   <input type="hidden" name="authority_id" value="4">
+   <input type="hidden" name="authority_id" value="3">
    </div>
 
 
