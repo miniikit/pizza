@@ -23,12 +23,9 @@
     <div class="container wrap">
         <div class="campaign">
             <ul>
-                <li><img src="images/index/banner02.png" alt="" /></li>
-                <li><img src="images/index/banner01.png" alt="" /></li>
-                <li><img src="images/index/banner01.png" alt="" /></li>
-                <li><img src="images/index/banner01.png" alt="" /></li>
-                <li><img src="images/index/banner01.png" alt="" /></li>
-                <li><img src="images/index/banner01.png" alt="" /></li>
+              @foreach ($campaigns as $campaign)
+                <li><a href="/topicdetail?id={{ $campaign->id }}"><img src="{{ $campaign->campaign_banner }}" alt="" /></a></li>
+              @endforeach
             </ul>
         </div>
     </div>
