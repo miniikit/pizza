@@ -370,9 +370,6 @@ class AuthoritiesMasterSeeder extends Seeder
             'authority_name' => 'Administrator'
         ]);
         Authority::create([
-            'authority_name' => 'AuthorityEmployee'
-        ]);
-        Authority::create([
             'authority_name' => 'Employee'
         ]);
         Authority::create([
