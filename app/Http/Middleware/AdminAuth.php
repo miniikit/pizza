@@ -33,8 +33,8 @@ class AdminAuth
                 $authid = session()->get('auth_id');
             }
             
-            // auth_idが 4（会員）　なら
-            if($authid == 4){
+            // auth_idが 3（会員）　なら
+            if($authid == 3){
                  return redirect('/');
             }
 
@@ -43,8 +43,8 @@ class AdminAuth
                  return redirect('/');
             }
 
-            //　 auth_idが 1/2/3（定員）　なら 
-            if($authid == 1 || $authid == 2 || $authid == 3){
+            //　 auth_idが 1/2(管理者、従業員)の場合 
+            if($authid == 1 || $authid == 2){
                  //　正常時の処理
                 return $next($request);
             }
