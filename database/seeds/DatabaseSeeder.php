@@ -477,7 +477,7 @@ class ProductsMasterSeeder extends Seeder
             'product_text' => 'まろやかな明太子クリームソースとホワイトソースを一緒に味わって頂く商品です。',
             'genre_id' => 2,
             'sales_start_date' => Carbon::parse('2016-10-10'),
-            'sales_end_date' => Carbon::yesterday(),
+            'sales_end_date' => null,
         ]);
     }
 }

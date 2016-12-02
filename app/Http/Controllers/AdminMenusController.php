@@ -12,12 +12,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Requests;
+use App\Http\Requests\AdminMenuAddForm;
 use App\Product;
+use App\ProductPrice;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;    //ログインユーザを判別
-use phpDocumentor\Reflection\Types\Integer;  //サービスに移植後削除
 use App\Http\Requests\AdminMenuForm;
+
 
 class AdminMenusController extends Controller
 {
@@ -83,85 +85,47 @@ class AdminMenusController extends Controller
 
     public function add()
     {
-        $genres = DB::table('genres_master')->get();
-        return view('pizzzzza.menu.add', compact('genres'));
+        return view('pizzzzza.menu.add');
     }
 
     //
-    public function push(Requests\AdminMenuAddForm $request)
+    public function store(AdminMenuAddForm $request)
     {
-        //
-        //  DBへ情報をINSERTする処理
-        //
-        //  商品マスタ・価格マスタは相互依存関係にあるので、
-        //  １．価格マスタに対し、「商品ID:1」「価格開始日:今日+1日後」でデータを挿入
-        //  ２．商品マスタに対し、商品情報を登録。価格IDは１で挿入したものを設定
-        //  ３．価格マスタに対し、「商品ID」「価格開始日」をRequest通りのものに変更
-        //  という流れを踏む必要がある。
+        $data = $request->all();
 
-
-        //
-        //  POSTデータの受け取り
-        //
-        $product_name = $request->product_name;
-        $product_price = $request->product_price;
-        $product_genre_id = $request->product_genre_id;
-        $product_sales_start_day = $request->product_sales_start_day;
-        $product_sales_end_day = $request->product_sales_end_day;
-        $product_text = $request->product_text;
-        $product_img = $request->product_img;
-
-        //本日
-        $now = Carbon::now();
-        $today = Carbon::today();
-        $nowAddMonth = Carbon::now()->addMonth();
-
-
-        //
-        //  処理１：商品価格テーブルに、価格情報をINSERTする（商品IDと価格開始日は適当なデータを挿入する）
-        //
-
-        $empId = Auth::user()->id;
-
-        // $product_sales_end_dayにNULLを設定して挿入するとエラーが帰ってくるので処理を分けて記述
-        if (is_null($product_sales_end_day)) {
-            $newPriceId = DB::table('products_prices_master')->insertGetId(['product_id' => 1, 'product_price' => $product_price, 'price_change_startdate' => $nowAddMonth, 'price_change_enddate' => $product_sales_end_day,  //NULLor日付
-                'employee_id' => $empId, 'created_at' => $now, 'updated_at' => $now,]);
+        if (empty($data['product_sales_end_day'])) {
+            $endDate = NULL;
         } else {
-            $newPriceId = DB::table('products_prices_master')->insertGetId(['product_id' => 1, 'product_price' => $product_price, 'price_change_startdate' => $nowAddMonth, 'price_change_enddate' => NULL,  //NULLor日付
-                'employee_id' => $empId, 'created_at' => $now, 'updated_at' => $now,]);
+            $endDate = $data['product_sales_end_day'];
         }
 
-        if (!is_null($newPriceId)) {
-            $update['price_id'] = $newPriceId;
-        } else {
-            //DB接続時にエラーの可能性。
-            $message["class"] = "menu menu-error";
-            $message["text"] = "DBエラー 再試行してください";
-            $request->session()->put('message', $message);
-            return redirect('/pizzzzza/menu');
-        }
+//        dd($data);
 
+        $product = Product::create([
+            'product_name' => $data['product_name'],
+            'price_id' => 0,
+            'product_image' => '/images/product/10.jpg',
+            'product_text' => $data['product_text'],
+            'genre_id' => $data['product_genre_id'],
+            'sales_start_date' => $data['product_sales_start_day'],
+            'sales_end_date' => $endDate,
+        ]);
 
-        //
-        //  処理２：商品マスタに商品情報を挿入
-        //
+        $price  =ProductPrice::create([
+            'product_id' => $product->id,
+            'product_price' => $data['product_price'],
+            'price_change_startdate' => $data['product_sales_start_day'],
+            'price_change_enddate' => $endDate,
+            'employee_id' => Auth::user()->id,
+        ]);
 
-        if (is_null($product_sales_end_day)) {
-            $newProductId = DB::table('products_master')->insertGetId(['product_name' => $product_name, 'price_id' => $newPriceId, 'product_image' => $product_img, 'product_text' => $product_text, 'genre_id' => $product_genre_id, 'sales_start_date' => $product_sales_start_day, 'sales_end_date' => $product_sales_end_day, 'created_at' => $now, 'updated_at' => $now, 'deleted_at' => NULL]);
-        } else {
-            $newProductId = DB::table('products_master')->insertGetId(['product_name' => $product_name, 'price_id' => $newPriceId, 'product_image' => $product_img, 'product_text' => $product_text, 'genre_id' => $product_genre_id, 'sales_start_date' => $product_sales_start_day, 'sales_end_date' => NULL, 'created_at' => $now, 'updated_at' => $now, 'deleted_at' => NULL]);
-        }
+        $product->price_id = $price->id;
+        $product->save();
 
-        //
-        //　処理３：価格マスタを修正
-        //
-        DB::table('products_prices_master')->where('id', '=', $newPriceId)->update(['product_id' => $newProductId, 'price_change_startdate' => $product_sales_start_day]);
+        Flash::success('登録完了しました。');
 
-        $message["class"] = "menu menu-end-complete";
-        $message["text"] = "商品を登録しました。";
-        $request->session()->put('message', $message);
-        return redirect('/pizzzzza/menu');
+        return redirect()->route('AdminMenu');
+
     }
 
 

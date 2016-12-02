@@ -84,12 +84,6 @@ Route::get('/pizzzzza/order/top','AdminController@orderIndex'); //注文確認�
 Route::any('/pizzzzza/order/get','AdminController@orderGet'); //注文確認ページ処理用
 
 
-Route::get('/pizzzzza/menu', 'AdminMenusController@index'); //従業員用メニュー一覧
-Route::get('/pizzzzza/menu/edit', 'AdminMenusController@nav'); //従業員用メニュー　販売終了or編集へ飛ばす
-Route::post('/pizzzzza/menu/edit/do', 'AdminMenusController@editDo'); //従業員用メニュー更新処理
-Route::get('/pizzzzza/menu/add', 'AdminMenusController@add'); //従業員用メニュー追加
-Route::post('/pizzzzza/menu/add', 'AdminMenusController@push'); //従業員用メニュー追加処理
-
 //クーポン
 Route::get('/pizzzzza/coupon/menu','CouponsController@couponMenu'); //クーポンメニュー
 Route::get('/pizzzzza/coupon/add','CouponsController@couponNew'); //クーポン種別選択ページ
@@ -117,8 +111,8 @@ Route::get('/pizzzzza/coupon/history','CouponsController@couponHistory'); //過�
     Route::get('/pizzzzza/menu/{id}/edit', 'AdminMenusController@edit'); //従業員用メニュー編集
     Route::post('/pizzzzza/menu/{id}/delete', 'AdminMenusController@destroy'); //従業員用メニュー編集
     Route::post('/pizzzzza/menu/edit/update', 'AdminMenusController@editDo'); //従業員用メニュー更新処理
-    Route::get('/pizzzzza/menu/add', 'AdminMenusController@add'); //従業員用メニュー追加
-    Route::post('/pizzzzza/menu/add', 'AdminMenusController@push'); //従業員用メニュー追加処理
+    Route::get('/pizzzzza/menu/add', 'AdminMenusController@add'); //従業員用メニュー追加画面
+    Route::post('/pizzzzza/menu/store', 'AdminMenusController@store'); //従業員用メニュー追加処理
 
 
     Route::get('/pizzzzza/order/top', 'AdminController@orderIndex'); //注文確認ページ
