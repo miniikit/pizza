@@ -85,18 +85,19 @@ Route::any('/pizzzzza/order/get','AdminController@orderGet'); //注文確認ペ�
 
 
 //クーポン
-Route::get('/pizzzzza/coupon/menu','CouponsController@couponMenu'); //クーポンメニュー
-Route::get('/pizzzzza/coupon/add','CouponsController@couponNew'); //クーポン種別選択ページ
-Route::get('/pizzzzza/coupon/list','CouponsController@couponNowList'); //開催中クーポン一覧ページ
-Route::get('/pizzzzza/coupon/{id}/show', 'CouponsController@show'); //クーポン詳細
-Route::get('/pizzzzza/coupon/{id}/edit','CouponsController@edit');  //クーポン編集
-Route::get('/pizzzzza/coupon/{id}/update','CouponsController@update');  //クーポン更新
-Route::get('/pizzzzza/coupon/add/discount/input','CouponsController@couponNewDiscount'); //クーポン値引き入力ページ
-Route::get('/pizzzzza/coupon/add/gift/input','CouponsController@couponNewGiftInput'); //プレゼントクーポン条件入力ページ
-Route::get('/pizzzzza/coupon/add/gift/select','CouponsController@couponNewGiftSelect'); //プレゼントクーポン商品選択ページ(未完成)
+    Route::get('/pizzzzza/coupon/menu','CouponsController@couponMenu'); //クーポンメニュー
+    Route::get('/pizzzzza/coupon/add','CouponsController@couponNew'); //クーポン種別選択ページ
+    Route::get('/pizzzzza/coupon/list','CouponsController@couponNowList'); //開催中クーポン一覧ページ
+    Route::get('/pizzzzza/coupon/{id}/show', 'CouponsController@show'); //クーポン詳細
+    Route::get('/pizzzzza/coupon/{id}/edit','CouponsController@edit');  //クーポン編集
+    Route::post('/pizzzzza/coupon/{id}/update','CouponsController@update');  //クーポン更新
+    Route::get('/pizzzzza/coupon/delete','CouponsController@delete');  //クーポン更新
+    Route::get('/pizzzzza/coupon/add/discount/input','CouponsController@couponNewDiscount'); //クーポン値引き入力ページ
+    Route::get('/pizzzzza/coupon/add/gift/input','CouponsController@couponNewGiftInput'); //プレゼントクーポン条件入力ページ
+    Route::get('/pizzzzza/coupon/add/gift/select','CouponsController@couponNewGiftSelect'); //プレゼントクーポン商品選択ページ(未完成)
 // Route::get('/pizzzzza/coupon/list/discount/edit','CouponsController@couponNowDiscountEdit'); //値引きクーポン編集ページ　
 // Route::get('/pizzzzza/coupon/list/gift/edit','CouponsController@couponNowGiftEdit'); //プレゼントクーポン条件変更ページ
-Route::get('/pizzzzza/coupon/history','CouponsController@couponHistory'); //過去のクーポン一覧ページ
+    Route::get('/pizzzzza/coupon/history','CouponsController@couponHistory'); //過去のクーポン一覧ページ
 
     Route::get('/pizzzzza/employee', 'EmployeesController@index')->name('employees'); //従業員一覧
     Route::get('/pizzzzza/employee/history', 'EmployeesController@history')->name('historyEmployees'); //従業員一覧

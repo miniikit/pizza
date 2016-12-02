@@ -3,7 +3,6 @@
 @section('title', '従業員管理画面')
 
 @section('css')
-    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
 @endsection
 
 @section('pankuzu')
@@ -47,8 +46,8 @@
                 </tr>
                 <tr>
                     <th class="text-center">対象者</th>
-                    @if(isset($coupon->coupon_conditions_first))
-                            <td>新規会員のみ</td>
+                    @if($coupon->coupon_conditions_first == 1)
+                            <td>当店初回利用者限定</td>
                     @else
                         <td>全員</td>
                     @endif
@@ -56,6 +55,10 @@
                 <tr>
                     <th class="text-center">クーポン種別</th>
                     <td>{{ $coupon->coupon_type}}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">対象商品</th>
+                    <td>{{ 'a' }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -82,8 +85,8 @@
                 </tbody>
             </table>
             
-            <form class="ar" action="/pizzzzza/coupon/{{$coupon->id}}/delete" method="post">
-                <a href="/pizzzzza/coupon/{{$coupon->id}}/edit" class="btn btn-default btn-sm">編集</a>
+            <form class="ar" action="/pizzzzza/coupon/{{$id}}/delete" method="post">
+                <a href="/pizzzzza/coupon/{{$id}}/edit" class="btn btn-default btn-sm">編集</a>
                 <input class="btn btn-danger btn-sm ml" type="submit" name="delete" value="削除">
                 {{ csrf_field() }}
             </form>
