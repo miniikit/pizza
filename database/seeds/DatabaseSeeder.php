@@ -350,10 +350,10 @@ class CouponsTypesMasterSeeder extends Seeder
         DB::table('coupons_types_master')->delete();
 
         CouponType::create([
-            'coupon_type' => 'discount'
+            'coupon_type' => '値引き'
         ]);
         CouponType::create([
-            'coupon_type' => 'present'
+            'coupon_type' => 'プレゼント'
         ]);
     }
 }
