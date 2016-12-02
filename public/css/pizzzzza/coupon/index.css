@@ -1,23 +1,4 @@
-.check {
-    width: 5%;
-}
-
-.number {
-    width: 10%;
-}
-
-.name {
-    width: 16%;
-}
-
-.discount {
-    width: 6%;
-}
-
-.date {
-    width: 9%;
-}
-
-.back {
-    margin-top: 50px;
+/* クーポンメニュー */
+.list-none{
+    list-style-type: none;
 }
