@@ -19,7 +19,7 @@ class UserAuth
             //ログインしていない
        if (!Auth::check()){
         
-            return redirect('pizzzzza/login'); 
+            return redirect('/login'); 
         
         //　ログインしている
         }else{
@@ -31,18 +31,18 @@ class UserAuth
                 $authid = session()->get('auth_id');
             }
 
-            // auth_idが 2(権限付き従業員）　なら
+            // auth_idが 1(権限付き従業員）　なら
+            if($authid == 1){
+                 return redirect('/');
+            }
+
+             // auth_idが 2(従業員）　なら
             if($authid == 2){
                  return redirect('/');
             }
 
-             // auth_idが 3(従業員）　なら
+            //　 auth_idが 3（顧客）　なら 
             if($authid == 3){
-                 return redirect('/');
-            }
-
-            //　 auth_idが 1/4（管理者、顧客）　なら 
-            if($authid == 1 || $authid == 4){
                  //　正常時の処理
                 return $next($request);
             }

@@ -29,7 +29,7 @@
       <div class="row">
                     @foreach($products as $product)
                         @if ($product->genre_id == 1)
-                        <div class="col-xs-6 col-md-4">
+                        <div class="col-xs-6 col-md-4 mb">
                          <div class="item">
                             <div class="text-center"><image src="{{ $product -> product_image }}"></image></div>
                             <p class="text-center space name">{{ $product->product_name }}</p>
@@ -51,7 +51,7 @@
                      <div class="row">
                         @foreach($products as $product)
                         @if ($product->genre_id == 2)
-                        <div class="col-xs-6 col-md-4">
+                        <div class="col-xs-6 col-md-4 mb">
                          <div class="item">
                             <div class="text-center"><image src="{{ $product -> product_image }}"></image></div>
                             <p class="text-center space name">{{ $product->product_name }}</p>
@@ -74,7 +74,7 @@
                   <div class="row">
                         @foreach($products as $product)
                         @if ($product->genre_id == 3)
-                        <div class="col-xs-6 col-md-4">
+                        <div class="col-xs-6 col-md-4 mb">
                          <div class="item">
                             <div class="text-center"><image src="{{ $product -> product_image }}"></image></div>
                             <p class="text-center space name">{{ $product->product_name }}</p>
@@ -111,6 +111,27 @@
          </div>
           </div>
            </div>
+
+           <div class="cart">
+            <h1>Cart</h1>
+            <table class="table table-bordered">
+                <thead>
+		         <tr>
+			      <th>商品</th>
+                  <th>数量</th>
+        		</tr>
+	            </thead>
+                 <tbody>
+                 @for($i = 0; $i< 10; $i++)
+		          <tr>
+                <td>フレッシュモッツァレラのジェノベーゼ</td>
+                <td>1</td>
+		          </tr>
+                   @endfor
+            </table>
+           </div>
+
+          
 @endsection
 
 @section('js')
