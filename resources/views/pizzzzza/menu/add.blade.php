@@ -60,8 +60,9 @@
                 </tr>
                 <tr>
                     <th>商品画像</th>
-                    <td>
-                        <input type="file" name="product_img" value="">
+                    <td class="imgInput">
+                        <img id="preview" class="mb" src="/images/product/noimage.jpg" alt="">
+                        <input type="file" id="getfile" name="product_img" value="" />
                         <div class="caption mt">※ 横:366px 縦:223px 拡張子: jpg jpeg</div>
                     </td>
                 </tr>
@@ -86,5 +87,19 @@
 @endsection
 
 @section('script')
+    <script type="text/javascript">
+        var file = document.querySelector('#getfile');
 
+        file.onchange = function (){
+            var fileList = file.files;
+            //読み込み
+            var reader = new FileReader();
+            reader.readAsDataURL(fileList[0]);
+
+            //読み込み後
+            reader.onload = function  () {
+                document.querySelector('#preview').src = reader.result;
+            };
+        };
+    </script>
 @endsection
