@@ -31,7 +31,7 @@
             </ul>
         </div>
     @endif
-    <form action="/pizzzzza/menu/{{ $product->id }}/update" method="post">
+    <form action="/pizzzzza/menu/{{ $product->id }}/update" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-7">
                 <table class="table table-bordered">
