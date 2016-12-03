@@ -76,7 +76,7 @@ class AdminMenusController extends Controller
         //　リクエストの取得
         $data = $request->all();
 
-        $product = Product::withTrashed()->find($id);
+        $product = Product::withTrashed()->with('productPrice')->find($id);
 
         // 終了日が決まっているか判断
         if (empty($data['product_sales_end_day'])) {
@@ -85,27 +85,34 @@ class AdminMenusController extends Controller
             $endDate = $data['product_sales_end_day'];
         }
 
-        // 新規のProductPriceを発行
-        $price = ProductPrice::create([
-            'product_id' => $product->id,
-            'product_price' => $data['product_price'],
-            'price_change_startdate' => $data['product_sales_start_day'],
-            'price_change_enddate' => $endDate,
-            'employee_id' => Auth::user()->id,
-        ]);
 
-        // 前回のProductPriceを停止
-        $lostPrice = ProductPrice::find($product->price_id);
-        $lostPrice->price_change_enddate = Carbon::today();
-        $lostPrice->save();
+        // 金額が変更されている場合の処理
+        if ($product->productPrice->product_price != $data['product_price']) {
 
+            // 新規のProductPriceを発行
+             $price = ProductPrice::create([
+                'product_id' => $product->id,
+                'product_price' => $data['product_price'],
+                'price_change_startdate' => $data['product_sales_start_day'],
+                'price_change_enddate' => $endDate,
+                'employee_id' => Auth::user()->id,
+            ]);
+
+            // 前回のProductPriceを停止
+            $lostPrice = ProductPrice::find($product->price_id);
+            $lostPrice->price_change_enddate = Carbon::today();
+            $lostPrice->save();
+
+            // price_idを変更する
+            $product->price_id = $price->id;
+
+        }
 
         // Productの値の変更する
         $product->product_name = $data['product_name'];
 //        $product->product_image = $data['product_img'];
         $product->product_text  = $data['product_text'];
         $product->genre_id = $data['product_genre_id'];
-        $product->price_id = $price->id;
         $product->sales_start_date = $data['product_sales_start_day'];
         $product->sales_end_date = $endDate;
 
