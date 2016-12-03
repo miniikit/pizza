@@ -43,9 +43,10 @@
                     <tr>
                         <th class="text-center">画像</th>
                         <td class="imgInput">
-                            <img class="imgView mb" src="{{ $product->product_image }}" alt="">
-                            <input type="file" name="product_img" >
+                            <img id="preview" class="mb" src="{{ $product->product_image }}" alt="">
+                            <input type="file" id="getfile" name="product_img" value="" />
                             <div class="caption mt">※ 横:366px 縦:223px 拡張子: jpg</div>
+
                         </td>
                     </tr>
                     <tr>
@@ -106,36 +107,18 @@
 
 @section('script')
     <script type="text/javascript">
-        $(function(){
-            var setFileInput = $('.imgInput'),
-                    setFileImg = $('.imgView');
+        var file = document.querySelector('#getfile');
 
-            setFileInput.each(function(){
-                var selfFile = $(this),
-                        selfInput = $(this).find('input[type=file]'),
-                        prevElm = selfFile.find(setFileImg),
-                        orgPass = prevElm.attr('src');
+        file.onchange = function (){
+            var fileList = file.files;
+            //読み込み
+            var reader = new FileReader();
+            reader.readAsDataURL(fileList[0]);
 
-                selfInput.change(function(){
-                    var file = $(this).prop('files')[0],
-                            fileRdr = new FileReader();
-
-                    if (!this.files.length){
-                        prevElm.attr('src', orgPass);
-                        return;
-                    } else {
-                        if (!file.type.match('image.*')){
-                            prevElm.attr('src', orgPass);
-                            return;
-                        } else {
-                            fileRdr.onload = function() {
-                                prevElm.attr('src', fileRdr.result);
-                            }
-                            fileRdr.readAsDataURL(file);
-                        }
-                    }
-                });
-            });
-        });
+            //読み込み後
+            reader.onload = function  () {
+                document.querySelector('#preview').src = reader.result;
+            };
+        };
     </script>
 @endsection

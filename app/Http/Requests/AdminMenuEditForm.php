@@ -25,8 +25,8 @@ class AdminMenuEditForm extends FormRequest
     {
         return [
             'product_name' => 'required|max:255',
-            'product_text' => 'required',
             'product_img' => 'max:1500|mimes:jpg,jpeg',
+            'product_text' => 'required',
             'product_price' => 'required|integer',
             'product_genre_id' => 'required',
             'product_sales_start_day' => 'required|date',
