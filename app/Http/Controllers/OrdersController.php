@@ -16,6 +16,7 @@ use App\Service\CartService;
 use App\Service\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Support\Facades\DB;  //サービスに移植後削除
 
@@ -69,6 +70,15 @@ class OrdersController extends Controller
 
         $order = new OrderService();
         $order->insert($products,$productCount,$userId,$datetime,$couponId);
+
+
+        $user = Auth::user();
+
+        Mail::send('mail.thanksMail', $data, function($message) use($user) {
+
+            $message->to($user->email)->subject('注文内容');
+
+        });
 
 
         return redirect()->route('complete');

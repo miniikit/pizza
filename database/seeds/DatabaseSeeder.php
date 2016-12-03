@@ -162,6 +162,21 @@ class UsersSeeder extends Seeder
             'authority_id' => 3,
         ]);
 
+        User::create([
+            'name' => 'Josh',
+            'kana' => 'josh',
+            'email' => 'B5212@oic.jp',
+            'password' => bcrypt('josh'),
+            'postal' => 5550012,
+            'address1' => '大阪府大阪市大正区北恩加島',
+            'address2' => '2-8-2',
+            'address3' => null,
+            'phone' => '08037401939',
+            'gender_id' => 1,
+            'birthday' => 19960607,
+            'authority_id' => 3,
+        ]);
+
 
         for ($i=0; $i < 200; $i++) {
 
