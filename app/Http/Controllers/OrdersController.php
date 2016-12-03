@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\User;
+use App\Coupon;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Service\CartService;
@@ -17,7 +18,6 @@ use App\Service\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
-
 use Illuminate\Support\Facades\DB;  //サービスに移植後削除
 
 
@@ -66,15 +66,19 @@ class OrdersController extends Controller
 
         // オーダする
 
-        $userId = Auth::user()->id;
+        $user = Auth::user();
+
+        $userId = $user->id;
 
         $order = new OrderService();
         $order->insert($products,$productCount,$userId,$datetime,$couponId);
 
+        $coupon = NULL;
+        if (!empty($couponId)) {
+            $coupon = Coupon::find($couponId);
+        }
 
-        $user = Auth::user();
-
-        Mail::send('mail.thanksMail', $data, function($message) use($user) {
+        Mail::send('mail.thanksMail', compact('user','products','productCount','total','datetime','coupon'), function($message) use($user,$products,$productCount,$total,$datetime,$coupon) {
 
             $message->to($user->email)->subject('注文内容');
 
