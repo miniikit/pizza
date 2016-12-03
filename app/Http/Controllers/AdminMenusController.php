@@ -78,16 +78,23 @@ class AdminMenusController extends Controller
 
         $product = Product::withTrashed()->with('productPrice')->find($id);
 
-//        // 現在の日付を取得
-//        $carbon = Carbon::now();
-//
-//        // 入力された画像を取得
-//        $file = $request->file('product_img');
-//
-//        // 画像名前を決めて画像を所定の場所に格納
-//        $filename = $carbon->format('Y-m-d-H-i-s') . '.jpg';
-//        $file->move(public_path('images/product/'), $filename);
+        // リクエストの中の画像が存在するか
 
+        if ($request->hasFile('product_img')) {
+
+            // 現在の日付を取得
+            $carbon = Carbon::now();
+
+            // 入力された画像を取得
+            $file = $request->file('product_img');
+
+            // 画像名前を決めて画像を所定の場所に格納
+            $filename = $carbon->format('Y-m-d-H-i-s') . '.jpg';
+            $file->move(public_path('images/product/'), $filename);
+
+            $product->product_image = '/images/product/' . $filename;
+
+        }
 
         // 終了日が決まっているか判断
         if (empty($data['product_sales_end_day'])) {

@@ -45,8 +45,7 @@
                         <td class="imgInput">
                             <img id="preview" class="mb" src="{{ $product->product_image }}" alt="">
                             <input type="file" id="getfile" name="product_img" value="" />
-                            <div class="caption mt">※ 横:366px 縦:223px 拡張子: jpg</div>
-
+                            <div class="caption mt">※ 横:366px 縦:223px 拡張子: jpg jpeg</div>
                         </td>
                     </tr>
                     <tr>

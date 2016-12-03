@@ -85,3 +85,14 @@ tr.link:hover{
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     padding: 15px 8px;
 }
+
+.cap,
+.caption {
+    background: none;
+    color: #666666;
+    font-size: 10px;
+    line-height: 15px;
+}
+.cap {
+    padding-top: 5px;
+}
