@@ -42,7 +42,11 @@
                     </tr>
                     <tr>
                         <th class="text-center">画像</th>
-                        <td><img src="{{ $product->product_image }}" alt=""></td>
+                        <td class="imgInput">
+                            <img class="imgView mb" src="{{ $product->product_image }}" alt="">
+                            <input type="file" name="product_img" >
+                            <div class="caption mt">※ 横:366px 縦:223px 拡張子: jpg</div>
+                        </td>
                     </tr>
                     <tr>
                         <th class="text-center">内容</th>
@@ -97,4 +101,41 @@
         {{ csrf_field() }}
     </form>
 
+@endsection
+
+
+@section('script')
+    <script type="text/javascript">
+        $(function(){
+            var setFileInput = $('.imgInput'),
+                    setFileImg = $('.imgView');
+
+            setFileInput.each(function(){
+                var selfFile = $(this),
+                        selfInput = $(this).find('input[type=file]'),
+                        prevElm = selfFile.find(setFileImg),
+                        orgPass = prevElm.attr('src');
+
+                selfInput.change(function(){
+                    var file = $(this).prop('files')[0],
+                            fileRdr = new FileReader();
+
+                    if (!this.files.length){
+                        prevElm.attr('src', orgPass);
+                        return;
+                    } else {
+                        if (!file.type.match('image.*')){
+                            prevElm.attr('src', orgPass);
+                            return;
+                        } else {
+                            fileRdr.onload = function() {
+                                prevElm.attr('src', fileRdr.result);
+                            }
+                            fileRdr.readAsDataURL(file);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
