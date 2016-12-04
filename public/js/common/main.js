@@ -56,9 +56,9 @@
 			type: 'GET',
 			url: '/app/countCartContents',
 			dataType: 'json',
-			success: function (date) {
-				if (date.count) {
-					$('#cartCount').text(date.count).css('display','inline-block');
+			success: function (data) {
+				if (data.count) {
+					$('#cartCount').text(data.count).css('display','inline-block');
 				}
 			}
 		});
