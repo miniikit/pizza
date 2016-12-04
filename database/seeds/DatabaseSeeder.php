@@ -300,10 +300,11 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_money' => 3000,
             'product_id' => 1,
             'coupon_start_date' => Carbon::today(),
-            'coupon_end_date' => null,
+            'coupon_end_date' => Carbon::today(),
             'coupon_number' => '00000001',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => null,
+            'deleted_at' => Carbon::today()
         ]);
         Coupon::create([
             'coupons_types_id' => '1',

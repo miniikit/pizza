@@ -85,11 +85,9 @@
                 </tbody>
             </table>
             
-            <form class="ar" action="/pizzzzza/coupon/{{$id}}/delete" method="post">
-                <a href="/pizzzzza/coupon/{{$id}}/edit" class="btn btn-default btn-sm">編集</a>
-                <input class="btn btn-danger btn-sm ml" type="submit" name="delete" value="削除">
-                {{ csrf_field() }}
-            </form>
+            <div class="ar">
+                <a href="/pizzzzza/coupon/{{$id}}/edit" class="btn btn-default btn-sm ar">編集</a>
+            </div>
             
         </div>
         <div class="col-md-4 col-md-offset-4 mt">

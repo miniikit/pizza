@@ -96,7 +96,9 @@
                 </tbody>
             </table>
             <div class="ar">
+                @if($coupon->deleted_at == NULL)
                 <a href="/pizzzzza/coupon/{{$id}}/delete" class="btn btn-danger btn-sm">削除</a>
+                @endif
                 <input class="btn btn-primary btn-sm ml" type="submit" name="status" value="更新">
             </div>
             {{ csrf_field() }}

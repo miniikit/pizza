@@ -58,7 +58,7 @@ class CouponsController extends Controller
 
     //  開催中クーポン一覧ページ
     public function couponNowList()  {
-        $coupons = DB::table('coupons_master')->get();
+        $coupons = DB::table('coupons_master')->where('deleted_at','=',NULL)->get();
         //dd($coupons);
         return view('pizzzzza.coupon.list',compact('coupons'));
     }
@@ -75,7 +75,8 @@ class CouponsController extends Controller
 
     //  過去クーポン一覧ページ
     public function couponHistory()  {
-        return view('pizzzzza.coupon.history');
+        $coupons = DB::table('coupons_master')->get();
+        return view('pizzzzza.coupon.history',compact('coupons'));
     }
 
     //  クーポン詳細ページ
@@ -172,7 +173,7 @@ class CouponsController extends Controller
 
 
 
-    // クーポン削除：show(詳細)ページからの遷移
+    // クーポン削除処理：show(詳細)ページからの遷移
     public function delete($id){
 
         $now = Carbon::now();
@@ -188,7 +189,7 @@ class CouponsController extends Controller
             return redirect()->route('showCoupon', $id);
         }else{
             //既に削除されている
-            flash('既に無効化されたクーポンです。', 'warning');
+            flash('既に無効化されているクーポンです。', 'warning');
             return redirect()->route('showCoupon', $id);
         }
 
