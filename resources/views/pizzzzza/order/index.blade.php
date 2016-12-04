@@ -6,6 +6,13 @@
     <link rel="stylesheet" href="/css/pizzzzza/order/index.css" media="all" title="no title">
 @endsection
 
+@section('pankuzu')
+    <ol class="breadcrumb">
+        <li><a href="/pizzzzza/order/top">ホーム</a></li>
+        <li class="active">注文確認</li>
+    </ol>
+@endsection
+
 @section('main')
     <div class="wrap">
         <h1>注文確認</h1>
