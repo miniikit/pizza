@@ -19,11 +19,28 @@ var app = new Vue({
 
             this.$http.get('/pizzzzza/order/get').then(function (orders) {
 
-                console.log(orders.body);
-                this.orders = orders.body;
-                // this.$set('orders', orders);
+                if (this.orders != orders.body) {
+
+                    this.orders = orders.body;
+                    // this.$set('orders', orders);
+                    
+                    this.newOrderAlert();
+
+                }
             });
 
+        },
+
+        newOrderAlert : function () {
+            notif({
+                msg: "新しい注文がありました。",
+                type: "info",
+                position: "right",
+                bgcolor: "#75999f",
+                opacity: 0.9,
+                width: 300,
+                fade: true
+            });
         }
 
     }

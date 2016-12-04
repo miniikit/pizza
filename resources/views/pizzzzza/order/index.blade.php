@@ -48,6 +48,7 @@
 
 
 @section('script')
+    <script src="/plug/Notifit/notifIt.min.js" charset="utf-8"></script>
     <script src="/js/vender.js" charset="utf-8"></script>
     <script src="/js/order/index.js" charset="utf-8"></script>
 @endsection
