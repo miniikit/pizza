@@ -24,7 +24,7 @@
             </ul>
         </div>
         @endif
-            <form action="/pizzzzza/employee/add/store" method="post">
+            <form action="/pizzzzza/employee/store" method="post">
                 <table class="table table-bordered ">
                     <tbody>
                     <tr>
