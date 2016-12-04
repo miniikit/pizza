@@ -13,7 +13,7 @@
         <div class="text-center">
           <ul>
             <li class="list-none"><a href="/pizzzzza/coupon/list"><input type="button" style="width:30%; margin-bottom:50px; margin-top:30px;" class="btn btn-primary btn-lg" name="name" value="現在期間中"></a></li>
-            <li class="list-none"><a href="#"><input type="button" style="width:30%;margin-bottom:50px;"class="btn btn-primary btn-lg" name="name" value="新規発行"></a></li>
+            <li class="list-none"><a href="/pizzzzza/coupon/add"><input type="button" style="width:30%;margin-bottom:50px;"class="btn btn-primary btn-lg" name="name" value="新規発行"></a></li>
             <li class="list-none"><a href="#"><input type="button" style="width:30%;" class="btn btn-primary btn-lg" name="name" value="履歴閲覧"></a></li>
           </ul>
 
