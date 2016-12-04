@@ -3,6 +3,7 @@
 @section('title', '従業員管理画面')
 
 @section('css')
+    <link rel="stylesheet" href="/css/pizzzzza/menu/index.css" media="all" title="no title">
 @endsection
 
 @section('pankuzu')
@@ -28,26 +29,26 @@
                     <td>{{ $coupon->coupon_number }}</td>
                 </tr>
                 <tr>
-                @if($coupon->coupon_discount < 0)
-                    <th class="text-center">プレゼント商品名</th>
-                    <td></td>
-                @else
-                    <th class="text-center">値引額</th>
-                    <td>{{ $coupon->coupon_discount }}</td>
-                @endif
+                    @if($coupon->coupon_discount < 0)
+                        <th class="text-center">プレゼント商品名</th>
+                        <td></td>
+                    @else
+                        <th class="text-center">値引額</th>
+                        <td>{{ $coupon->coupon_discount }}</td>
+                    @endif
                 </tr>
                 <tr>
                     <th class="text-center">利用上限回数</th>
                     <td>{{ $coupon->coupon_conditions_count }}</td>
                 </tr>
-                 <tr>
+                <tr>
                     <th class="text-center">利用条件金額</th>
                     <td>{{ $coupon->coupon_conditions_money }}</td>
                 </tr>
                 <tr>
                     <th class="text-center">対象者</th>
                     @if($coupon->coupon_conditions_first == 1)
-                            <td>当店初回利用者限定</td>
+                        <td>当店初回利用者限定</td>
                     @else
                         <td>全員</td>
                     @endif
@@ -57,9 +58,14 @@
                     <td>{{ $coupon->coupon_type}}</td>
                 </tr>
                 <tr>
-                    <th class="text-center">対象商品</th>
-                    <td>{{ 'a' }}</td>
+                    <th class="text-center">使用条件商品</th>
+                @if(isset($coupon->product_id))
+                    <td>{{ $product->product_name }}</td>
+                @else
+                    <td>なし</td>
+                @endif
                 </tr>
+
                 </tbody>
             </table>
         </div>
@@ -84,11 +90,11 @@
                 </tr>
                 </tbody>
             </table>
-            
+
             <div class="ar">
                 <a href="/pizzzzza/coupon/{{$id}}/edit" class="btn btn-default btn-sm ar">編集</a>
             </div>
-            
+
         </div>
         <div class="col-md-4 col-md-offset-4 mt">
             <a href="/pizzzzza/coupon/list" class="btn btn-default btn-lg btn-block">戻る</a>

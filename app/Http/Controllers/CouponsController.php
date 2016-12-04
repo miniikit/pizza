@@ -56,12 +56,19 @@ class CouponsController extends Controller
         return view('pizzzzza.coupon.new.gift.select');
     }
 
+
     //  開催中クーポン一覧ページ
     public function couponNowList()  {
-        $coupons = DB::table('coupons_master')->where('deleted_at','=',NULL)->get();
-        //dd($coupons);
+
+        $today = Carbon::today();
+
+        //開始日・終了日・削除済み　の３項目を確認してクリアした一覧を取得
+        $coupons = DB::table('coupons_master')->where('deleted_at','=',NULL)->where('coupon_end_date','>=',$today)->orWhere('coupon_end_date','=',null)->where('coupon_start_date','<=',$today)->get();
+
         return view('pizzzzza.coupon.list',compact('coupons'));
+
     }
+
 
     //  開催中クーポン一覧ページ＞値引きクーポン編集ページ
     public function couponNowDiscountEdit()  {
@@ -79,6 +86,8 @@ class CouponsController extends Controller
         return view('pizzzzza.coupon.history',compact('coupons'));
     }
 
+
+
     //  クーポン詳細ページ
     public function show($id)  {
 
@@ -86,9 +95,16 @@ class CouponsController extends Controller
         //　※ID、クーポンマスタの値を返したいのに、クーポン種別マスタのIDで上書きされる。だからIDも一緒に返却する。
         $coupon = DB::table('coupons_master')->join('coupons_types_master','coupons_types_master.id','=','coupons_master.coupons_types_id')->where('coupons_master.id','=',$id)->first();
 
+        // 条件商品を取得
+            $product_id = $coupon->product_id;
+            $product = DB::table('products_master')->where('products_master.id','=',$product_id)->first();
+
         //　※ID、クーポンマスタの値を返したいのに、クーポン種別マスタのIDで上書きされる。だからIDも一緒に返却する。
-        return view('pizzzzza.coupon.show',compact('coupon','id'));
+        return view('pizzzzza.coupon.show',compact('coupon','id','product'));
+
     }
+
+
 
     //  クーポン編集ページ
     public function edit($id) {
@@ -113,6 +129,8 @@ class CouponsController extends Controller
         return view('pizzzzza.coupon.list.edit',compact('coupon','couponTypes','couponTarget','id'));
 
     }
+
+
 
     // クーポン更新処理：edit(編集)ページからの遷移
     public function update(Request $request,$id){

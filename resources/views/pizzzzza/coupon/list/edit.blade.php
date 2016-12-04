@@ -3,7 +3,7 @@
 @section('title', '値引クーポン編集画面')
 
 @section('css')
-    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+    <link rel="stylesheet" href="/css/pizzzzza/menu/index.css" media="all" title="no title">
 @endsection
 
 @section('pankuzu')
@@ -70,6 +70,9 @@
                                 @endforeach
                             </select>
                         </td>
+                    </tr>
+                    <tr>
+                        <th></th>
                     </tr>
                     </tbody>
                 </table>
