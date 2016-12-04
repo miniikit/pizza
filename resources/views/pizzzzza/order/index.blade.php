@@ -4,6 +4,7 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/pizzzzza/order/index.css" media="all" title="no title">
+    <link rel="stylesheet" href="/plug/Notifit/notifIt.css">
 @endsection
 
 @section('pankuzu')
@@ -29,7 +30,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr class="link" v-for="(order, index) in orders">
+                            <tr class="link" v-for="(order, index) in orders" v-on:click="say('hi')">
                                 <td>@{{ index + 1 }}</td>
                                 <td>@{{ order.user.name }}</td>
                                 <td>@{{ order.user.address1 + order.user.address2}} <span v-if="order.user.address3 != null">@{{ order.user.address3 }}</span></td>
