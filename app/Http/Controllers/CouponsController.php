@@ -41,20 +41,34 @@ class CouponsController extends Controller
 //        return view('pizzzzza.coupon.add');
 //    }
 
+
+
     //  クーポン種別選択ページ＞値引きクーポン新規発行ページ
     public function couponNewDiscount()  {
-        return view('pizzzzza.coupon.add.discount.input');
+
+        $today = Carbon::today();
+
+        //販売期間中かつ、削除されていない商品を取得する
+        $products = DB::table('products_master')->where('deleted_at','=',NULL)->where('sales_start_date','<=',$today)->where('sales_end_date','>=',$today)->orWhere('sales_end_date','=',NULL)->orderBy('genre_id','asc')->get();
+
+
+        return view('pizzzzza.coupon.add.discount.input',compact('products'));
+
     }
+
+    //  値引きクーポン　登録処理
+    public function couponNewDiscountDo(Request $request) {
+        dd($request->all());
+        //バリデーション、追加処理、
+        return redirect()->route();
+    }
+
 
     //  クーポン種別選択ページ＞（１）プレゼントクーポン新規発行ページ
     public function couponNewGiftInput()  {
         return view('pizzzzza.coupon.add.gift.input');
     }
 
-    //  クーポン種別選択ページ＞（２）プレゼントクーポン商品選択ページ
-    public function couponNewGiftSelect()  {
-        return view('pizzzzza.coupon.new.gift.select');
-    }
 
 
     //  開催中クーポン一覧ページ
@@ -69,16 +83,6 @@ class CouponsController extends Controller
 
     }
 
-
-    //  開催中クーポン一覧ページ＞値引きクーポン編集ページ
-    public function couponNowDiscountEdit()  {
-        return view('pizzzzza.coupon.list.discount.edit');
-    }
-
-    //  開催中クーポン一覧ページ＞プレゼントクーポン編集ページ
-    public function couponNowGiftEdit()  {
-        return view('pizzzzza.coupon.list.gift.edit');
-    }
 
     //  過去クーポン一覧ページ
     public function couponHistory()  {

@@ -25,33 +25,33 @@
         </div>
     @endif
 
-    <form action="/pizzzzza/employee/store" method="post">
+    <form action="/pizzzzza/coupon/add/discount/do" method="post">
         <table class="table table-bordered ">
             <tbody>
             <tr>
                 <th class="text-center">クーポン名</th>
-                <td><input class="form-control" type="text" name="name" value="" placeholder="冬限定５００円OFFクーポン"></td>
+                <td><input class="form-control" type="text" name="coupon_name" value="" placeholder="冬限定５００円OFFクーポン"></td>
             </tr>
             <tr>
                 <th class="text-center">クーポン番号</th>
-                <td><input class="form-control" type="text" name="kana" value="" placeholder="GREAT-WINTER2016"></td>
+                <td><input class="form-control" type="text" name="coupon_num" value="" placeholder="GREAT-WINTER2016"></td>
             </tr>
             <tr>
                 <th class="text-center">値引き額</th>
-                <td><input class="form-control" type="number" name="birthday" value="" placeholder="500"></td>
+                <td><input class="form-control" type="number" name="coupon_conditions_price" value="" placeholder="500"></td>
             </tr>
             <tr>
                 <th class="text-center">利用開始日</th>
-                <td><input class="form-control" type="date" name="gender_id" value="1" checked>
+                <td><input class="form-control" type="date" name="coupon_start_date" value="1" checked>
                 </td>
             </tr>
             <tr>
                 <th class="text-center">利用終了日</th>
-                <td><input class="form-control" type="date" name="postal" value="" placeholder="ハイフン抜き"></td>
+                <td><input class="form-control" type="date" name="coupon_end_date" value="" placeholder="ハイフン抜き"></td>
             </tr>
             <tr>
                 <th class="text-center">対象者</th>
-                <td><select class="form-control" name="coupon_conditions_first" id="">
+                <td><select class="form-control" name="coupon_target" id="">
                         <option value="0" checked>全員</option>
                         <option value="1">当店初回利用者限定</option>
                     </select>
@@ -59,17 +59,38 @@
             </tr>
             <tr>
                 <th class="text-center">利用上限回数</th>
-                <td><input class="form-control" type="number" name="address3" value="" placeholder="１人あたりの使用上限回数を指定します">
+                <td><input class="form-control" type="number" name="coupon_max" value="" placeholder="１人あたりの使用上限回数を指定します">
                 </td>
             </tr>
             <tr>
                 <th class="text-center">利用条件金額</th>
-                <td><input class="form-control" type="number" name="address2" value=""
-                           placeholder="カート内合計金額により使用可否を指定します"></td>
+                <td><input class="form-control" type="number" name="coupon_" value=""
+                           placeholder="この金額以上の際にクーポンが適用可能になります"></td>
             </tr>
             <tr>
                 <th class="text-center">利用条件商品</th>
-                <td><input class="form-control" type="text" name="phone" value="" placeholder="カート内にこの商品が必要です"></td>
+                <td>
+                    <select class="form-control" name="coupon_conditions_first" id="">
+                        <?php $cnt = 1; ?>
+                        @foreach($products as $product)
+                            @if(!isset($genre))
+                                <?php $genre = $product->genre_id; ?>
+                                <optgroup label="●">
+                            @endif
+                            @if($genre != $product->genre_id)
+                                @if($cnt != 1)
+                                <?php  $cnt = 1; ?>
+                                </optgroup>
+                                @endif
+                                <?php $cnt = 0; $genre = $product->genre_id; ?>
+                                <optgroup label="●">
+                                <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                            @else
+                                <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </td>
             </tr>
             </tbody>
         </table>
