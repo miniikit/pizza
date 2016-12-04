@@ -31,7 +31,7 @@
                         <td><input class="form-control" type="text" name="coupon_num" value="{{ $coupon->coupon_number }}"></td>
                     </tr>
                     <tr>
-                            <th class="text-center">値引額</th>
+                            <th class="text-center">値引き額</th>
                             <td><input class="form-control" type="text" name="coupon_discount" value="{{ $coupon->coupon_discount }}">
                             </td>
                     </tr>
@@ -72,7 +72,18 @@
                         </td>
                     </tr>
                     <tr>
-                        <th></th>
+                        <th class="text-center">使用条件商品</th>
+                        <td>
+                            <select name="product_id">
+                                @foreach($products as $product)
+                                    @if($product->id == $product_id)
+                                        <option value="{{ $product->id }}" selected>{{ $product->product_name }}</option>
+                                    @else
+                                        <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

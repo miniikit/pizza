@@ -36,10 +36,10 @@ class CouponsController extends Controller
         return view('pizzzzza.coupon.menu');
     }
 
-    //  クーポン種別選択ページ
-    public function couponNew()  {
-        return view('pizzzzza.coupon.add');
-    }
+//    //  クーポン種別選択ページ
+//    public function couponNew()  {
+//        return view('pizzzzza.coupon.add');
+//    }
 
     //  クーポン種別選択ページ＞値引きクーポン新規発行ページ
     public function couponNewDiscount()  {
@@ -126,7 +126,11 @@ class CouponsController extends Controller
         //クーポン種別を取得する(Viewで使用）
             $couponTypes = DB::table('coupons_types_master')->get();
 
-        return view('pizzzzza.coupon.list.edit',compact('coupon','couponTypes','couponTarget','id'));
+        // 条件商品を取得
+            $product_id = $coupon->product_id;
+            $products = DB::table('products_master')->get();
+
+        return view('pizzzzza.coupon.list.edit',compact('coupon','couponTypes','couponTarget','id','products','product_id'));
 
     }
 
@@ -151,6 +155,8 @@ class CouponsController extends Controller
                 $update['coupon_conditions_count'] = $request->coupon_max;
                 //使用条件金額
                 $update['coupon_conditions_money'] = $request->coupon_conditions_price;
+                //使用条件商品
+                $update['product_id'] = $request->product_id;
                 //クーポン種別
                 $update['coupons_types_id'] = $request->coupon_type_id;
 
