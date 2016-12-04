@@ -32,7 +32,7 @@
             <thead>
             <tr>
                 <th style="text-align: center;">ID</th>
-                <th>メニュー名</th>
+                <th>商品名</th>
                 <th style="text-align: center;">価格</th>
                 <th style="text-align: center;">ジャンル</th>
                 <th style="text-align: center;">販売開始日</th>

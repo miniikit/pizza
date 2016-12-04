@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Coupon;
+use Carbon\Carbon;
 
 class CouponsController extends Controller
 {
@@ -112,34 +113,86 @@ class CouponsController extends Controller
 
     }
 
-    // クーポン更新：edit(編集)ページからの遷移
-    public function update(Request $request){
+    // クーポン更新処理：edit(編集)ページからの遷移
+    public function update(Request $request,$id){
 
         if($request->status = "更新"){
+            //
+            //  POSTデータの受け取り
+            //
+                $update = array();
+
+                //クーポン名
+                $update['coupon_name'] = $request->coupon_name;
+                //クーポン番号
+                $update['coupon_number'] = $request->coupon_num;
+                //値引き金額
+                $update['coupon_discount'] = $request->coupon_discount;
+                //利用上限回数
+                $update['coupon_conditions_count'] = $request->coupon_max;
+                //使用条件金額
+                $update['coupon_conditions_money'] = $request->coupon_conditions_price;
+                //クーポン種別
+                $update['coupons_types_id'] = $request->coupon_type_id;
+
+                //対象者は全員か、初回利用者限定か ※POSTデータは、0(全員)、1(初回利用者限定)にしていてDBと若干異なるので、DB格納用に変換
+                if($request->coupon_conditions_first == 1){
+                    $update['coupon_conditions_first'] = 1;    //初回利用者のみ
+                }
+
+                //終了日
+                if(isset($request->coupon_end_date) && $request->coupon_end_date != "") {
+                    $update['coupon_end_date'] = $request->coupon_end_date;
+                }
+
+
+            //
+            //  更新
+            //
+
+                DB::table('coupons_master')->where('coupons_master.id','=',$id)->update($update);
+                flash('クーポンの更新が完了しました。', 'success');
+                return redirect()->route('showCoupon', $id);
 
         }
 
+
         //
-        //  POSTデータの受け取り
+        //  エラー処理
         //
 
-        $coupon_name = $request->coupon_name;
-        $coupon_num = $request->coupon_num;
-        $coupon_discount = $request->coupon_discount;
-        $coupon_max = $request->coupon_max;
-        $coupon_conditions_price = $request->coupon_conditions_price;
-        $coupon_conditions_first = $request->coupon_conditions_first;
-        $coupon_type_id = $request->coupon_type_id;
-        $coupon_end_date = $request->coupon_end_date;
+            flash('Message', 'warning');
+            if(isset($id)) {
+                return redirect()->route('showCoupon', $id);
+            }else{
+                return redirect()->route('menuCoupon');
+            }
 
-
-        dd($request->all());
     }
+
+
 
     // クーポン削除：show(詳細)ページからの遷移
     public function delete($id){
 
+        $now = Carbon::now();
+        $today = Carbon::today();
 
+        //未だクーポンが削除されていないことを確認
+        $activeStatus = DB::table('coupons_master')->where('id','=',$id)->where('deleted_at','=',NULL)->first();
+
+        if(count($activeStatus) > 0) {
+            //まだ削除されていないので、実際に削除する
+            DB::table('coupons_master')->where('coupons_master.id','=',$id)->update(['deleted_at' => $now,'coupon_end_date' => $today]);
+            flash('選択されたクーポンを無効化しました。', 'success');
+            return redirect()->route('showCoupon', $id);
+        }else{
+            //既に削除されている
+            flash('既に無効化されたクーポンです。', 'warning');
+            return redirect()->route('showCoupon', $id);
+        }
 
     }
+
+
 }

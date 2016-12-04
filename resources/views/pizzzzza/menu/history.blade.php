@@ -9,12 +9,12 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order/top">ホーム</a></li>
-        <li class="active">商品履歴一覧</li>
+        <li class="active">商品履歴</li>
     </ol>
 @endsection
 
 @section('main')
-    <h1>商品一覧</h1>
+    <h1>商品履歴</h1>
 
     <div class="form-group table-responsive">
 
@@ -32,7 +32,7 @@
             <thead>
             <tr>
                 <th style="text-align: center;">ID</th>
-                <th>メニュー名</th>
+                <th>商品名</th>
                 <th style="text-align: center;">価格</th>
                 <th style="text-align: center;">ジャンル</th>
                 <th style="text-align: center;">販売開始日</th>
