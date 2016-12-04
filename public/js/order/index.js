@@ -3,14 +3,13 @@ var app = new Vue({
     el: '#app',
 
     data: {
-
-        list: []
+        orders: []
     },
 
     created: function() {
 
         this.getOrders();
-        this.log();
+        setInterval(this.getOrders,5000);
 
     },
 
@@ -18,16 +17,14 @@ var app = new Vue({
 
         getOrders: function() {
 
-            this.$http.get('/pizzzzza/order/get', function (orders) {
+            this.$http.get('/pizzzzza/order/get').then(function (orders) {
 
-                this.$set('orders', orders);
-
+                console.log(orders.body);
+                this.orders = orders.body;
+                // this.$set('orders', orders);
             });
 
-        },
-
-        log: function () {
-            console.log('おっけーやで');
         }
+
     }
 });
