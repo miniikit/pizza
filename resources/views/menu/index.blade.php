@@ -21,7 +21,7 @@
                     <div class="inner">
                         <div class="image"><img src="{{ $product->product_image }}" alt="" /></div>
                         <div class="title"><h3>{{ $product->product_name }}</h3></div>
-                         <div class="praice"><p>{{ $product->productPrice->product_price }}円</p></div>
+                         <div class="price"><p>{{ $product->productPrice->product_price }}円</p></div>
                         <div class="text"><p>{{ $product->product_text }}</p></div>
                         <div class="btn">
                             <form class="" action="/cart/store" method="post">
@@ -48,7 +48,7 @@
                     <div class="inner">
                         <div class="image"><img src="{{ $product->product_image }}" alt="" /></div>
                         <div class="title"><h3>{{ $product->product_name }}</h3></div>
-                         <div class="praice"><p>{{ $product->productPrice->product_price }}円</p></div>
+                         <div class="price"><p>{{ $product->productPrice->product_price }}円</p></div>
                         <div class="text"><p>{{ $product->product_text }}</p></div>
                         <div class="btn">
                             <form class="" action="/cart/store" method="post">
@@ -75,7 +75,7 @@
                     <div class="inner">
                         <div class="image"><img src="{{ $product->product_image }}" alt="" /></div>
                         <div class="title"><h3>{{ $product->product_name }}</h3></div>
-                         <div class="praice"><p>{{ $product->productPrice->product_price }}円</p></div>
+                         <div class="price"><p>{{ $product->productPrice->product_price }}円</p></div>
                         <div class="text"><p>{{ $product->product_text }}</p></div>
                         <div class="btn">
                             <form class="" action="/cart/store" method="post">

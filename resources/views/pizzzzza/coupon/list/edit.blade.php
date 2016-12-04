@@ -3,7 +3,7 @@
 @section('title', '値引クーポン編集画面')
 
 @section('css')
-    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+    <link rel="stylesheet" href="/css/pizzzzza/menu/index.css" media="all" title="no title">
 @endsection
 
 @section('pankuzu')
@@ -71,6 +71,9 @@
                             </select>
                         </td>
                     </tr>
+                    <tr>
+                        <th></th>
+                    </tr>
                     </tbody>
                 </table>
         </div>
@@ -96,7 +99,9 @@
                 </tbody>
             </table>
             <div class="ar">
+                @if($coupon->deleted_at == NULL)
                 <a href="/pizzzzza/coupon/{{$id}}/delete" class="btn btn-danger btn-sm">削除</a>
+                @endif
                 <input class="btn btn-primary btn-sm ml" type="submit" name="status" value="更新">
             </div>
             {{ csrf_field() }}

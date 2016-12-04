@@ -26,14 +26,14 @@ class EmployeesController extends Controller
 
         $employees = Employee::with('user.gender')->get();
 
-        return view('pizzzzza/employee.index',compact('employees'));
+        return view('pizzzzza.employee.index',compact('employees'));
     }
 
     public function history()  {
 
         $employees = Employee::withTrashed()->with('user.gender')->get();
 
-        return view('pizzzzza/employee.history',compact('employees'));
+        return view('pizzzzza.employee.history',compact('employees'));
     }
 
 
@@ -41,7 +41,7 @@ class EmployeesController extends Controller
     public function show($id)  {
 
         $employee = Employee::withTrashed()->with('user.gender')->find($id);
-        return view('pizzzzza/employee.show',compact('employee'));
+        return view('pizzzzza.employee.show',compact('employee'));
 
     }
 
@@ -50,13 +50,13 @@ class EmployeesController extends Controller
     public function edit($id)  {
 
         $employee = Employee::withTrashed()->with('user.gender')->find($id);
-        return view('pizzzzza/employee.edit',compact('employee'));
+        return view('pizzzzza.employee.edit',compact('employee'));
 
     }
 
     //  従業員追加ページ
     public function add()  {
-        return view('pizzzzza/employee.add');
+        return view('pizzzzza.employee.add');
     }
 
     public function store(EmployeeRequest $request)  {
@@ -107,7 +107,7 @@ class EmployeesController extends Controller
 
         Flash::success('削除しました。');
 
-        return redirect()->route('AdminMenu');
+        return redirect()->route('employees');
 
     }
 

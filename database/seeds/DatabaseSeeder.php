@@ -300,10 +300,11 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_money' => 3000,
             'product_id' => 1,
             'coupon_start_date' => Carbon::today(),
-            'coupon_end_date' => null,
+            'coupon_end_date' => Carbon::today(),
             'coupon_number' => '00000001',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => null,
+            'deleted_at' => Carbon::today()
         ]);
         Coupon::create([
             'coupons_types_id' => '1',
@@ -352,6 +353,19 @@ class CouponsMasterSeeder extends Seeder
             'coupon_number' => 'SUMMER',
             'coupon_conditions_count' => 3,
             'coupon_conditions_first' => 1,
+        ]);
+        Coupon::create([
+            'coupons_types_id' => '1',
+            'coupon_name' => '赤字覚悟！500円無料クーポン',
+            'coupon_discount' => 500,
+            'coupon_conditions_money' => 501,
+            'product_id' => null,
+            'coupon_start_date' => Carbon::today(),
+            'coupon_end_date' => Carbon::today(),
+            'coupon_number' => 'ZAWASPECIAL',
+            'coupon_conditions_count' => 1,
+            'coupon_conditions_first' => null,
+            'deleted_at' => null
         ]);
     }
 }

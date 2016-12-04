@@ -275,7 +275,17 @@ class OrdersController extends Controller
         //
 
 
+        //
+        //  クーポン条件７：　クーポンが無効化されていないか確認する
+        //
 
+            $now = Carbon::now();
+            $activeStatus = DB::table('coupons_master')->where('coupons_master.id','=',$couponId)->where('deleted_at','!=','NULL')->first();
+            if(count($activeStatus)){
+                $message["message"] = "こちらのクーポンは終了いたしました。";
+                $message["status"] = "error";
+                return $message;
+            }
 
         //
         //  最終処理：　クーポン情報を配列で返却
