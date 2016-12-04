@@ -119,7 +119,7 @@ Route::post('/pizzzzza/employee/{id}/update', 'EmployeesController@update'); //�
 
 
     Route::get('/pizzzzza/order', 'AdminController@orderIndex'); //注文確認ページ
-    Route::any('/pizzzzza/order/get', 'AdminController@orderGet'); //注文確認ページ処理用
+    Route::get('/pizzzzza/order/get', 'AdminController@orderGet'); //注文確認ページ処理用
 
 
 

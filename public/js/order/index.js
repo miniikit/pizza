@@ -1,11 +1,18 @@
-new Vue({
+var app = new Vue({
+
     el: '#app',
 
+    data: {
 
-    ready: function() {
-        this.getOrders();
+        list: []
     },
 
+    created: function() {
+
+        this.getOrders();
+        this.log();
+
+    },
 
     methods: {
 
@@ -17,6 +24,10 @@ new Vue({
 
             });
 
+        },
+
+        log: function () {
+            console.log('おっけーやで');
         }
     }
 });
