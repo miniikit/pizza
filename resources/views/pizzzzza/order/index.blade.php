@@ -29,8 +29,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr class="link" v-for="order in orders">
-                                <td>@{{ order.id }}</td>
+                            <tr class="link" v-for="(order, index) in orders">
+                                <td>@{{ index + 1 }}</td>
                                 <td>@{{ order.user.name }}</td>
                                 <td>@{{ order.user.address1 + order.user.address2}} <span v-if="order.user.address3 != null">@{{ order.user.address3 }}</span></td>
                                 <td>@{{ order.order_appointment_date }}</td>
