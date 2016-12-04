@@ -3,7 +3,8 @@ var app = new Vue({
     el: '#app',
 
     data: {
-        orders: []
+        orders: [],
+        detail: []
     },
 
     created: function() {
@@ -43,8 +44,8 @@ var app = new Vue({
             });
         },
 
-        say: function (message) {
-          alert(message)
+        showdetail: function (index) {
+            this.detail = this.orders[index];
         }
 
     }
