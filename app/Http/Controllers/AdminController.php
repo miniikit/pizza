@@ -14,7 +14,7 @@ class AdminController extends Controller
 
         $orders = DB::table('orders_master')->join('orders_details_table','orders_master.id','=','orders_details_table.id')->whereIn('orders_master.state_id',[1,2,3])->get();
 
-        return view('pizzzzza.order.top',compact('orders'));
+        return view('pizzzzza.order.index',compact('orders'));
     }
 
     // 顧客情報の表示と、自動ロード機能
