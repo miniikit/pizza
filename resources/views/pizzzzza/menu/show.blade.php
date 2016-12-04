@@ -12,7 +12,7 @@
         @if(is_null($product->deleted_at))
             <li><a href="/pizzzzza/menu">商品一覧</a></li>
         @else
-            <li><a href="/pizzzzza/menu/history">商品履歴一覧</a></li>
+            <li><a href="/pizzzzza/menu/history">商品履歴</a></li>
         @endif
         <li class="active">{{$product->product_name}}</li>
     </ol>

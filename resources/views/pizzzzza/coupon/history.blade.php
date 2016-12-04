@@ -1,55 +1,60 @@
-@extends('template.admin')
+@extends('template/admin')
 
-@section('title', 'Coupon')
+@section('title', 'クーポン履歴')
 
 @section('css')
+    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+@endsection
+
+@section('pankuzu')
+    <ol class="breadcrumb">
+        <li><a href="/pizzzzza/order/top">ホーム</a></li>
+        <li class="active">クーポン履歴</li>
+    </ol>
 @endsection
 
 @section('main')
-    <div class="wrap">
-    <h1>過去クーポン一覧</h1>
-      <div class="container">
-        <div class="table" style="margin-top:15px">
-  <table class="table"> <!-- サンプル -->
-    <thead>
-      <tr>
-        <th>クーポンID</th>
-        <th>クーポン名</th>
-        <th>シリアル番号</th>
-        <th>条件金額</th>
-        <th>値引き金額</th>
-        <th>プレゼント商品</th>
-        <th>上限</th>
-        <th>対象者</th>
-        <th>登録日</th>
-        <th>開始日</th>
-        <th>終了日</th>
-        <th>担当者</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php for ($i=0; $i < 20 ; $i++) { ?>
-      <tr>
-          <td><?php echo $i ; ?></td>
-          <td>マルゲリータピザ無料!</td>
-          <td>19191145147</td>
-          <td>2000</td>
-          <td>1000</td>
-          <td>000</td>
-          <td>無制限</td>
-          <td>全員</td>
-          <td>1111/22/11 11:22:33</td>
-          <td>4444/22/11</td>
-          <td>4456/88/45</td>
-          <td>003</td>
-      </tr>
-        <?php } ?>
-    </tbody>
-  </div>
-  </table>
-<div class="text-center">
-  <a href="/pizzzzza/coupon/list" class="btn btn-primary btn-lg">戻る</a>
-</div>
+    <h1>クーポン履歴</h1>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">クーポン名</th>
+                <th class="text-center">開始日</th>
+                <th class="text-center">終了日</th>
+                <th class="text-center">登録日時</th>
+                <th class="text-center">更新日時</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($coupons as $coupon)
+                <tr class="link" data-href="/pizzzzza/coupon/{{ $coupon->id }}/show">
+                    <td class="number text-center">{{ $coupon->id }}</td>
+                    <td class="name text-center">{{ $coupon->coupon_name }}</td>
+                    <td class="date text-center">{{ $coupon->coupon_start_date }}</td>
+                    <td class="date text-center">{{ $coupon->coupon_end_date }}</td>
+                    <td class="date text-center">{{ $coupon->created_at }}</td>
+                    <td class="date text-center">{{ $coupon->updated_at }}</td>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
-  </div>
+    </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        $('.table tr[data-href]').addClass('clickable').click(function () {
+            window.location = $(this).attr('data-href');
+        }).find('a').hover(function () {
+            $(this).parents('tr').unbind('click');
+        }, function () {
+            $(this).parents('tr').click(function () {
+                window.location = $(this).attr('data-href');
+            });
+        });
+    </script>
 @endsection

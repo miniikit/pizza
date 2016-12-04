@@ -19,7 +19,7 @@ class CouponsMaster extends Migration
         $table->string('coupon_name'); //クーポン名
         $table->integer('coupon_discount'); //クーポン値引き額
         $table->integer('coupon_conditions_money'); //使用金額条件
-        $table->integer('product_id');//->references('id')->on('products_master'); //商品ID
+        $table->integer('product_id')->nullable();//->references('id')->on('products_master'); //商品ID
         $table->date('coupon_start_date'); //クーポン開始日
         $table->date('coupon_end_date')->nullable(); //クーポン終了日
         $table->string('coupon_number',15)->unique(); //クーポン番号
