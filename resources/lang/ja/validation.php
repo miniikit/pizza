@@ -57,7 +57,7 @@ return [
     'not_in'               => '選択された:attributeは正しくありません。',
     'numeric'              => ':attributeは数字にしてください。',
     'regex'                => ':attributeの書式が正しくありません。',
-    'required'             => ':attributeは必須です。',
+    'required'             => ':attributeが入力されていません。',
     'required_if'          => ':otherが:valueの時、:attributeは必須です。',
     'required_with'        => ':valuesが存在する時、:attributeは必須です。',
     'required_with_all'    => ':valuesが存在する時、:attributeは必須です。',
@@ -162,7 +162,7 @@ return [
             'integer' => '商品価格は半角数字で入力してください',
         ],
         'product_img' => [
-            'mimes' => 'アップロードできるのはJPG/JPEG/PNG/BMP形式の画像のみです',
+            'mimes' => 'アップロードできるのはJPG/JPEG形式の画像のみです',
             'max' => 'アップロードできるのは1500KBまでのファイルのみです',
             'required' => '画像を選択してください',
         ],

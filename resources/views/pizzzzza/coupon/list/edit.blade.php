@@ -32,7 +32,7 @@
                     </tr>
                     <tr>
                             <th class="text-center">値引き額</th>
-                            <td><input class="form-control" type="text" name="coupon_discount" value="{{ $coupon->coupon_discount }}">
+                            <td><input class="form-control" type="text" name="coupon_discount_price" value="{{ $coupon->coupon_discount }}">
                             </td>
                     </tr>
                     <tr>

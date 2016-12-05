@@ -24,6 +24,8 @@ use App\Http\Requests;
 use App\Coupon;
 use Carbon\Carbon;
 
+use App\Http\Requests\AdminCouponNewDiscountRequest;
+
 class CouponsController extends Controller
 {
     public function __construct()
@@ -57,7 +59,22 @@ class CouponsController extends Controller
     }
 
     //  値引きクーポン　登録処理
-    public function couponNewDiscountDo(Request $request) {
+    public function couponNewDiscountDo(AdminCouponNewDiscountRequest $request) {
+
+        DB::table('coupons_master')->insert([
+            'coupons_types_id' => 1,
+            'coupon_name' => $request->coupon_name,
+            'coupon_discount' => $request->coupon_product_id,
+            'coupon_conditions_money' => $request->coupon_discount_price,
+            'product_id' => $request->coupon_product_id,
+            'coupon_start_date' => $request->coupon_start_date,
+            'coupon_end_date' => $request->coupon_end_date,
+            'coupon_number' => $request->coupon_num,
+            'coupon_conditions_count' => $request->coupon_max,
+            'coupon_conditions_first' => $request->coupon_target,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
         dd($request->all());
         //バリデーション、追加処理、
         return redirect()->route();
