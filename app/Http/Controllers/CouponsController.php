@@ -61,7 +61,17 @@ class CouponsController extends Controller
     //  値引きクーポン　登録処理
     public function couponNewDiscountDo(AdminCouponNewDiscountRequest $request) {
 
-        DB::table('coupons_master')->insert([
+        //
+        //  エラーチェック
+        //
+
+        if($request->coupon_start_date > $request->coupon_end_date){
+            flash('開始日と終了日が不正です。', 'success');
+            return redirect()->route('newCouponDiscount')->withInput($request);
+        }
+
+
+        $id = DB::table('coupons_master')->insertGetId([
             'coupons_types_id' => 1,
             'coupon_name' => $request->coupon_name,
             'coupon_discount' => $request->coupon_product_id,
@@ -75,15 +85,22 @@ class CouponsController extends Controller
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-        dd($request->all());
-        //バリデーション、追加処理、
-        return redirect()->route();
+
+        flash('クーポンを発行しました。', 'success');
+
+        return redirect()->route('showCoupon', $id);
+
     }
 
 
     //  クーポン種別選択ページ＞（１）プレゼントクーポン新規発行ページ
-    public function couponNewGiftInput()  {
-        return view('pizzzzza.coupon.add.gift.input');
+    public function couponNewGift()  {
+
+        //販売期間中かつ、削除されていない商品を取得する
+        $products = DB::table('products_master')->where('deleted_at','=',NULL)->where('sales_start_date','<=',$today)->where('sales_end_date','>=',$today)->orWhere('sales_end_date','=',NULL)->orderBy('genre_id','asc')->get();
+
+
+        return view('pizzzzza.coupon.add.gift.input',compact('products'));
     }
 
 

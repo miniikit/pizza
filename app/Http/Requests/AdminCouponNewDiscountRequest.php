@@ -32,7 +32,7 @@ class AdminCouponNewDiscountRequest extends FormRequest
             'coupon_target' => 'required',
             'coupon_max' => 'numeric',
             'coupon_conditions_price' => 'numeric',
-            'coupon_conditions_first' => 'required|numeric',
+            'coupon_product_id' => 'required|numeric',
         ];
     }
 }
