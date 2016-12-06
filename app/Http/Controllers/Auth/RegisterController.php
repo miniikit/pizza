@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Requests\RegisterRequest;
 
@@ -78,5 +79,9 @@ class RegisterController extends Controller
             'authority_id' => $data['authority_id'],
 
         ]);
+    }
+
+        public function input(){
+        return view('auth/register/input');
     }
 }

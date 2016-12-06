@@ -32,4 +32,12 @@ class ResetPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    public function input(){
+        return view('auth/passwords/input');
+    }
+
+    public function send(){
+         return view('auth/passwords/send');
+    }
 }
