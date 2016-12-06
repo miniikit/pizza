@@ -84,7 +84,7 @@ Route::post('/pizzzzza/employee/{id}/update', 'EmployeesController@update'); //�
 //クーポン
     Route::get('/pizzzzza/coupon/menu','CouponsController@couponMenu')->name('menuCoupon'); //クーポンメニュー
     Route::get('/pizzzzza/coupon/add','CouponsController@couponNew'); //クーポン種別選択ページ
-    Route::get('/pizzzzza/coupon/list','CouponsController@couponNowList'); //開催中クーポン一覧ページ
+    Route::get('/pizzzzza/coupon','CouponsController@couponNowList'); //開催中クーポン一覧ページ
     Route::get('/pizzzzza/coupon/{id}/show', 'CouponsController@show')->name('showCoupon'); //クーポン詳細
     Route::get('/pizzzzza/coupon/{id}/edit','CouponsController@edit')->name('editCoupon');  //クーポン編集
     Route::post('/pizzzzza/coupon/{id}/update','CouponsController@update');  //クーポン更新
