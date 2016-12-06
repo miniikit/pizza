@@ -1,0 +1,10 @@
+.regist_table td{
+  height: 100%;
+}
+
+.regist_explain {
+  font-size: 14px;
+  color: #7f7f7f;
+  height: 50%;
+  margin-top: 5px;
+}
