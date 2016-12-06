@@ -53,7 +53,8 @@ class LoginController extends Controller
     //DB結果をカウントし、件数が１件でなければ、エラー処理
     $count = count($pizza);
     if($count != 1){
-     return "メールアドレスが登録されていません。";
+     flash('メールアドレスが登録されていません。', 'danger');
+     return redirect('/login');
     }
 
     //ユーザ表の情報を取得。
@@ -69,11 +70,13 @@ class LoginController extends Controller
             return redirect('/'); //メール、パスワード、権限がすべて一致した場合
 
         }else{
-            return "メールアドレスまたはパスワードが間違っています"; //メール、パスワードが一致していない場合
+            flash('メールアドレスまたはパスワードが間違っています', 'danger');
+            return redirect('/login'); //メール、パスワードが一致していない場合
         }
     
     }else{
-        return "無効なログインです。"; //権限が1,2,3の場合
+        flash('無効なログインです', 'danger');
+        return redirect('/login'); //権限が1,2,3の場合
     }
     
 }
