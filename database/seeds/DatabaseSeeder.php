@@ -148,10 +148,10 @@ class UsersSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => '近沢邦彦',
+            'name' => '近澤邦彦',
             'kana' => 'チカザワクニヒコ',
-            'email' => 'B5164@oic.jp',
-            'password' => bcrypt('zawatika'),
+            'email' => 'B5216@oic.jp',
+            'password' => bcrypt('chikazawa'),
             'postal' => 5550012,
             'address1' => '大阪府大阪市大正区北恩加島',
             'address2' => '2-8-2',
