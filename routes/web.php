@@ -159,7 +159,15 @@ Route::post('/pizzzzza/employee/{id}/update', 'EmployeesController@update'); //�
 
 });
 
-Auth::routes();
-
 Route::get('/pizzzzza/login', 'auth\AdminLoginController@form'); //管理画面ログインページ
 Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理画面トップ
+
+// --------------------------- Auth ---------------------------------------
+
+Auth::routes();
+
+Route::get('register/input', 'auth\RegisterController@input'); //仮登録ページ
+Route::get('register/send','auth\RegisterController@send'); //仮登録完了ページ
+
+Route::get('password/input' ,'auth\ResetPasswordController@input'); //パスワードリセットメール入力ページ
+
