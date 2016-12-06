@@ -44,17 +44,29 @@
                 <div class="">
                     <h3 class="title">注文内容</h3>
                     <table class="table table-borderd">
-
+                        <thead>
+                            <tr>
+                                <th>商品</th>
+                                <th>ジャンル</th>
+                                <th>金額</th>
+                                <th>個数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="detail in detail.detail">
+                                <td>@{{ detail.product_price.product.product_name }}</td>
+                                <td>@{{ detail.product_price.product.genre_id }}</td>
+                                <td>@{{ detail.product_price.product_price }}</td>
+                                <td>@{{ detail.number }}</td>
+                            </tr>
+                        </tbody>
                     </table>
                     <div v-for="detail in detail.detail">
 
-                        @{{ detail.product_price.product.product_name }}
-                        @{{ detail.product_price.product.genre_id }}
-                        @{{ detail.product_price.product_price }}
-                        @{{ detail.number }}
+
                     </div>
                     <h3 class="title">注文情報</h3>
-                    <table class="table table-borderd">
+                    <table class="table table-bordered">
                         <tbody>
                             <tr>
                                 <th>注文日</th>
