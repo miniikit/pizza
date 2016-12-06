@@ -62,7 +62,8 @@
                     <div v-for="detail in detail.detail">
                         @{{ detail.product_price.product.product_name }}
                         @{{ detail.product_price.product.genre_id }}
-                        @{{ detail.product_price }}
+                        @{{ detail.product_price.product_price }}
+                        @{{ detail.number }}
                     </div>
                 </div>
             </div>
