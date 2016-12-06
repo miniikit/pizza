@@ -25,7 +25,7 @@
 
 <main class="main">
 <div class="container">
-
+@include('flash::message')
 @yield('main')
 </main>
 </div>

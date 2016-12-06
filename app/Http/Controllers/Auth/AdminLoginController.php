@@ -41,7 +41,7 @@ public function login(Request $request) {
 
             session()->put('auth_id',$authId);
 
-           return redirect()->route('order');  //メール、パスワード、権限がすべて一致した場合
+           return redirect('pizzzzza/order');//メール、パスワード、権限がすべて一致した場合
             
         }else{
             flash('メールアドレスまたはパスワードが間違っています', 'danger'); //メール、パスワードが一致していない場合
