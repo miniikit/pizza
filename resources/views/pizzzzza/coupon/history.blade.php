@@ -8,7 +8,7 @@
 
 @section('pankuzu')
     <ol class="breadcrumb">
-        <li><a href="/pizzzzza/order/top">ホーム</a></li>
+        <li><a href="/pizzzzza/order">ホーム</a></li>
         <li class="active">クーポン履歴</li>
     </ol>
 @endsection

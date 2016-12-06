@@ -9,7 +9,7 @@
 
 @section('pankuzu')
     <ol class="breadcrumb">
-        <li><a href="/pizzzzza/order/top">ホーム</a></li>
+        <li><a href="/pizzzzza/order">ホーム</a></li>
         @if(is_null($product->deleted_at))
             <li><a href="/pizzzzza/menu">商品一覧</a></li>
         @else

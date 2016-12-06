@@ -9,7 +9,7 @@
 
 @section('pankuzu')
     <ol class="breadcrumb">
-        <li><a href="/pizzzzza/order/top">ホーム</a></li>
+        <li><a href="/pizzzzza/order">ホーム</a></li>
         <li class="active">注文確認</li>
     </ol>
 @endsection
@@ -59,7 +59,9 @@
                         <li>@{{ detail.user.phone }}</li>
                         <li>@{{ detail.user.email }}</li>
                     </ul>
-                    <div class="">
+                    <div v-for="detail in detail.detail">
+                        @{{ detail.product_price.product.product_name }}
+                        @{{ detail.product_price.product.genre_id }}
                         @{{ detail.product_price }}
                     </div>
                 </div>
