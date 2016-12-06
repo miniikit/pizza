@@ -24,6 +24,8 @@ use App\Http\Requests;
 use App\Coupon;
 use Carbon\Carbon;
 
+use App\Http\Requests\AdminCouponNewDiscountRequest;
+
 class CouponsController extends Controller
 {
     public function __construct()
@@ -57,16 +59,76 @@ class CouponsController extends Controller
     }
 
     //  値引きクーポン　登録処理
-    public function couponNewDiscountDo(Request $request) {
-        dd($request->all());
-        //バリデーション、追加処理、
-        return redirect()->route();
+    public function couponNewDiscountDo(AdminCouponNewDiscountRequest $request) {
+
+
+        //
+        //  エラーチェック
+        //
+
+            $today = Carbon::today();
+
+            //開始日より終了日のほうが早ければエラー
+            if($request->coupon_start_date > $request->coupon_end_date){
+                flash('開始日と終了日が不正です。', 'danger');
+                //※routeでなぜか参照ができないのでURLフル指定の必要あり
+                return redirect('/pizzzzza/coupon/add/discount/input');
+                // return redirect()->route('newCouponDiscount'); //←のこれだとできない
+            }
+
+            //終了日が過去であればエラー
+            if($request->coupon_end_date < $today){
+                flash('終了日は本日以降を指定してください。', 'danger');
+                //※routeでなぜか参照ができないのでURLフル指定の必要あり
+                return redirect('/pizzzzza/coupon/add/discount/input');
+                // return redirect()->route('newCouponDiscount'); //←のこれだとできない
+            }
+
+
+        //
+        //  「クーポン使用条件の商品」が「なし」であれば、product_idにはNULLを設定する。
+        //
+            if($request->coupon_product_id == 0){
+                $product_id = NULL;
+            }else{
+                $product_id = $request->coupon_product_id;
+            }
+
+
+        //
+        //  INSERT  SQL実行
+        //
+
+            $id = DB::table('coupons_master')->insertGetId([
+                'coupons_types_id' => 1,
+                'coupon_name' => $request->coupon_name,
+                'coupon_discount' => $request->coupon_product_id,
+                'coupon_conditions_money' => $request->coupon_discount_price,
+                'product_id' => $product_id,
+                'coupon_start_date' => $request->coupon_start_date,
+                'coupon_end_date' => $request->coupon_end_date,
+                'coupon_number' => $request->coupon_num,
+                'coupon_conditions_count' => $request->coupon_max,
+                'coupon_conditions_first' => $request->coupon_target,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+
+            flash('クーポンの発行が完了しました。', 'success');
+
+            return redirect()->route('showCoupon', $id);
+
     }
 
 
     //  クーポン種別選択ページ＞（１）プレゼントクーポン新規発行ページ
-    public function couponNewGiftInput()  {
-        return view('pizzzzza.coupon.add.gift.input');
+    public function couponNewGift()  {
+
+        //販売期間中かつ、削除されていない商品を取得する
+        $products = DB::table('products_master')->where('deleted_at','=',NULL)->where('sales_start_date','<=',$today)->where('sales_end_date','>=',$today)->orWhere('sales_end_date','=',NULL)->orderBy('genre_id','asc')->get();
+
+
+        return view('pizzzzza.coupon.add.gift.input',compact('products'));
     }
 
 
@@ -154,7 +216,7 @@ class CouponsController extends Controller
                 //クーポン番号
                 $update['coupon_number'] = $request->coupon_num;
                 //値引き金額
-                $update['coupon_discount'] = $request->coupon_discount;
+                $update['coupon_discount'] = $request->coupon_discount_price;
                 //利用上限回数
                 $update['coupon_conditions_count'] = $request->coupon_max;
                 //使用条件金額

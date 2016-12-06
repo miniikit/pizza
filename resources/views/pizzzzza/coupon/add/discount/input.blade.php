@@ -34,11 +34,11 @@
             </tr>
             <tr>
                 <th class="text-center">クーポン番号</th>
-                <td><input class="form-control" type="text" name="coupon_num" value="" placeholder="GREAT-WINTER2016"></td>
+                <td><input class="form-control" type="text" name="coupon_num" value="" placeholder="半角英数字とハイフンのみ"></td>
             </tr>
             <tr>
                 <th class="text-center">値引き額</th>
-                <td><input class="form-control" type="number" name="coupon_conditions_price" value="" placeholder="500"></td>
+                <td><input class="form-control" type="number" name="coupon_discount_price" value="" placeholder="500"></td>
             </tr>
             <tr>
                 <th class="text-center">利用開始日</th>
@@ -64,13 +64,16 @@
             </tr>
             <tr>
                 <th class="text-center">利用条件金額</th>
-                <td><input class="form-control" type="number" name="coupon_" value=""
+                <td><input class="form-control" type="number" name="coupon_conditions_price" value=""
                            placeholder="この金額以上の際にクーポンが適用可能になります"></td>
             </tr>
             <tr>
                 <th class="text-center">利用条件商品</th>
                 <td>
-                    <select class="form-control" name="coupon_conditions_first" id="">
+                    <select class="form-control" name="coupon_product_id" id="">
+                        <optgroup label="●">
+                            <option value="0">なし</option>
+                        </optgroup>
                         <?php $cnt = 1; ?>
                         @foreach($products as $product)
                             @if(!isset($genre))
@@ -95,7 +98,7 @@
             </tbody>
         </table>
         <div class="col-md-4 col-md-offset-4 ac">
-            <a class="btn btn-default btn-lg mr" href="/pizzzzza/employee">戻る</a>
+            <a class="btn btn-default btn-lg mr" href="/pizzzzza/coupon/list">戻る</a>
             <input type="submit" class="btn btn-primary btn-lg" name="store" value="追加">
         </div>
         {{ csrf_field() }}
