@@ -1,3 +1,4 @@
+/*本登録*/
 .regist_table td{
   height: 100%;
 }
@@ -7,4 +8,9 @@
   color: #7f7f7f;
   height: 50%;
   margin-top: 5px;
+}
+
+/*仮登録*/
+.email_exaplain{
+    color: #7f7f7f;
 }
