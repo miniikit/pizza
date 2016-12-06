@@ -63,26 +63,21 @@
                     <tr>
                         <th class="text-center">クーポン種別</th>
                         <td>
-                            <select class="form-control" name="coupon_type_id" id="">
-                                @foreach($couponTypes as $type)
-                                    @if($type->id == $coupon->coupons_types_id)
-                                        <option value="{{ $type->id }}" checked>{{ $type->coupon_type }}</option>
-                                    @else
-                                        <option value="{{ $type->id }}">{{ $type->coupon_type }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
+                            <input class="form-control" name="coupon_type_id" id="" value="{{ $coupon->coupon_type }}" disabled>
+                            </input>
                         </td>
                     </tr>
                     <tr>
+                        @if($coupon->coupons_types_id == 1) {{-- クーポン種別が値引きであれば --}}
                         <th class="text-center">使用条件商品</th>
                         <td>
                             <select class="form-control" name="product_id">
-                                @if($coupon->product_id == NULL)
-                                    <option value=NULL selected>なし</option>
-                                @else
-                                    <option value=NULL>なし</option>
-                                @endif
+
+                                    @if($coupon->product_id == NULL)
+                                        <option value=NULL selected>なし</option>
+                                    @else
+                                        <option value=NULL>なし</option>
+                                    @endif
                                 @foreach($products as $product)
                                     @if($product->id == $product_id)
                                         <option value="{{ $product->id }}"
@@ -93,6 +88,9 @@
                                 @endforeach
                             </select>
                         </td>
+                        @else {{-- クーポン種別がプレゼントであれば --}}
+
+                        @endif
                     </tr>
                     </tbody>
                 </table>

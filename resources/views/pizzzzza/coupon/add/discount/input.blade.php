@@ -9,12 +9,12 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order/top">ホーム</a></li>
-        <li class="active">クーポン</li>
+        <li class="active">プレゼントクーポン新規発券</li>
     </ol>
 @endsection
 
 @section('main')
-    <h1>クーポン新規発券</h1>
+    <h1>値引きクーポン新規発券</h1>
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
