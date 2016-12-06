@@ -200,5 +200,17 @@ return [
         'kana' => 'フリガナ',
         'name' => '名前',
         'password_confirm' => 'パスワード(確認)',
+        //クーポン新規発券
+        'coupon_name' => 'クーポン名',
+        'coupon_num' => 'クーポン番号',
+        'coupon_discount_price' => '値引き額',
+        'coupon_max' => '利用上限回数',
+        'coupon_conditions_price' => '利用条件金額',
+        'coupon_conditions_first' => '対象者',
+        'coupon_type_id' => 'クーポン種別',
+        'product_id' => '商品名',  //だぶり
+        'coupon_product_id' => '商品名',   //だぶり
+        'coupon_start_date' => '利用開始日',
+        'coupon_end_date' => '利用終了日',
     ],
 ];

@@ -25,13 +25,13 @@ class AdminCouponNewDiscountRequest extends FormRequest
     {
         return [
             'coupon_name' => 'required',
-            'coupon_num' => 'required',
+            'coupon_num' => 'required|regex:/^[a-zA-Z0-9-]+$/', //半角英数とハイフン
             'coupon_discount_price' => 'required|min:1',
             'coupon_start_date' => 'required|date',
             'coupon_end_date' => 'required|date',
             'coupon_target' => 'required',
-            'coupon_max' => 'numeric',
-            'coupon_conditions_price' => 'numeric',
+            'coupon_max' => 'required|numeric',
+            'coupon_conditions_price' => 'required|numeric',
             'coupon_product_id' => 'required|numeric',
         ];
     }

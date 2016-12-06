@@ -24,16 +24,19 @@
                     <tbody>
                     <tr>
                         <th class="text-center">クーポン名</th>
-                        <td><input class="form-control" type="text" name="coupon_name" value="{{ $coupon->coupon_name }}"></td>
+                        <td><input class="form-control" type="text" name="coupon_name"
+                                   value="{{ $coupon->coupon_name }}"></td>
                     </tr>
                     <tr>
                         <th class="text-center">クーポン番号</th>
-                        <td><input class="form-control" type="text" name="coupon_num" value="{{ $coupon->coupon_number }}"></td>
+                        <td><input class="form-control" type="text" name="coupon_num"
+                                   value="{{ $coupon->coupon_number }}"></td>
                     </tr>
                     <tr>
-                            <th class="text-center">値引き額</th>
-                            <td><input class="form-control" type="text" name="coupon_discount_price" value="{{ $coupon->coupon_discount }}">
-                            </td>
+                        <th class="text-center">値引き額</th>
+                        <td><input class="form-control" type="text" name="coupon_discount_price"
+                                   value="{{ $coupon->coupon_discount }}">
+                        </td>
                     </tr>
                     <tr>
                         <th class="text-center">利用上限回数</th>
@@ -74,10 +77,16 @@
                     <tr>
                         <th class="text-center">使用条件商品</th>
                         <td>
-                            <select name="product_id">
+                            <select class="form-control" name="product_id">
+                                @if($coupon->product_id == NULL)
+                                    <option value=NULL selected>なし</option>
+                                @else
+                                    <option value=NULL>なし</option>
+                                @endif
                                 @foreach($products as $product)
                                     @if($product->id == $product_id)
-                                        <option value="{{ $product->id }}" selected>{{ $product->product_name }}</option>
+                                        <option value="{{ $product->id }}"
+                                                selected>{{ $product->product_name }}</option>
                                     @else
                                         <option value="{{ $product->id }}">{{ $product->product_name }}</option>
                                     @endif
@@ -97,7 +106,8 @@
                 </tr>
                 <tr>
                     <th class="text-center">終了日</th>
-                    <td><input class="form-control" type="date" name="coupon_end_date" value="{{ $coupon->coupon_end_date }}"></td>
+                    <td><input class="form-control" type="date" name="coupon_end_date"
+                               value="{{ $coupon->coupon_end_date }}"></td>
                 </tr>
                 <tr>
                     <th class="text-center">登録日時</th>
@@ -111,7 +121,7 @@
             </table>
             <div class="ar">
                 @if($coupon->deleted_at == NULL)
-                <a href="/pizzzzza/coupon/{{$id}}/delete" class="btn btn-danger btn-sm">削除</a>
+                    <a href="/pizzzzza/coupon/{{$id}}/delete" class="btn btn-danger btn-sm">削除</a>
                 @endif
                 <input class="btn btn-primary btn-sm ml" type="submit" name="status" value="更新">
             </div>
@@ -122,5 +132,4 @@
         <div class="col-md-4 col-md-offset-4 mt">
             <a href="/pizzzzza/coupon/{{$coupon->id}}/show" class="btn btn-default btn-lg btn-block">戻る</a>
         </div>
-    </div>
 @endsection
