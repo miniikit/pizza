@@ -31,9 +31,10 @@ class UserAuth
                 $authid = session()->get('auth_id');
             }
 
-            // auth_idが 1(権限付き従業員）　なら
+            // auth_idが 1(管理者）　なら
             if($authid == 1){
-                 return redirect('/');
+                  //　正常時の処理
+                return $next($request);
             }
 
              // auth_idが 2(従業員）　なら

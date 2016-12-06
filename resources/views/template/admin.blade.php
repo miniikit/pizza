@@ -28,7 +28,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/pizzzzza/order/top">管理画面</a>
+            <a class="navbar-brand" href="/pizzzzza/order">管理画面</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

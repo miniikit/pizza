@@ -24,9 +24,9 @@ class AdminController extends Controller
 
     public function orderGet(){
 
-        $orders = Order::with('user','coupon','state','detail.productPrice.product')->where('state_id','=',1)->orderBy('order_appointment_date','asc')->get();
+        $orders = Order::with('user','coupon','state','detail.productPrice.product')->where('state_id','=',1)->orderBy('order_appointment_date','asc')->get()->toArray();
 
-        return $orders;
+        return response()->json($orders);
 
     }
 }
