@@ -40,14 +40,17 @@ public function login(Request $request) {
         if(Auth::attempt(['email' => $email, 'password' => $password ])){
 
             session()->put('auth_id',$authId);
-            return redirect('pizzzzza/order/top'); //メール、パスワード、権限がすべて一致した場合
+
+           return redirect()->route('order');  //メール、パスワード、権限がすべて一致した場合
             
         }else{
-            return "メールアドレスまたはパスワードが間違っています"; //メール、パスワードが一致していない場合
-        }
+            flash('メールアドレスまたはパスワードが間違っています', 'danger'); //メール、パスワードが一致していない場合
+            return redirect('/pizzzzza/login');
+      }
     
     }else{
-        return "権限がありません"; //権限が４の場合
+        flash('ログインする権限がありません', 'danger'); //権限が４の場合
+        return redirect('/pizzzzza/login'); 
     }
     
 }
