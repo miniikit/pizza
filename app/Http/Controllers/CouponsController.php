@@ -25,6 +25,8 @@ use App\Coupon;
 use Carbon\Carbon;
 
 use App\Http\Requests\AdminCouponNewDiscountRequest;
+use App\Http\Requests\AdminCouponNewGiftRequest;
+use phpDocumentor\Reflection\Types\Integer;
 
 class CouponsController extends Controller
 {
@@ -136,7 +138,7 @@ class CouponsController extends Controller
 
 
     //  プレゼントクーポン
-    public function couponNewGiftDo(Request $request) {
+    public function couponNewGiftDo(AdminCouponNewGiftRequest $request) {
 
         //
         //  エラーチェック
@@ -172,14 +174,24 @@ class CouponsController extends Controller
 
 
         //
+        //  coupon_present_product_idに入っている値と同額を、値引きするように。
+        //
+
+        $product_id = $request->coupon_present_product_id;
+        $TmpDiscount_price = DB::table('products_master')->join('products_prices_master','products_prices_master.id','=','products_master.price_id')->where('products_master.id','=',$product_id)->select('product_price')->first();
+        $discount_price = $TmpDiscount_price->product_price;
+        $conditions_price = (int) $request->coupon_conditions_price;
+
+
+        //
         //  INSERT  SQL実行
         //
 
         $id = DB::table('coupons_master')->insertGetId([
             'coupons_types_id' => 2,    //プレゼントクーポン
             'coupon_name' => $request->coupon_name,
-            'coupon_discount' => $request->coupon_product_id,
-            'coupon_conditions_money' => $request->coupon_discount_price,
+            'coupon_discount' => $discount_price,   //値引き額を、商品から自動的に設定
+            'coupon_conditions_money' => $conditions_price,   //使用条件金額
             'product_id' => $product_id,
             'coupon_start_date' => $request->coupon_start_date,
             'coupon_end_date' => $request->coupon_end_date,
@@ -288,7 +300,7 @@ class CouponsController extends Controller
                 //使用条件商品
                 $update['product_id'] = $request->product_id;
                 //クーポン種別
-                $update['coupons_types_id'] = $request->coupon_type_id;
+                $update['coupons_types_id'] = $request->coupons_types_id;
 
                 //対象者は全員か、初回利用者限定か ※POSTデータは、0(全員)、1(初回利用者限定)にしていてDBと若干異なるので、DB格納用に変換
                 if($request->coupon_conditions_first == 1){

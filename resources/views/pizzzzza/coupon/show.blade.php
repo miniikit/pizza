@@ -29,9 +29,9 @@
                     <td>{{ $coupon->coupon_number }}</td>
                 </tr>
                 <tr>
-                    @if($coupon->coupon_discount < 0)
+                    @if($coupon->coupons_types_id == 2)
                         <th class="text-center">プレゼント商品名</th>
-                        <td></td>
+                        <td>{{ $product->product_name }}</td>
                     @else
                         <th class="text-center">値引額</th>
                         <td>{{ $coupon->coupon_discount }}</td>
@@ -57,15 +57,16 @@
                     <th class="text-center">クーポン種別</th>
                     <td>{{ $coupon->coupon_type}}</td>
                 </tr>
-                <tr>
-                    <th class="text-center">使用条件商品</th>
-                @if(isset($coupon->product_id))
-                    <td>{{ $product->product_name }}</td>
-                @else
-                    <td>なし</td>
+                @if($coupon->coupons_types_id ==1)
+                    <tr>
+                        <th class="text-center">使用条件商品</th>
+                    @if(isset($coupon->product_id))
+                        <td>{{ $product->product_name }}</td>
+                    @else
+                        <td>なし</td>
+                    @endif
+                    </tr>
                 @endif
-                </tr>
-
                 </tbody>
             </table>
         </div>

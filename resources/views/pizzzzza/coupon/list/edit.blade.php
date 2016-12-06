@@ -124,6 +124,7 @@
                 <input class="btn btn-primary btn-sm ml" type="submit" name="status" value="更新">
             </div>
             {{ csrf_field() }}
+            <input type="hidden" name="coupons_types_id" value="{{  $coupon->coupons_types_id }}">
             </form>
 
         </div>
