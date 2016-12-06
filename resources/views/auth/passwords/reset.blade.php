@@ -1,6 +1,6 @@
 @extends('template.auth')
 
-@section('title', 'ログイン')
+@section('title', 'パスワード再発行')
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
@@ -11,13 +11,15 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
+                <div class="panel-heading">パスワード再発行のお手続き</div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
                         {{ csrf_field() }}
+                        <div class="">
+                          <p>会員登録されているメールアドレスと新たに発行するパスワードを入力してください。</p>
+                        </div>
 
-                        <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">登録されているメールアドレス</label>
@@ -63,7 +65,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Reset Password
+                                    送信
                                 </button>
                             </div>
                         </div>
