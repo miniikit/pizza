@@ -8,7 +8,7 @@
 
 @section('pankuzu')
     <ol class="breadcrumb">
-        <li><a href="/pizzzzza/order/top">ホーム</a></li>
+        <li><a href="/pizzzzza/order">ホーム</a></li>
         @if(is_null($employee->deleted_at))
             <li><a href="/pizzzzza/employee">従業員一覧</a></li>
         @else

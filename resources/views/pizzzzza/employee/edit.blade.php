@@ -8,7 +8,7 @@
 
 @section('pankuzu')
 <ol class="breadcrumb">
-<li><a href="/pizzzzza/order/top">ホーム</a></li>
+<li><a href="/pizzzzza/order">ホーム</a></li>
 <li><a href="/pizzzzza/employee">従業員一覧</a></li>
 <li><a href="/pizzzzza/employee/{{$employee->id}}/show">{{$employee->user->name}}</a></li>
 <li class="active">編集</li>

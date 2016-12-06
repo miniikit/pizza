@@ -59,6 +59,7 @@ var app = new Vue({
         showdetail: function (index) {
 
             this.detail = this.orders[index];
+
         }
 
     }
