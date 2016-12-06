@@ -18,4 +18,8 @@ class Coupon extends Model
         return $this->belongsTo('App\CouponType','coupon_type');
     }
 
+    public function productName() {
+        return $this->belongsTo('App\Product','product_name');
+    }
+
 }

@@ -65,6 +65,8 @@
        </div>
        <div class="ac">
          <div class="button"><a href="/topic">戻る</a></div>
+         <div class="button"><a href="/">TOPへ</a></div>
+         </div>
        </div>
     </div>
 @endsection

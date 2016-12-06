@@ -9,8 +9,8 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order/top">ホーム</a></li>
-        <li><a href="/pizzzzza/coupon/list">開催中のクーポン一覧</a></li>
-        <li class="active"></li>
+        <li><a href="/pizzzzza/coupon/list">開催中クーポン一覧</a></li>
+        <li class="active">クーポン詳細</li>
     </ol>
 @endsection
 
@@ -21,12 +21,12 @@
             <table class="table table-bordered">
                 <tbody>
                 <tr>
-                    <th class="text-center">クーポン番号</th>
-                    <td>{{ $coupon->coupon_number }}</td>
-                </tr>
-                <tr>
                     <th class="text-center">クーポン名</th>
                     <td>{{ $coupon->coupon_name }}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">クーポン番号</th>
+                    <td>{{ $coupon->coupon_number }}</td>
                 </tr>
                 <tr>
                 @if($coupon->coupon_discount < 0)
@@ -42,12 +42,16 @@
                     <td>{{ $coupon->coupon_conditions_count }}</td>
                 </tr>
                  <tr>
-                    <th class="text-center">利用上限金額</th>
+                    <th class="text-center">利用条件金額</th>
                     <td>{{ $coupon->coupon_conditions_money }}</td>
                 </tr>
                 <tr>
                     <th class="text-center">対象者</th>
-                    <td>{{ $coupon->coupon_conditions_first }}</td>
+                    @if(isset($coupon->coupon_conditions_first))
+                            <td>新規会員のみ</td>
+                    @else
+                        <td>全員</td>
+                    @endif
                 </tr>
                 <tr>
                     <th class="text-center">クーポン種別</th>
@@ -80,7 +84,7 @@
             
             <form class="ar" action="/pizzzzza/coupon/{{$coupon->id}}/delete" method="post">
                 <a href="/pizzzzza/coupon/{{$coupon->id}}/edit" class="btn btn-default btn-sm">編集</a>
-                    <input class="btn btn-danger btn-sm ml" type="submit" name="delete" value="削除">
+                <input class="btn btn-danger btn-sm ml" type="submit" name="delete" value="削除">
                 {{ csrf_field() }}
             </form>
             

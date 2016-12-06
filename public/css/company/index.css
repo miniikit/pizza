@@ -1,5 +1,5 @@
 .wrap {
-  width: 960px;
+  width: 100%;
 }
 .title {
   font-size: 20px;
@@ -7,20 +7,45 @@
 	border-left: 6px solid #ccc;
 	border-bottom: 1px solid #ccc;
 }
+.main-title h1{
+  text-align: center;
+  letter-spacing: 8px;
+  font-size: 40px;
+  color: #656565;
+  position: relative;
+}
+
+.main-title h1::after {
+  content: '';
+  display: block;
+  width: 50px;
+  background: #656565;
+  height: 3px;
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  margin-left: -25px;
+}
+
 .table {
   border: 2px #d9d9d9 solid;;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   padding: 10px 20px 10px 20px;
   display: block;
+  width: 100%;
+}
+.table_info {
+  width: 100%;
 }
 .td_head {
   background-color: #a8a8a8;
-  text-align: right;
+  text-align: center;
   padding: 8px;
   white-space: nowrap;
   color: #ffffff;
   font-weight: bold;
   font-size: 17px;
+  letter-spacing: 3px
 
 }
 .td_detail {
@@ -30,12 +55,14 @@
   border: 1px solid #d6d6cd;
   font-size: 15px;
   line-height: 20px;
+  letter-spacing: 2px;
 }
 .access {
   font-size: 20px;
   padding: .25em 0 .5em .75em;
 	border-left: 6px solid #ccc;
 	border-bottom: 1px solid #ccc;
+  margin-top: 30px;
 }
 .ggmap {
 position: relative;
@@ -44,7 +71,10 @@ padding-bottom: 56.25%;
 padding-top: 30px;
 height: 0;
 overflow: hidden;
+width: 100%;
+margin: 20px;
 }
+
 .ggmap iframe,
 .ggmap object,
 .ggmap embed {
