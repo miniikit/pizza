@@ -26,7 +26,7 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
     <h1 style="">新規会員登録</h1>
   </div>
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12 col-md-offset-1">
             <div class="">
                 <div class="">
                     <form class="" role="form" method="POST" action="{{ url('/register') }}">
@@ -35,16 +35,18 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                           下記の通りに入力してください<br>
                           <font color="#FF0000">※</font>の項目は必ず入力してください
                         </div>
-                        <table class="table">
+                        <table class="table regist_table">
                           <tr>
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                          <th>
+                          <th style="width:17%;">
                             <label for="name" class="">氏名<font color="#FF0000">※</font></label>
                             </th>
                             <td>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}"  required autofocus>
-
+                              </div>
+                              <div class="regist_explain">
+                                <span class="">例)情報太郎</span>
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -60,9 +62,11 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                             <label for="kana" class="">カナ<font color="#FF0000">※</font></label>
                             </th>
                             <td>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <input id="kana" type="text" class="form-control" name="kana" value="{{ old('name') }}"  required autofocus>
-
+                              </div>
+                              <div class="regist_explain">
+                                <span class="">例)ジョウホウタロウ</span>
                                 @if ($errors->has('kana'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('kana') }}</strong>
@@ -78,9 +82,11 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                             <label for="email" class="">Eメールアドレス<font color="#FF0000">※</font></label>
                             </th>
                             <td>
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
+                                </div>
+                                <div class="regist_explain">
+                                <span  class="">例)oic@example.com</span>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -95,8 +101,11 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                             <label for="password" class="">パスワード<font color="#FF0000">※</font></label>
                           </th>
                           <td>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <input id="password" type="password" class="form-control" name="password" required>
+                                </div>
+                                <div class="regist_explain">
+                                <span class="">数字とアルファベット大文字を一文字ずつ、6文字以上入力してください。</span>
                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -111,9 +120,11 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                             <label for="password-confirm" class="">確認パスワード<font color="#FF0000">※</font></label>
                             </th>
                             <td>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-
+                                </div>
+                                <div class="regist_explain">
+                                  <span class="">確認の為、もう一度入力してください。</span>
                                 @if ($errors->has('password_confirmation'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
@@ -126,18 +137,21 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                         </th><td><div class="form-group">
                           <div class="col-sm-2 form-inline">
                             <input type="text" class="form-control" name="postal" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')" size="5" maxlength="7"
-                      onKeyup="AjaxZip3.zip2addr('postal','','pref','address1');"></div>
+                      onKeyup="AjaxZip3.zip2addr('postal','','pref','address1');">
+                      </div>
                       <div class="col-sm-2 form-inline">
                       <input type="button" class="form-control" name="postal" onClick="AjaxZip3.zip2addr('postal','','pref','address1');" value="〒→変換" onKeyup="AjaxZip3.zip2addr('postal','','pref','address1');">
+                    </div><div class="col-sm-1 regist_explain">
+                      <span class="">例)0000000</span>
                     </div></div>
                 </td></tr><tr>
                   <div class="form-group{{ $errors->has('pref') ? ' has-error' : '' }}">
                     <th>
                     <label for="pref" class="">都道府県<font color="#FF0000">※</font></label>
                   </th><td>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <select class="form-control" name="pref">
-            <option value="">--------------</option>
+            <option value="">---------------------------------</option>
             <option value="北海道">北海道</option>
             <option value="青森県">青森県</option>
             <option value="岩手県">岩手県</option>
@@ -187,6 +201,9 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
             <option value="沖縄県">沖縄県</option>
         </select>
       </div>
+        <div class="regist_explain">
+      <span class="">例)大阪府</span>
+    </div>
     </td>
   </div>
 </tr><tr>
@@ -194,8 +211,11 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
   <th>
  <label for="address1" class="">市区町村 (全角)<font color="#FF0000">※</font></label>
  </th><td>
-  <div class="col-md-5">
+  <div class="col-md-4">
    <input type="text" class="form-control" name="address1" size="40">
+   </div>
+   <div class="regist_explain">
+   <span class="">例)大阪市天王寺区上本町</span>
   </div>
 </td>
  </div>
@@ -204,8 +224,11 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
   <th>
   <label for="address2" class="">町名・番地 (全角)<font color="#FF0000">※</font></label>
 </th><td>
-   <div class="col-md-5">
+   <div class="col-md-4">
     <input type="text" class="form-control" name="address2" size="40">
+    </div>
+    <div class="regist_explain">
+    <span class="">例)６－８－４</span>
   </div>
 </td>
  </div></tr><tr>
@@ -213,8 +236,11 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
   <th>
  <label for="address3" class="">建物名 (全角)</label>
  </th><td>
-  <div class="col-md-5">
+  <div class="col-md-4">
    <input type="text" class="form-control" name="address3" size="40">
+ </div>
+ <div class="regist_explain">
+   <span class="">例)大阪情報コンピュータ専門学校</span>
 </div>
 </td>
 </div></tr><tr>
@@ -222,26 +248,35 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
         <th>
                             <label for="phone" class="">電話番号<font color="#FF0000">※</font></label>
                           </th><td>
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 <input id="phone" type="text" class="form-control" name="phone" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')" maxlength="11" value="{{ old('phone') }}" required>
+                              </div>
+                              <div class="regist_explain">
+                                <span class="">例)0663400017　のようにハイフンを付けずに入力してください。</span>
                             </div>
                           </td></div></tr><tr>
                             <div class="form-group{{ $errors->has('gender_id') ? ' has-error' : '' }}">
                               <th>
                               <label for="gender_id" class="">性別<font color="#FF0000">※</font></label>
                             </th><td><div class="">
-                              <div class="col-sm-3">
+                              <div class="col-sm-2">
                  <label for="gender" class="radio-inline"><input type="radio" name="gender_id" class="radio" value="1" />男性</label>
-        </div>
-        <div class="col-sm-3">
+               </div>
+        <div class="col-sm-2">
                   <label for="gender" class="radio-inline"><input type="radio" name="gender_id" class="radio" value="2"  />女性</label>
+         </div>
+         <div class="regist_explain">
+           <span class="">必ずどちらかを選択してください。</span>
          </div></div></td></tr><tr>
          <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
            <th>
                             <label for="birthday" class="">誕生日<font color="#FF0000">※</font></label>
                           </th><td>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <input type="date" class="form-control" name="birthday" value="{{ old('birthday') }}" required>
+                              </div>
+                              <div class="regist_explain">
+                                <span class="">西暦で入力してください</span>
                             </div></td>
                         </div></tr>
                       </table>
