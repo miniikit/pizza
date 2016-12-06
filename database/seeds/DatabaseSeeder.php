@@ -187,7 +187,7 @@ class UsersSeeder extends Seeder
             'phone' => '08000000000',
             'gender_id' => null,
             'birthday' => null,
-            'authority_id' => 3,
+            'authority_id' => 4,
         ]);
 
         User::create([
@@ -202,7 +202,7 @@ class UsersSeeder extends Seeder
             'phone' => '08000000000',
             'gender_id' => null,
             'birthday' => null,
-            'authority_id' => 3,
+            'authority_id' => 4,
         ]);
 
         for ($i=0; $i < 50; $i++) {
@@ -423,13 +423,16 @@ class AuthoritiesMasterSeeder extends Seeder
         DB::table('authorities_master')->delete();
 
         Authority::create([
-            'authority_name' => 'Administrator'
+            'authority_name' => '管理者'
         ]);
         Authority::create([
-            'authority_name' => 'Employee'
+            'authority_name' => '従業員'
         ]);
         Authority::create([
-            'authority_name' => 'GeneralMember'
+            'authority_name' => 'WEB会員'
+        ]);
+        Authority::create([
+            'authority_name' => '電話会員'
         ]);
     }
 }
@@ -670,6 +673,13 @@ class OrdersMasterSeeder extends Seeder
             'state_id' => 1,
             'user_id' => 4,
         ]);
+        Order::create([
+            'order_date' => Carbon::now(),
+            'order_appointment_date' => Carbon::tomorrow(),
+            'coupon_id' => null,
+            'state_id' => 1,
+            'user_id' => 9,
+        ]);
     }
 }
 
@@ -718,6 +728,16 @@ class OrdersDetailsTableSeeder extends Seeder
         ]);
         OrderDetail::create([
             'id' => 4,
+            'price_id' => 2,
+            'number' => 3,
+        ]);
+        OrderDetail::create([
+            'id' => 5,
+            'price_id' => 1,
+            'number' => 3,
+        ]);
+        OrderDetail::create([
+            'id' => 5,
             'price_id' => 2,
             'number' => 3,
         ]);
