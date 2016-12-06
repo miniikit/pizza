@@ -80,8 +80,4 @@ class RegisterController extends Controller
 
         ]);
     }
-
-        public function input(){
-        return view('auth/register/input');
-    }
 }
