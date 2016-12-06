@@ -9,12 +9,25 @@ var app = new Vue({
 
     created: function() {
 
-        this.getOrders();
+
+        this.init();
         setInterval(this.getOrders,5000);
 
     },
 
     methods: {
+
+        init: function () {
+
+            this.$http.get('/pizzzzza/order/get').then(function (orders) {
+
+                this.orders = orders.body;
+
+                this.$set(this,'detail',this.orders[0]);
+
+            });
+
+        },
 
         getOrders: function() {
 
@@ -23,7 +36,6 @@ var app = new Vue({
                 if (this.orders.length != orders.body.length) {
 
                     this.orders = orders.body;
-                    // this.$set('orders', orders);
 
                     this.newOrderAlert();
 
@@ -45,6 +57,7 @@ var app = new Vue({
         },
 
         showdetail: function (index) {
+
             this.detail = this.orders[index];
         }
 

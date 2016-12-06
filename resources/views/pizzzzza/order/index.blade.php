@@ -41,7 +41,28 @@
                 </div>
             </div>
             <div class="col-md-6">
-                @{{ detail }}
+                <div class="">
+                    <ul>
+                        <li>@{{ detail.order_appointment_date }}</li>
+                        <li>@{{ detail.order_date }}</li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <ul>
+                        <li>@{{ detail.user.name }}</li>
+                        <li>@{{ detail.user.kana }}</li>
+                        <li v-if="detail.user.gender_id == 1">男</li>
+                        <li v-if="detail.user.gender_id == 2">女</li>
+                        <li>@{{ detail.user.birthday }}</li>
+                        <li>@{{ detail.user.postal }}</li>
+                        <li>@{{ detail.user.address1 + detail.user.address2 }} <span v-if="detail.user.address3 != null">@{{ detail.user.address3 }}</span></li>
+                        <li>@{{ detail.user.phone }}</li>
+                        <li>@{{ detail.user.email }}</li>
+                    </ul>
+                    <div class="">
+                        @{{ detail.product_price }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
