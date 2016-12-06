@@ -25,6 +25,8 @@ use App\Coupon;
 use Carbon\Carbon;
 
 use App\Http\Requests\AdminCouponNewDiscountRequest;
+use App\Http\Requests\AdminCouponNewGiftRequest;
+use phpDocumentor\Reflection\Types\Integer;
 
 class CouponsController extends Controller
 {
@@ -121,8 +123,10 @@ class CouponsController extends Controller
     }
 
 
-    //  クーポン種別選択ページ＞（１）プレゼントクーポン新規発行ページ
+    //  プレゼントクーポン新規発行ページ
     public function couponNewGift()  {
+
+        $today = Carbon::today();
 
         //販売期間中かつ、削除されていない商品を取得する
         $products = DB::table('products_master')->where('deleted_at','=',NULL)->where('sales_start_date','<=',$today)->where('sales_end_date','>=',$today)->orWhere('sales_end_date','=',NULL)->orderBy('genre_id','asc')->get();
@@ -131,6 +135,77 @@ class CouponsController extends Controller
         return view('pizzzzza.coupon.add.gift.input',compact('products'));
     }
 
+
+
+    //  プレゼントクーポン
+    public function couponNewGiftDo(AdminCouponNewGiftRequest $request) {
+
+        //
+        //  エラーチェック
+        //
+
+        $today = Carbon::today();
+
+        //開始日より終了日のほうが早ければエラー
+        if($request->coupon_start_date > $request->coupon_end_date){
+            flash('開始日と終了日が不正です。', 'danger');
+            //※routeでなぜか参照ができないのでURLフル指定の必要あり
+            return redirect('/pizzzzza/coupon/add/discount/input');
+            // return redirect()->route('newCouponDiscount'); //←のこれだとできない
+        }
+
+        //終了日が過去であればエラー
+        if($request->coupon_end_date < $today){
+            flash('終了日は本日以降を指定してください。', 'danger');
+            //※routeでなぜか参照ができないのでURLフル指定の必要あり
+            return redirect('/pizzzzza/coupon/add/discount/input');
+            // return redirect()->route('newCouponDiscount'); //←のこれだとできない
+        }
+
+
+        //
+        //  「クーポン使用条件の商品」が「なし」であれば、product_idにはNULLを設定する。
+        //
+        if($request->coupon_product_id == 0){
+            $product_id = NULL;
+        }else{
+            $product_id = $request->coupon_product_id;
+        }
+
+
+        //
+        //  coupon_present_product_idに入っている値と同額を、値引きするように。
+        //
+
+        $product_id = $request->coupon_present_product_id;
+        $TmpDiscount_price = DB::table('products_master')->join('products_prices_master','products_prices_master.id','=','products_master.price_id')->where('products_master.id','=',$product_id)->select('product_price')->first();
+        $discount_price = $TmpDiscount_price->product_price;
+        $conditions_price = (int) $request->coupon_conditions_price;
+
+
+        //
+        //  INSERT  SQL実行
+        //
+
+        $id = DB::table('coupons_master')->insertGetId([
+            'coupons_types_id' => 2,    //プレゼントクーポン
+            'coupon_name' => $request->coupon_name,
+            'coupon_discount' => $discount_price,   //値引き額を、商品から自動的に設定
+            'coupon_conditions_money' => $conditions_price,   //使用条件金額
+            'product_id' => $product_id,
+            'coupon_start_date' => $request->coupon_start_date,
+            'coupon_end_date' => $request->coupon_end_date,
+            'coupon_number' => $request->coupon_num,
+            'coupon_conditions_count' => $request->coupon_max,
+            'coupon_conditions_first' => $request->coupon_target,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        flash('クーポンの発行が完了しました。', 'success');
+
+        return redirect()->route('showCoupon', $id);
+    }
 
 
     //  開催中クーポン一覧ページ
@@ -183,14 +258,15 @@ class CouponsController extends Controller
         //DBから取得（クーポン＋クーポン種別を、$idと一致する１つだけ取得）
             $coupon = DB::table('coupons_master')->join('coupons_types_master','coupons_master.coupons_types_id','=','coupons_types_master.id')->where('coupons_master.id','=',$id)->first();
 
-        //もし、クーポン種別が「プレゼント」であれば、どの商品が無料になるのかを表示するために商品表と結合する
+        //もし、クーポン種別が「プレゼント」であれば、どの商品が無料になるのかを表示するために商品表と結合し、上書きする
             $couponTypeId = $coupon->coupons_types_id;
             if($couponTypeId == 2){
                 $coupon = DB::table('coupons_master')->join('coupons_types_master','coupons_master.coupons_types_id','=','coupons_types_master.id')->join('products_master','products_master.id','=','coupons_master.product_id')->where('coupons_master.id','=',$id)->first();
             }
 
+
         //クーポン種別を取得する(Viewで使用）
-            $couponTypes = DB::table('coupons_types_master')->get();
+            $couponTypes = DB::table('coupons_types_master')->get();    //12.6の変更で不要に
 
         // 条件商品を取得
             $product_id = $coupon->product_id;
@@ -224,7 +300,7 @@ class CouponsController extends Controller
                 //使用条件商品
                 $update['product_id'] = $request->product_id;
                 //クーポン種別
-                $update['coupons_types_id'] = $request->coupon_type_id;
+                $update['coupons_types_id'] = $request->coupons_types_id;
 
                 //対象者は全員か、初回利用者限定か ※POSTデータは、0(全員)、1(初回利用者限定)にしていてDBと若干異なるので、DB格納用に変換
                 if($request->coupon_conditions_first == 1){
