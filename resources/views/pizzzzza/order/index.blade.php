@@ -25,8 +25,8 @@
                         <tr >
                             <th>注文番号</th>
                             <th>名前</th>
-                            <th>場所</th>
-                            <th>配達希望日時</th>
+                            <th>配達場所</th>
+                            <th>配達日時</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -42,29 +42,71 @@
             </div>
             <div class="col-md-6">
                 <div class="">
-                    <ul>
-                        <li>@{{ detail.order_appointment_date }}</li>
-                        <li>@{{ detail.order_date }}</li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                    <ul>
-                        <li>@{{ detail.user.name }}</li>
-                        <li>@{{ detail.user.kana }}</li>
-                        <li v-if="detail.user.gender_id == 1">男</li>
-                        <li v-if="detail.user.gender_id == 2">女</li>
-                        <li>@{{ detail.user.birthday }}</li>
-                        <li>@{{ detail.user.postal }}</li>
-                        <li>@{{ detail.user.address1 + detail.user.address2 }} <span v-if="detail.user.address3 != null">@{{ detail.user.address3 }}</span></li>
-                        <li>@{{ detail.user.phone }}</li>
-                        <li>@{{ detail.user.email }}</li>
-                    </ul>
+                    <h3 class="title">注文内容</h3>
+                    <table class="table table-borderd">
+
+                    </table>
                     <div v-for="detail in detail.detail">
+
                         @{{ detail.product_price.product.product_name }}
                         @{{ detail.product_price.product.genre_id }}
                         @{{ detail.product_price.product_price }}
                         @{{ detail.number }}
                     </div>
+                    <h3 class="title">注文情報</h3>
+                    <table class="table table-borderd">
+                        <tbody>
+                            <tr>
+                                <th>注文日</th>
+                                <td>@{{ detail.order_date }}</td>
+                            </tr>
+                            <tr>
+                                <th>配達日時</th>
+                                <td>@{{ detail.order_appointment_date }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3 class="title">ユーザー情報</h3>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                              <th>名前</th>
+                              <td>@{{ detail.user.name }}</td>
+                            </tr>
+                            <tr>
+                              <th>フリガナ</th>
+                              <td>@{{ detail.user.kana }}</td>
+                            </tr>
+                            <tr>
+                              <th>性別</th>
+                              <td><span v-if="detail.user.gender_id == 1">男</span><span v-if="detail.user.gender_id == 2">女</span></td>
+                            </tr>
+                            <tr>
+                              <th>生年月日</th>
+                              <td>@{{ detail.user.birthday }}</td>
+                            </tr>
+                            <tr>
+                              <th>生年月日</th>
+                              <td>@{{ detail.user.birthday }}</td>
+                            </tr>
+                            <tr>
+                              <th>郵便番号</th>
+                              <td>@{{ detail.user.postal }}</td>
+                            </tr>
+                            <tr>
+                              <th>住所</th>
+                              <td>@{{ detail.user.address1 + detail.user.address2 }} <span v-if="detail.user.address3 != null">@{{ detail.user.address3 }}</span></td>
+                            </tr>
+                            <tr>
+                              <th>電話番号</th>
+                              <td>@{{ detail.user.phone }}</td>
+                            </tr>
+                            <tr>
+                              <th>メールアドレス</th>
+                              <td>@{{ detail.user.email }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
