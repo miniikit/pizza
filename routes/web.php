@@ -156,3 +156,6 @@ Auth::routes();
 
 Route::get('password/input' ,'auth\ResetPasswordController@input'); //パスワードリセットメール入力ページ
 
+Route::get('/1', function () {    // 管理者ログイン画面
+    return view('auth/register/complete');
+});
