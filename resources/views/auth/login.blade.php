@@ -60,7 +60,7 @@
                                     ログイン
                                 </button>
 
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">
+                                <a class="btn btn-link" href="{{ url('/password/input') }}">
                                     パスワードを忘れた場合はこちら
                                 </a>
                             </div>

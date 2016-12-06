@@ -27,7 +27,8 @@ public function login(Request $request) {
     //DB結果をカウントし、件数が１件でなければ、エラー処理
     $count = count($pizza);
     if($count != 1){
-     return "メール登録されていません。";
+     flash('メールアドレスが登録されていません。', 'danger');
+     return redirect('/pizzzzza/login');
     }
 
     //ユーザ表の情報を取得。
@@ -40,17 +41,17 @@ public function login(Request $request) {
         if(Auth::attempt(['email' => $email, 'password' => $password ])){
 
             session()->put('auth_id',$authId);
-
-           return redirect('pizzzzza/order');//メール、パスワード、権限がすべて一致した場合
+           flash('ログインしました。', 'success');
+           return redirect('pizzzzza/order'); //メール、パスワード、権限がすべて一致した場合
             
         }else{
-            flash('メールアドレスまたはパスワードが間違っています', 'danger'); //メール、パスワードが一致していない場合
-            return redirect('/pizzzzza/login');
+            flash('メールアドレスまたはパスワードが間違っています', 'danger'); 
+            return redirect('/pizzzzza/login'); //メール、パスワードが一致していない場合
       }
     
     }else{
-        flash('ログインする権限がありません', 'danger'); //権限が４の場合
-        return redirect('/pizzzzza/login'); 
+        flash('ログインする権限がありません', 'danger'); 
+        return redirect('/pizzzzza/login');  //権限が４の場合
     }
     
 }
@@ -61,7 +62,6 @@ public function login(Request $request) {
         $request->session()->flush();
 
         $request->session()->regenerate();
-
         return redirect('/pizzzzza/login');
     }
 

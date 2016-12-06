@@ -119,7 +119,7 @@ Route::post('/pizzzzza/employee/{id}/update', 'EmployeesController@update'); //�
     Route::post('/pizzzzza/menu/store', 'AdminMenusController@store'); //従業員用メニュー追加処理
 
 
-    Route::get('/pizzzzza/order', 'AdminController@orderIndex')->name('order'); //注文確認ページ
+    Route::get('/pizzzzza/order', 'AdminController@orderIndex'); //注文確認ページ
     Route::get('/pizzzzza/order/get', 'AdminController@orderGet'); //注文確認ページ処理用
 
 
@@ -159,7 +159,12 @@ Route::post('/pizzzzza/employee/{id}/update', 'EmployeesController@update'); //�
 
 });
 
-Auth::routes();
-
 Route::get('/pizzzzza/login', 'auth\AdminLoginController@form'); //管理画面ログインページ
 Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理画面トップ
+
+// --------------------------- Auth ---------------------------------------
+
+Auth::routes();
+
+Route::get('password/input' ,'auth\ResetPasswordController@input'); //パスワードリセットメール入力ページ
+
