@@ -17,16 +17,16 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name',50);
             $table->string('kana',100);
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('email')->unique()->nullable();
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->integer('postal'); //郵便番号
             $table->string('address1'); //住所1
             $table->string('address2'); //住所2
             $table->string('address3')->nullable(); //住所3
             $table->string('phone'); //電話番号
-            $table->integer('gender_id');//->references('id')->on('gender_master'); //性別ID
-            $table->date('birthday'); //生年月日
+            $table->integer('gender_id')->nullable();//->references('id')->on('gender_master'); //性別ID
+            $table->date('birthday')->nullable(); //生年月日
             $table->integer('authority_id');//->references('id')->on('authorities_master'); //権限ID
             $table->timestamps();
         });
