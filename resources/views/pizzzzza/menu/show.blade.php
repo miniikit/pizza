@@ -75,11 +75,11 @@
                 </tbody>
             </table>
             <form class="ar" action="/pizzzzza/menu/{{$product->id}}/delete" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <a href="/pizzzzza/menu/{{$product->id}}/edit" class="btn btn-default btn-sm">編集</a>
                 @if (is_null($product->deleted_at))
                     <input class="btn btn-danger btn-sm ml" type="submit" name="delete" value="削除">
                 @endif
-                {{ csrf_field() }}
             </form>
         </div>
         <div class="col-md-4 col-md-offset-4 mt">
