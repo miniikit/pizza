@@ -14,7 +14,7 @@
 @endsection
 
 @section('main')
-    <h1>プレゼントクーポン新規発券</h1>
+    <h1>プレゼントクーポン新規発行</h1>
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
