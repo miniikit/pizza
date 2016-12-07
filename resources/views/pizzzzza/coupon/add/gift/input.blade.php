@@ -8,13 +8,13 @@
 
 @section('pankuzu')
     <ol class="breadcrumb">
-        <li><a href="/pizzzzza/order/top">ホーム</a></li>
-        <li class="active">クーポン</li>
+        <li><a href="/pizzzzza/order">ホーム</a></li>
+        <li class="active">プレゼントクーポン新規発行</li>
     </ol>
 @endsection
 
 @section('main')
-    <h1>プレゼントクーポン新規発券</h1>
+    <h1>プレゼントクーポン新規発行</h1>
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
