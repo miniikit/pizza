@@ -94,13 +94,18 @@
 
 @section('script')
 <script type="text/javascript">
+
+    var clicked = false;
     $('#submit').on('click',function () {
-        $('#post').submit();
+        if(!clicked) {
+            clicked = true;
+            $('#post').submit();
+        }
     })
 
     $('#coupon-btn').on('click',function () {
         var num = $('#coupon_text').val();
-        $('#post_coupon_num').val(num)
+        $('#post_coupon_num').val(num);
         // $('#post_coupon').submit();
     })
 
