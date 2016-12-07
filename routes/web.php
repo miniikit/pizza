@@ -12,29 +12,29 @@
 */
 
 // トップページ
-Route::get('/', 'IndexController@index');
+    Route::get('/', 'IndexController@index');
 
 // メニューページ
-Route::get('/menu', 'MenusController@index');
+    Route::get('/menu', 'MenusController@index');
 
 // カートページ
-Route::get('/cart', 'CartsController@index')->name('cart');
-Route::post('/cart/store', 'CartsController@store');
-Route::post('/cart/clear/{id}', 'CartsController@pop');
-Route::post('/cart/edit', 'CartsController@edit');
-Route::post('/cart/clear', 'CartsController@clear');
+    Route::get('/cart', 'CartsController@index')->name('cart');
+    Route::post('/cart/store', 'CartsController@store');
+    Route::post('/cart/clear/{id}', 'CartsController@pop');
+    Route::post('/cart/edit', 'CartsController@edit');
+    Route::post('/cart/clear', 'CartsController@clear');
 
 //　注文
-Route::get('/order/confirm', 'OrdersController@index')->name('order');
-Route::post('/order/confirm/insert', 'OrdersController@insert');
-Route::get('/order/complete', 'OrdersController@complete')->name('complete');
-Route::any('/order/confirm/coupon', 'OrdersController@coupon');
+    Route::get('/order/confirm', 'OrdersController@index')->name('order');
+    Route::post('/order/confirm/insert', 'OrdersController@insert');
+    Route::get('/order/complete', 'OrdersController@complete')->name('complete');
+    Route::any('/order/confirm/coupon', 'OrdersController@coupon');
 
 // etc..
-Route::get('/company', 'PagesController@company');
-Route::get('/privacypolicy', 'PagesController@privacypolicy');
-Route::get('/agreement', 'PagesController@agreement');
-Route::get('/faq', 'PagesController@faq');
+    Route::get('/company', 'PagesController@company');
+    Route::get('/privacypolicy', 'PagesController@privacypolicy');
+    Route::get('/agreement', 'PagesController@agreement');
+    Route::get('/faq', 'PagesController@faq');
 
 Route::group(['middleware' => ['userauth']], function () {
 
@@ -52,15 +52,15 @@ Route::group(['middleware' => ['userauth']], function () {
 });
 
 //トピック
-Route::get('/topic', 'CampaignesController@index');
-Route::get('/topicdetail', 'CampaignesController@campaignDetail');
+    Route::get('/topic', 'CampaignesController@index');
+    Route::get('/topicdetail', 'CampaignesController@campaignDetail');
 
 // コンタクト
-Route::get('/contact', 'ContactController@index');
-Route::post('/contact', 'ContactController@send');
+    Route::get('/contact', 'ContactController@index');
+    Route::post('/contact', 'ContactController@send');
 
 // API
-Route::get('/app/countCartContents', 'ApisController@countCartContents');
+    Route::get('/app/countCartContents', 'ApisController@countCartContents');
 
 
 
@@ -80,8 +80,6 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::post('/pizzzzza/employee/add/store', 'EmployeesController@store'); //従業員追加処理
     Route::post('/pizzzzza/employee/{id}/update', 'EmployeesController@update'); //従業員更新処理
 
-
-
 //クーポン
     Route::get('/pizzzzza/coupon/menu','CouponsController@couponMenu')->name('menuCoupon'); //クーポンメニュー
     Route::get('/pizzzzza/coupon/add','CouponsController@couponNew'); //クーポン種別選択ページ
@@ -95,7 +93,6 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::get('/pizzzzza/coupon/add/gift/input','CouponsController@couponNewGift'); //プレゼントクーポン条件入力ページ
     Route::post('/pizzzzza/coupon/add/gift/do','CouponsController@couponNewGiftDo'); //クーポン追加処理（プレゼント）
     Route::get('/pizzzzza/coupon/history','CouponsController@couponHistory'); //過去のクーポン一覧ページ
-
 
 /*  おそらく、コンフリクトのもの。不要と思われる(12/7 mini 様子見中
     Route::get('/pizzzzza/employee', 'EmployeesController@index')->name('employees'); //従業員一覧
@@ -121,7 +118,6 @@ Route::group(['middleware' => ['adminauth']], function () {
 //注文確認
     Route::get('/pizzzzza/order', 'AdminController@orderIndex'); //注文確認ページ
     Route::get('/pizzzzza/order/get', 'AdminController@orderGet'); //注文確認ページ処理用
-
 
 //電話注文
     Route::post('/pizzzzza/order/accept/customer/handler', 'PhoneOrdersController@handler'); // POSTデータの処理振り分け
