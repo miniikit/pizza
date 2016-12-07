@@ -122,7 +122,7 @@ Route::group(['middleware' => ['adminauth']], function () {
 //電話注文
     Route::post('/pizzzzza/order/accept/customer/handler', 'PhoneOrdersController@handler'); // POSTデータの処理振り分け
     Route::get('/pizzzzza/order/accept/input', 'PhoneOrdersController@index')->name('telSearch'); //電話番号入力ページ
-    Route::post('/pizzzzza/order/accept/customer/check', 'PhoneOrdersController@input'); //お客様情報・注文履歴表示ページ（入力ページからの遷移用）
+    Route::post('/pizzzzza/order/accept/customer/check', 'PhoneOrdersController@input'); //お客様情報・注文履歴表示ページ（入力ページからの遷移用）ajax使用中
     Route::get('/pizzzzza/order/accept/customer/detail', 'PhoneOrdersController@show');  //お客様情報・注文履歴表示ページ（戻るボタンなどでの遷移用）
     Route::get('/pizzzzza/order/accept/customer/edit', 'PhoneOrdersController@edit'); //登録済みの顧客情報編集ページ
     Route::post('/pizzzzza/order/accept/customer/update/phone', 'PhoneOrdersController@updatePhone'); //登録済みの顧客情報編集＞電話会員＞更新処理

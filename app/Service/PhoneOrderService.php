@@ -8,7 +8,7 @@ class PhoneOrderService
 {
     public function searchPhoneNumber($phone) {
 
-        $user = User::with('gender')->where('phone','=',$phone)->first();
+        $user = User::with('gender')->where('phone','=',$phone)->get();
 
         return $user;
 

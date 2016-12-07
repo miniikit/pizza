@@ -34,11 +34,27 @@ class PhoneOrdersController extends Controller
 
 
     //電話番号入力ページ＞バリデーションチェック処理
-    public function input(phoneSearchRequest $request){
-        $this->show($request);
-        return redirect('/pizzzzza/order/accept/customer/detail');
-    }
+    //public function input(phoneSearchRequest $request){
+    public function input(Request $request){
 
+        //$check = new PhoneOrderService();
+        //$check->searchPhoneNumber($request->number);
+        $check = array();
+        $users = DB::table('users')->where('phone','=',$request->number)->get();
+
+        if(count($users) > 0) {
+            $check["status"] = "true";
+            $check["message"] = "ユーザが見つかりました。";
+            return compact('check','users');
+        }else{
+            $check["status"] = "false";
+            $check["message"] = "ユーザが見つかりませんでした。";
+            return $check;
+        }
+        // dd($check);
+        //$this->show($request);
+        // return redirect('/pizzzzza/order/accept/customer/detail');
+    }
 
 
     //電話番号入力ページ＞お客様情報・注文履歴表示ページ
@@ -68,20 +84,17 @@ class PhoneOrdersController extends Controller
 
         // 番号からUser情報を引き出す
         $phoneOrder = new PhoneOrderService();
-        $userWeb = $phoneOrder->searchPhoneNumber($phone);
+        $userType = $phoneOrder->searchPhoneNumber($phone);
 
-        if(!is_null($userWeb)){
-            $user = $userWeb;
+        //
+        //  二人以上見つかる？
+        //
+
+
+        dd($userType);
+        if(!is_null($userType)){
+            $user = $userType;
             session()->put('phone_order_user_type','web');  // 編集時に使用
-            return view('pizzzzza.order.accept.customer.detail', compact('user'));
-        }
-
-        // 会員マスタから見つからないので、Temporary Tableから値をさがす　
-        $userTmp = DB::table('temporaries_users_master')->where('temporaries_users_master.phone','=',$phone)->first();
-
-        if (!is_null($userTmp)) {
-            $user = $userTmp;
-            session()->put('phone_order_user_type','phone'); //編集時に使用
             return view('pizzzzza.order.accept.customer.detail', compact('user'));
         }
 
