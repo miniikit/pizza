@@ -35,6 +35,14 @@
                     </tr>
                 </table>
             </div>
+            <div id="errors">
+                <div id="error-message">
+                    <h3></h3>
+                </div>
+                <div id="new-user">
+                    <a type="button" href="/pizzzzza/order/accept/customer/input">お客様情報の登録</a>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -48,6 +56,7 @@
                 //毎回初期化
                 $("#customers").css('display', 'none');
                 $('.customer').remove();
+                $("#errors").css('display', 'none');
 
                 $.ajaxSetup({
                     headers: {
@@ -89,7 +98,7 @@
                                         }
 
                                         $('#customer-detail').append(
-                                                "<tr class=\"customer link\" data-href=\"/pizzzzza/order/accept/customer/detail?"+ code["users"][i]["id"] +"\"><td>"+ code["users"][i]["name"] + "</td>" +
+                                                "<tr class=\"customer link clickable\" data-href=\"/pizzzzza/order/accept/customer/" + code["users"][i]["id"] + "/show/\"><td>"+ code["users"][i]["name"] + "</td>" +
                                                 "<td>" + code["users"][i]["postal"] + "</td>" +
                                                 "<td>" + code["users"][i]["address1"] + " " + code["users"][i]["address2"] + " " + code["users"][i]["address3"] + "</td>" +
                                                 "<td>" + code["users"][i]["authority_id"] + "</td></tr>"
@@ -97,15 +106,13 @@
 
                                     }
 
-                                } else if (code["status"] == "false") {
-                                    $("#customer-detail").css('display', 'inline-block');
-                                    $('#customer-detail').text(code["message"]);
-                                    var newTotal = String(code["newTotal"]).toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-                                    $("#total").text(newTotal + "円");
+                                } else if (code["check"]["status"] == "false") {
+                                    $("#errors").css('display', 'inline-block');
+                                    $('#error-message h3').text(code["check"]["message"]);
+
                                 } else {
                                     //なにも設定されていない
-                                    $("#customer-detail").css('display', 'inline-block').removeClass('coupon-true').addClass('coupon-false');
-                                    $('#customer-detail').text("クーポンコードが不正です");
+                                    alert('いとをかし');
                                 }
                             },
 

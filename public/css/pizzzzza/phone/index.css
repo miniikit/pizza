@@ -1,6 +1,6 @@
 /**
     電話番号入力ページ
-               　　　　*/
+               　　　**/
 
 #customers{
     display: none;
@@ -17,4 +17,19 @@
 
 #customers #title{
     margin-top:50px;
+}
+
+#errors{
+    display: none;
+    width:100%;
+    text-align: center;
+    margin-top:50px;
+}
+
+#errors #error-message{
+
+}
+
+#errors #new-user{
+    margin-top: 30px;
 }

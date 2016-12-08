@@ -3,6 +3,7 @@
 
 namespace App\Service;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class PhoneOrderService
 {
@@ -12,6 +13,12 @@ class PhoneOrderService
 
         return $user;
 
+    }
+
+    public function getUser($id) {
+        $user = DB::table('users')->where('id','=',$id)->first();
+        //dd($user);
+        return $user;
     }
 
 }
