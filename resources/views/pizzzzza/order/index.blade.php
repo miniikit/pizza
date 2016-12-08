@@ -20,6 +20,7 @@
         <div id="app" class="row">
             <div class="col-md-6">
                 <div id="order-top">
+                    <h3 class="title">注文一覧</h3>
                     <table class="table">
                         <thead>
                         <tr >
@@ -48,15 +49,13 @@
                             <tr>
                                 <th>商品</th>
                                 <th>ジャンル</th>
-                                <th>金額</th>
                                 <th>個数</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="detail in detail.detail">
-                                <td>@{{ detail.product_price.product.product_name }}</td>
-                                <td>@{{ detail.product_price.product.genre_id }}</td>
-                                <td>@{{ detail.product_price.product_price }}</td>
+                                <td><a v-bind:href="'/pizzzzza/menu/' + detail.product_price.product.id + '/show'">@{{ detail.product_price.product.product_name }}</a></td>
+                                <td>@{{ detail.product_price.product.genre.genre_name }}</td>
                                 <td>@{{ detail.number }}</td>
                             </tr>
                         </tbody>
@@ -68,6 +67,11 @@
                     <h3 class="title">注文情報</h3>
                     <table class="table table-bordered">
                         <tbody>
+                            <tr>
+                                <th>注文種別</th>
+                                <td v-if="detail.user.email">Web注文</td>
+                                <td v-else>電話注文</td>
+                            </tr>
                             <tr>
                                 <th>注文日</th>
                                 <td>@{{ detail.order_date }}</td>
@@ -82,6 +86,11 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
+                                <th>ユーザー種別</th>
+                                <td v-if="detail.user.email">Web会員</td>
+                                <td v-else>一時会員</td>
+                            </tr>
+                            <tr>
                               <th>名前</th>
                               <td>@{{ detail.user.name }}</td>
                             </tr>
@@ -89,15 +98,11 @@
                               <th>フリガナ</th>
                               <td>@{{ detail.user.kana }}</td>
                             </tr>
-                            <tr>
+                            <tr v-if="detail.user.gender_id">
                               <th>性別</th>
                               <td><span v-if="detail.user.gender_id == 1">男</span><span v-if="detail.user.gender_id == 2">女</span></td>
                             </tr>
-                            <tr>
-                              <th>生年月日</th>
-                              <td>@{{ detail.user.birthday }}</td>
-                            </tr>
-                            <tr>
+                            <tr v-if="detail.user.birthday">
                               <th>生年月日</th>
                               <td>@{{ detail.user.birthday }}</td>
                             </tr>
@@ -113,7 +118,7 @@
                               <th>電話番号</th>
                               <td>@{{ detail.user.phone }}</td>
                             </tr>
-                            <tr>
+                            <tr v-if="detail.user.email">
                               <th>メールアドレス</th>
                               <td>@{{ detail.user.email }}</td>
                             </tr>
