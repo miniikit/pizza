@@ -24,8 +24,16 @@
                 <a id="phone-submit" class="btn btn-primary btn-lg btn-block" href="#">確認</a>
                 {{ csrf_field() }}
             </form>
-            <div id="customer-detail" style="display: none;">
-
+            <div id="customers" class="form-group table-responsive">
+                <h1 id="title">顧客情報</h1>
+                <table id="customer-detail" class="table table-bordered">
+                    <tr>
+                        <th>氏名</th>
+                        <th>郵便番号</th>
+                        <th>住所</th>
+                        <th>会員種別</th>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
@@ -36,6 +44,10 @@
         $(function () {
 
             $('#phone-submit').click(function () {
+
+                //毎回初期化
+                $("#customers").css('display', 'none');
+                $('.customer').remove();
 
                 $.ajaxSetup({
                     headers: {
@@ -53,25 +65,35 @@
                             type: "POST",
                             url: "/pizzzzza/order/accept/customer/check",
                             data: data,
+
                             success: function (code, users, dataType) {
-                                //値引き後金額
+
                                 if (code["check"]["status"] == "true") {
-                                    $("#customer-detail").css('display', 'block');  //.removeClass('coupon-true').addClass('coupon-false');
+
+                                    $("#customers").css('display', 'block');
+                                    $("#customer-detail").css('display', 'inline-table');  //.removeClass('coupon-true').addClass('coupon-false');
                                     //$('#customer-detail').text(code["message"]);
 
-                                    for (var i = 0; i < code["users"].length; i++) {
-                                        //$('.customer0').text(code["users"][i]["address1"]);
+                                    //人数分出力
+                                    var cnt = code["users"].length;
+                                    for (var i = 0; i < cnt; i++) {
 
-                                        if(i = 0){
-                                            $('#customer-detail').append("<table class=\"table\">");
+                                        if(code["users"][i]["address3"] == null){
+                                            code["users"][i]["address3"] = "";
                                         }
-                                            $('#customer-detail').append(
-                                                    "<tr><th>氏名</th> <th>郵便番号</th> <th>住所</th></tr>" +
-                                                    "<tr><td>たたた</td> <td>111-1111</td> <td>aaaaaaaaaaaaaaaaaaaaa</td></tr>" +
-                                                    );
-                                        if(i = 0){
-                                            $('#customer-detail').append("</table>");
+
+                                        if(code["users"][i]["authority_id"] == 3){
+                                            code["users"][i]["authority_id"] = "WEB";
+                                        }else if(code["users"][i]["authority_id"] == 4){
+                                            code["users"][i]["authority_id"] = "PHONE";
                                         }
+
+                                        $('#customer-detail').append(
+                                                "<tr class=\"customer link\" data-href=\"/pizzzzza/order/accept/customer/detail?"+ code["users"][i]["id"] +"\"><td>"+ code["users"][i]["name"] + "</td>" +
+                                                "<td>" + code["users"][i]["postal"] + "</td>" +
+                                                "<td>" + code["users"][i]["address1"] + " " + code["users"][i]["address2"] + " " + code["users"][i]["address3"] + "</td>" +
+                                                "<td>" + code["users"][i]["authority_id"] + "</td></tr>"
+                                        );
 
                                     }
 
@@ -86,15 +108,28 @@
                                     $('#customer-detail').text("クーポンコードが不正です");
                                 }
                             },
+
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
                                 alert('Error : ' + errorThrown);
                                 $("#XMLHttpRequest").html("XMLHttpRequest : " + XMLHttpRequest.status);
                                 $("#textStatus").html("textStatus : " + textStatus);
                                 $("#errorThrown").html("errorThrown : " + errorThrown);
                             }
+
                         });
                 //ページをリロードしない
                 return false;
+            });
+        });
+
+
+        $('.table tr[data-href]').addClass('clickable').click(function () {
+            window.location = $(this).attr('data-href');
+        }).find('a').hover(function () {
+            $(this).parents('tr').unbind('click');
+        }, function () {
+            $(this).parents('tr').click(function () {
+                window.location = $(this).attr('data-href');
             });
         });
     </script>

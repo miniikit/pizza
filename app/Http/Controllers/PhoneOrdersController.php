@@ -34,9 +34,9 @@ class PhoneOrdersController extends Controller
 
 
     //電話番号入力ページ＞バリデーションチェック処理
+    //タスク：：バリデーションチェック
     //public function input(phoneSearchRequest $request){
     public function input(Request $request){
-        dd('a');
 
         //$check = new PhoneOrderService();
         //$check->searchPhoneNumber($request->number);
@@ -57,6 +57,13 @@ class PhoneOrdersController extends Controller
         // return redirect('/pizzzzza/order/accept/customer/detail');
     }
 
+
+    public function show($id){
+        dd($id);
+    }
+
+
+    /*
 
     //電話番号入力ページ＞お客様情報・注文履歴表示ページ
     // ※処理内容：電話番号が見つかれば会員情報を表示し、見つからなければ新規登録ページへリダイレクトする
@@ -108,7 +115,7 @@ class PhoneOrdersController extends Controller
 
     }
 
-
+    */
 
     // POSTデータの受け皿。
     public function handler(Request $request)
