@@ -20,6 +20,7 @@
         <div id="app" class="row">
             <div class="col-md-6">
                 <div id="order-top">
+                    <h3 class="title">注文一覧</h3>
                     <table class="table">
                         <thead>
                         <tr >
@@ -48,15 +49,13 @@
                             <tr>
                                 <th>商品</th>
                                 <th>ジャンル</th>
-                                <th>金額</th>
                                 <th>個数</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="detail in detail.detail">
-                                <td>@{{ detail.product_price.product.product_name }}</td>
-                                <td>@{{ detail.product_price.product.genre_id }}</td>
-                                <td>@{{ detail.product_price.product_price }}</td>
+                                <td><a v-bind:href="'/pizzzzza/menu/' + detail.product_price.product.id + '/show'">@{{ detail.product_price.product.product_name }}</a></td>
+                                <td>@{{ detail.product_price.product.genre.genre_name }}</td>
                                 <td>@{{ detail.number }}</td>
                             </tr>
                         </tbody>
@@ -92,10 +91,6 @@
                             <tr>
                               <th>性別</th>
                               <td><span v-if="detail.user.gender_id == 1">男</span><span v-if="detail.user.gender_id == 2">女</span></td>
-                            </tr>
-                            <tr>
-                              <th>生年月日</th>
-                              <td>@{{ detail.user.birthday }}</td>
                             </tr>
                             <tr>
                               <th>生年月日</th>
