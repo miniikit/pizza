@@ -121,16 +121,17 @@ Route::group(['middleware' => ['adminauth']], function () {
 
 //電話注文
     Route::post('/pizzzzza/order/accept/customer/handler', 'PhoneOrdersController@handler'); // POSTデータの処理振り分け
-    Route::get('/pizzzzza/order/accept/input', 'PhoneOrdersController@index')->name('telSearch'); //電話番号入力ページ
-    Route::post('/pizzzzza/order/accept/customer/check', 'PhoneOrdersController@input'); //お客様情報・注文履歴表示ページ（入力ページからの遷移用）ajax使用中
-    Route::get('/pizzzzza/order/accept/customer/{id}/show', 'PhoneOrdersController@show')->name('telShow');  //お客様情報・注文履歴表示ページ（戻るボタンなどでの遷移用）
-    Route::get('/pizzzzza/order/accept/customer/{id}/edit', 'PhoneOrdersController@edit')->name('telEdit'); //登録済みの顧客情報編集ページ
-    Route::post('/pizzzzza/order/accept/customer/{id}/update/phone', 'PhoneOrdersController@updatePhone'); //登録済みの顧客情報編集＞電話会員＞更新処理
-    Route::post('/pizzzzza/order/accept/customer/{id}/update/web', 'PhoneOrdersController@updateWeb'); //登録済みの顧客情報編集＞WEB会員＞更新処理
-    Route::get('/pizzzzza/order/accept/customer/input', 'PhoneOrdersController@newCustomer')->name('newCustomer'); //登録済み出ない場合のお客様情報入力ページ
+    Route::get('/pizzzzza/order/accept/input', 'PhoneOrdersController@index')->name('telSearch'); //電話番号入力
+    Route::post('/pizzzzza/order/accept/customer/check', 'PhoneOrdersController@input'); //電話番号検索＞ajax
+    Route::get('/pizzzzza/order/accept/customer/{id}/show', 'PhoneOrdersController@show')->name('telShow');  //会員情報・注文情報
+    Route::get('/pizzzzza/order/accept/customer/{id}/edit', 'PhoneOrdersController@edit')->name('telEdit'); //会員情報編集
+    Route::post('/pizzzzza/order/accept/customer/{id}/update/phone', 'PhoneOrdersController@updatePhone'); //会員情報編集＞更新処理＞PHONE
+    Route::post('/pizzzzza/order/accept/customer/{id}/update/web', 'PhoneOrdersController@updateWeb'); //会員情報編集＞更新処理＞WEB
+    Route::get('/pizzzzza/order/accept/customer/input', 'PhoneOrdersController@newCustomer')->name('newCustomer'); //新規登録
+    Route::post('/pizzzzza/order/accept/customer/input/add', 'PhoneOrdersController@newCustomerInsert'); //新規登録＞DB追加処理
 
 //電話注文　注文処理
-    Route::get('/pizzzzza/order/accept/item/select', 'PhoneOrdersController@orderSelect'); //商品入力・選択ページ
+    Route::get('/pizzzzza/order/accept/item/{id}/select', 'PhoneOrdersController@orderSelect')->name('telOrderSelect'); //商品入力・選択ページ
     Route::get('/pizzzzza/order/accept/item/confirm', 'PhoneOrdersController@orderConfirm'); //注文情報確認ページ
 
 //売上・売れ筋

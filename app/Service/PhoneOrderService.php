@@ -16,8 +16,9 @@ class PhoneOrderService
     }
 
     public function getUser($id) {
+
         $user = DB::table('users')->where('id','=',$id)->first();
-        //dd($user);
+
         return $user;
     }
 

@@ -11,7 +11,7 @@
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
         <li><a href="/pizzzzza/order/accept/input">電話番号入力</a></li>
-        <li><a href="/pizzzzza/order/accept/customer/detail">お客様情報確認</a></li>
+        <li><a href="/pizzzzza/order/accept/customer/{{$id}}/show">お客様情報確認</a></li>
         <li class="active">商品選択</li>
     </ol>
 @endsection
