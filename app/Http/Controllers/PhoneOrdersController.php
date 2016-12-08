@@ -13,12 +13,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AdminPhoneUserEditRequestForWeb;
+use App\Http\Requests\AdminPhoneUserAddRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\phoneSearchRequest;
 use App\Service\PhoneOrderService;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\DB;  //サービスに移植後削除
 use App\Product;
+use Carbon\Carbon;
+
 
 use App\Http\Requests\AdminPhoneUserEditRequest;
 
@@ -54,21 +57,30 @@ class PhoneOrdersController extends Controller
             $check["message"] = "ユーザが見つかりませんでした。";
             return compact('check');
         }
-        // dd($check);
-        //$this->show($request);
-        // return redirect('/pizzzzza/order/accept/customer/detail');
     }
 
 
     public function show($id)
     {
-        //$user = new PhoneOrderService();
-        //$user->getUser($id);
-
-        $user = DB::table('users')->where('id', '=', $id)->first();
+        $phoneOrder = new PhoneOrderService();
+        $user = $phoneOrder->getUser($id);
 
         if (count($user) > 0) {
-            return view('pizzzzza.order.accept.customer.detail', compact('user'));
+
+            //累計注文回数
+            $orderCount = $phoneOrder->getOrderCount($id);
+
+            //注文情報
+            $orders = $phoneOrder->getOrders($id);
+
+            //累計注文金額
+            $orderTotal = $phoneOrder->getOrderTotal($id);
+
+            //平均支出金額
+            $orderAvg = $orderTotal / $orderCount;
+
+            return view('pizzzzza.order.accept.customer.show', compact('user','orders','orderCount','orderTotal','orderAvg'));
+
         } else {
             return redirect()->route('telSearch');
         }
@@ -123,7 +135,7 @@ class PhoneOrdersController extends Controller
             } else if ($request->detailPost == "注文へ") {
                 $this->orderSelect($request);
                 //この辺で、会員IDをセッションに保存する必要あり。
-                return redirect('/pizzzzza/order/accept/item/select');
+                return redirect()->route('telOrderSelect',$request->customer_id);
 
             //会員情報編集ページへ
             } else if ($request->detailPost == "編集") {
@@ -171,7 +183,7 @@ class PhoneOrdersController extends Controller
         $success = DB::table('users')->where('users.id', '=', $id)->update(['name' => $name, 'kana' => $name_katakana, 'email' => $email, 'gender_id' => $gender_id, 'birthday' => $birthday, 'postal' => $postal, 'address1' => $address1, 'address2' => $address2, 'address3' => $address3, 'phone' => $phone]);
 
         //リダイレクト
-        if(count($success)) {
+        if(count($success)>0) {
 
             Flash::success('会員情報の更新が完了しました。');
             return redirect()->route('telShow', $id);
@@ -203,7 +215,7 @@ class PhoneOrdersController extends Controller
 
         $success = DB::table('users')->where('users.id', '=', $id)->update(['name' => $name, 'kana' => $name_katakana, 'postal' => $postal, 'address1' => $address1, 'address2' => $address2, 'address3' => $address3, 'phone' => $phone]);
 
-        if(count($success)) {
+        if(count($success) > 0) {
 
             Flash::success('会員情報の更新が完了しました。');
 
@@ -226,14 +238,58 @@ class PhoneOrdersController extends Controller
     }
 
 
+    public function newCustomerInsert(AdminPhoneUserAddRequest $request)
+    {
+
+        //POSTデータの受取
+        $name = $request->name;
+        $name_katakana = $request->kana;
+        $postal = $request->postal;
+        $address1 = $request->address1;
+        $address2 = $request->address2;
+        $address3 = $request->address3;
+        $phone = $request->phone;
+
+
+        //登録
+        $id = DB::table('users')->insertGetId([
+            'name' => $name,
+            'kana' => $name_katakana,
+            'postal' => $postal,
+            'address1' => $address1,
+            'address2' => $address2,
+            'address3' => $address3,
+            'phone' => $phone,
+            'authority_id' => 4,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
+
+        //リダイレクト
+        if(count($id)>0) {
+
+            Flash::success('会員登録が完了しました。');
+            return redirect()->route('telShow', $id);
+
+        }else{
+
+            Flash::danger('会員登録が完了しました。');
+            return redirect()->route('telShow', $id);
+
+        }
+
+    }
+
+
     //商品入力・選択ページ
-    public function orderSelect()
+    public function orderSelect($id)
     {
         $products = DB::table('products_master')->join('products_prices_master', 'products_master.price_id', '=', 'products_prices_master.id')->join('genres_master', 'genres_master.id', '=', 'products_master.genre_id')->orderBy('genre_id', 'asc')->get();
         $pizzacnt = Product::where('genre_id', 1)->count();
         $sidecnt = Product::where('genre_id', 2)->count();
         $drinkcnt = Product::where('genre_id', 3)->count();
-        return view('pizzzzza.order.accept.item.select', compact('products', 'pizzacnt', 'sidecnt', 'drinkcnt'));
+        return view('pizzzzza.order.accept.item.select', compact('products', 'pizzacnt', 'sidecnt', 'drinkcnt','id'));
     }
 
 

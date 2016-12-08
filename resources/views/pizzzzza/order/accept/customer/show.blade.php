@@ -40,20 +40,20 @@
                         <td>{{ $user->kana }}</td>
                     </tr>
                     @if(isset($user->birthday) || isset($user->gender_id))
-                    <tr>
-                        <th class="text-center"><label for="">生年月日</label></th>
-                        <td>{{ $user->birthday }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-center"><label for="">性別</label></th>
-                        @if($user->gender_id == 1)
-                            <td>男</td>
-                        @elseif($user->gender_id == 2)
-                            <td>女</td>
-                        @else
-                            <td>その他</td>
-                        @endif
-                    </tr>
+                        <tr>
+                            <th class="text-center"><label for="">生年月日</label></th>
+                            <td>{{ $user->birthday }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-center"><label for="">性別</label></th>
+                            @if($user->gender_id == 1)
+                                <td>男</td>
+                            @elseif($user->gender_id == 2)
+                                <td>女</td>
+                            @else
+                                <td>その他</td>
+                            @endif
+                        </tr>
                     @endif
                     <tr>
                         <th class="text-center"><label for="">郵便番号</label></th>
@@ -76,10 +76,10 @@
                         <td>{{ $user->phone }}</td>
                     </tr>
                     @if(isset($user->email))
-                    <tr>
-                        <th class="text-center"><label for="">メールアドレス</label></th>
-                        <td>{{ $user->email }}</td>
-                    </tr>
+                        <tr>
+                            <th class="text-center"><label for="">メールアドレス</label></th>
+                            <td>{{ $user->email }}</td>
+                        </tr>
                     @endif
                     </tbody>
                 </table>
@@ -94,5 +94,41 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
             </form>
         </div>
+        @if(count($orders) > 0)
+            <h1>過去の注文履歴</h1>
+            <table class="table table-bordered">
+                <tr>
+                    <th>累計購入金額</th>
+                    <th>累計購入回数</th>
+                    <th>平均支出金額</th>
+                </tr>
+                <tr>
+                    <td>¥ {{ number_format($orderTotal) }}</td>
+                    <td>{{ $orderCount }}</td>
+                    <td>¥ {{ number_format($orderAvg) }}</td>
+                </tr>
+            </table>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>注文ID</th>
+                    <th>注文日</th>
+                    <th>注文状況</th>
+                    <th>商品名</th>
+                    <th>個数</th>
+                </tr>
+                @foreach($orders as $order)
+                    <tr>
+                        <td></td>
+                        <td>{{ $order->order_date }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforeach
+            </table>
+        @else
+            <h1>注文履歴がありませんでした</h1>
+        @endif
     </div>
 @endsection

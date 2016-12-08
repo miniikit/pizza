@@ -1,14 +1,17 @@
+
+Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+
 var app = new Vue({
 
     el: '#app',
 
     data: {
         orders: [],
+        order_id: [],
         detail: []
     },
 
     created: function() {
-
 
         this.init();
         setInterval(this.getOrders,5000);
@@ -46,18 +49,28 @@ var app = new Vue({
 
         destroy: function () {
 
-            this.$http.post('/pizzzzza/order/destroy',this.detail).then(function (response) {
-
-                console.log(this.detail);
-                console.log(response);
-
-            })
+            this.$http.post('/pizzzzza/order/destroy',this.detail.id).then(function (response) {
 
 
-            this.detail = this.orders[0];
+                this.orders.pop(this.order_id);
+                this.detail = this.orders[0];
+
+                this.deletedOrderAlert();
+
+            });
         },
 
         success: function () {
+
+            this.$http.post('/pizzzzza/order/success',this.detail.id).then(function (response) {
+
+
+                this.orders.pop(this.order_id);
+                this.detail = this.orders[0];
+
+                this.successOrderAlert();
+
+            });
 
         },
 
@@ -66,7 +79,19 @@ var app = new Vue({
                 msg: "新しい注文がありました。",
                 type: "info",
                 position: "right",
-                bgcolor: "#455A64",
+                bgcolor: "#e2e2e2",
+                opacity: 1,
+                width: 300,
+                fade: true
+            });
+        },
+
+        deletedOrderAlert : function () {
+            notif({
+                msg: "注文を破棄しました",
+                type: "info",
+                position: "right",
+                bgcolor: "#c14646",
                 opacity: 1,
                 width: 300,
                 fade: true
@@ -74,6 +99,8 @@ var app = new Vue({
         },
 
         showdetail: function (index) {
+
+            this.$set(this,'order_id',index);
 
             this.detail = this.orders[index];
 

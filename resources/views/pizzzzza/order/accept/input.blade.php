@@ -112,8 +112,21 @@
 
                                 } else {
                                     //なにも設定されていない
-                                    alert('いとをかし');
+                                    alert('error処理エラー');
                                 }
+
+                                //table jQuery Click
+                                $('.table tr[data-href]').addClass('clickable').click(function () {
+                                    console.log('aa');
+                                    window.location = $(this).attr('data-href');
+                                }).find('a').hover(function () {
+                                    $(this).parents('tr').unbind('click');
+                                }, function () {
+                                    $(this).parents('tr').click(function () {
+                                        window.location = $(this).attr('data-href');
+                                    });
+                                });
+
                             },
 
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -124,19 +137,9 @@
                             }
 
                         });
+
                 //ページをリロードしない
                 return false;
-            });
-        });
-
-
-        $('.table tr[data-href]').addClass('clickable').click(function () {
-            window.location = $(this).attr('data-href');
-        }).find('a').hover(function () {
-            $(this).parents('tr').unbind('click');
-        }, function () {
-            $(this).parents('tr').click(function () {
-                window.location = $(this).attr('data-href');
             });
         });
     </script>

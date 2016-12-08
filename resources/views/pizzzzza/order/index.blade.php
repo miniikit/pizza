@@ -1,5 +1,9 @@
 @extends('template.admin')
 
+@section('meta')
+<meta id="token" name="token" value="{{ csrf_token() }}">
+@endsection
+
 @section('title', '注文確認')
 
 @section('css')
