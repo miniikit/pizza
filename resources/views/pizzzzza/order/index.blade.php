@@ -60,17 +60,17 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div v-for="detail in detail.detail">
-
-
-                    </div>
                     <h3 class="title">注文情報</h3>
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
                                 <th>注文種別</th>
-                                <td v-if="detail.user.email">Web注文</td>
-                                <td v-else>電話注文</td>
+                                <td v-if="detail.employee_id">電話注文</td>
+                                <td v-else>Web注文</td>
+                            </tr>
+                            <tr v-if="detail.employee_id">
+                                <th>担当者</th>
+                                <td>@{{ detail.employee.user.name }}</td>
                             </tr>
                             <tr>
                                 <th>注文日</th>
@@ -125,6 +125,9 @@
                         </tbody>
                     </table>
                 </div>
+                <form class="ar" action="/pizzzzza/menu/{{1}}/delete" method="post">
+
+                </form>
             </div>
         </div>
     </div>

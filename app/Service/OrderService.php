@@ -28,6 +28,7 @@ class OrderService
             'coupon_id' => $couponId,
             'state_id' => 1,
             'user_id' => $userId,
+            'employee_id' => NULL,
         ]);
 
         $order = Order::orderBy('id', 'desc')->where('user_id','=',$userId)->take(1)->get();

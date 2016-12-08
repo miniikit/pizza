@@ -651,6 +651,7 @@ class OrdersMasterSeeder extends Seeder
             'coupon_id' => 1,
             'state_id' => 1,
             'user_id' => 4,
+            'employee_id' => NULL,
         ]);
         Order::create([
             'order_date' => Carbon::now(),
@@ -658,6 +659,7 @@ class OrdersMasterSeeder extends Seeder
             'coupon_id' => null,
             'state_id' => 1,
             'user_id' => 5,
+            'employee_id' => NULL,
         ]);
         Order::create([
             'order_date' => Carbon::now(),
@@ -665,6 +667,7 @@ class OrdersMasterSeeder extends Seeder
             'coupon_id' => null,
             'state_id' => 1,
             'user_id' => 6,
+            'employee_id' => NULL,
         ]);
         Order::create([
             'order_date' => Carbon::now(),
@@ -672,6 +675,7 @@ class OrdersMasterSeeder extends Seeder
             'coupon_id' => null,
             'state_id' => 1,
             'user_id' => 4,
+            'employee_id' => NULL,
         ]);
         Order::create([
             'order_date' => Carbon::now(),
@@ -679,6 +683,7 @@ class OrdersMasterSeeder extends Seeder
             'coupon_id' => null,
             'state_id' => 1,
             'user_id' => 9,
+            'employee_id' => 2,
         ]);
     }
 }

@@ -20,6 +20,7 @@ class OrdersMaster extends Migration
         $table->integer('coupon_id')->nullable();//->references('id')->on('coupons_master'); //クーポンID
         $table->integer('state_id');//->references('id')->on('states_master'); //状態ID
         $table->integer('user_id');//->references('id')->on('user_id'); //顧客ID
+        $table->integer('employee_id')->nullable();//->references('id')->on('user_id'); //従業員ID
         $table->timestamps(); //登録・更新日
       });
     }
