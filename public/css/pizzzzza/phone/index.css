@@ -1,0 +1,35 @@
+/**
+    電話番号入力ページ
+               　　　**/
+
+#customers{
+    display: none;
+    text-align: center;
+}
+
+#customers #customer-detail{
+    width:100%;
+}
+
+#customers>#customer-detail>tbody>tr>th{
+    text-align: center;
+}
+
+#customers #title{
+    margin-top:50px;
+}
+
+#errors{
+    display: none;
+    width:100%;
+    text-align: center;
+    margin-top:50px;
+}
+
+#errors #error-message{
+
+}
+
+#errors #new-user{
+    margin-top: 30px;
+}

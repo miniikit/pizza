@@ -9,7 +9,7 @@
 @section('pankuzu')
   <ol class="breadcrumb">
     <li><a href="/pizzzzza/order">ホーム</a></li>
-    <li class="active"><a href="">電話番号入力</a></li>
+    <li><a href="/pizzzzza/order/accept/input">電話番号入力</a></li>
     <li class="active">新規登録</li>
   </ol>
 @endsection
