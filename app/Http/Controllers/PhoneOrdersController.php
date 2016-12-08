@@ -62,13 +62,25 @@ class PhoneOrdersController extends Controller
 
     public function show($id)
     {
-        //$user = new PhoneOrderService();
-        //$user->getUser($id);
-
-        $user = DB::table('users')->where('id', '=', $id)->first();
+        $phoneOrder = new PhoneOrderService();
+        $user = $phoneOrder->getUser($id);
 
         if (count($user) > 0) {
-            return view('pizzzzza.order.accept.customer.show', compact('user'));
+
+            //累計注文回数
+            $orderCount = $phoneOrder->getOrderCount($id);
+
+            //注文情報
+            $orders = $phoneOrder->getOrders($id);
+
+            //累計注文金額
+            $orderTotal = $phoneOrder->getOrderTotal($id);
+
+            //平均支出金額
+            $orderAvg = $orderTotal / $orderCount;
+
+            return view('pizzzzza.order.accept.customer.show', compact('user','orders','orderCount','orderTotal','orderAvg'));
+
         } else {
             return redirect()->route('telSearch');
         }
