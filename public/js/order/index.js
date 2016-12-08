@@ -44,6 +44,23 @@ var app = new Vue({
 
         },
 
+        destroy: function () {
+
+            this.$http.post('/pizzzzza/order/destroy',this.detail).then(function (response) {
+
+                console.log(this.detail);
+                console.log(response);
+
+            })
+
+
+            this.detail = this.orders[0];
+        },
+
+        success: function () {
+
+        },
+
         newOrderAlert : function () {
             notif({
                 msg: "新しい注文がありました。",

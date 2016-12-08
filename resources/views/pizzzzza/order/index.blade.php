@@ -125,9 +125,10 @@
                         </tbody>
                     </table>
                 </div>
-                <form class="ar" action="/pizzzzza/menu/{{1}}/delete" method="post">
-
-                </form>
+                <div class="button ar">
+                    <button v-on:click="destroy" class="btn btn-danger btn-sm">削除</button>
+                    <button v-on:click="success" class="btn btn-default btn-sm ml">完了</button>
+                </div>
             </div>
         </div>
     </div>

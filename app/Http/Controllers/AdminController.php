@@ -29,4 +29,8 @@ class AdminController extends Controller
         return response()->json($orders);
 
     }
+
+    public function destroy() {
+        return 'hgehgoehgeo';
+    }
 }
