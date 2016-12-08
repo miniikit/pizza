@@ -36,6 +36,7 @@ class PhoneOrdersController extends Controller
     //電話番号入力ページ＞バリデーションチェック処理
     //public function input(phoneSearchRequest $request){
     public function input(Request $request){
+        dd('a');
 
         //$check = new PhoneOrderService();
         //$check->searchPhoneNumber($request->number);
