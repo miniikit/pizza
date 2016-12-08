@@ -68,6 +68,11 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
+                                <th>注文種別</th>
+                                <td v-if="detail.user.email">Web注文</td>
+                                <td v-else>電話注文</td>
+                            </tr>
+                            <tr>
                                 <th>注文日</th>
                                 <td>@{{ detail.order_date }}</td>
                             </tr>
@@ -81,6 +86,11 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
+                                <th>ユーザー種別</th>
+                                <td v-if="detail.user.email">Web会員</td>
+                                <td v-else>一時会員</td>
+                            </tr>
+                            <tr>
                               <th>名前</th>
                               <td>@{{ detail.user.name }}</td>
                             </tr>
@@ -88,11 +98,11 @@
                               <th>フリガナ</th>
                               <td>@{{ detail.user.kana }}</td>
                             </tr>
-                            <tr>
+                            <tr v-if="detail.user.gender_id">
                               <th>性別</th>
                               <td><span v-if="detail.user.gender_id == 1">男</span><span v-if="detail.user.gender_id == 2">女</span></td>
                             </tr>
-                            <tr>
+                            <tr v-if="detail.user.birthday">
                               <th>生年月日</th>
                               <td>@{{ detail.user.birthday }}</td>
                             </tr>
@@ -108,7 +118,7 @@
                               <th>電話番号</th>
                               <td>@{{ detail.user.phone }}</td>
                             </tr>
-                            <tr>
+                            <tr v-if="detail.user.email">
                               <th>メールアドレス</th>
                               <td>@{{ detail.user.email }}</td>
                             </tr>
