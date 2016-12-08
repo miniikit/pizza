@@ -153,4 +153,3 @@ Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理�
 Auth::routes();
 
 Route::get('password/input' ,'auth\ResetPasswordController@input'); //パスワードリセットメール入力ページ
-
