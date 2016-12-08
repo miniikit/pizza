@@ -116,19 +116,19 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::post('/pizzzzza/menu/store', 'AdminMenusController@store'); //従業員用メニュー追加処理
 
 //注文確認
-    Route::get('/pizzzzza/order', 'AdminController@orderIndex'); //注文確認ページ
+    Route::get('/pizzzzza/order', 'AdminController@orderIndex')->name('orderTop'); //注文確認ページ
     Route::get('/pizzzzza/order/get', 'AdminController@orderGet'); //注文確認ページ処理用
 
 //電話注文
     Route::post('/pizzzzza/order/accept/customer/handler', 'PhoneOrdersController@handler'); // POSTデータの処理振り分け
     Route::get('/pizzzzza/order/accept/input', 'PhoneOrdersController@index')->name('telSearch'); //電話番号入力ページ
     Route::post('/pizzzzza/order/accept/customer/check', 'PhoneOrdersController@input'); //お客様情報・注文履歴表示ページ（入力ページからの遷移用）ajax使用中
-    Route::get('/pizzzzza/order/accept/customer/{id}/show', 'PhoneOrdersController@show');  //お客様情報・注文履歴表示ページ（戻るボタンなどでの遷移用）
+    Route::get('/pizzzzza/order/accept/customer/{id}/show', 'PhoneOrdersController@show')->name('telShow');  //お客様情報・注文履歴表示ページ（戻るボタンなどでの遷移用）
     //Route::get('/pizzzzza/order/accept/customer/detail', 'PhoneOrdersController@show');  //お客様情報・注文履歴表示ページ（戻るボタンなどでの遷移用）
     Route::get('/pizzzzza/order/accept/customer/{id}/edit', 'PhoneOrdersController@edit')->name('telEdit'); //登録済みの顧客情報編集ページ
     //Route::get('/pizzzzza/order/accept/customer/edit', 'PhoneOrdersController@edit'); //登録済みの顧客情報編集ページ
-    Route::post('/pizzzzza/order/accept/customer/update/phone', 'PhoneOrdersController@updatePhone'); //登録済みの顧客情報編集＞電話会員＞更新処理
-    Route::post('/pizzzzza/order/accept/customer/update/web', 'PhoneOrdersController@updateWeb'); //登録済みの顧客情報編集＞WEB会員＞更新処理
+    Route::post('/pizzzzza/order/accept/customer/{id}/update/phone', 'PhoneOrdersController@updatePhone'); //登録済みの顧客情報編集＞電話会員＞更新処理
+    Route::post('/pizzzzza/order/accept/customer/{id}/update/web', 'PhoneOrdersController@updateWeb'); //登録済みの顧客情報編集＞WEB会員＞更新処理
     Route::get('/pizzzzza/order/accept/customer/input', 'PhoneOrdersController@newCustomer')->name('newCustomer'); //登録済み出ない場合のお客様情報入力ページ
 
 //電話注文　注文処理

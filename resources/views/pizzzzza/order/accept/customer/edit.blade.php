@@ -30,7 +30,7 @@
         @endif
 
         @if(isset($user))
-        <form id="updateForm" action="" method="post">
+        <form id="updateForm" action="#" method="post">
             <div class="form-group table-responsive">
                 <table class="table table-bordered">
                     <tbody>
@@ -105,4 +105,16 @@
 
 @section('script')
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+    <script>
+        $(function(){
+            @if($user->authority_id == 3)   //web
+                var element = document.getElementById("updateForm");
+                element.setAttribute("action", "/pizzzzza/order/accept/customer/{{$user->id}}/update/web");
+            @elseif($user->authority_id == 4)   //電話
+                var element = document.getElementById("updateForm");
+                element.setAttribute("action", "/pizzzzza/order/accept/customer/{{$user->id}}/update/phone");
+            @endif
+        });
+
+    </script>
 @endsection
