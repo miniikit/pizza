@@ -4,6 +4,7 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/accept/index.css" media="all" title="no title">
+    <link rel="stylesheet" href="/css/pizzzzza/phone/index.css" media="all" title="no title">
 @endsection
 
 @section('pankuzu')
@@ -94,41 +95,50 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
             </form>
         </div>
-        @if(count($orders) > 0)
-            <h1>過去の注文履歴</h1>
-            <table class="table table-bordered">
-                <tr>
-                    <th>累計購入金額</th>
-                    <th>累計購入回数</th>
-                    <th>平均支出金額</th>
-                </tr>
-                <tr>
-                    <td>¥ {{ number_format($orderTotal) }}</td>
-                    <td>{{ $orderCount }}</td>
-                    <td>¥ {{ number_format($orderAvg) }}</td>
-                </tr>
-            </table>
-
-            <table class="table table-bordered">
-                <tr>
-                    <th>注文ID</th>
-                    <th>注文日</th>
-                    <th>注文状況</th>
-                    <th>商品名</th>
-                    <th>個数</th>
-                </tr>
-                @foreach($orders as $order)
+        <div id="status">
+            @if(count($orders) > 0)
+                <h1>統計情報</h1>
+                <table class="table table-bordered">
                     <tr>
-                        <td></td>
-                        <td>{{ $order->order_date }}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <th>累計注文金額</th>
+                        <th>累計注文回数</th>
+                        <th>平均注文金額</th>
+                        <th>クーポン使用金額</th>
                     </tr>
-                @endforeach
-            </table>
-        @else
-            <h1>注文履歴がありませんでした</h1>
-        @endif
+                    <tr>
+                        <td>¥ {{ number_format($orderTotal) }}</td>
+                        <td>{{ $orderCount }}</td>
+                        <td>¥ {{ number_format($orderAvg) }}</td>
+                        @if(isset($orderCouponTotal))
+                            <td>¥ {{ number_format($orderCouponTotal) }}</td>
+                        @endif
+                    </tr>
+                </table>
+
+                <h1>注文履歴</h1>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>注文ID</th>
+                        <th>注文日時</th>
+                        <th>注文状況</th>
+                        <th>商品名</th>
+                        <th>個数</th>
+                        <th>注文金額</th>
+                    </tr>
+                    @foreach($orders as $order)
+                        <tr>
+                            <td>{{ $order->id }}</td>
+                            <td>{{ $order->order_date }}</td>
+                            <td>{{ $order->state_name }}</td>
+                            <td>{{ $order->product_name }}</td>
+                            <td>{{ $order->number }}</td>
+                            <td>¥ {{ number_format($order->product_price * $order->number) }}</td>
+                        </tr>
+                    @endforeach
+                </table>
+            @else
+                <h1>注文履歴がありませんでした</h1>
+            @endif
+        </div>
     </div>
 @endsection
