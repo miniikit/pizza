@@ -70,7 +70,7 @@ class PhoneOrdersController extends Controller
             //累計注文回数
             $orderCount = $phoneOrder->getOrderCount($id);
 
-            //注文情報
+            //注文情報（価格＋注文＋注文詳細＋商品＋状態マスタの連結）
             $orders = $phoneOrder->getOrders($id);
 
             //累計注文金額
@@ -79,7 +79,10 @@ class PhoneOrdersController extends Controller
             //平均支出金額
             $orderAvg = $orderTotal / $orderCount;
 
-            return view('pizzzzza.order.accept.customer.show', compact('user','orders','orderCount','orderTotal','orderAvg'));
+            //クーポン使用総額のカウント
+            $orderCouponTotal = $phoneOrder->getOrderCouponTotal($id);
+
+            return view('pizzzzza.order.accept.customer.show', compact('user','orders','orderCount','orderTotal','orderAvg','orderCouponTotal'));
 
         } else {
             return redirect()->route('telSearch');
