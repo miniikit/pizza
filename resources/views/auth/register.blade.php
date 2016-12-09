@@ -29,7 +29,7 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
         <div class="col-md-12 col-md-offset-1">
             <div class="">
                 <div class="">
-                    <form class="" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="" role="form" method="POST" action="{{ url('/register/confirm') }}">
                         {{ csrf_field() }}
                         <div class="">
                           下記の通りに入力してください<br>
