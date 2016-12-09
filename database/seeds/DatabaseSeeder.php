@@ -558,11 +558,56 @@ class ProductsMasterSeeder extends Seeder
         Product::create([
             'product_name' => '【期間限定】越後産ズワイガニのご馳走ピザ',
             'price_id' => 11,
-            'product_image' => '/images/product/10.jpg',
+            'product_image' => '/images/product/11.jpg',
             'product_text' => '越後産のズワイガニをふんだんに使用したご馳走ピザです。',
             'genre_id' => 1,
             'sales_start_date' => Carbon::parse('2016-12-01'),
             'sales_end_date' => Carbon::parse('2017-03-30'),
+        ]);
+        Product::create([
+            'product_name' => 'ミートスペシャル',
+            'price_id' => 12,
+            'product_image' => '/images/product/12.jpg',
+            'product_text' => 'トマト・クリームソースに、３種類のウインナーをトッピング。飽きのこないシンプルな味に仕上げました。',
+            'genre_id' => 1,
+            'sales_start_date' => Carbon::parse('2016-12-10'),
+            'sales_end_date' => null,
+        ]);
+        Product::create([
+            'product_name' => 'アスパラゴールデン',
+            'price_id' => 13,
+            'product_image' => '/images/product/13.jpg',
+            'product_text' => '光輝くアスパラを、程よい柔らかさに焼き上げました。トマト・ベーコンとの相性は抜群です。',
+            'genre_id' => 1,
+            'sales_start_date' => Carbon::parse('2016-12-10'),
+            'sales_end_date' => null,
+        ]);
+        Product::create([
+            'product_name' => 'ホワイトモッツァレラ',
+            'price_id' => 14,
+            'product_image' => '/images/product/14.jpg',
+            'product_text' => '北海道産モッツァレラチーズに、イベリコ豚のスライスをトッピング。',
+            'genre_id' => 1,
+            'sales_start_date' => Carbon::parse('2016-12-10'),
+            'sales_end_date' => null,
+        ]);
+        Product::create([
+            'product_name' => '海のミックスコラボ',
+            'price_id' => 15,
+            'product_image' => '/images/product/15.jpg',
+            'product_text' => '海の幸をふんだんに使用した、シーフードずきにはたまらない一品です。',
+            'genre_id' => 1,
+            'sales_start_date' => Carbon::parse('2016-12-10'),
+            'sales_end_date' => null,
+        ]);
+        Product::create([
+            'product_name' => 'ミックスパーティー',
+            'price_id' => 16,
+            'product_image' => '/images/product/16.jpg',
+            'product_text' => '子供から大人まで幅広い年代の方に支持される、大人気ミックスピザです。',
+            'genre_id' => 1,
+            'sales_start_date' => Carbon::parse('2016-12-10'),
+            'sales_end_date' => null,
         ]);
     }
 }
@@ -645,11 +690,49 @@ class ProductsPricesMasterSeeder extends Seeder
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
+        //冬限定　ズワイガニのご馳走ピザ
         ProductPrice::create([
             'product_id' => 11,
             'product_price' => '2480',
             'price_change_startdate' => Carbon::parse('2016-12-01'),
             'price_change_enddate' => Carbon::parse('2016-03-30'),
+            'employee_id' => 3,
+        ]);
+        //ミートスペシャル
+        ProductPrice::create([
+            'product_id' => 12,
+            'product_price' => '2740',
+            'price_change_startdate' => Carbon::parse('2016-12-01'),
+            'price_change_enddate' => null,
+            'employee_id' => 3,
+        ]);
+        //アスパラゴールデン
+        ProductPrice::create([
+            'product_id' => 13,
+            'product_price' => '2100',
+            'price_change_startdate' => Carbon::parse('2016-12-01'),
+            'price_change_enddate' => null,
+            'employee_id' => 3,
+        ]);
+        ProductPrice::create([
+            'product_id' => 14,
+            'product_price' => '2980',
+            'price_change_startdate' => Carbon::parse('2016-12-01'),
+            'price_change_enddate' => null,
+            'employee_id' => 3,
+        ]);
+        ProductPrice::create([
+            'product_id' => 15,
+            'product_price' => '3200',
+            'price_change_startdate' => Carbon::parse('2016-12-01'),
+            'price_change_enddate' => null,
+            'employee_id' => 3,
+        ]);
+        ProductPrice::create([
+            'product_id' => 16,
+            'product_price' => '2600',
+            'price_change_startdate' => Carbon::parse('2016-12-01'),
+            'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
     }
