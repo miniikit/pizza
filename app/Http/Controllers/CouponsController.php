@@ -30,11 +30,6 @@ use phpDocumentor\Reflection\Types\Integer;
 
 class CouponsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     //  クーポンメニューページ
     public function couponMenu()  {
         return view('pizzzzza.coupon.menu');
