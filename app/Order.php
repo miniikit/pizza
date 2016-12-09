@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $table = 'orders_master';
-    protected $fillable = ['order_date','order_appointment_date','coupon_id','state_id','user_id'];
+    protected $fillable = ['order_date','order_appointment_date','coupon_id','state_id','user_id','employee_id'];
 
     public function detail() {
         return $this->hasMany('App\OrderDetail','id');
@@ -23,6 +23,10 @@ class Order extends Model
 
     public function state() {
         return $this->belongsTo('App\State','state_id');
+    }
+
+    public function employee() {
+        return $this->belongsTo('App\Employee','employee_id');
     }
 
 }
