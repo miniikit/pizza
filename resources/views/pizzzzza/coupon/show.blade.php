@@ -97,8 +97,10 @@
             </table>
 
             <div class="ar">
-                <a href="/pizzzzza/coupon/{{$id}}/edit" class="btn btn-default btn-sm ar">編集</a>
+                  <a href="/pizzzzza/coupon/{{$id}}/edit" class="btn btn-default btn-sm ar">編集</a>
+                  <a href="/pizzzzza/coupon/{{$id}}/delete" class="btn btn-danger btn-sm ml">削除</a>
             </div>
+
 
         </div>
         <div class="col-md-4 col-md-offset-4 mt">
