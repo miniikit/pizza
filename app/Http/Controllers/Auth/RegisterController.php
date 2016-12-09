@@ -87,6 +87,13 @@ class RegisterController extends Controller
 
     return view('auth.register.confirm',compact('data'));
     }
+
+    public function getregister()
+    {
+    $prefs = config('pref');
+    
+    return view('auth.register')->with(['prefs' => $prefs]);
+    }
     
     public function register(Request $request)
     {
