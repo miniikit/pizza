@@ -14,7 +14,7 @@ var app = new Vue({
     created: function() {
 
         this.init();
-        setInterval(this.getOrders,5000);
+        setInterval(this.getOrders,10000);
 
     },
 

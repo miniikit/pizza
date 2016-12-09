@@ -16,11 +16,10 @@
         <h2>CART</h2>
 
         @if ($products)
-            {{-- {{ dd($productMap) }} --}}
 
             <div class="clear btn">
                 <form id="clear" action="/cart/clear" method="post">
-                    <div class="inner form-bottom"><a>カートをカラにする</a></div>
+                    <div class="inner form-bottom"><a>カートを空にする</a></div>
                     {{ csrf_field() }}
                 </form>
             </div>
