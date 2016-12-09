@@ -18,8 +18,8 @@ class UserAuth
     {
             //ログインしていない
        if (!Auth::check()){
-        dd('a');
-            return redirect('/login'); 
+
+            return redirect('/login');
         
         //　ログインしている
         }else{
