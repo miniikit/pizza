@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Order;
 use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Types\Null_;
 
 class AdminController extends Controller
 {
@@ -30,7 +31,28 @@ class AdminController extends Controller
 
     }
 
-    public function destroy() {
-        return 'hgehgoehgeo';
+    public function destroy(Request $request) {
+
+        $orderId = $request->input('0');
+
+        $order = Order::find($orderId);
+
+        $order->state_id = 3;
+        $order->save();
+
+        return Null;
+    }
+
+    public function success(Request $request) {
+
+        $orderId = $request->input('0');
+
+        $order = Order::find($orderId);
+
+        $order->state_id = 2;
+        $order->save();
+
+        return Null;
+
     }
 }

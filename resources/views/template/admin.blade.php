@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 
 <title>@yield('title') | 管理画面 </title>
-
+@yield('meta')
 <meta name="description" itemprop="description" content="@yield('description')">
 <meta name="keywords" itemprop="keywords" content="@yield('keywords')">
 <link rel="stylesheet" href="/plug/fontawesome/css/font-awesome.min.css" media="screen" title="no title">

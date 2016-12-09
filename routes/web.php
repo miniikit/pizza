@@ -119,6 +119,7 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::get('/pizzzzza/order', 'AdminController@orderIndex')->name('orderTop'); //注文確認ページ
     Route::get('/pizzzzza/order/get', 'AdminController@orderGet'); //注文確認ページ処理用
     Route::post('pizzzzza/order/destroy', 'AdminController@destroy');
+    Route::post('pizzzzza/order/success', 'AdminController@success');
 
 //電話注文
     Route::post('/pizzzzza/order/accept/customer/handler', 'PhoneOrdersController@handler'); // POSTデータの処理振り分け
