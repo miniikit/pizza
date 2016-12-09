@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use App\Genre;
 use App\Gender;
 use App\Coupon;
-use App\Coupontype;
+use App\CouponType;
 use App\Authority;
 use App\Product;
 use App\ProductPrice;
