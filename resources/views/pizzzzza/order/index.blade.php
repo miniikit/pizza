@@ -20,8 +20,8 @@
 
 @section('main')
     <h1>注文確認</h1>
-    <div class="container">
-        <div id="app" class="row">
+    <div id="app" class="container">
+        <div v-if="orders.length != 0" class="row">
             <div class="col-md-6">
                 <div id="order-top">
                     <h3 class="title">注文一覧</h3>
@@ -134,6 +134,9 @@
                     <button v-on:click="success" class="btn btn-default btn-sm ml">完了</button>
                 </div>
             </div>
+        </div>
+        <div v-else>
+            <h3>注文がありません</h3>
         </div>
     </div>
 @endsection

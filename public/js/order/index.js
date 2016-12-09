@@ -24,10 +24,13 @@ var app = new Vue({
 
             this.$http.get('/pizzzzza/order/get').then(function (orders) {
 
-                this.orders = orders.body;
+                this.$set(this,'orders',orders.body);
 
-                this.$set(this,'detail',this.orders[0]);
-
+                if (this.orders.length) {
+                    this.$set(this,'detail',this.orders[0]);
+                }else {
+                    this.$set(this,'detail',null);
+                }
             });
 
         },
@@ -38,12 +41,26 @@ var app = new Vue({
 
                 if (this.orders.length != orders.body.length) {
 
-                    this.orders = orders.body;
+                    this.$set(this,'orders',orders.body);
+
+                    if (this.orders.length) {
+                        this.$set(this,'detail',this.orders[0]);
+                    }else {
+                        this.$set(this,'detail',null);
+                    }
 
                     this.newOrderAlert();
 
                 }
             });
+
+        },
+
+        showdetail: function (index) {
+
+            this.$set(this,'order_id',index);
+
+            this.detail = this.orders[index];
 
         },
 
@@ -79,7 +96,19 @@ var app = new Vue({
                 msg: "新しい注文がありました。",
                 type: "info",
                 position: "right",
-                bgcolor: "#e2e2e2",
+                bgcolor: "#2c485b",
+                opacity: 1,
+                width: 300,
+                fade: true
+            });
+        },
+
+        successOrderAlert : function () {
+            notif({
+                msg: "注文を完了しました。",
+                type: "info",
+                position: "right",
+                bgcolor: "#2c485b",
                 opacity: 1,
                 width: 300,
                 fade: true
@@ -96,14 +125,6 @@ var app = new Vue({
                 width: 300,
                 fade: true
             });
-        },
-
-        showdetail: function (index) {
-
-            this.$set(this,'order_id',index);
-
-            this.detail = this.orders[index];
-
         }
 
     }
