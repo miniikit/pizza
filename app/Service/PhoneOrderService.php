@@ -35,7 +35,8 @@ class PhoneOrderService
     //注文状況を取得
     public function getOrders($id){
 
-        $orders = DB::table('orders_master')->where('orders_master.user_id', '=', $id)->join('orders_details_table','orders_details_table.id','=','orders_master.id')->get();
+        //注文マスタ＋注文詳細テーブル＋価格マスタ＋商品マスタ＋状態マスタの結合。
+        $orders = DB::table('orders_master')->where('orders_master.user_id', '=', $id)->join('orders_details_table','orders_details_table.id','=','orders_master.id')->join('products_prices_master','orders_details_table.price_id','=','products_prices_master.id')->join('products_master','products_master.price_id','=','products_prices_master.id')->join('states_master','states_master.id','=','orders_master.state_id')->get();
 
         return $orders;
     }
@@ -52,6 +53,26 @@ class PhoneOrderService
         }
 
         return $total;
+    }
+
+    //クーポン使用金額
+    public function getOrderCouponTotal($id){
+
+        $orders = DB::table('orders_master')->where('orders_master.user_id', '=', $id)->join('orders_details_table','orders_details_table.id','=','orders_master.id')->join('coupons_master','coupons_master.id','=','orders_master.coupon_id')->get();
+
+        $total = 0;
+
+        if(count($orders) > 0) {
+
+            foreach ($orders as $order) {
+                $total += $order->coupon_discount;
+            }
+
+            return $total;
+
+        }else{
+            return $total;
+        }
     }
 
 
