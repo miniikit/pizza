@@ -1,21 +1,31 @@
-/*本登録*/
+/*新規会員登録*/
 
-.regist_table td {
-    height: 100%;
-}
-
-.regist_explain {
+.example {
     font-size: 14px;
     color: #7f7f7f;
     height: 50%;
     margin-top: 5px;
+    margin-left: 15px;
 }
 
+.red {
+    color: #FF0000;
+}
 
-/*仮登録*/
+.w17 {
+    width: 17%;
+}
 
-.email_exaplain {
-    color: #7f7f7f;
+.w24 {
+    width: 24%;
+}
+
+.w29 {
+    width: 29%;
+}
+
+.title {
+    letter-spacing: 3px;
 }
 
 
