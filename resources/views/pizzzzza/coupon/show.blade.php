@@ -9,7 +9,11 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
-        <li><a href="/pizzzzza/coupon/list">開催中クーポン一覧</a></li>
+        @if(is_null($coupon->deleted_at))
+            <li><a href="/pizzzzza/coupon">クーポン一覧</a></li>
+        @else
+            <li><a href="/pizzzzza/coupon">クーポン履歴</a></li>
+        @endif
         <li class="active">クーポン詳細</li>
     </ol>
 @endsection
@@ -98,7 +102,7 @@
 
         </div>
         <div class="col-md-4 col-md-offset-4 mt">
-            <a href="/pizzzzza/coupon/list" class="btn btn-default btn-lg btn-block">戻る</a>
+            <a href="/pizzzzza/coupon" class="btn btn-default btn-lg btn-block">戻る</a>
         </div>
     </div>
 @endsection

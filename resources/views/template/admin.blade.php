@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 
 <title>@yield('title') | 管理画面 </title>
-
+@yield('meta')
 <meta name="description" itemprop="description" content="@yield('description')">
 <meta name="keywords" itemprop="keywords" content="@yield('keywords')">
 <link rel="stylesheet" href="/plug/fontawesome/css/font-awesome.min.css" media="screen" title="no title">
@@ -39,9 +39,11 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">クーポン<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/pizzzzza/coupon/list">開催中のクーポン一覧</a></li>
+                        <li><a href="/pizzzzza/coupon">クーポン一覧</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/pizzzzza/coupon/menu">クーポン新規発行</a></li>
+                        <li><a href="/pizzzzza/coupon/add/discount/input">値引きクーポン新規発行</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/pizzzzza/coupon/add/gift/input">プレゼントクーポン新規発行</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/pizzzzza/coupon/history">クーポン履歴</a></li>
                     </ul>

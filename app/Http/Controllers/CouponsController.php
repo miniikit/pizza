@@ -216,7 +216,7 @@ class CouponsController extends Controller
         //開始日・終了日・削除済み　の３項目を確認してクリアした一覧を取得
         $coupons = DB::table('coupons_master')->where('deleted_at','=',NULL)->where('coupon_end_date','>=',$today)->orWhere('coupon_end_date','=',null)->where('coupon_start_date','<=',$today)->get();
 
-        return view('pizzzzza.coupon.list',compact('coupons'));
+        return view('pizzzzza.coupon.coupon',compact('coupons'));
 
     }
 
@@ -272,7 +272,7 @@ class CouponsController extends Controller
             $product_id = $coupon->product_id;
             $products = DB::table('products_master')->get();
 
-        return view('pizzzzza.coupon.list.edit',compact('coupon','couponTypes','couponTarget','id','products','product_id'));
+        return view('pizzzzza.coupon.edit',compact('coupon','couponTypes','couponTarget','id','products','product_id'));
 
     }
 

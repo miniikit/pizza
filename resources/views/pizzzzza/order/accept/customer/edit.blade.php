@@ -10,7 +10,7 @@
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
         <li class="active"><a href="/pizzzzza/order/accept/input">電話番号入力</a></li>
-        <li class="active"><a href="/pizzzzza/order/accept/customer/detail">お客様情報確認</a></li>
+        <li class="active"><a href="/pizzzzza/order/accept/customer/{{ $user->id }}/show">お客様情報確認</a></li>
         <li class="active">編集</li>
     </ol>
 @endsection
@@ -30,7 +30,7 @@
         @endif
 
         @if(isset($user))
-        <form id="updateForm" action="a.html" method="post">
+        <form id="updateForm" action="#" method="post">
             <div class="form-group table-responsive">
                 <table class="table table-bordered">
                     <tbody>
@@ -47,6 +47,7 @@
                             <th class="text-center"><label for="">生年月日</label></th>
                             <td><input type="date" name="birthday" value="{{ $user->birthday }}"></td>
                         </tr>
+                        @if(isset($genders))
                         <tr>
                             <th class="text-center"><label for="">性別</label></th>
                             <td>
@@ -59,6 +60,7 @@
                                     @endforeach
                                 </td>
                         </tr>
+                        @endif
                     @endif
                     <tr>
                         <th class="text-center"><label for="">郵便番号</label></th>
@@ -91,7 +93,7 @@
 
                 </table>
                 <div class="text-center">
-                    <input type="submit" class="btn btn-danger btn-lg" name="editPost" value="戻る">
+                    <a type="button" class="btn btn-danger btn-lg" href="/pizzzzza/order/accept/customer/{{ $user->id }}/show">戻る</a>
                     <input id="submit" type="submit" class="btn btn-primary btn-lg" name="editPost" value="更新" onclick="changeData()">
                 </div>
             </div>
@@ -105,31 +107,13 @@
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
     <script>
         $(function(){
-            //なにかしらの処理
-
-            @if(session()->get('phone_order_user_type') == "web")
-                var status = "web";
-            @else
-                var status = "phone";
+            @if($user->authority_id == 3)   //web
+                var element = document.getElementById("updateForm");
+                element.setAttribute("action", "/pizzzzza/order/accept/customer/{{$user->id}}/update/web");
+            @elseif($user->authority_id == 4)   //電話
+                var element = document.getElementById("updateForm");
+                element.setAttribute("action", "/pizzzzza/order/accept/customer/{{$user->id}}/update/phone");
             @endif
-
-
-/*
-            $('#submit').click(function() {
-                $(this).parents('form').attr('action', $(this).data('/pizzzzza/order/accept/customer/update/phone'));
-                $(this).parents('form').submit();
-                alert('submitがおされた！処理する');
-            });
-            */
-
-            if(status  == "phone")
-            {
-                var element = document.getElementById("updateForm");
-                element.setAttribute("action", "/pizzzzza/order/accept/customer/update/phone");
-            }else if(status == "web"){
-                var element = document.getElementById("updateForm");
-                element.setAttribute("action", "/pizzzzza/order/accept/customer/update/web");
-            }
         });
 
     </script>
