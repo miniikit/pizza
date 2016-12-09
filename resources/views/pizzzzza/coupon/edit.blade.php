@@ -10,9 +10,9 @@
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
         @if(is_null($coupon->deleted_at))
-            <li><a href="/pizzzzza/coupon/list">クーポン一覧</a></li>
+            <li><a href="/pizzzzza/coupon">クーポン一覧</a></li>
         @else
-            <li><a href="/pizzzzza/coupon/list">クーポン履歴</a></li>
+            <li><a href="/pizzzzza/coupon">クーポン履歴</a></li>
         @endif
         <li><a href="/pizzzzza/coupon/{{ $id }}/show">クーポン詳細</a></li>
         <li class="active">クーポン編集</li>
@@ -121,18 +121,22 @@
                 </tr>
                 </tbody>
             </table>
+            <!--
             <div class="ar">
                 @if($coupon->deleted_at == NULL)
-                    <a href="/pizzzzza/coupon/{{$id}}/delete" class="btn btn-danger btn-sm">削除</a>
                 @endif
                 <input class="btn btn-primary btn-sm ml" type="submit" name="status" value="更新">
             </div>
+            -->
+
             {{ csrf_field() }}
             <input type="hidden" name="coupons_types_id" value="{{  $coupon->coupons_types_id }}">
-            </form>
+          </div>
+          <div class="col-md-4 col-md-offset-4 ac">
+              <a href="/pizzzzza/coupon/{{$coupon->id}}/show" class="btn btn-default btn-lg mr">戻る</a>
+              <input class="btn btn-primary btn-lg" type="submit" name="status" value="更新">
+          </div>
+        </form>
+  </div>
 
-        </div>
-        <div class="col-md-4 col-md-offset-4 mt">
-            <a href="/pizzzzza/coupon/{{$coupon->id}}/show" class="btn btn-default btn-lg btn-block">戻る</a>
-        </div>
 @endsection
