@@ -9,12 +9,12 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
-        <li class="active">商品履歴</li>
+        <li class="active">注文履歴</li>
     </ol>
 @endsection
 
 @section('main')
-    <h1>商品履歴</h1>
+    <h1>注文履歴</h1>
 
     <div class="form-group table-responsive">
 
@@ -32,7 +32,7 @@
             <thead>
             <tr>
                 <th style="text-align: center;">ID</th>
-                <th>商品名</th>
+                <th>氏名</th>
                 <th style="text-align: center;">価格</th>
                 <th style="text-align: center;">ジャンル</th>
                 <th style="text-align: center;">販売開始日</th>
@@ -40,20 +40,14 @@
             </tr>
             </thead>
             <tbody>
-            @foreach ($products as $product)
-                <tr class="link" data-href="/pizzzzza/menu/{{ $product->id }}/show">
-                    <td style="width:5%;text-align: center;">{{ $product->id }}</td>
-                    <td style="width:20%;">{{ $product->product_name }}</td>
-                    <td style="text-align: center;">{{ number_format($product->productPrice->product_price )}}円</td>
-                    <td style="text-align: center;">{{ $product->genre->genre_name }}</td>
-                    <td style="text-align: center;">{{ \Carbon\Carbon::parse($product->sales_start_date)->format('Y年m月d日') }}</td>
-                    <td style="text-align: center;">
-                        @if ($product->sales_end_date == null)
-                            未設定
-                        @else
-                            {{ \Carbon\Carbon::parse($product->sales_end_date)->format('Y年m月d日') }}
-                        @endif
-                    </td>
+            @foreach ($orders as $order)
+                <tr class="link" data-href="/pizzzzza/menu/{{ $order->id }}/show">
+                    <td style="width:5%;text-align: center;">{{ $order->order_date }}</td>
+                    <td style="width:5%;text-align: center;">{{ $order->user->name }}</td>
+                    <td style="width:5%;text-align: center;">{{ $order->user->address1.$order->user->address2.$order->user->address3 }}</td>
+                    <td style="width:5%;text-align: center;">{{ $order->user->phone }}</td>
+                    <td style="width:5%;text-align: center;">{{ $order->id }}</td>
+                    <td style="width:5%;text-align: center;">{{ $order->id }}</td>
                 </tr>
             @endforeach
             </tbody>

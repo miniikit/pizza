@@ -46,7 +46,7 @@
                     <td style="width:20%;">{{ $product->product_name }}</td>
                     <td style="text-align: center;">{{ number_format($product->productPrice->product_price )}}円</td>
                     <td style="text-align: center;">{{ $product->genre->genre_name }}</td>
-                    <td style="text-align: center;">{{ $product->sales_start_date }}</td>
+                    <td style="text-align: center;">{{ \Carbon\Carbon::parse($product->sales_start_date)->format('Y年m月d日') }}</td>
                     <td style="text-align: center;">
                         @if ($product->sales_end_date == null)
                             未設定

@@ -21,8 +21,8 @@ class AdminAuth
         //ログインしていない
        if (!Auth::check()){
         
-            return redirect('pizzzzza/login');
-        
+            return redirect('/pizzzzza/login');
+
         //　ログインしている
         }else{
 

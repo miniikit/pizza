@@ -117,7 +117,7 @@
         </ul>
     </div>
     </div>
-    </div>
+    
 
     <div class="cart">
         <h1>Cart</h1>
@@ -137,7 +137,7 @@
             @endfor
         </table>
     </div>
-
+</div>
 
 @endsection
 

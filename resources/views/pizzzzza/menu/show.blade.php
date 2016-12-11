@@ -52,7 +52,7 @@
                 <tbody>
                 <tr>
                     <th class="text-center">販売開始日</th>
-                    <td>{{ $product->sales_start_date }}</td>
+                    <td>{{ \Carbon\Carbon::parse($product->sales_start_date)->format('Y年m月d日') }}</td>
                 </tr>
                 <tr>
                     <th class="text-center">販売終了日</th>
@@ -60,17 +60,17 @@
                         @if ($product->sales_end_date == null)
                             未設定
                         @else
-                            {{ $product->sales_end_date }}
+                            {{ \Carbon\Carbon::parse($product->sales_end_date)->format('Y年m月d日') }}
                         @endif
                     </td>
                 </tr>
                 <tr>
                     <th class="text-center">登録日</th>
-                    <td>{{ $product->created_at }}</td>
+                    <td>{{ \Carbon\Carbon::parse($product->created_at)->format('Y年m月d日') }}</td>
                 </tr>
                 <tr>
                     <th class="text-center">更新日</th>
-                    <td>{{ $product->updated_at }}</td>
+                    <td>{{ \Carbon\Carbon::parse($product->updated_at)->format('Y年m月d日') }}</td>
                 </tr>
                 </tbody>
             </table>

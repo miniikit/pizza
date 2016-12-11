@@ -22,6 +22,14 @@ class AdminController extends Controller
         return view('pizzzzza.order.index',compact('orders'));
     }
 
+    public function history() {
+
+        $orders = Order::with('user','coupon','state','employee.user','detail.productPrice.product.genre')->orderBy('order_appointment_date','asc')->get();
+
+        return view('pizzzzza.order.history',compact('orders'));
+
+    }
+
 
     public function orderGet(){
 

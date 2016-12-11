@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Requests\RegisterRequest;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -79,5 +80,32 @@ class RegisterController extends Controller
             'authority_id' => $data['authority_id'],
 
         ]);
+    }
+    public function confirm(Request $request)
+    {
+    $data = $request->all();
+
+    return view('auth.register.confirm',compact('data'));
+    }
+
+    public function getregister()
+    {
+    $prefs = config('pref');
+    
+    return view('auth.register')->with(['prefs' => $prefs]);
+    }
+    
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        return redirect('/register/complete');
+    }
+
+    public function complete()
+    {
+        return view('auth.register.complete');
     }
 }
