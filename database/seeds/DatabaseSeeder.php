@@ -60,6 +60,7 @@ class UsersSeeder extends Seeder
 
         DB::table('users')->delete();
 
+        //1 テストデータ：管理者
         User::create([
             'name' => '管理者',
             'kana' => 'カンリシャ',
@@ -74,6 +75,7 @@ class UsersSeeder extends Seeder
             'birthday' => 19961111,
             'authority_id' => 1,
         ]);
+        //2 テストデータ：従業員
         User::create([
             'name' => '濱田真旗',
             'kana' => 'ハマダマサキ',
@@ -88,6 +90,7 @@ class UsersSeeder extends Seeder
             'birthday' => 19960607,
             'authority_id' => 2,
         ]);
+        //3 テストデータ：従業員
         User::create([
             'name' => '兵頭佑一',
             'kana' => 'ヒョウドウユウイチ',
@@ -102,6 +105,7 @@ class UsersSeeder extends Seeder
             'birthday' => 19970221,
             'authority_id' => 2,
         ]);
+        //4 テストデータ：従業員
         User::create([
             'name' => '土屋百合',
             'kana' => 'ツチヤユリ',
@@ -116,6 +120,7 @@ class UsersSeeder extends Seeder
             'birthday' => 19970221,
             'authority_id' => 2,
         ]);
+        //5 テストデータ：従業員
         User::create([
             'name' => '森山みくり',
             'kana' => 'モリヤマミクリ',
@@ -130,6 +135,7 @@ class UsersSeeder extends Seeder
             'birthday' => 19970221,
             'authority_id' => 2,
         ]);
+        //6 テストデータ：従業員
         User::create([
             'name' => '津崎 平匡',
             'kana' => 'ツザキヒロマサ',
@@ -139,12 +145,12 @@ class UsersSeeder extends Seeder
             'address1' => $faker->prefecture.$faker->city,
             'address2' => $faker->streetAddress,
             'address3' => null,
-            'phone' => '09019384468',
+            'phone' => str_replace(array('-', 'ー'), '', $faker->phoneNumber),
             'gender_id' => 1,
             'birthday' => 19970221,
             'authority_id' => 2,
         ]);
-
+        //7 テストデータ：WEB会員
         User::create([
             'name' => '近澤邦彦',
             'kana' => 'チカザワクニヒコ',
@@ -154,12 +160,12 @@ class UsersSeeder extends Seeder
             'address1' => '大阪府大阪市大正区北恩加島',
             'address2' => '2-8-2',
             'address3' => null,
-            'phone' => '08037401939',
+            'phone' => str_replace(array('-', 'ー'), '', $faker->phoneNumber),
             'gender_id' => 1,
             'birthday' => 19960607,
             'authority_id' => 3,
         ]);
-
+        //8 テストデータ：WEB会員
         User::create([
             'name' => 'Josh',
             'kana' => 'josh',
@@ -169,12 +175,12 @@ class UsersSeeder extends Seeder
             'address1' => '大阪府大阪市大正区北恩加島',
             'address2' => '2-8-2',
             'address3' => null,
-            'phone' => '08037401939',
+            'phone' => str_replace(array('-', 'ー'), '', $faker->phoneNumber),
             'gender_id' => 1,
             'birthday' => 19960607,
             'authority_id' => 3,
         ]);
-
+        //9 テストデータ：電話会員（電話番号が同じ）
         User::create([
             'name' => '野比のび太',
             'kana' => 'ノビノビタ',
@@ -189,7 +195,7 @@ class UsersSeeder extends Seeder
             'birthday' => null,
             'authority_id' => 4,
         ]);
-
+        //10 テストデータ：電話会員（電話番号が同じ）
         User::create([
             'name' => '野比静香',
             'kana' => 'ノビシズカ',
@@ -205,7 +211,8 @@ class UsersSeeder extends Seeder
             'authority_id' => 4,
         ]);
 
-        for ($i=0; $i < 50; $i++) {
+        //11以降 テストデータ：WEB会員
+        for ($i=0; $i < 10; $i++) {
 
             User::create([
                 'name' => $faker->name,
@@ -234,40 +241,46 @@ class EmployeeMasterSeeder extends Seeder
     {
         DB::table('employees_master')->delete();
 
+        //テストデータ：契約中
         Employee::create([
-            'users_id' => 1,
-            'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
+            'users_id' => 1,    //管理者
+            'emoloyee_agreement_date' => Carbon::parse('2010-01-01'),
             'emoloyee_agreement_enddate' => null,
         ]);
 
+        //テストデータ：契約中
         Employee::create([
             'users_id' => 2,
-            'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
+            'emoloyee_agreement_date' => Carbon::parse('2011-03-10'),
             'emoloyee_agreement_enddate' => null,
         ]);
 
+        //テストデータ：契約中
         Employee::create([
             'users_id' => 3,
             'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
             'emoloyee_agreement_enddate' => null,
         ]);
 
+        //テストデータ：契約中
         Employee::create([
             'users_id' => 4,
             'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
             'emoloyee_agreement_enddate' => null,
         ]);
 
+        //テストデータ：契約終了
         Employee::create([
             'users_id' => 5,
             'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
-            'emoloyee_agreement_enddate' => null,
+            'emoloyee_agreement_enddate' => Carbon::yesterday(),
         ]);
 
+        //テストデータ：契約終了
         Employee::create([
             'users_id' => 6,
             'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
-            'emoloyee_agreement_enddate' => null,
+            'emoloyee_agreement_enddate' => Carbon::yesterday(),
         ]);
 
 
@@ -320,55 +333,74 @@ class CouponsMasterSeeder extends Seeder
     {
         DB::table('coupons_master')->delete();
 
+        //1 テストデータ：（キャンペーンと整合性 // プレゼント・全員・2000以上・焼きたてポテト無料・1人1回まで）
         Coupon::create([
-            'coupons_types_id' => '1',
-            'coupon_name' => '500円値引きクーポン',
-            'coupon_discount' => 500,
-            'coupon_conditions_money' => 3000,
-            'product_id' => 1,
-            'coupon_start_date' => Carbon::today(),
-            'coupon_end_date' => Carbon::today(),
-            'coupon_number' => '00000001',
+            'coupons_types_id' => '2',
+            'coupon_name' => '1人1回まで 2000円以上で焼きたてポテトが無料クーポン',
+            'coupon_discount' => 410,
+            'coupon_conditions_money' => 2000,
+            'product_id' => 4,
+            'coupon_start_date' => Carbon::parse('2016-12-06'),
+            'coupon_end_date' => Carbon::parse('2017-10-18'),
+            'coupon_number' => 'GIFTPOTATO',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => null,
-            'deleted_at' => Carbon::today()
+            'deleted_at' => null
         ]);
+        //2 テストデータ：（キャンペーンと整合性 // 値引き・全員・5000以上・1000円引き・1人1回まで）
         Coupon::create([
             'coupons_types_id' => '1',
-            'coupon_name' => '1000円値引きクーポン',
+            'coupon_name' => '全員対象 5000円以上で1000円引きクーポン',
             'coupon_discount' => 1000,
             'coupon_conditions_money' => 5000,
-            'product_id' => 1,
-            'coupon_start_date' => Carbon::today(),
-            'coupon_end_date' => null,
-            'coupon_number' => '00000002',
-            'coupon_conditions_count' => 1,
-            'coupon_conditions_first' => null,
-        ]);
-        Coupon::create([
-            'coupons_types_id' => '2',
-            'coupon_name' => 'プレゼントクーポン',
-            'coupon_discount' => 2200,
-            'coupon_conditions_money' => 1,
-            'product_id' => 2,
-            'coupon_start_date' => Carbon::today(),
-            'coupon_end_date' => null,
-            'coupon_number' => '00000003',
-            'coupon_conditions_count' => 1,
-            'coupon_conditions_first' => null,
-        ]);
-        Coupon::create([
-            'coupons_types_id' => '2',
-            'coupon_name' => 'ピザ無料クーポン',
-            'coupon_discount' => 2200,
-            'coupon_conditions_money' => 1,
-            'product_id' => 2,
-            'coupon_start_date' => Carbon::yesterday(),
-            'coupon_end_date' => Carbon::yesterday(),
-            'coupon_number' => 'MARTIN',
+            'product_id' => null,
+            'coupon_start_date' => Carbon::parse('2016-12-06'),
+            'coupon_end_date' => Carbon::parse('2017-06-07'),
+            'coupon_number' => '5000OFF',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => 1,
         ]);
+        //3 テストデータ：（キャンペーンと整合性 // プレゼント・全員・2500以上・コーラ無料・1人1回まで）
+        Coupon::create([
+            'coupons_types_id' => '1',
+            'coupon_name' => '全員対象 2500円以上でコーラ無料クーポン',
+            'coupon_discount' => 162,
+            'coupon_conditions_money' => 2500,
+            'product_id' => 7,
+            'coupon_start_date' => Carbon::parse('2016-12-06'),
+            'coupon_end_date' => Carbon::parse('2017-08-31'),
+            'coupon_number' => 'GIFTCOLA',
+            'coupon_conditions_count' => 1,
+            'coupon_conditions_first' => null,
+            'deleted_at' => null
+        ]);
+        //4 テストデータ：（キャンペーンと整合性 // 値引き・全員・3000以上・500円OFF・1人1回まで）
+        Coupon::create([
+            'coupons_types_id' => '2',
+            'coupon_name' => '期間限定 500円引きクーポン',
+            'coupon_discount' => 500,
+            'coupon_conditions_money' => 3000,
+            'product_id' => null,
+            'coupon_start_date' => Carbon::parse('2016-08-04'),
+            'coupon_end_date' => Carbon::parse('2016-12-25'),
+            'coupon_number' => '500OFF',
+            'coupon_conditions_count' => 1,
+            'coupon_conditions_first' => null,
+        ]);
+        //5 テストデータ：開催中 （プレゼント・全員対象・2000円以上・十勝産コーンポタージュ・無制限）
+        Coupon::create([
+            'coupons_types_id' => '1',
+            'coupon_name' => '2000円以上で十勝産コーンポタージュ無料',
+            'coupon_discount' => 400,
+            'coupon_conditions_money' => 2000,
+            'product_id' => 5,
+            'coupon_start_date' => Carbon::parse('2014-01-01'),
+            'coupon_end_date' => Carbon::parse('2018-12-31'),
+            'coupon_number' => 'FREEPOTARGE',
+            'coupon_conditions_count' => null,
+            'coupon_conditions_first' => 1, //初回限定
+        ]);
+        //6 テストデータ：終了 （値引き・初回限定・500円以上・コーラ無料・無制限）
         Coupon::create([
             'coupons_types_id' => '2',
             'coupon_name' => 'プレゼントクーポン',
@@ -381,19 +413,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_count' => 3,
             'coupon_conditions_first' => 1,
         ]);
-        Coupon::create([
-            'coupons_types_id' => '1',
-            'coupon_name' => '赤字覚悟！500円無料クーポン',
-            'coupon_discount' => 500,
-            'coupon_conditions_money' => 501,
-            'product_id' => null,
-            'coupon_start_date' => Carbon::today(),
-            'coupon_end_date' => Carbon::today(),
-            'coupon_number' => 'ZAWASPECIAL',
-            'coupon_conditions_count' => 1,
-            'coupon_conditions_first' => null,
-            'deleted_at' => null
-        ]);
+
     }
 }
 
@@ -406,10 +426,10 @@ class CouponsTypesMasterSeeder extends Seeder
         DB::table('coupons_types_master')->delete();
 
         CouponType::create([
-            'coupon_type' => '値引き'
+            'coupon_type' => '値引きクーポン'
         ]);
         CouponType::create([
-            'coupon_type' => 'プレゼント'
+            'coupon_type' => 'プレゼントクーポン'
         ]);
     }
 }
@@ -527,12 +547,66 @@ class ProductsMasterSeeder extends Seeder
             'sales_end_date' => null,
         ]);
         Product::create([
-            'product_name' => 'もち明太グラタン',
+            'product_name' => '【期間限定】もち明太グラタン',
             'price_id' => 10,
             'product_image' => '/images/product/10.jpg',
             'product_text' => 'まろやかな明太子クリームソースとホワイトソースを一緒に味わって頂く商品です。',
             'genre_id' => 2,
-            'sales_start_date' => Carbon::parse('2016-10-10'),
+            'sales_start_date' => Carbon::parse('2016-12-20'),
+            'sales_end_date' => Carbon::parse('2017-03-31'),
+        ]);
+        Product::create([
+            'product_name' => '【期間限定】越後産ズワイガニのご馳走ピザ',
+            'price_id' => 11,
+            'product_image' => '/images/product/11.jpg',
+            'product_text' => '越後産のズワイガニをふんだんに使用したご馳走ピザです。',
+            'genre_id' => 1,
+            'sales_start_date' => Carbon::parse('2016-12-01'),
+            'sales_end_date' => Carbon::parse('2017-03-30'),
+        ]);
+        Product::create([
+            'product_name' => 'ミートスペシャル',
+            'price_id' => 12,
+            'product_image' => '/images/product/12.jpg',
+            'product_text' => 'トマト・クリームソースに、３種類のウインナーをトッピング。飽きのこないシンプルな味に仕上げました。',
+            'genre_id' => 1,
+            'sales_start_date' => Carbon::parse('2016-12-10'),
+            'sales_end_date' => null,
+        ]);
+        Product::create([
+            'product_name' => 'アスパラゴールデン',
+            'price_id' => 13,
+            'product_image' => '/images/product/13.jpg',
+            'product_text' => '光輝くアスパラを、程よい柔らかさに焼き上げました。トマト・ベーコンとの相性は抜群です。',
+            'genre_id' => 1,
+            'sales_start_date' => Carbon::parse('2016-12-10'),
+            'sales_end_date' => null,
+        ]);
+        Product::create([
+            'product_name' => 'ホワイトモッツァレラ',
+            'price_id' => 14,
+            'product_image' => '/images/product/14.jpg',
+            'product_text' => '北海道産モッツァレラチーズに、イベリコ豚のスライスをトッピング。',
+            'genre_id' => 1,
+            'sales_start_date' => Carbon::parse('2016-12-10'),
+            'sales_end_date' => null,
+        ]);
+        Product::create([
+            'product_name' => '海のミックスコラボ',
+            'price_id' => 15,
+            'product_image' => '/images/product/15.jpg',
+            'product_text' => '海の幸をふんだんに使用した、シーフードずきにはたまらない一品です。',
+            'genre_id' => 1,
+            'sales_start_date' => Carbon::parse('2016-12-10'),
+            'sales_end_date' => null,
+        ]);
+        Product::create([
+            'product_name' => 'ミックスパーティー',
+            'price_id' => 16,
+            'product_image' => '/images/product/16.jpg',
+            'product_text' => '子供から大人まで幅広い年代の方に支持される、大人気ミックスピザです。',
+            'genre_id' => 1,
+            'sales_start_date' => Carbon::parse('2016-12-10'),
             'sales_end_date' => null,
         ]);
     }
@@ -616,6 +690,51 @@ class ProductsPricesMasterSeeder extends Seeder
             'price_change_enddate' => null,
             'employee_id' => 3,
         ]);
+        //冬限定　ズワイガニのご馳走ピザ
+        ProductPrice::create([
+            'product_id' => 11,
+            'product_price' => '2480',
+            'price_change_startdate' => Carbon::parse('2016-12-01'),
+            'price_change_enddate' => Carbon::parse('2016-03-30'),
+            'employee_id' => 3,
+        ]);
+        //ミートスペシャル
+        ProductPrice::create([
+            'product_id' => 12,
+            'product_price' => '2740',
+            'price_change_startdate' => Carbon::parse('2016-12-01'),
+            'price_change_enddate' => null,
+            'employee_id' => 3,
+        ]);
+        //アスパラゴールデン
+        ProductPrice::create([
+            'product_id' => 13,
+            'product_price' => '2100',
+            'price_change_startdate' => Carbon::parse('2016-12-01'),
+            'price_change_enddate' => null,
+            'employee_id' => 3,
+        ]);
+        ProductPrice::create([
+            'product_id' => 14,
+            'product_price' => '2980',
+            'price_change_startdate' => Carbon::parse('2016-12-01'),
+            'price_change_enddate' => null,
+            'employee_id' => 3,
+        ]);
+        ProductPrice::create([
+            'product_id' => 15,
+            'product_price' => '3200',
+            'price_change_startdate' => Carbon::parse('2016-12-01'),
+            'price_change_enddate' => null,
+            'employee_id' => 3,
+        ]);
+        ProductPrice::create([
+            'product_id' => 16,
+            'product_price' => '2600',
+            'price_change_startdate' => Carbon::parse('2016-12-01'),
+            'price_change_enddate' => null,
+            'employee_id' => 3,
+        ]);
     }
 }
 
@@ -627,11 +746,19 @@ class StatesMasterSeeder extends Seeder
     {
         DB::table('states_master')->delete();
 
+        //1 未だ
         State::create([
             'state_name' => '未完了'
         ]);
+
+        //2 完了
         State::create([
             'state_name' => '完了'
+        ]);
+
+        //3 破棄
+        State::create([
+            'state_name' => '破棄'
         ]);
 
     }
@@ -645,36 +772,67 @@ class OrdersMasterSeeder extends Seeder
     {
         DB::table('orders_master')->delete();
 
+        $orderDate = Carbon::today()->subDays(10);
+        $baseDate = Carbon::today();
+
+        // WEB会員からの注文（クーポンなし）
+        for($i = 1; $i<= 10; $i++){
+            Order::create([
+                'order_date' => $orderDate->addHours($i),
+                'order_appointment_date' => $baseDate->addHours($i),
+                'coupon_id' => null,
+                'state_id' => rand(1,3),
+                'user_id' => rand(7,20),
+                'employee_id' => NULL,
+            ]);
+        }
+
+        // 電話会員からの注文（クーポンなし）
+        for($i = 1; $i<= 10; $i++){
+            Order::create([
+                'order_date' => $orderDate->addHours($i)->addMinutes(30),
+                'order_appointment_date' => $baseDate->addHours($i)->addMinutes(30),
+                'coupon_id' => null,
+                'state_id' => rand(1,3),
+                'user_id' => rand(7,20),
+                'employee_id' => rand(1,6),
+            ]);
+        }
+
+        //21 クーポン1 使用時（商品ID4 かつ 2000円以上）
         Order::create([
             'order_date' => Carbon::now(),
             'order_appointment_date' => Carbon::tomorrow(),
             'coupon_id' => 1,
             'state_id' => 1,
-            'user_id' => 4,
+            'user_id' => 8,
             'employee_id' => NULL,
         ]);
+        //22 クーポン2 使用時（5000円以上）
         Order::create([
             'order_date' => Carbon::now(),
             'order_appointment_date' => Carbon::tomorrow(),
             'coupon_id' => null,
             'state_id' => 1,
-            'user_id' => 5,
+            'user_id' => 10,
             'employee_id' => NULL,
         ]);
+        //23 クーポン3 使用時（商品ID7 かつ 2500円以上）
         Order::create([
             'order_date' => Carbon::now(),
             'order_appointment_date' => Carbon::tomorrow(),
             'coupon_id' => null,
             'state_id' => 1,
-            'user_id' => 6,
+            'user_id' => 3,
             'employee_id' => NULL,
         ]);
+        //24 クーポン5 使用時（商品ID5 かつ 2000円以上）
         Order::create([
             'order_date' => Carbon::now(),
             'order_appointment_date' => Carbon::tomorrow(),
             'coupon_id' => null,
             'state_id' => 1,
-            'user_id' => 4,
+            'user_id' => 7,
             'employee_id' => NULL,
         ]);
         Order::create([
@@ -696,53 +854,68 @@ class OrdersDetailsTableSeeder extends Seeder
     {
         DB::table('orders_details_table')->delete();
 
+
+        // WEB会員からの注文 + 電話会員からの注文（クーポンなし）
+        // orders_masterの注文IDと整合性を保っています
+        for($i = 1; $i<= 20; $i++){
+            $orderCnt = rand(1,5);
+            $randomCnt = rand(0,4);
+            for($k = 1; $k <= $orderCnt; $k++){
+                OrderDetail::create([
+                    'id' => $i,
+                    'price_id' => $k+$randomCnt,
+                    'number' => rand(1,7),
+                ]);
+           }
+        }
+
         OrderDetail::create([
-            'id' => 1,
+            'id' => 21,
             'price_id' => 1,
             'number' => 1,
         ]);
         OrderDetail::create([
-            'id' => 1,
+            'id' => 21,
             'price_id' => 2,
             'number' => 2,
         ]);
         OrderDetail::create([
-            'id' => 1,
+            'id' => 21,
             'price_id' => 3,
             'number' => 3,
         ]);
         OrderDetail::create([
-            'id' => 2,
+            'id' => 22,
             'price_id' => 4,
             'number' => 3,
         ]);
         OrderDetail::create([
-            'id' => 2,
+            'id' => 22,
             'price_id' => 7,
             'number' => 3,
         ]);
         OrderDetail::create([
-            'id' => 3,
+            'id' => 23,
             'price_id' => 8,
             'number' => 3,
         ]);
         OrderDetail::create([
-            'id' => 4,
+            'id' => 24,
             'price_id' => 1,
             'number' => 3,
         ]);
         OrderDetail::create([
-            'id' => 4,
+            'id' => 24,
             'price_id' => 2,
             'number' => 3,
         ]);
         OrderDetail::create([
-            'id' => 5,
+            'id' => 25,
             'price_id' => 1,
             'number' => 3,
         ]);
         OrderDetail::create([
-            'id' => 5,
+            'id' => 25,
             'price_id' => 2,
             'number' => 3,
         ]);
@@ -757,47 +930,61 @@ class CampaignesMasterSeeder extends Seeder
     {
         DB::table('campaigns_master')->delete();
 
+        // 3000円以上で500円OFF
         Campaign::create([
-            'campaign_title' => '500円引きクーポン',
+            'campaign_title' => '12月末まで！500円OFFキャンペーン',
             'campaign_banner' => '/images/campaign_banner/1.jpg',
             'campaign_image' => '/images/campaign/1.jpg',
-            'campaign_text' => '期間限定8月４日〜12月25日までおひとり様一回限り使用可能です。3000円以上お買い上げのお客様に合計金額より500円引き！',
-            'campaign_note' => 'テキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいりますテキストがはいります',
-            'campaign_subject' => '全ユーザー対象',
-            'campaign_start_day' => Carbon::today(),
-            'campaign_end_day' => null,
+            'campaign_text' => '3000円以上ご注文の際、クーポンコードのご入力で500円OFF',
+            'campaign_note' => 'ご注文の際、クーポンコード「500OFF」をご入力ください。お一人様１回までご利用いただけます。',
+            'campaign_subject' => '全会員',
+            'campaign_start_day' => Carbon::parse('2016-08-04'),
+            'campaign_end_day' => Carbon::parse('2017-12-25'),
         ]);
+        // 2000円以上で焼きたてポテト無料
         Campaign::create([
-            'campaign_title' => 'ポテト無料クーポン！',
+            'campaign_title' => '名脇役！焼きたてポテト無料キャンペーン',
             'campaign_banner' => '/images/campaign_banner/2.jpg',
             'campaign_image' => '/images/campaign/2.jpg',
-            'campaign_text' => '期間限定2017年10月18日までおひとり様一回限り使用可能です。2000円以上お買い上げのお客様にポテト一つ無料で差し上げます！',
-            'campaign_note' => 'おひとり様一回限り有効です',
-            'campaign_subject' => '全ユーザー対象',
-            'campaign_start_day' => Carbon::today(),
-            'campaign_end_day' => null,
+            'campaign_text' => '2000円以上ご注文の祭、クーポンコードのご入力で「焼きたてポテト」を無料プレゼント',
+            'campaign_note' => 'ご注文の際、「焼きたてポテト」をカートに入れた状態でクーポンコード「GIFTPOTATO」をご入力ください。お一人様１回までご利用いただけます。',
+            'campaign_subject' => '全会員',
+            'campaign_start_day' => Carbon::parse('2016-12-01'),
+            'campaign_end_day' => Carbon::parse('2017-10-18'),
         ]);
+        // 5000円以上で1000円OFF
         Campaign::create([
-            'campaign_title' => '1000円引きクーポン',
+            'campaign_title' => '2017年ロケットパーティー応援キャンペーン',
             'campaign_banner' => '/images/campaign_banner/3.jpg',
             'campaign_image' => '/images/campaign/3.jpg',
-            'campaign_text' => '5000円以上購入のお客様限定で、合計金額より1000円引き！',
-            'campaign_note' => '秋限定です。',
-            'campaign_subject' => '全ユーザー対象',
-            'campaign_start_day' => Carbon::today(),
-            'campaign_end_day' => null,
+            'campaign_text' => '5000円以上ご注文の祭、クーポンコードのご入力で1000円OFF',
+            'campaign_note' => 'ご注文の際、クーポンコード「1000OFF」をご入力ください。お一人様１回までご利用いただけます。',
+            'campaign_subject' => '全会員',
+            'campaign_start_day' => Carbon::parse('2016-12-07'),
+            'campaign_end_day' => Carbon::parse('2017-06-07'),
         ]);
+        // 2500円以上でコーラ1本無料
         Campaign::create([
-            'campaign_title' => 'コーラ一本無料クーポン',
+            'campaign_title' => 'コーラで盛り上がろう！キャンペーン',
             'campaign_banner' => '/images/campaign_banner/4.jpg',
             'campaign_image' => '/images/campaign/4.jpg',
-            'campaign_text' => '2500円以上購入のお客様限定でおひとり様一回限り、コーラ一本無料で差し上げます！',
-            'campaign_note' => 'おひとり様一回限り有効です',
-            'campaign_subject' => '全ユーザー対象',
-            'campaign_start_day' => Carbon::today(),
-            'campaign_end_day' => null,
+            'campaign_text' => '2500円以上ご注文の祭、クーポンコードのご入力でコーラ1本無料',
+            'campaign_note' => 'ご注文の際、カートに「コーラ」を入れた状態でクーポンコード「GIFTCOLA」をご入力ください。お一人様１回までご利用いただけます。',
+            'campaign_subject' => '全会員',
+            'campaign_start_day' => Carbon::parse('2016-12-07'),
+            'campaign_end_day' => Carbon::parse('2017-08-31'),
         ]);
-
+        // お正月フェア開催中
+        Campaign::create([
+            'campaign_title' => '冬フェア開催中',
+            'campaign_banner' => '/images/campaign_banner/4.jpg',
+            'campaign_image' => '/images/campaign/4.jpg',
+            'campaign_text' => '冬限定メニューが続々登場！冬の味覚をお楽しみ下さい！',
+            'campaign_note' => 'スタッフ一押しの越後産ズワイガニをふんだんに使用したピザが登場しています。ぜひご確認ください！',
+            'campaign_subject' => null,
+            'campaign_start_day' => Carbon::parse('2016-12-01'),
+            'campaign_end_day' => Carbon::parse('2017-03-30'),
+        ]);
 
     }
 

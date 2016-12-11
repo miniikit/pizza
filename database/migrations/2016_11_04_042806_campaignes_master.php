@@ -20,7 +20,7 @@ class CampaignesMaster extends Migration
           $table->string('campaign_image',50); //キャンペーン画像
           $table->text('campaign_text');  //キャンペーン内容文
           $table->text('campaign_note');  //キャンペーン注意事項
-          $table->string('campaign_subject'); //キャンペーン対象者
+          $table->string('campaign_subject')->nullable(); //キャンペーン対象者
           $table->dateTime('campaign_start_day'); //キャンペーン開始日
           $table->dateTime('campaign_end_day')->nullable(); //キャンペーン終了日
           $table->timestamps(); //登録日時・更新日時
