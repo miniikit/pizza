@@ -118,8 +118,8 @@
                 <h1>注文履歴</h1>
                 <table class="table table-bordered">
                     <tr>
-                        <th>注文ID</th>
                         <th>注文日時</th>
+                        <th>配達日時</th>
                         <th>注文状況</th>
                         <th>商品名</th>
                         <th>個数</th>
@@ -127,8 +127,8 @@
                     </tr>
                     @foreach($orders as $order)
                         <tr>
-                            <td>{{ $order->id }}</td>
-                            <td>{{ $order->order_date }}</td>
+                            <td>{{ \Carbon\Carbon::parse($order->order_date)->format('Y年m月d日 H時i分') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($order->order_appointment_date)->format('Y年m月d日 H時i分') }}</td>
                             <td>{{ $order->state_name }}</td>
                             <td>{{ $order->product_name }}</td>
                             <td>{{ $order->number }}</td>
