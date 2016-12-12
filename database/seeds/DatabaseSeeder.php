@@ -777,11 +777,28 @@ class OrdersMasterSeeder extends Seeder
 
         // WEB会員からの注文（クーポンなし）
         for($i = 1; $i<= 10; $i++){
+
+            //配達希望日時
+            $apointment_date = $baseDate->addHours($i);
+
+            //状態ID（もし、配達希望日時が過去であれば、「完了」または「キャンセル」にセット
+            if($apointment_date <= $baseDate){
+                $state_id = rand(1,2);
+
+            //配達希望日が未来である
+            }else{
+                //状態を、1または3に設定する。（１は未完了・３はキャンセル）
+                $state_id = rand(1,3);
+                if($state_id == 2){
+                    $state_id = 1;
+                }
+            }
+
             Order::create([
                 'order_date' => $orderDate->addHours($i),
-                'order_appointment_date' => $baseDate->addHours($i),
+                'order_appointment_date' => $apointment_date,
                 'coupon_id' => null,
-                'state_id' => rand(1,3),
+                'state_id' => $state_id,
                 'user_id' => rand(7,20),
                 'employee_id' => NULL,
             ]);
@@ -789,11 +806,28 @@ class OrdersMasterSeeder extends Seeder
 
         // 電話会員からの注文（クーポンなし）
         for($i = 1; $i<= 10; $i++){
+
+            //配達希望日時
+            $apointment_date = $baseDate->addHours($i);
+
+            //状態ID（もし、配達希望日時が過去であれば、「完了」または「キャンセル」にセット
+            if($apointment_date <= $baseDate){
+                $state_id = rand(1,2);
+
+            //配達希望日が未来である
+            }else{
+                //状態を、1または3に設定する。（１は未完了・３はキャンセル）
+                $state_id = rand(1,3);
+                if($state_id == 2){
+                    $state_id = 1;
+                }
+            }
+
             Order::create([
                 'order_date' => $orderDate->addHours($i)->addMinutes(30),
                 'order_appointment_date' => $baseDate->addHours($i)->addMinutes(30),
                 'coupon_id' => null,
-                'state_id' => rand(1,3),
+                'state_id' => $state_id,
                 'user_id' => rand(7,20),
                 'employee_id' => rand(1,6),
             ]);
