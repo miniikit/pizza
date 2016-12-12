@@ -66,18 +66,37 @@ var app = new Vue({
 
         destroy: function () {
 
+            var loading = document.querySelector('#loading');
+            loading.style.display = 'block';
+
             this.$http.post('/pizzzzza/order/destroy',this.detail.id).then(function (response) {
 
 
                 this.orders.pop(this.order_id);
                 this.detail = this.orders[0];
 
-                this.deletedOrderAlert();
+
+                var self = this;
+
+                setTimeout(function () {
+
+                    self.getOrders();
+
+                    loading.style.display = 'none';
+                    self.deletedOrderAlert();
+
+                },2000);
+
+
 
             });
         },
 
         success: function () {
+
+            var loading = document.querySelector('#loading');
+            loading.style.display = 'block';
+
 
             this.$http.post('/pizzzzza/order/success',this.detail.id).then(function (response) {
 
@@ -85,7 +104,16 @@ var app = new Vue({
                 this.orders.pop(this.order_id);
                 this.detail = this.orders[0];
 
-                this.successOrderAlert();
+                var self = this;
+
+                setTimeout(function () {
+
+                    self.getOrders();
+
+                    loading.style.display = 'none';
+                    self.successOrderAlert();
+
+                },2000);
 
             });
 
