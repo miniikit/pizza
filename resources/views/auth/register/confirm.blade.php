@@ -18,7 +18,7 @@
     <h1>新規会員登録確認</h1>
   </div>
     <div class="row">
-             <form role="form" method="POST" action="{{ url('/register') }}">
+             <form role="form" method="POST" action="{{ url('/register/complete') }}">
              {{ csrf_field() }}
              <p>下記の内容で通りに登録します。</p>
                     
