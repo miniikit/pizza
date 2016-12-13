@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call('OrdersMasterSeeder');
         $this->call('OrdersDetailsTableSeeder');
         $this->call('CouponsMasterSeeder');
-        $this->call('CampaignesMasterSeeder');
+        $this->call('CampaignsMasterSeeder');
         $this->call('UsersSeeder');
         $this->call('EmployeeMasterSeeder');
 
@@ -959,7 +959,7 @@ class OrdersDetailsTableSeeder extends Seeder
 }
 
 //キャンペーン
-class CampaignesMasterSeeder extends Seeder
+class CampaignsMasterSeeder extends Seeder
 {
 
     public function run()

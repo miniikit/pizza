@@ -32,7 +32,7 @@ class AdminCampaignService
         //
         //  DBにInsert
         //
-            $id = DB::table('campaignes_master')->insertGetId([""]);
+            $id = DB::table('campaigns_master')->insertGetId([""]);
 
 
             dd($request->all());
