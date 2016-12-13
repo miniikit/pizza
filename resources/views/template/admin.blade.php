@@ -34,7 +34,13 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/pizzzzza/order">注文確認</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">注文確認<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/pizzzzza/order/history">注文履歴</a></li>
+                    </ul>
+                </li>
+
                 <li><a href="/pizzzzza/order/accept/input">電話注文</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">クーポン<span class="caret"></span></a>
@@ -86,6 +92,7 @@
                 <li><a>ユーザー名 : {{ Auth::user()->name }}</a></li>
                 <li><a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">ログアウト</a></li>
                 <li><form id="logout-form" action="{{ url('/pizzzzza/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form></li>
+                <li><a href="/">顧客側TOP</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
