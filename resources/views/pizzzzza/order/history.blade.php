@@ -16,7 +16,6 @@
     <h1>注文履歴</h1>
 
     <div class="form-group table-responsive">
-
         @if (count($errors) > 0)
             <div class="alert alert-danger">
                 <ul>
@@ -53,6 +52,9 @@
             @endforeach
             </tbody>
         </table>
+        <div class="ac">
+            {{$orders->links()}}
+        </div>
     </div>
 @endsection
 

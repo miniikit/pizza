@@ -24,7 +24,7 @@ class AdminController extends Controller
 
     public function history() {
 
-        $orders = Order::with('user','coupon','state','employee.user','detail.productPrice.product.genre')->orderBy('order_date','desc')->get();
+        $orders = Order::with('user','coupon','state','employee.user','detail.productPrice.product.genre')->orderBy('order_date','desc')->paginate(20);
 
         return view('pizzzzza.order.history',compact('orders'));
 
