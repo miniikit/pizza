@@ -25,7 +25,6 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
     <h1 class="text-center title">新規会員登録</h1>
 </div>
 <div class="row">
-    <div class="col-md-12">
         <form role="form" method="POST" action="{{ url('/register/confirm') }}">
         {{ csrf_field() }}
     <font class="red">※</font>の項目は必ず入力してください
@@ -37,13 +36,8 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                     <label for="name">氏名<font class="red">※</font></label>
                 </th>
                     <td class="form-inline">
-                      <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                      <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
                       <span class="example">例)情報太郎</span>
-                         @if ($errors->has('name'))
-                               <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                               </span>
-                         @endif
                     </td>
               </div>
         </tr>
@@ -53,13 +47,8 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                     <label for="kana">カナ<font class="red">※</font></label>
                 </th>
                     <td class="form-inline">
-                      <input id="kana" type="text" class="form-control" name="kana" value="{{ old('name') }}"  required autofocus>
+                      <input id="kana" type="text" class="form-control" name="kana" value="{{ old('name') }}">
                       <span class="example">例)ジョウホウタロウ</span>
-                         @if ($errors->has('kana'))
-                               <span class="help-block">
-                                    <strong>{{ $errors->first('kana') }}</strong>
-                               </span>
-                         @endif
                     </td>
               </div>
         </tr>
@@ -69,13 +58,8 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                     <label for="email">Eメールアドレス<font class="red">※</font></label>
                 </th>
                     <td class="form-inline">
-                       <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                       <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
                        <span class="example">例)oic@example.com</span>
-                         @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                         @endif
                     </td>
               </div>
         </tr>
@@ -85,13 +69,8 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                     <label for="password">パスワード<font class="red">※</font></label>
                 </th>
                     <td class="form-inline">
-                       <input id="password" type="password" class="form-control" name="password" required>
+                       <input id="password" type="password" class="form-control" name="password">
                        <span class="example">数字とアルファベット大文字を一文字ずつ、6文字以上入力してください。</span>
-                          @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                          @endif
                     </td>
              </div>
         </tr>
@@ -101,13 +80,9 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                     <label for="password-confirm">確認パスワード<font class="red">※</font></label>
                 </th>
                     <td class="form-inline">
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
                         <span class="example">確認の為、もう一度入力してください。</span>
-                           @if ($errors->has('password_confirmation'))
-                                 <span class="help-block">
-                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                 </span>
-                           @endif
+
                      </td>
               </div>
         </tr>
@@ -177,7 +152,7 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                             <label for="phone">電話番号<font class="red">※</font></label>
                         </th>
                             <td class="form-inline">
-                                <input id="phone" type="text" class="form-control" name="phone" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')" maxlength="11" value="{{ old('phone') }}" required>
+                                <input id="phone" type="text" class="form-control" name="phone" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')" maxlength="11" value="{{ old('phone') }}">
                                 <span class="example">例)0663400017　のようにハイフンを付けずに入力してください。</span>
                             </td>
                       </div>
@@ -199,17 +174,13 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                                   <label for="birthday">誕生日<font class="red">※</font></label>
                               </th>
                                 <td class="form-inline">
-                                   <input type="date" class="form-control" name="birthday" value="{{ old('birthday') }}" required>
+                                   <input type="date" class="form-control" name="birthday" value="{{ old('birthday') }}">
                                    <span class="example">西暦で入力してください</span>
                                 </td>
                            </div>
                        </tr>
                 </tbody>
          </table>
-         
-         <div class="form-group{{ $errors->has('authority_id') ? ' has-error' : '' }}">
-              <input type="hidden" name="authority_id" value="3">
-         </div>
               <div class="text-center">
                    <button type="submit" class="btn btn-primary">次へ</button>
               </div>
