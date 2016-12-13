@@ -37,7 +37,7 @@
                                             <p class="text-center space name">{{ $product->product_name }}</p>
                                             <div class="text-center space">{{ $product->product_price }}円</div>
                                             <div class="text-center space">
-                                                <select name="product_num" id="{{ $product->id }}">
+                                                <select name="product_num" id="{{ $product->product_name }}" class="{{ $product->genre_name }}">
                                                     @for($i = 0; $i<= 10; $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
@@ -61,7 +61,7 @@
                                             <p class="text-center space name prduct_name">{{ $product->product_name }}</p>
                                             <div class="text-center space">{{ $product->product_price }}円</div>
                                             <div class="text-center space">
-                                                <select name="product_num" id="{{ $product->id }}">
+                                                <select name="product_num" id="{{ $product->product_name }}" class="{{ $product->genre_name }}">
                                                     @for($i = 0; $i<= 10; $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
@@ -86,7 +86,7 @@
                                             <p class="text-center space name">{{ $product->product_name }}</p>
                                             <div class="text-center space">{{ $product->product_price }}円</div>
                                             <div class="text-center space">
-                                                <select name="product_num" id="{{ $product->id }}">
+                                                <select name="product_num" id="{{ $product->product_name }}" class="{{ $product->genre_name }}">
                                                     @for($i = 0; $i<= 10; $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
@@ -126,6 +126,7 @@
             <tr>
                 <th>商品</th>
                 <th>数量</th>
+                <th>ジャンル</th>
             </tr>
             </thead>
             <tbody id="cart">
@@ -164,11 +165,12 @@
             $('select').change(function() {
 
                 //選択したvalue値を変数に格納
-                var val = $(this).val();
-                var id = $(this).attr("id");
+                var num = $(this).val();
+                var name = $(this).attr("id");
+                var genre = $(this).attr("class");
 
                 //選択したvalue値をp要素に出力
-                $('#cart').append('<tr><td>' + val + '</td><td>' + val + '</td></tr>');
+                $('#cart').append('<tr><td>' + name + '</td><td>' + num + '</td><td>' + genre + '</tr>');
             });
         });
 
@@ -177,6 +179,8 @@
         {
             $('select').change(function()
             {
+
+
                 {{-- トークンをmetaに設定し、送る --}}
                 $.ajaxSetup({
                     headers: {
