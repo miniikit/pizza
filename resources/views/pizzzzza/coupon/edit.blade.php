@@ -1,6 +1,6 @@
 @extends('template.admin')
 
-@section('title', '値引クーポン編集画面')
+@section('title', 'クーポン編集')
 
 @section('css')
     <link rel="stylesheet" href="/css/pizzzzza/menu/index.css" media="all" title="no title">
@@ -10,7 +10,7 @@
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
         @if(is_null($coupon->deleted_at))
-            <li><a href="/pizzzzza/coupon">クーポン一覧</a></li>
+            <li><a href="/pizzzzza/coupon">開催中クーポン一覧</a></li>
         @else
             <li><a href="/pizzzzza/coupon">クーポン履歴</a></li>
         @endif

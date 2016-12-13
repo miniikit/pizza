@@ -9,12 +9,12 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
-        <li class="active">クーポン一覧</li>
+        <li class="active">開催中クーポン一覧</li>
     </ol>
 @endsection
 
 @section('main')
-    <h1>開催中クーポン</h1>
+    <h1>開催中クーポン一覧</h1>
 
     <div class="row">
         <table class="table" >

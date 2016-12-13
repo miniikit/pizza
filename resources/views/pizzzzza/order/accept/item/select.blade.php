@@ -1,6 +1,6 @@
 @extends('template.admin')
 
-@section('title', '電話注文')
+@section('title', '商品選択')
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
@@ -10,7 +10,7 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
-        <li><a href="/pizzzzza/order/accept/input">電話番号入力</a></li>
+        <li><a href="/pizzzzza/order/accept/input">電話注文受付</a></li>
         <li><a href="/pizzzzza/order/accept/customer/{{$id}}/show">お客様情報確認</a></li>
         <li class="active">商品選択</li>
     </ol>
