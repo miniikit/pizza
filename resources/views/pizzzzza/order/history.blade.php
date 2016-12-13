@@ -1,6 +1,6 @@
 @extends('template/admin')
 
-@section('title', 'メニュー一覧')
+@section('title', '注文履歴')
 
 @section('css')
 @endsection

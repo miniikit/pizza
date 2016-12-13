@@ -1,6 +1,6 @@
 @extends('template/admin')
 
-@section('title', '従業員追加画面')
+@section('title', '従業員追加')
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
