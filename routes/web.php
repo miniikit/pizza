@@ -77,7 +77,7 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::post('/pizzzzza/employee/{id}/delete', 'EmployeesController@destroy'); //従業員削除
     Route::get('/pizzzzza/employee/{id}/edit', 'EmployeesController@edit'); //従業員編集
     Route::get('/pizzzzza/employee/add', 'EmployeesController@add'); //従業員追加
-    Route::post('/pizzzzza/employee/add/store', 'EmployeesController@store'); //従業員追加処理
+    Route::post('/pizzzzza/employee/store', 'EmployeesController@store'); //従業員追加処理
     Route::post('/pizzzzza/employee/{id}/update', 'EmployeesController@update'); //従業員更新処理
 
 //クーポン

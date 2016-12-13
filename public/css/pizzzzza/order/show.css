@@ -1,0 +1,14 @@
+.title {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+    /* background-color: #5a5a5a; */
+    padding: 10px;
+    color: #5a5a5a;
+    letter-spacing: 2px;
+    border-bottom: solid 4px;
+}
+
+.table th {
+    width: 40%;
+}
