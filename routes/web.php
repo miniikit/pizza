@@ -81,7 +81,6 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::post('/pizzzzza/employee/{id}/update', 'EmployeesController@update'); //従業員更新処理
 
 //クーポン
-    Route::get('/pizzzzza/coupon/menu','CouponsController@couponMenu')->name('menuCoupon'); //クーポンメニュー
     Route::get('/pizzzzza/coupon/add','CouponsController@couponNew'); //クーポン種別選択ページ
     Route::get('/pizzzzza/coupon','CouponsController@couponNowList'); //開催中クーポン一覧ページ
     Route::get('/pizzzzza/coupon/{id}/show', 'CouponsController@show')->name('showCoupon'); //クーポン詳細
@@ -94,16 +93,14 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::post('/pizzzzza/coupon/add/gift/do','CouponsController@couponNewGiftDo'); //クーポン追加処理（プレゼント）
     Route::get('/pizzzzza/coupon/history','CouponsController@couponHistory'); //過去のクーポン一覧ページ
 
-/*  おそらく、コンフリクトのもの。不要と思われる(12/7 mini 様子見中
-    Route::get('/pizzzzza/employee', 'EmployeesController@index')->name('employees'); //従業員一覧
-    Route::get('/pizzzzza/employee/history', 'EmployeesController@history')->name('historyEmployees'); //従業員一覧
-    Route::get('/pizzzzza/employee/{id}/show', 'EmployeesController@show'); //従業員詳細
-    Route::get('/pizzzzza/employee/{id}/edit', 'EmployeesController@edit'); //従業員編集
-    Route::post('/pizzzzza/employee/{id}/delete', 'EmployeesController@destroy'); //従業員削除
-    Route::post('/pizzzzza/employee/{id}/update', 'EmployeesController@update'); //従業員更新処理
-    Route::get('/pizzzzza/employee/add', 'EmployeesController@add'); //従業員追加
-    Route::post('/pizzzzza/employee/store', 'EmployeesController@store'); //従業員追加処理
-*/
+//従業員用キャンペーン
+    Route::get('/pizzzzza/campaign/','AdminCampaignsController@index')->name('adminCampIndex');    // 管理者クーポン一覧
+    Route::get('/pizzzzza/campaign/{id}/show','AdminCampaignsController@show')->name('adminCampShow');    // 管理者クーポン詳細
+    Route::get('/pizzzzza/campaign/{id}/add','AdminCampaignsController@add');   // 管理者クーポン追加
+    Route::get('/pizzzzza/campaign/{id}/update','AdminCampaignsController@update');   // 管理者クーポン更新
+    Route::get('/pizzzzza/campaign/{id}/delete','AdminCampaignsController@delete');   // 管理者クーポン削除
+    Route::get('/pizzzzza/campaign/store','AdminCampaignsController@store');   // 管理者クーポン処理
+    Route::get('/pizzzzza/campaign/history','AdminCampaignsController@history');   // 管理者クーポン履歴
 
 //メニュー
     Route::get('/pizzzzza/menu', 'AdminMenusController@index')->name('AdminMenu'); //従業員用メニュー一覧
