@@ -131,7 +131,7 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                                <select class="form-control w17" name="pref">
                                   <option>選択してください</option>
                                     @foreach($prefs as $index => $name)
-                                        <option value="{{ $index }}">{{$name}}</option>
+                                        <option value="{{ $name }}">{{$name}}</option>
                                     @endforeach
                                </select>
                                <span class="example">例)大阪府</span>
@@ -206,9 +206,10 @@ katakana : true  //true：カタカナ、false：ひらがな（デフォルト�
                        </tr>
                 </tbody>
          </table>
+         
          <div class="form-group{{ $errors->has('authority_id') ? ' has-error' : '' }}">
               <input type="hidden" name="authority_id" value="3">
-          </div>
+         </div>
               <div class="text-center">
                    <button type="submit" class="btn btn-primary">次へ</button>
               </div>

@@ -101,7 +101,7 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        return redirect('/register/complete');
+        return view('register/complete');
     }
 
     public function complete()
