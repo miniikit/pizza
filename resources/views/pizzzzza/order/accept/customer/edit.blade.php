@@ -93,8 +93,8 @@
 
                 </table>
                 <div class="text-center">
-                    <a type="button" class="btn btn-danger btn-lg" href="/pizzzzza/order/accept/customer/{{ $user->id }}/show">戻る</a>
-                    <input id="submit" type="submit" class="btn btn-primary btn-lg" name="editPost" value="更新" onclick="changeData()">
+                    <a type="button" class="btn btn-default btn-sm ml" href="/pizzzzza/order/accept/customer/{{ $user->id }}/show">戻る</a>
+                    <input id="submit" type="submit" class="btn btn-primary btn-sm ml" name="editPost" value="更新" onclick="changeData()">
                 </div>
             </div>
             {{  csrf_field()  }}
