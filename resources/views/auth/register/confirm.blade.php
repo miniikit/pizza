@@ -1,22 +1,13 @@
-@extends('template.auth')
-
-@section('title', '新規登録確認')
-
-@section('css')
-    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
-    <link rel="stylesheet" href="/css/auth/register/index.css" media="all" title="no title">
-@endsection
-
-@section('js')
+@extends('template.auth') @section('title', '新規登録確認') @section('css')
+<link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+<link rel="stylesheet" href="/css/auth/register/index.css" media="all" title="no title"> @endsection @section('js')
 <script type="text/javascript" src="https://ajaxzip3.github.io/ajaxzip3.js" charset="utf-8"></script>
 <script src="/js/common/autokana/jquery.autoKana.js" language="javascript" type="text/javascript"></script>
-@endsection
-
-@section('main')
+@endsection @section('main')
 <div class="container">
-  <div class="text-center">
-    <h1 style="">新規会員登録確認</h1>
-  </div>
+    <div class="text-center">
+        <h1 style="">新規会員登録確認</h1>
+    </div>
     <div class="row">
         <div class="col-md-9 col-md-offset-1">
             <div class="">
@@ -24,9 +15,10 @@
                     <form class="" role="form" method="POST" action="{{ url('/register/complete') }}">
                         {{ csrf_field() }}
                         <div class="">
-                          下記の内容で通りに登録します。<br>
+                            下記の内容で通りに登録します。<br>
                         </div>
                         <table class="table regist_table regist_confirm">
+
                           <tr>
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                           <th>
@@ -145,15 +137,10 @@
      よろしければ、「登録」を押してください。
    </div>
 
-                        <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-lg">
-                                  登録
-                                </button>
-                              </div>
                     </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection
