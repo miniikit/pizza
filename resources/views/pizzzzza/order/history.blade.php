@@ -35,8 +35,7 @@
                 <th style="text-align: center;">氏名</th>
                 <th style="text-align: center;">お届け先</th>
                 <th style="text-align: center;">電話番号</th>
-                <th style="text-align: center;">販売開始日</th>
-                <th style="text-align: center;">販売終了日</th>
+                <th style="text-align: center;">担当者</th>
             </tr>
             </thead>
             <tbody>
@@ -46,8 +45,11 @@
                     <td style="text-align: center;">{{ $order->user->name }}</td>
                     <td style="text-align: center;">{{ $order->user->address1.$order->user->address2.$order->user->address3 }}</td>
                     <td style="text-align: center;">{{ $order->user->phone }}</td>
-                    <td style="text-align: center;">{{ $order->id }}</td>
-                    <td style="text-align: center;">{{ $order->id }}</td>
+                    @if(is_null($order->employee))
+                        <td style="text-align: center;">Web注文</td>
+                    @else
+                        <td style="text-align: center;">{{ $order->employee->user->name }}</td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>
