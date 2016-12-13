@@ -1,6 +1,6 @@
 @extends('template/admin')
 
-@section('title', '従業員管理画面')
+@section('title', '注文詳細')
 
 @section('css')
     <link rel="stylesheet" href="/css/pizzzzza/order/show.css" media="all" title="no title">
@@ -10,7 +10,7 @@
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
         <li><a href="/pizzzzza/order/history">注文履歴</a></li>
-        <li class="active">詳細</li>
+        <li class="active">注文詳細</li>
     </ol>
 @endsection
 

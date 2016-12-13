@@ -1,6 +1,6 @@
 @extends('template/admin')
 
-@section('title', 'メニュー一覧')
+@section('title', '商品履歴')
 
 @section('css')
     <link rel="stylesheet" href="/css/pizzzzza/menu/index.css" media="all" title="no title">
