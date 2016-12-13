@@ -85,8 +85,8 @@
                     </tbody>
                 </table>
                 <div class="text-center">
-                    <input type="submit" class="btn btn-danger btn-lg" name="detailPost" value="戻る">
-                    <input type="submit" class="btn btn-primary btn-lg" name="detailPost" value="注文へ">
+                    <input type="submit" class="btn btn-default btn-lg mr" name="detailPost" value="戻る">
+                    <input type="submit" class="btn btn-primary btn-lg ml" name="detailPost" value="注文へ">
                 </div>
                 <div class="text-right">
                     <input type="submit" class="btn btn-primary btn-lg" name="detailPost" value="編集">
@@ -95,8 +95,9 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
             </form>
         </div>
+
         <div id="status">
-            @if(count($orders) > 0)
+            @if(isset($orderCount))
                 <h1>統計情報</h1>
                 <table class="table table-bordered">
                     <tr>

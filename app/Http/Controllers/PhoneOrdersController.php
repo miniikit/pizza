@@ -70,23 +70,33 @@ class PhoneOrdersController extends Controller
             //累計注文回数
             $orderCount = $phoneOrder->getOrderCount($id);
 
-            //注文情報（価格＋注文＋注文詳細＋商品＋状態マスタの連結）
-            $orders = $phoneOrder->getOrders($id);
+            if($orderCount >= 1) {
 
-            //累計注文金額
-            $orderTotal = $phoneOrder->getOrderTotal($id);
+                //注文情報（価格＋注文＋注文詳細＋商品＋状態マスタの連結）
+                $orders = $phoneOrder->getOrders($id);
 
-            //平均支出金額
-            $orderAvg = $orderTotal / $orderCount;
+                //累計注文金額
+                $orderTotal = $phoneOrder->getOrderTotal($id);
 
-            //クーポン使用総額のカウント
-            $orderCouponTotal = $phoneOrder->getOrderCouponTotal($id);
+                //平均支出金額
+                $orderAvg = $orderTotal / $orderCount;
 
-            return view('pizzzzza.order.accept.customer.show', compact('user','orders','orderCount','orderTotal','orderAvg','orderCouponTotal'));
+                //クーポン使用総額のカウント
+                $orderCouponTotal = $phoneOrder->getOrderCouponTotal($id);
+
+                return view('pizzzzza.order.accept.customer.show', compact('user', 'orders', 'orderCount', 'orderTotal', 'orderAvg', 'orderCouponTotal'));
+
+            }else{
+
+                return view('pizzzzza.order.accept.customer.show', compact('user'));
+
+            }
+
 
         } else {
             return redirect()->route('telSearch');
         }
+
     }
 
     //会員情報編集
@@ -188,12 +198,12 @@ class PhoneOrdersController extends Controller
         //リダイレクト
         if(count($success)>0) {
 
-            Flash::success('会員情報の更新が完了しました。');
+            Flash::success('お届け先情報の更新が完了しました。');
             return redirect()->route('telShow', $id);
 
         }else{
 
-            Flash::danger('会員情報の更新に失敗しました。');
+            Flash::danger('お届け先情報の更新に失敗しました。');
             return redirect()->route('telShow', $id);
         }
 
@@ -220,13 +230,13 @@ class PhoneOrdersController extends Controller
 
         if(count($success) > 0) {
 
-            Flash::success('会員情報の更新が完了しました。');
+            Flash::success('お届け先情報の更新が完了しました。');
 
             return redirect()->route('telShow', $id);
 
         }else{
 
-            Flash::danger('会員情報の更新に失敗しました。');
+            Flash::danger('お届け先情報の更新に失敗しました。');
 
             return redirect()->route('telShow', $id);
         }
@@ -270,14 +280,14 @@ class PhoneOrdersController extends Controller
 
 
         //リダイレクト
-        if(count($id)>0) {
+        if(count($id) >= 1) {
 
-            Flash::success('会員登録が完了しました。');
+            Flash::success('お届け先情報の登録が完了しました。');
             return redirect()->route('telShow', $id);
 
         }else{
 
-            Flash::danger('会員登録が完了しました。');
+            Flash::danger('お届け先情報の登録が完了しました。');
             return redirect()->route('telShow', $id);
 
         }

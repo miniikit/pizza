@@ -177,7 +177,7 @@ class UsersSeeder extends Seeder
             'address3' => null,
             'phone' => str_replace(array('-', 'ー'), '', $faker->phoneNumber),
             'gender_id' => 1,
-            'birthday' => 19960607,
+            'birthday' => null,
             'authority_id' => 3,
         ]);
         //9 テストデータ：電話会員（電話番号が同じ）
@@ -356,7 +356,7 @@ class CouponsMasterSeeder extends Seeder
             'product_id' => null,
             'coupon_start_date' => Carbon::parse('2016-12-06'),
             'coupon_end_date' => Carbon::parse('2017-06-07'),
-            'coupon_number' => '5000OFF',
+            'coupon_number' => '1000OFF',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => 1,
         ]);

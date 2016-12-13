@@ -34,6 +34,14 @@
     margin-top: 30px;
 }
 
+#phone-submit
+{
+    background-color: tomato;
+    border-color: whitesmoke;
+    letter-spacing: 1em;
+    text-indent: 1em;
+}
+
 
 /**
     お客様情報確認ページ
