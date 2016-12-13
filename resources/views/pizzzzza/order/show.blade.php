@@ -33,7 +33,7 @@
                 <tr>
                     @if(is_null($order->coupon))
                         <th class="text-center">クーポン</th>
-                        <td>無し</td>
+                        <td>無</td>
                     @else
                         <th class="text-center">クーポン</th>
                         <td>{{ $order->coupon->coupon_name }}</td>
@@ -53,6 +53,17 @@
             <h2 class="title">顧客情報</h2>
             <table class="table table-bordered">
                 <tbody>
+                @if(is_null($order->user->email))
+                <tr>
+                    <th class="text-center">Web登録</th>
+                    <td>無</td>
+                </tr>
+                @else
+                <tr>
+                    <th class="text-center">Web登録</th>
+                    <td>有</td>
+                </tr>
+                @endif
                 <tr>
                     <th class="text-center">氏名</th>
                     <td>{{ $order->user->name }}</td>
@@ -61,14 +72,18 @@
                     <th class="text-center">フリガナ</th>
                     <td>{{ $order->user->kana }}</td>
                 </tr>
+                @if($order->user->gender)
                 <tr>
                     <th class="text-center">性別</th>
                     <td>{{ $order->user->gender->gender_name }}</td>
                 </tr>
+                @endif
+                @if($order->user->birthday)
                 <tr>
                     <th class="text-center">生年月日</th>
                     <td>{{ \Carbon\Carbon::parse($order->user->birthday)->format('Y年m月d日') }}</td>
                 </tr>
+                @endif
                 <tr>
                     <th class="text-center">郵便番号</th>
                     <td>{{ $order->user->postal }}</td>
@@ -81,10 +96,12 @@
                     <th class="text-center">電話番号</th>
                     <td>{{ $order->user->phone }}</td>
                 </tr>
+                @if($order->user->email)
                 <tr>
                     <th class="text-center">メールアドレス</th>
                     <td>{{ $order->user->email }}</td>
                 </tr>
+                @endif
                 </tbody>
             </table>
         </div>
