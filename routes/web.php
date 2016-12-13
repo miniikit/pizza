@@ -96,9 +96,9 @@ Route::group(['middleware' => ['adminauth']], function () {
 //従業員用キャンペーン
     Route::get('/pizzzzza/campaign/','AdminCampaignsController@index')->name('adminCampIndex');    // 管理者クーポン一覧
     Route::get('/pizzzzza/campaign/{id}/show','AdminCampaignsController@show')->name('adminCampShow');    // 管理者クーポン詳細
-    Route::get('/pizzzzza/campaign/{id}/add','AdminCampaignsController@add');   // 管理者クーポン追加
+    Route::get('/pizzzzza/campaign/add','AdminCampaignsController@add');   // 管理者クーポン追加
     Route::get('/pizzzzza/campaign/{id}/edit','AdminCampaignsController@edit');   // 管理者クーポン編集
-    Route::get('/pizzzzza/campaign/store','AdminCampaignsController@store');   // 管理者クーポン追加処理
+    Route::post('/pizzzzza/campaign/store','AdminCampaignsController@store');   // 管理者クーポン追加処理
     Route::get('/pizzzzza/campaign/{id}/update','AdminCampaignsController@update');   // 管理者クーポン更新処理
     Route::get('/pizzzzza/campaign/{id}/delete','AdminCampaignsController@delete');   // 管理者クーポン削除処理
     Route::get('/pizzzzza/campaign/history','AdminCampaignsController@history');   // 管理者クーポン履歴
