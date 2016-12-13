@@ -40,12 +40,12 @@
             <tbody>
             @foreach ($orders as $order)
                 <tr class="link" data-href="/pizzzzza/order/{{ $order->id }}/show">
-                    <td style="text-align: center;">{{ \Carbon\Carbon::parse( $order->order_date )->format('Y年m月d日 H時i分') }}</td>
+                    <td>{{ \Carbon\Carbon::parse( $order->order_date )->format('Y年m月d日 H時i分') }}</td>
                     <td style="text-align: center;">{{ $order->user->name }}</td>
-                    <td style="text-align: center;">{{ $order->user->address1.$order->user->address2.$order->user->address3 }}</td>
+                    <td>{{ $order->user->address1.$order->user->address2.$order->user->address3 }}</td>
                     <td style="text-align: center;">{{ $order->user->phone }}</td>
                     @if(is_null($order->employee))
-                        <td style="text-align: center;">Web注文</td>
+                        <td style="text-align: center;">Web</td>
                     @else
                         <td style="text-align: center;">{{ $order->employee->user->name }}</td>
                     @endif
