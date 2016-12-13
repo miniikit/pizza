@@ -103,7 +103,7 @@
                         <th>累計注文金額</th>
                         <th>累計注文回数</th>
                         <th>平均注文金額</th>
-                        <th>クーポン使用金額</th>
+                        <th>累計クーポン使用金額</th>
                     </tr>
                     <tr>
                         <td>¥ {{ number_format($orderTotal) }}</td>
@@ -118,8 +118,9 @@
                 <h1>注文履歴</h1>
                 <table class="table table-bordered">
                     <tr>
-                        <th>注文ID</th>
+                        <th>件</th>
                         <th>注文日時</th>
+                        <th>配達日時</th>
                         <th>注文状況</th>
                         <th>商品名</th>
                         <th>個数</th>
@@ -127,8 +128,25 @@
                     </tr>
                     @foreach($orders as $order)
                         <tr>
-                            <td>{{ $order->id }}</td>
-                            <td>{{ $order->order_date }}</td>
+                            {{--  どこまでが１件の注文かを、まとめる処理。  --}}
+                            @if(!isset($order_id))
+                                <?php // 最初だけ実行
+                                    $order_id = 1;
+                                    $order_date = $order->order_date;
+                                ?>
+                            @endif
+                            <td><?php // 注文日時が違えば実行
+                                    if($order->order_date != $order_date){
+                                        $order_id += 1;
+                                    }
+                                    // 毎回実行
+                                    echo $order_id;
+                                    $order_date = $order->order_date;
+                                ?>
+                            </td>
+                            {{--  ここまで　どこまでが１件の注文かをまとめる処理  --}}
+                            <td>{{ \Carbon\Carbon::parse($order->order_date)->format('Y年m月d日 H時i分') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($order->order_appointment_date)->format('Y年m月d日 H時i分') }}</td>
                             <td>{{ $order->state_name }}</td>
                             <td>{{ $order->product_name }}</td>
                             <td>{{ $order->number }}</td>
