@@ -1,6 +1,6 @@
 @extends('template/admin')
 
-@section('title', 'クーポン新規発行')
+@section('title', '値引きクーポン新規発行')
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
