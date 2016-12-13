@@ -1,0 +1,21 @@
+
+/*フォーム*/
+form{
+  margin-bottom: 50px;
+}
+/*テーブル１*/
+.info{
+  margin-bottom: 100px;
+}
+
+/*テーブル２*/
+.status{
+  margin-bottom: 50px;
+}
+
+/*ボタン*/
+.btn-group-lg>.btn, .btn-lg{
+  margin-right: 15px;
+  width: 150px;
+  letter-spacing: 5px;
+}
