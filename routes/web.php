@@ -132,6 +132,7 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::post('/pizzzzza/order/accept/customer/{id}/update/web', 'PhoneOrdersController@updateWeb'); //会員情報編集＞更新処理＞WEB
     Route::get('/pizzzzza/order/accept/customer/input', 'PhoneOrdersController@newCustomer')->name('newCustomer'); //新規登録
     Route::post('/pizzzzza/order/accept/customer/input/add', 'PhoneOrdersController@newCustomerInsert'); //新規登録＞DB追加処理
+    Route::post('/pizzzzza/order/accept/customer/cart','PhoneOrdersController@orderCart'); //商品入力ページ・カート処理
 
 //電話注文　注文処理
     Route::get('/pizzzzza/order/accept/item/{id}/select', 'PhoneOrdersController@orderSelect')->name('telOrderSelect'); //商品入力・選択ページ
