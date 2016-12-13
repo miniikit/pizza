@@ -14,7 +14,7 @@ use App\Http\Requests;
 use App\Campaign;
 use Illuminate\Support\Facades\DB;
 
-class CampaignesController extends Controller
+class CampaignsController extends Controller
 {
     //  キャンペーン一覧ページ
     public function index() {

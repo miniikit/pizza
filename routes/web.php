@@ -52,8 +52,8 @@ Route::group(['middleware' => ['userauth']], function () {
 });
 
 //トピック
-    Route::get('/topic', 'CampaignesController@index');
-    Route::get('/topicdetail', 'CampaignesController@campaignDetail');
+    Route::get('/topic', 'CampaignsController@index');
+    Route::get('/topicdetail', 'CampaignsController@campaignDetail');
 
 // コンタクト
     Route::get('/contact', 'ContactController@index');

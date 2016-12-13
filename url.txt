@@ -84,6 +84,6 @@
 |        | GET|HEAD                       | privacypolicy                               |                      | App\Http\Controllers\PagesController@privacypolicy                     | web                |
 |        | GET|HEAD                       | register                                    |                      | App\Http\Controllers\Auth\RegisterController@showRegistrationForm      | web,guest          |
 |        | POST                           | register                                    |                      | App\Http\Controllers\Auth\RegisterController@register                  | web,guest          |
-|        | GET|HEAD                       | topic                                       |                      | App\Http\Controllers\CampaignesController@index                        | web                |
-|        | GET|HEAD                       | topicdetail                                 |                      | App\Http\Controllers\CampaignesController@campaignDetail               | web                |
+|        | GET|HEAD                       | topic                                       |                      | App\Http\Controllers\CampaignsController@index                        | web                |
+|        | GET|HEAD                       | topicdetail                                 |                      | App\Http\Controllers\CampaignsController@campaignDetail               | web                |
 +--------+--------------------------------+---------------------------------------------+----------------------+------------------------------------------------------------------------+--------------------+
