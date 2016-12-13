@@ -91,6 +91,11 @@
         <div class="col-md-5">
             <h2 class="title">注文内容</h2>
 
+            <?php
+                $sum = 0;
+                $total = 0;
+            ?>
+
             {{--{{ dd($order) }}--}}
             @foreach($order->detail as $product)
                 <table class="table table-bordered">
@@ -113,30 +118,37 @@
                             {{ $product->number }}
                         </td>
                     </tr>
-                    </tbody>
-                </table>
-
-            @endforeach
-
-            @foreach($order->detail as $product)
-                <table class="table table-bordered">
-                    <tbody>
                     <tr>
-                        <th class="text-center">合計数量</th>
+                        <th class="text-center">小計</th>
                         <td>
-                            {{ $product }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="text-center">合計金額</th>
-                        <td>
-                            {{ number_format($product->productPrice->product_price) }} 円
+                            {{ number_format($product->productPrice->product_price * $product->number) }} 円
                         </td>
                     </tr>
                     </tbody>
                 </table>
-
+                <?php
+                    $sum += $product->number;
+                    $total += $product->productPrice->product_price * $product->number;
+                ?>
             @endforeach
+
+            <h2 class="title">合計</h2>
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th class="text-center">合計数量</th>
+                    <td>
+                        {{ $sum }}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-center">合計金額</th>
+                    <td>
+                        {{ number_format($total) }} 円
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
         </div>
         <div class="col-md-4 col-md-offset-4 mt">
