@@ -25,7 +25,6 @@
     Route::post('/cart/clear', 'CartsController@clear');
 
 //　注文
-    Route::get('/order/confirm', 'OrdersController@index')->name('order');
     Route::post('/order/confirm/insert', 'OrdersController@insert');
     Route::get('/order/complete', 'OrdersController@complete')->name('complete');
     Route::any('/order/confirm/coupon', 'OrdersController@coupon');
@@ -37,6 +36,9 @@
     Route::get('/faq', 'PagesController@faq');
 
 Route::group(['middleware' => ['userauth']], function () {
+
+//注文ページ
+    Route::get('/order/confirm', 'OrdersController@index')->name('order');
 
 //マイページ
     Route::get('/mypage/order/history', 'MypagesController@orderHistory');
@@ -156,8 +158,7 @@ Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理�
 
 Auth::routes();
 
-Route::post('/register','auth\RegisterController@register'); //登録処理
-Route::get('/register','auth\RegisterController@getregister'); //登録ページ
-Route::post('/register/complete','auth\RegisterController@complete');
+Route::get('/register','auth\RegisterController@register'); //登録ページ
 Route::post('/register/confirm', 'auth\RegisterController@confirm');
+Route::post('/register/complete','auth\RegisterController@complete');
 Route::get('password/input' ,'auth\ResetPasswordController@input'); //パスワードリセットメール入力ページ

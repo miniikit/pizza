@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Auth\Events\Registered;
+use Laracasts\Flash\Flash;
 
 class RegisterController extends Controller
 {
@@ -77,7 +78,7 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'gender_id' => $data['gender_id'],
             'birthday' => $data['birthday'],
-            'authority_id' => $data['authority_id'],
+            'authority_id' => 3,
 
         ]);
     }
@@ -88,24 +89,18 @@ class RegisterController extends Controller
     return view('auth.register.confirm',compact('data'));
     }
 
-    public function getregister()
+    public function register()
     {
     $prefs = config('pref');
     
     return view('auth.register')->with(['prefs' => $prefs]);
     }
     
-    public function register(Request $request)
+    public function complete(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $data = $request->all();
 
-        event(new Registered($user = $this->create($request->all())));
-
-        return view('register/complete');
-    }
-
-    public function complete()
-    {
-        return view('auth.register.complete');
+        event(new Registered($user = $this->create($data)));
+       return view('auth.register.complete');
     }
 }

@@ -35,8 +35,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">注文確認<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">注文<span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li><a href="/pizzzzza/order">注文確認</a></li>
                         <li><a href="/pizzzzza/order/history">注文履歴</a></li>
                     </ul>
                 </li>
