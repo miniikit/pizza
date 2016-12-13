@@ -22,7 +22,7 @@
             </div>
             <div class="media__summary">
                 <h2 class="media__heading">{{ $campaign->campaign_title }}</h2>
-                <p class="media__text">{{ $campaign->campaign_note }}</p>
+                <p class="media__text">{{ $campaign->campaign_text }}</p>
             </div>
           </div>
           <a href="/topicdetail?id={{ $campaign->id }}"></a>

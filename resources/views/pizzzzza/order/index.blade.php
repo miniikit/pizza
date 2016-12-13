@@ -19,8 +19,14 @@
 @endsection
 
 @section('main')
+
     <h1>注文確認</h1>
     <div id="app" class="container">
+        <div id="loading" style="display: none">
+            <div class="inner">
+                <div class="loader">Loading...</div>
+            </div>
+        </div>
         <div v-if="orders.length != 0" class="row">
             <div class="col-md-6">
                 <div id="order-top">
@@ -30,7 +36,7 @@
                         <tr >
                             <th>注文番号</th>
                             <th>名前</th>
-                            <th>配達場所</th>
+                            <th>お届け先</th>
                             <th>配達日時</th>
                         </tr>
                         </thead>

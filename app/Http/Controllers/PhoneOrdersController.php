@@ -288,11 +288,43 @@ class PhoneOrdersController extends Controller
     //商品入力・選択ページ
     public function orderSelect($id)
     {
-        $products = DB::table('products_master')->join('products_prices_master', 'products_master.price_id', '=', 'products_prices_master.id')->join('genres_master', 'genres_master.id', '=', 'products_master.genre_id')->orderBy('genre_id', 'asc')->get();
+        //$products = DB::table('products_master')->join('products_prices_master', 'products_master.price_id', '=', 'products_prices_master.id')->join('genres_master', 'products_master.genre_id', '=', 'genres_master.id')->orderBy('genre_id', 'asc')->get();
+        $products = DB::table('genres_master')->join('products_master','genres_master.id','=','products_master.genre_id')->join('products_prices_master','products_master.price_id', '=', 'products_prices_master.id')->orderBy('genre_id','asc')->get();
         $pizzacnt = Product::where('genre_id', 1)->count();
         $sidecnt = Product::where('genre_id', 2)->count();
         $drinkcnt = Product::where('genre_id', 3)->count();
         return view('pizzzzza.order.accept.item.select', compact('products', 'pizzacnt', 'sidecnt', 'drinkcnt','id'));
+    }
+
+
+    public function orderCart(Request $request)
+    {
+
+        // POSTデータ受け取り
+            $product_id = $request->product_id;
+            $product_num = $request->product_num;
+
+        // カート内に商品があるか
+//            $cart = array();
+//            if(session()->has('phoneOrderCart')){
+//                $cart = session()->pull('phoneOrderCart');
+//                $cart[$product_id] = $product_num;
+//                session()->put('phoneOrderCart',$cart);
+//                dd($cart);
+//            }else{  //カート内に商品がない
+//                $cart[$product_id] = $product_num;
+//                session()->put('phoneOrderCart',$cart);
+//            }
+
+
+            $cart = session()->get("phoneOrderCart",[]);
+            $cart[$product_id] = $product_num;
+
+            session()->put('phoneOrderCart',$cart);
+
+
+        dd('err',session()->all());
+
     }
 
 

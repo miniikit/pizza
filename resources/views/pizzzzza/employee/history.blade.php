@@ -31,15 +31,15 @@
                 <tr class="link" data-href="/pizzzzza/employee/{{$employee->id}}/show">
                     <td>{{ $employee->id }}</td>
                     <td>{{ $employee->user->name }}</td>
-                    <td>{{ $employee->emoloyee_agreement_date }}</td>
+                    <td>{{ \Carbon\Carbon::parse($employee->emoloyee_agreement_date)->format('Y年m月d日') }}</td>
                     <td>
                         @if($employee->emoloyee_agreement_enddate == null)
                             未設定
                         @else
-                            {{ $employee->emoloyee_agreement_enddate }}
+                            {{ \Carbon\Carbon::parse($employee->emoloyee_agreement_enddate)->format('Y年m月d日') }}
                         @endif
                     </td>
-                    <td>{{ \Carbon\Carbon::parse($employee->updated_at)->format('Y-m-d') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($employee->updated_at)->format('Y年m月d日') }}</td>
                 </tr>
             @endforeach
             </tbody>

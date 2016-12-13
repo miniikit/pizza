@@ -34,9 +34,10 @@
                 <h1>キャンペーン期間</h1>
               </div>
               <div class="box-text">
-                <h2>{{ $campaign->campaign_start_day }}~{{ $campaign->campaign_end_day }}</h2>
+                <h2>{{ \Carbon\Carbon::parse($campaign->campaign_start_day)->format('Y年m月d日')  }}　〜　{{ \Carbon\Carbon::parse($campaign->campaign_end_day)->format('Y年m月d日') }}まで</h2>
               </div>
             </li>
+            @if(isset($campaign->campaign_subject))
             <li class="box2">
               <div class="box3">
                 <h1>キャンペーン対象者</h1>
@@ -45,6 +46,7 @@
                 <h2>{{ $campaign->campaign_subject }}</h2>
               </div>
             </li>
+            @endif
             <li class="box2">
               <div class="box3">
                 <h1>キャンペーン内容</h1>
@@ -55,7 +57,7 @@
             </li>
             <li class="box2">
               <div class="box3">
-                <h1>注意事項</h1>
+                <h1>その他</h1>
               </div>
               <div class="box-text">
                 <h2>{{ $campaign->campaign_note }}</h2>
