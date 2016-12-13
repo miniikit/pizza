@@ -3,7 +3,6 @@
 @section('title', '従業員管理画面')
 
 @section('css')
-    <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
 @endsection
 
 @section('pankuzu')

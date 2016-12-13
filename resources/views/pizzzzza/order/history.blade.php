@@ -3,7 +3,6 @@
 @section('title', 'メニュー一覧')
 
 @section('css')
-    <link rel="stylesheet" href="/css/pizzzzza/menu/index.css" media="all" title="no title">
 @endsection
 
 @section('pankuzu')
