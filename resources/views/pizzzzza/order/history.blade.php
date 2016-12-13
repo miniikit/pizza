@@ -31,23 +31,23 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th style="text-align: center;">ID</th>
-                <th>氏名</th>
-                <th style="text-align: center;">価格</th>
-                <th style="text-align: center;">ジャンル</th>
+                <th style="text-align: center;">注文日</th>
+                <th style="text-align: center;">氏名</th>
+                <th style="text-align: center;">お届け先</th>
+                <th style="text-align: center;">電話番号</th>
                 <th style="text-align: center;">販売開始日</th>
                 <th style="text-align: center;">販売終了日</th>
             </tr>
             </thead>
             <tbody>
             @foreach ($orders as $order)
-                <tr class="link" data-href="/pizzzzza/menu/{{ $order->id }}/show">
-                    <td style="width:5%;text-align: center;">{{ $order->order_date }}</td>
-                    <td style="width:5%;text-align: center;">{{ $order->user->name }}</td>
-                    <td style="width:5%;text-align: center;">{{ $order->user->address1.$order->user->address2.$order->user->address3 }}</td>
-                    <td style="width:5%;text-align: center;">{{ $order->user->phone }}</td>
-                    <td style="width:5%;text-align: center;">{{ $order->id }}</td>
-                    <td style="width:5%;text-align: center;">{{ $order->id }}</td>
+                <tr class="link" data-href="/pizzzzza/order/{{ $order->id }}/show">
+                    <td style="text-align: center;">{{ \Carbon\Carbon::parse( $order->order_date )->format('Y年m月d日 H時i分') }}</td>
+                    <td style="text-align: center;">{{ $order->user->name }}</td>
+                    <td style="text-align: center;">{{ $order->user->address1.$order->user->address2.$order->user->address3 }}</td>
+                    <td style="text-align: center;">{{ $order->user->phone }}</td>
+                    <td style="text-align: center;">{{ $order->id }}</td>
+                    <td style="text-align: center;">{{ $order->id }}</td>
                 </tr>
             @endforeach
             </tbody>
