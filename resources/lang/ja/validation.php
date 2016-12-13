@@ -212,5 +212,15 @@ return [
         'coupon_product_id' => '商品名',   //だぶり
         'coupon_start_date' => '利用開始日',
         'coupon_end_date' => '利用終了日',
+        //顧客側キャンペーン
+        'campaign_name' => 'キャンペーン名',
+        'campaign_text' => 'キャンペーン説明文',
+        'campaign_note' => '注意事項',
+        'campaign_subject' => 'キャンペーン対象者',
+        'campaign_start_day' => '掲載開始日',
+        'campaign_end_day' => '掲載終了日',
+        'file1' => 'メイン画像',
+        'file2' => 'バナー画像',
+
     ],
 ];
