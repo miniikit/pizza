@@ -37,8 +37,8 @@
                                             <p class="text-center space name">{{ $product->product_name }}</p>
                                             <div class="text-center space">{{ $product->product_price }}円</div>
                                             <div class="text-center space">
-                                                <select name="product_num" id="">
-                                                    @for($i = 0; $i< 50; $i++)
+                                                <select name="product_num" id="{{ $product->id }}">
+                                                    @for($i = 0; $i<= 10; $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
                                                 </select>
@@ -58,11 +58,11 @@
                                             <div class="text-center">
                                                 <image src="{{ $product -> product_image }}"></image>
                                             </div>
-                                            <p class="text-center space name">{{ $product->product_name }}</p>
+                                            <p class="text-center space name prduct_name">{{ $product->product_name }}</p>
                                             <div class="text-center space">{{ $product->product_price }}円</div>
                                             <div class="text-center space">
-                                                <select name="product_num" id="">
-                                                    @for($i = 0; $i< 50; $i++)
+                                                <select name="product_num" id="{{ $product->id }}">
+                                                    @for($i = 0; $i<= 10; $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
                                                 </select>
@@ -86,8 +86,8 @@
                                             <p class="text-center space name">{{ $product->product_name }}</p>
                                             <div class="text-center space">{{ $product->product_price }}円</div>
                                             <div class="text-center space">
-                                                <select name="product_num" id="">
-                                                    @for($i = 0; $i< 50; $i++)
+                                                <select name="product_num" id="{{ $product->id }}">
+                                                    @for($i = 0; $i<= 10; $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
                                                 </select>
@@ -128,13 +128,8 @@
                 <th>数量</th>
             </tr>
             </thead>
-            <tbody>
-            @for($i = 0; $i< 10; $i++)
-                <tr>
-                    <td>フレッシュモッツァレラのジェノベーゼ</td>
-                    <td>1</td>
-                </tr>
-            @endfor
+            <tbody id="cart">
+            {{-- ここに追加商品が増加 --}}
         </table>
     </div>
 </div>
@@ -160,6 +155,65 @@
                 window.location = $(this).attr('data-href');
             });
         });
+
+
+
+        $(function() {
+
+            //セレクトボックスが切り替わったら発動
+            $('select').change(function() {
+
+                //選択したvalue値を変数に格納
+                var val = $(this).val();
+                var id = $(this).attr("id");
+
+                //選択したvalue値をp要素に出力
+                $('#cart').append('<tr><td>' + val + '</td><td>' + val + '</td></tr>');
+            });
+        });
+
+
+        $(function()
+        {
+            $('select').change(function()
+            {
+                {{-- トークンをmetaに設定し、送る --}}
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                        {{-- 入力値をdataに設定 --}}
+                var data = {
+                            product_id : $(this).attr('id'),
+                            product_num : $(this).val(),
+                            "_token": "{{ csrf_token() }}"
+                };
+
+                $.ajax(
+                        {
+                            type:"POST",
+                            url: "/pizzzzza/order/accept/customer/cart",
+                            data: data,
+                            success: function(message, dataType)
+                            {
+
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown)
+                            {
+                                alert('Error : ' + errorThrown);
+                                $("#XMLHttpRequest").html("XMLHttpRequest : " + XMLHttpRequest.status);
+                                $("#textStatus").html("textStatus : " + textStatus);
+                                $("#errorThrown").html("errorThrown : " + errorThrown);
+                            }
+                        });
+                //ページをリロードしない
+                return false;
+            });
+        });
+
+
 
     </script>
 @endsection

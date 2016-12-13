@@ -117,6 +117,8 @@ Route::group(['middleware' => ['adminauth']], function () {
 
 //注文確認
     Route::get('/pizzzzza/order', 'AdminController@orderIndex')->name('orderTop'); //注文確認ページ
+    Route::get('/pizzzzza/order/history', 'AdminController@history')->name('orderHistory'); //注文履歴
+    Route::get('/pizzzzza/order/{id}/show', 'AdminController@show');  //注文詳細
     Route::get('/pizzzzza/order/get', 'AdminController@orderGet'); //注文確認ページ処理用
     Route::post('pizzzzza/order/destroy', 'AdminController@destroy');
     Route::post('pizzzzza/order/success', 'AdminController@success');
@@ -131,6 +133,7 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::post('/pizzzzza/order/accept/customer/{id}/update/web', 'PhoneOrdersController@updateWeb'); //会員情報編集＞更新処理＞WEB
     Route::get('/pizzzzza/order/accept/customer/input', 'PhoneOrdersController@newCustomer')->name('newCustomer'); //新規登録
     Route::post('/pizzzzza/order/accept/customer/input/add', 'PhoneOrdersController@newCustomerInsert'); //新規登録＞DB追加処理
+    Route::post('/pizzzzza/order/accept/customer/cart','PhoneOrdersController@orderCart'); //商品入力ページ・カート処理
 
 //電話注文　注文処理
     Route::get('/pizzzzza/order/accept/item/{id}/select', 'PhoneOrdersController@orderSelect')->name('telOrderSelect'); //商品入力・選択ページ
@@ -155,4 +158,7 @@ Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理�
 
 Auth::routes();
 
+Route::post('/register','auth\RegisterController@register'); //登録ポスト
+Route::post('/register/complete','auth\RegisterController@complete');
+Route::post('/register/confirm', 'auth\RegisterController@confirm');
 Route::get('password/input' ,'auth\ResetPasswordController@input'); //パスワードリセットメール入力ページ

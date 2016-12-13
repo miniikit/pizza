@@ -34,7 +34,7 @@
                 </tr>
                 <tr>
                     <th class="text-center">生年月日</th>
-                    <td>{{ $employee->user->birthday }}</td>
+                    <td>{{ \Carbon\Carbon::parse($employee->user->birthday)->format('Y年m月d日') }}</td>
                 </tr>
                 <tr>
                     <th class="text-center">性別</th>
@@ -68,19 +68,19 @@
                 </tr>
                 <tr>
                     <th class="text-center">契約開始日</th>
-                    <td>{{ $employee->emoloyee_agreement_date }}</td>
+                    <td>{{ \Carbon\Carbon::parse($employee->emoloyee_agreement_date)->format('Y年m月d日') }}</td>
                 </tr>
                 <tr>
                     <th class="text-center">契約終了日</th>
-                    <td>{{ $employee->emoloyee_agreement_enddate }}</td>
+                    <td>{{ \Carbon\Carbon::parse($employee->emoloyee_agreement_enddate)->format('Y年m月d日') }}</td>
                 </tr>
                 <tr>
                     <th class="text-center">登録日</th>
-                    <td>{{ $employee->created_at }}</td>
+                    <td>{{ \Carbon\Carbon::parse($employee->created_at)->format('Y年m月d日') }}</td>
                 </tr>
                 <tr>
                     <th class="text-center">更新日</th>
-                    <td>{{ $employee->updated_at }}</td>
+                    <td>{{ \Carbon\Carbon::parse($employee->updated_at)->format('Y年m月d日') }}</td>
                 </tr>
                 </tbody>
             </table>
