@@ -27,11 +27,11 @@ class AdminCampaignRequest extends FormRequest
             'campaign_name' => 'required',
             'campaign_text' => 'required',
             'campaign_note' => 'required',
-            'campaign_subject' => 'required',
+            'campaign_subject' => 'required|integer',
             'campaign_start_day' => 'required|date',
             'campaign_end_day' => 'required|date',
-            'file1' => 'required',
-            'file2' => 'required',
+            'file1' => 'required|file|image:jpg,jpeg|mimes:jpg,jpeg',
+            'file2' => 'required|file|image:jpg,jpeg|mimes:jpg,jpeg',
         ];
     }
 }

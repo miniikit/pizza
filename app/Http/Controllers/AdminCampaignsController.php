@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Service\AdminCampaignService;
+use App\Http\Requests\AdminCampaignRequest;
+
 
 class AdminCampaignsController extends Controller
 {
@@ -45,7 +47,9 @@ class AdminCampaignsController extends Controller
     }
 
     // キャンペーン追加処理
-    public function store(Request $request){
+    public function store(AdminCampaignRequest $request){
+        dd($request->all());
+
         $camp = new AdminCampaignService();
         $camp->insert($request);
     }

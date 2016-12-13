@@ -2,7 +2,8 @@
 
 namespace App\Service;
 
-use app\Http\Requests\AdminCampaignRequest;
+use Illuminate\Support\Facades\DB;
+
 
 class AdminCampaignService
 {
@@ -28,6 +29,10 @@ class AdminCampaignService
             $campaign_image_main = $request->file1;
             $campaign_image_banner = $request->file2;
 
+        //
+        //  DBにInsert
+        //
+            $id = DB::table('campaignes_master')->insertGetId([""]);
 
 
             dd($request->all());
