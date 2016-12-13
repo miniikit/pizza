@@ -776,7 +776,7 @@ class OrdersMasterSeeder extends Seeder
         $baseDate = Carbon::today();
 
         // WEB会員からの注文（クーポンなし）
-        for($i = 1; $i<= 10; $i++){
+        for($i = 1; $i<= 50; $i++){
 
             //配達希望日時
             $apointment_date = $baseDate->addHours($i);
@@ -805,7 +805,7 @@ class OrdersMasterSeeder extends Seeder
         }
 
         // 電話会員からの注文（クーポンなし）
-        for($i = 1; $i<= 10; $i++){
+        for($i = 1; $i<= 50; $i++){
 
             //配達希望日時
             $apointment_date = $baseDate->addHours($i);
@@ -888,10 +888,12 @@ class OrdersDetailsTableSeeder extends Seeder
     {
         DB::table('orders_details_table')->delete();
 
+        // orderマスタのfor文の件数を変更した場合、ここを変更
+        $max = 100;
 
         // WEB会員からの注文 + 電話会員からの注文（クーポンなし）
         // orders_masterの注文IDと整合性を保っています
-        for($i = 1; $i<= 20; $i++){
+        for($i = 1; $i<= $max; $i++){
             $orderCnt = rand(1,5);
             $randomCnt = rand(0,4);
             for($k = 1; $k <= $orderCnt; $k++){
@@ -904,52 +906,52 @@ class OrdersDetailsTableSeeder extends Seeder
         }
 
         OrderDetail::create([
-            'id' => 21,
+            'id' => $max + 1,
             'price_id' => 1,
             'number' => 1,
         ]);
         OrderDetail::create([
-            'id' => 21,
+            'id' => $max + 1,
             'price_id' => 2,
             'number' => 2,
         ]);
         OrderDetail::create([
-            'id' => 21,
+            'id' => $max + 1,
             'price_id' => 3,
             'number' => 3,
         ]);
         OrderDetail::create([
-            'id' => 22,
+            'id' => $max + 2,
             'price_id' => 4,
             'number' => 3,
         ]);
         OrderDetail::create([
-            'id' => 22,
+            'id' => $max + 2,
             'price_id' => 7,
             'number' => 3,
         ]);
         OrderDetail::create([
-            'id' => 23,
+            'id' => $max + 3,
             'price_id' => 8,
             'number' => 3,
         ]);
         OrderDetail::create([
-            'id' => 24,
+            'id' => $max + 4,
             'price_id' => 1,
             'number' => 3,
         ]);
         OrderDetail::create([
-            'id' => 24,
+            'id' => $max + 4,
             'price_id' => 2,
             'number' => 3,
         ]);
         OrderDetail::create([
-            'id' => 25,
+            'id' => $max + 5,
             'price_id' => 1,
             'number' => 3,
         ]);
         OrderDetail::create([
-            'id' => 25,
+            'id' => $max + 5,
             'price_id' => 2,
             'number' => 3,
         ]);
