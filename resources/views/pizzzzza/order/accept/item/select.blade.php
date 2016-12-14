@@ -202,6 +202,7 @@
                             data: data,
                             success: function(message, dataType)
                             {
+                                console.log(message)
 
                             },
                             error: function(XMLHttpRequest, textStatus, errorThrown)

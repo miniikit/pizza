@@ -25,7 +25,6 @@ use Carbon\Carbon;
 
 use App\Http\Requests\AdminPhoneUserEditRequest;
 
-
 class PhoneOrdersController extends Controller
 {
 
@@ -331,9 +330,13 @@ class PhoneOrdersController extends Controller
             $cart[$product_id] = $product_num;
 
             session()->put('phoneOrderCart',$cart);
+        return [
+            "status" => "ok",
+            'cart' => $cart
+        ];
 
 
-        dd('err',session()->all());
+//        dd('err',session()->all());
 
     }
 

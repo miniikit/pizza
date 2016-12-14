@@ -35,7 +35,11 @@
                 <tr>
                     @if($coupon->coupons_types_id == 2)
                         <th class="text-center">プレゼント商品名</th>
-                        <td>{{ $product->product_name }}</td>
+                        @if(isset($product))
+                            <td>{{ $product->product_name }}</td>
+                        @else
+                            <td> なし </td>
+                        @endif
                     @else
                         <th class="text-center">値引額</th>
                         <td>{{ $coupon->coupon_discount }}</td>
@@ -64,11 +68,11 @@
                 @if($coupon->coupons_types_id ==1)
                     <tr>
                         <th class="text-center">使用条件商品</th>
-                    @if(isset($coupon->product_id))
-                        <td>{{ $product->product_name }}</td>
-                    @else
-                        <td>なし</td>
-                    @endif
+                        @if(isset($coupon->product_id))
+                            <td>{{ $product->product_name }}</td>
+                        @else
+                            <td>なし</td>
+                        @endif
                     </tr>
                 @endif
                 </tbody>
@@ -97,8 +101,8 @@
             </table>
 
             <div class="ar">
-                  <a href="/pizzzzza/coupon/{{$id}}/edit" class="btn btn-default btn-sm ar">編集</a>
-                  <a href="/pizzzzza/coupon/{{$id}}/delete" class="btn btn-danger btn-sm ml">削除</a>
+                <a href="/pizzzzza/coupon/{{$id}}/edit" class="btn btn-default btn-sm ar">編集</a>
+                <a href="/pizzzzza/coupon/{{$id}}/delete" class="btn btn-danger btn-sm ml">削除</a>
             </div>
 
 

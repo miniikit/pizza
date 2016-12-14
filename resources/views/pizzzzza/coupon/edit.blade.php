@@ -133,7 +133,7 @@
             <input type="hidden" name="coupons_types_id" value="{{  $coupon->coupons_types_id }}">
           </div>
           <div class="col-md-4 col-md-offset-4 ac">
-              <a href="/pizzzzza/coupon/{{$coupon->id}}/show" class="btn btn-default btn-lg mr">戻る</a>
+              <a href="/pizzzzza/coupon/{{$id}}/show" class="btn btn-default btn-lg mr">戻る</a>
               <input class="btn btn-primary btn-lg" type="submit" name="status" value="更新">
           </div>
         </form>
