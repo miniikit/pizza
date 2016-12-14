@@ -231,12 +231,21 @@ class CouponsController extends Controller
         //　※ID、クーポンマスタの値を返したいのに、クーポン種別マスタのIDで上書きされる。だからIDも一緒に返却する。
         $coupon = DB::table('coupons_master')->join('coupons_types_master','coupons_types_master.id','=','coupons_master.coupons_types_id')->where('coupons_master.id','=',$id)->first();
 
-        // 条件商品を取得
-            $product_id = $coupon->product_id;
-            $product = DB::table('products_master')->where('products_master.id','=',$product_id)->first();
 
-        //　※ID、クーポンマスタの値を返したいのに、クーポン種別マスタのIDで上書きされる。だからIDも一緒に返却する。
-        return view('pizzzzza.coupon.show',compact('coupon','id','product'));
+        // 条件商品を取得
+        if(isset($coupon->product_id)) {
+
+            $product_id = $coupon->product_id;
+            $product = DB::table('products_master')->where('products_master.id', '=', $product_id)->first();
+
+            //　※ID、クーポンマスタの値を返したいのに、クーポン種別マスタのIDで上書きされる。だからIDも一緒に返却する。
+            return view('pizzzzza.coupon.show', compact('coupon', 'id', 'product'));
+
+        }else{
+
+            return view('pizzzzza.coupon.show', compact('coupon', 'id'));
+
+        }
 
     }
 
