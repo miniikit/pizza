@@ -10,17 +10,14 @@ $ cp .env.example .env
 ```
 $ php artisan key:generate
 ```
-
-```
-$ php artisan serve
-```
-
 ```
 $ php artisan migrate:refresh
 ```
-
 ```
 $ php artisan db::seed
+```
+```
+$ php artisan serve
 ```
 
 対話式
