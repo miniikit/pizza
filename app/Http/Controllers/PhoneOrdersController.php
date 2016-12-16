@@ -314,29 +314,21 @@ class PhoneOrdersController extends Controller
             $product_id = $request->product_id;
             $product_num = $request->product_num;
 
-        // カート内に商品があるか
-            $cart = array();
-            if(session()->has('phoneOrderCart')){
-                $cart = session()->pull('phoneOrderCart');
-                $cart[$product_id] = $product_num;
-                session()->put('phoneOrderCart',$cart);
-            }else{  //カート内に商品がない
-                $cart[$product_id] = $product_num;
-                session()->put('phoneOrderCart',$cart);
-            }
-
-            return compact('cart');
-
-    /*
+        // セッション処理
             $cart = session()->get("phoneOrderCart",[]);
-            $cart[$product_id] = $product_num;
 
+            $cart[$product_id] = $product_num;
             session()->put('phoneOrderCart',$cart);
+
+
+            $count = count($cart);
+
         return [
             "status" => "ok",
-            'cart' => $cart
+            "cart" => $cart,
+            "count" => $count,
         ];
-    */
+
     }
 
 
