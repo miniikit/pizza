@@ -10,7 +10,7 @@
 @section('main')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-heading">パスワード再発行のお手続き</div>
                 <div class="panel-body">
@@ -19,7 +19,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <div class="">
                       <h5>パスワードをお忘れの場合、下記の入力フォームにてメールアドレスをご記入ください。</h5>
                     </div>
 
