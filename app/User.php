@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Notifications\CustomPasswordReset;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -31,4 +33,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Gender','gender_id');
     }
 
+    public function sendPasswordResetNotification($token) {
+        $this->notify(new CustomPasswordReset($token));
+    }
 }
