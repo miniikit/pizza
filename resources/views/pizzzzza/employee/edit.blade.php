@@ -32,7 +32,7 @@
                 <table class="table table-bordered ">
                     <tbody>
                     <tr>
-                        <th class="text-center" >氏名</th>
+                        <th class="text-center" >名前</th>
                         <td><input class="form-control" type="text" name="name" value="{{ $employee->user->name }}" placeholder="例）山田太郎"></td>
                     </tr>
                     <tr>

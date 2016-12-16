@@ -20,7 +20,7 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>氏名</th>
+                <th>名前</th>
                 <th>契約開始日</th>
                 <th>契約終了日</th>
                 <th>更新日時</th>
