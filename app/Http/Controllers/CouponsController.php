@@ -26,6 +26,9 @@ use Carbon\Carbon;
 
 use App\Http\Requests\AdminCouponNewDiscountRequest;
 use App\Http\Requests\AdminCouponNewGiftRequest;
+use App\Http\Requests\AdminCouponEditDiscountRequest;
+use App\Http\Requests\AdminCouponEditGiftRequest;
+
 use phpDocumentor\Reflection\Types\Integer;
 
 class CouponsController extends Controller
@@ -233,7 +236,7 @@ class CouponsController extends Controller
 
 
         // 条件商品を取得
-        if(isset($coupon->product_id)) {
+        if(isset($coupon->product_id) && $coupon->product_id != 0) {
 
             $product_id = $coupon->product_id;
             $product = DB::table('products_master')->where('products_master.id', '=', $product_id)->first();
@@ -265,8 +268,9 @@ class CouponsController extends Controller
         //もし、クーポン種別が「プレゼント」であれば、どの商品が無料になるのかを表示するために商品表と結合し、上書きする
             $couponTypeId = $coupon->coupons_types_id;
             if($couponTypeId == 2){
-                $coupon = DB::table('coupons_master')->join('coupons_types_master','coupons_master.coupons_types_id','=','coupons_types_master.id')->join('products_master','products_master.id','=','coupons_master.product_id')->where('coupons_master.id','=',$id)->first();
+                $coupon = DB::table('coupons_master')->join('coupons_types_master','coupons_master.coupons_types_id','=','coupons_types_master.id')->where('coupons_master.id','=',$id)->first();
             }
+
 
 
         //クーポン種別を取得する(Viewで使用）
@@ -287,7 +291,7 @@ class CouponsController extends Controller
 
 
     // クーポン更新処理：edit(編集)ページからの遷移
-    public function update(Request $request,$id){
+    public function DiscountUpdateDo(AdminCouponEditDiscountRequest $request,$id){
 
         if($request->status = "更新"){
             //
@@ -306,7 +310,7 @@ class CouponsController extends Controller
                 //使用条件金額
                 $update['coupon_conditions_money'] = $request->coupon_conditions_price;
                 //使用条件商品
-                $update['product_id'] = $request->product_id;
+                $update['product_id'] = $request->coupon_product_id;
                 //クーポン種別
                 $update['coupons_types_id'] = $request->coupons_types_id;
 
@@ -342,6 +346,66 @@ class CouponsController extends Controller
             }else{
                 return redirect()->route('menuCoupon');
             }
+
+    }
+
+
+    // クーポン更新処理：edit(編集)ページからの遷移
+    public function GiftUpdateDo(AdminCouponEditGiftRequest $request,$id){
+
+        if($request->status = "更新"){
+            //
+            //  POSTデータの受け取り
+            //
+            $update = array();
+
+            //クーポン名
+            $update['coupon_name'] = $request->coupon_name;
+            //クーポン番号
+            $update['coupon_number'] = $request->coupon_num;
+            //値引き金額
+            $update['coupon_discount'] = $request->coupon_discount_price;
+            //利用上限回数
+            $update['coupon_conditions_count'] = $request->coupon_max;
+            //使用条件金額
+            $update['coupon_conditions_money'] = $request->coupon_conditions_price;
+            //使用条件商品
+            $update['product_id'] = $request->coupon_product_id;
+            //クーポン種別
+            $update['coupons_types_id'] = $request->coupons_types_id;
+
+            //対象者は全員か、初回利用者限定か ※POSTデータは、0(全員)、1(初回利用者限定)にしていてDBと若干異なるので、DB格納用に変換
+            if($request->coupon_conditions_first == 1){
+                $update['coupon_conditions_first'] = 1;    //初回利用者のみ
+            }
+
+            //終了日
+            if(isset($request->coupon_end_date) && $request->coupon_end_date != "") {
+                $update['coupon_end_date'] = $request->coupon_end_date;
+            }
+
+
+            //
+            //  更新
+            //
+
+            DB::table('coupons_master')->where('coupons_master.id','=',$id)->update($update);
+            flash('クーポンの更新が完了しました。', 'success');
+            return redirect()->route('showCoupon', $id);
+
+        }
+
+
+        //
+        //  エラー処理
+        //
+
+        flash('Message', 'warning');
+        if(isset($id)) {
+            return redirect()->route('showCoupon', $id);
+        }else{
+            return redirect()->route('menuCoupon');
+        }
 
     }
 

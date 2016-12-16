@@ -152,13 +152,13 @@ class UsersSeeder extends Seeder
         ]);
         //7 テストデータ：WEB会員
         User::create([
-            'name' => '近澤邦彦',
-            'kana' => 'チカザワクニヒコ',
+            'name' => '大阪太郎',
+            'kana' => 'オオサカタロウ',
             'email' => 'B5216@oic.jp',
             'password' => bcrypt('chikazawa'),
-            'postal' => 5550012,
-            'address1' => '大阪府大阪市大正区北恩加島',
-            'address2' => '2-8-2',
+            'postal' => 5430001,
+            'address1' => '大阪府大阪市天王寺区',
+            'address2' => '6丁目8-4',
             'address3' => null,
             'phone' => str_replace(array('-', 'ー'), '', $faker->phoneNumber),
             'gender_id' => 1,
@@ -362,7 +362,7 @@ class CouponsMasterSeeder extends Seeder
         ]);
         //3 テストデータ：（キャンペーンと整合性 // プレゼント・全員・2500以上・コーラ無料・1人1回まで）
         Coupon::create([
-            'coupons_types_id' => '1',
+            'coupons_types_id' => '2',
             'coupon_name' => '全員対象 2500円以上でコーラ無料クーポン',
             'coupon_discount' => 162,
             'coupon_conditions_money' => 2500,

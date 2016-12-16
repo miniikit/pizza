@@ -35,7 +35,7 @@
                 <tr>
                     @if($coupon->coupons_types_id == 2)
                         <th class="text-center">プレゼント商品名</th>
-                        @if(isset($product))
+                        @if(isset($product) && ($product->product_id != 0) )
                             <td>{{ $product->product_name }}</td>
                         @else
                             <td> なし </td>
