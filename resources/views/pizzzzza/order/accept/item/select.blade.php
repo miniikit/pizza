@@ -37,7 +37,8 @@
                                             <p class="text-center space name">{{ $product->product_name }}</p>
                                             <div class="text-center space">{{ $product->product_price }}円</div>
                                             <div class="text-center space">
-                                                <select name="product_num" id="{{ $product->product_name }}" class="{{ $product->genre_name }}">
+                                                <select name="product_num" id="{{ $product->product_name }}"
+                                                        class="{{ $product->genre_name }}">
                                                     @for($i = 0; $i<= 10; $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
@@ -61,7 +62,8 @@
                                             <p class="text-center space name prduct_name">{{ $product->product_name }}</p>
                                             <div class="text-center space">{{ $product->product_price }}円</div>
                                             <div class="text-center space">
-                                                <select name="product_num" id="{{ $product->product_name }}" class="{{ $product->genre_name }}">
+                                                <select name="product_num" id="{{ $product->product_name }}"
+                                                        class="{{ $product->genre_name }}">
                                                     @for($i = 0; $i<= 10; $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
@@ -86,7 +88,8 @@
                                             <p class="text-center space name">{{ $product->product_name }}</p>
                                             <div class="text-center space">{{ $product->product_price }}円</div>
                                             <div class="text-center space">
-                                                <select name="product_num" id="{{ $product->product_name }}" class="{{ $product->genre_name }}">
+                                                <select name="product_num" id="{{ $product->product_name }}"
+                                                        class="{{ $product->genre_name }}">
                                                     @for($i = 0; $i<= 10; $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
@@ -97,6 +100,8 @@
                                 @endif
                             @endforeach
                         </div>
+                    </div>
+                </div>
             </form>
         @endif
     </div>
@@ -117,7 +122,7 @@
         </ul>
     </div>
     </div>
-    
+
 
     <div class="cart">
         <h1>Cart</h1>
@@ -133,7 +138,7 @@
             {{-- ここに追加商品が増加 --}}
         </table>
     </div>
-</div>
+    </div>
 
 @endsection
 
@@ -158,11 +163,10 @@
         });
 
 
-
-        $(function() {
+        $(function () {
 
             //セレクトボックスが切り替わったら発動
-            $('select').change(function() {
+            $('select').change(function () {
 
                 //選択したvalue値を変数に格納
                 var num = $(this).val();
@@ -175,10 +179,8 @@
         });
 
 
-        $(function()
-        {
-            $('select').change(function()
-            {
+        $(function () {
+            $('select').change(function () {
 
 
                 {{-- トークンをmetaに設定し、送る --}}
@@ -190,23 +192,21 @@
 
                         {{-- 入力値をdataに設定 --}}
                 var data = {
-                            product_id : $(this).attr('id'),
-                            product_num : $(this).val(),
+                            product_id: $(this).attr('id'),
+                            product_num: $(this).val(),
                             "_token": "{{ csrf_token() }}"
-                };
+                        };
 
                 $.ajax(
                         {
-                            type:"POST",
+                            type: "POST",
                             url: "/pizzzzza/order/accept/customer/cart",
                             data: data,
-                            success: function(message, dataType)
-                            {
-                                console.log(message)
+                            success: function (message,flag,dataType) {
+                                console.log(message,flag);
 
                             },
-                            error: function(XMLHttpRequest, textStatus, errorThrown)
-                            {
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
                                 alert('Error : ' + errorThrown);
                                 $("#XMLHttpRequest").html("XMLHttpRequest : " + XMLHttpRequest.status);
                                 $("#textStatus").html("textStatus : " + textStatus);
@@ -217,7 +217,6 @@
                 return false;
             });
         });
-
 
 
     </script>
