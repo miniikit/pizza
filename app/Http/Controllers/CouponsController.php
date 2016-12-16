@@ -273,7 +273,11 @@ class CouponsController extends Controller
             $couponTypes = DB::table('coupons_types_master')->get();    //12.6の変更で不要に
 
         // 条件商品を取得
-            $product_id = $coupon->product_id;
+            if(isset($coupon->product_id)){
+                $product_id = $coupon->product_id;
+            }else{
+                $product_id = null;
+            }
             $products = DB::table('products_master')->get();
 
         return view('pizzzzza.coupon.edit',compact('coupon','couponTypes','couponTarget','id','products','product_id'));

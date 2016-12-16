@@ -376,7 +376,7 @@ class CouponsMasterSeeder extends Seeder
         ]);
         //4 テストデータ：（キャンペーンと整合性 // 値引き・全員・3000以上・500円OFF・1人1回まで）
         Coupon::create([
-            'coupons_types_id' => '2',
+            'coupons_types_id' => '1',
             'coupon_name' => '期間限定 500円引きクーポン',
             'coupon_discount' => 500,
             'coupon_conditions_money' => 3000,
@@ -389,7 +389,7 @@ class CouponsMasterSeeder extends Seeder
         ]);
         //5 テストデータ：開催中 （プレゼント・全員対象・2000円以上・十勝産コーンポタージュ・無制限）
         Coupon::create([
-            'coupons_types_id' => '1',
+            'coupons_types_id' => '2',
             'coupon_name' => '2000円以上で十勝産コーンポタージュ無料',
             'coupon_discount' => 400,
             'coupon_conditions_money' => 2000,
