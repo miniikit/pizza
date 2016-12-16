@@ -212,6 +212,7 @@ return [
         'coupon_product_id' => '商品名',   //だぶり
         'coupon_start_date' => '利用開始日',
         'coupon_end_date' => '利用終了日',
+        'coupon_present_product_id' => '使用条件商品',
         //顧客側キャンペーン
         'campaign_name' => 'キャンペーン名',
         'campaign_text' => 'キャンペーン説明文',
