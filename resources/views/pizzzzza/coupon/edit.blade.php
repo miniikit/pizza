@@ -22,8 +22,21 @@
 @section('main')
     <h1>クーポン編集</h1>
     <div class="row">
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="col-md-7">
-            <form action="/pizzzzza/coupon/{{$id}}/update" method="post">
+            @if($coupon->coupons_types_id == 1) {{-- 値引きクーポン --}}
+                <form action="/pizzzzza/coupon/{{$id}}/update/discount" method="post">
+            @else {{-- プレゼントクーポン --}}
+                <form action="/pizzzzza/coupon/{{$id}}/update/gift" method="post">
+            @endif
                 <table class="table table-bordered">
                     <tbody>
                     <tr>
@@ -67,7 +80,8 @@
                     <tr>
                         <th class="text-center">クーポン種別</th>
                         <td>
-                            <input class="form-control" name="coupon_type_id" id="" value="{{ $coupon->coupon_type }}" disabled>
+                            <input class="form-control" name="coupon_type_id" id="" value="{{ $coupon->coupon_type }}"
+                                   disabled>
                             </input>
                         </td>
                     </tr>
@@ -75,13 +89,13 @@
                         @if($coupon->coupons_types_id == 1) {{-- クーポン種別が値引きであれば --}}
                         <th class="text-center">使用条件商品</th>
                         <td>
-                            <select class="form-control" name="product_id">
+                            <select class="form-control" name="coupon_product_id">
 
-                                    @if($coupon->product_id == NULL)
-                                        <option value=NULL selected>なし</option>
-                                    @else
-                                        <option value=NULL>なし</option>
-                                    @endif
+                                @if($coupon->product_id == NULL)
+                                    <option value="0" selected>なし</option>
+                                @else
+                                    <option value="0" >なし</option>
+                                @endif
                                 @foreach($products as $product)
                                     @if($product->id == $product_id)
                                         <option value="{{ $product->id }}"
@@ -121,22 +135,22 @@
                 </tr>
                 </tbody>
             </table>
-            <!--
+        <!--
             <div class="ar">
                 @if($coupon->deleted_at == NULL)
-                @endif
+        @endif
                 <input class="btn btn-primary btn-sm ml" type="submit" name="status" value="更新">
             </div>
             -->
 
             {{ csrf_field() }}
             <input type="hidden" name="coupons_types_id" value="{{  $coupon->coupons_types_id }}">
-          </div>
-          <div class="col-md-4 col-md-offset-4 ac">
-              <a href="/pizzzzza/coupon/{{$id}}/show" class="btn btn-default btn-lg mr">戻る</a>
-              <input class="btn btn-primary btn-lg" type="submit" name="status" value="更新">
-          </div>
+        </div>
+        <div class="col-md-4 col-md-offset-4 ac">
+            <a href="/pizzzzza/coupon/{{$id}}/show" class="btn btn-default btn-lg mr">戻る</a>
+            <input class="btn btn-primary btn-lg" type="submit" name="status" value="更新">
+        </div>
         </form>
-  </div>
+    </div>
 
 @endsection

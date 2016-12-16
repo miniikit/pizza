@@ -65,7 +65,7 @@
                 </tr>
                 @endif
                 <tr>
-                    <th class="text-center">氏名</th>
+                    <th class="text-center">名前</th>
                     <td>{{ $order->user->name }}</td>
                 </tr>
                 <tr>
