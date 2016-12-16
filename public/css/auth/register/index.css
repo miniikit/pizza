@@ -1,11 +1,165 @@
 /*新規会員登録*/
 
+.container .wrap {
+    padding: 80px 10px;
+}
+
+.container h1 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+
+.register {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.main-title h1 {
+    text-align: center;
+    letter-spacing: 8px;
+    font-size: 40px;
+    margin-bottom: 80px;
+    color: #656565;
+    position: relative;
+}
+
+.main-title h1::after {
+    content: '';
+    display: block;
+    width: 50px;
+    background: #656565;
+    height: 3px;
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    margin-left: -25px;
+}
+
+
+/*テーブル*/
+
+
+/*
+td,th{
+  width: 100%;
+  display: block;
+}
+*/
+
+label {
+    vertical-align: -webkit-baseline-middle;
+}
+
+#table {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#table th {
+    background-color: #787877;
+    text-align: center;
+    padding: 10px 0;
+    color: #656565;
+    letter-spacing: 2px;
+    color: #eee;
+    border-bottom: solid 1px #eee;
+    padding: 15px 5px;
+    width: 200px;
+}
+
+#table td {
+    vertical-align: middle;
+    text-align: left;
+    background-color: rgba(100, 100, 100, 0.1);
+    border: solid 2px #eee;
+    padding: 5px;
+    color: #656565;
+}
+
+#table td input {
+    padding: 5px;
+    font-size: 12px;
+    display: table-cell;
+}
+
+#table td input[type="text"] {
+    width: 200px;
+}
+
+#table td input[type="email"] {
+    width: 200px;
+}
+
+#table td input[type="password"] {
+    width: 200px;
+}
+
+#table td input[type="date"] {
+    width: 200px;
+}
+
+#table td span {
+    font-size: 10px;
+    margin-top: 5px;
+    letter-spacing: 1px;
+    display: block;
+}
+
+.btn-wrap {
+    text-align: center;
+}
+
+.btn-wrap .btn {
+    color: #fff;
+    background-color: #424242;
+    border: solid 1px #424242;
+    font-size: 15px;
+    width: 250px;
+    height: 57px;
+}
+
+.btn-wrap .btn:hover {
+    opacity: 0.8;
+}
+
+.font_left {
+    text-align: left;
+}
+
 .example {
     font-size: 14px;
     color: #7f7f7f;
     height: 50%;
     margin-top: 5px;
     margin-left: 15px;
+}
+
+.form-btn {
+    -moz-appearance: none;
+    appearance: none;
+    width: 70px;
+    padding: 10px;
+    border: 1px solid #999;
+    background: #eee;
+    border-radius: 5px;
+}
+
+.form-inline select {
+    width: 110px;
+    padding: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid #999;
+    background: #eee;
+    background-size: 20px, 100%;
 }
 
 .red {
