@@ -39,7 +39,7 @@ var app = new Vue({
 
             this.$http.get('/pizzzzza/order/get').then(function (orders) {
 
-                if (this.orders.length != orders.body.length) {
+                if (this.orders.length < orders.body.length) {
 
                     this.$set(this,'orders',orders.body);
 
@@ -51,6 +51,8 @@ var app = new Vue({
 
                     this.newOrderAlert();
 
+                }else if (this.orders.length > orders.body.length) {
+                    console.log('えらー');
                 }
             });
 
