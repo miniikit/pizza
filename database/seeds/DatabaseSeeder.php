@@ -772,17 +772,24 @@ class OrdersMasterSeeder extends Seeder
     {
         DB::table('orders_master')->delete();
 
-        $orderDate = Carbon::today()->subDays(10);
-        $baseDate = Carbon::today();
+        // WEBとPHONEの生成数（合計）
+        $max = 100; //ここを変更する場合の注意点：この数値を、orders_details_tableの先頭行$maxの値に代入すること
 
-        // WEB会員からの注文（クーポンなし）
-        for($i = 1; $i<= 50; $i++){
+        // WEB+PHONEの注文
+        for($i = 1; $i<= $max; $i++){
+
+            //徐々に小さくなる値
+            $rand = ($max-$i) * 3;
+
+            $orderDate = Carbon::today()->subHour($rand);
+            $today = Carbon::today();
+
 
             //配達希望日時
-            $apointment_date = $baseDate->addHours($i);
+            $apointment_date = $today->addHour($i)->addMinute($rand);
 
             //状態ID（もし、配達希望日時が過去であれば、「完了」または「キャンセル」にセット
-            if($apointment_date <= $baseDate){
+            if($apointment_date <= $today){
                 $state_id = rand(1,2);
 
             //配達希望日が未来である
@@ -794,43 +801,13 @@ class OrdersMasterSeeder extends Seeder
                 }
             }
 
-            Order::create([
-                'order_date' => $orderDate->addHours($i),
-                'order_appointment_date' => $apointment_date,
-                'coupon_id' => null,
-                'state_id' => $state_id,
-                'user_id' => rand(7,20),
-                'employee_id' => NULL,
-            ]);
-        }
-
-        // 電話会員からの注文（クーポンなし）
-        for($i = 1; $i<= 50; $i++){
-
-            //配達希望日時
-            $apointment_date = $baseDate->addHours($i);
-
-            //状態ID（もし、配達希望日時が過去であれば、「完了」または「キャンセル」にセット
-            if($apointment_date <= $baseDate){
-                $state_id = rand(1,2);
-
-            //配達希望日が未来である
-            }else{
-                //状態を、1または3に設定する。（１は未完了・３はキャンセル）
-                $state_id = rand(1,3);
-                if($state_id == 2){
-                    $state_id = 1;
-                }
+            $type = rand(1,2);
+            if($type == 1) { // WEB会員
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand(7, 20), 'employee_id' => NULL,]);
+            }else { // PHONE会員
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $today->addMinute(30), 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand(7, 20), 'employee_id' => rand(1, 6),]);
             }
 
-            Order::create([
-                'order_date' => $orderDate->addHours($i)->addMinutes(30),
-                'order_appointment_date' => $baseDate->addHours($i)->addMinutes(30),
-                'coupon_id' => null,
-                'state_id' => $state_id,
-                'user_id' => rand(7,20),
-                'employee_id' => rand(1,6),
-            ]);
         }
 
         //21 クーポン1 使用時（商品ID4 かつ 2000円以上）
