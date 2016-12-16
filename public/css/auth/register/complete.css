@@ -1,0 +1,50 @@
+.container .wrap {
+    padding: 80px 10px;
+}
+
+.container h1 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 50px;
+    color: #656565;
+}
+
+.test-box p{
+  font-size: 20px;
+  color: #656565;
+}
+
+.btn-box{
+  text-align: center;
+  margin-top: 70px;
+}
+
+.btn-box .box1{
+  display: inline-block;
+  width: 250px;
+  font-size: 15px;
+}
+
+.btn-box .box2{
+  display: inline-block;
+  width: 250px;
+  font-size: 15px;
+}
+
+.btn-box a{
+  display: block;
+  padding: 20px;
+  color: #fff;
+  background-color: #424242;
+  letter-spacing: 10px;
+  transition: ease-in 0.2s;
+  border: solid 1px #424242;
+}
+
+.btn-box a:hover{
+  opacity: 0.8;
+}
+
+.btn-box .box1{
+  margin-right: 2%;
+}
