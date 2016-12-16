@@ -31,4 +31,13 @@ class User extends Authenticatable
         return $this->belongsTo('App\Gender','gender_id');
     }
 
+    public function scopeSearchUser($query, $key)
+    {
+        if (!empty($key)) {
+            $query = $query->where('name','like',"%$key%");
+        }
+
+        return $query;
+    }
+
 }

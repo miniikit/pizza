@@ -18,8 +18,8 @@
     <div class="search mb">
         <form action="/pizzzzza/order/history" method="get">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="キーワード検索">
-                <span class="input-group-btn"><button class="btn btn-default" type="button">検索</button></span>
+                <input type="text" class="form-control" placeholder="名前で検索" name="key" value="{{ $key }}">
+                <span class="input-group-btn"><button class="btn btn-default" type="submit">検索</button></span>
             </div>
         </form>
     </div>
@@ -39,7 +39,7 @@
             <thead>
             <tr>
                 <th style="text-align: center;">注文日</th>
-                <th style="text-align: center;">氏名</th>
+                <th style="text-align: center;">名前</th>
                 <th style="text-align: center;">お届け先</th>
                 <th style="text-align: center;">電話番号</th>
                 <th style="text-align: center;">担当者</th>

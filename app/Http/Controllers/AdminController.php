@@ -12,41 +12,52 @@ use phpDocumentor\Reflection\Types\Null_;
 
 class AdminController extends Controller
 {
-    public function orderIndex(){
+    public function orderIndex()
+    {
 
         // $orders = Order::with('user','coupon','state','detail.productPrice')->where('state_id','=',1)->get()->toJson()
 
 
-        $orders = DB::table('orders_master')->join('orders_details_table','orders_master.id','=','orders_details_table.id')->whereIn('orders_master.state_id',[1,2,3])->get();
+        $orders = DB::table('orders_master')->join('orders_details_table', 'orders_master.id', '=', 'orders_details_table.id')->whereIn('orders_master.state_id', [1, 2, 3])->get();
 
-        return view('pizzzzza.order.index',compact('orders'));
+        return view('pizzzzza.order.index', compact('orders'));
     }
 
-    public function history() {
+    public function history(Request $request)
+    {
+        $key = $request->input('key');
 
-        $orders = Order::with('user','coupon','state','employee.user','detail.productPrice.product.genre')->orderBy('order_date','desc')->paginate(20);
+        $orders = Order::with('coupon', 'state', 'employee.user', 'detail.productPrice.product.genre')->whereIn('state_id', [2, 3])->whereHas('user',function($query) use($key){
 
-        return view('pizzzzza.order.history',compact('orders'));
+            $query->SearchUser($key);
+
+        })->orderBy('order_date', 'desc')->paginate(20);
+
+
+        return view('pizzzzza.order.history', compact('orders','key'));
 
     }
 
-    public function show($id) {
+    public function show($id)
+    {
 
-        $order = Order::with('user','coupon','state','employee.user','detail.productPrice.product.genre')->find($id);
+        $order = Order::with('user', 'coupon', 'state', 'employee.user', 'detail.productPrice.product.genre')->find($id);
 
         return view('pizzzzza.order.show', compact('order'));
     }
 
 
-    public function orderGet(){
+    public function orderGet()
+    {
 
-        $orders = Order::with('user','coupon','state','employee.user','detail.productPrice.product.genre')->where('state_id','=',1)->orderBy('order_appointment_date','asc')->get()->toArray();
+        $orders = Order::with('user', 'coupon', 'state', 'employee.user', 'detail.productPrice.product.genre')->where('state_id', '=', 1)->orderBy('order_appointment_date', 'asc')->get()->toArray();
 
         return response()->json($orders);
 
     }
 
-    public function destroy(Request $request) {
+    public function destroy(Request $request)
+    {
 
         $orderId = $request->input('0');
 
@@ -58,7 +69,8 @@ class AdminController extends Controller
         return Null;
     }
 
-    public function success(Request $request) {
+    public function success(Request $request)
+    {
 
         $orderId = $request->input('0');
 
