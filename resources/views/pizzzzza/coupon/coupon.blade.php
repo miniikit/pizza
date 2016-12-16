@@ -1,6 +1,6 @@
 @extends('template.admin')
 
-@section('title', 'Coupon')
+@section('title', '開催中クーポン一覧')
 
 @section('css')
     <link rel="stylesheet" href="/css/pizzzzza/coupon/index.css" media="all" title="no title">

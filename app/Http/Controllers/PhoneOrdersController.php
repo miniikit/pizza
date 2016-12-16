@@ -308,24 +308,26 @@ class PhoneOrdersController extends Controller
 
     public function orderCart(Request $request)
     {
+        //session()->forget('phoneOrderCart');
 
         // POSTデータ受け取り
             $product_id = $request->product_id;
             $product_num = $request->product_num;
 
         // カート内に商品があるか
-//            $cart = array();
-//            if(session()->has('phoneOrderCart')){
-//                $cart = session()->pull('phoneOrderCart');
-//                $cart[$product_id] = $product_num;
-//                session()->put('phoneOrderCart',$cart);
-//                dd($cart);
-//            }else{  //カート内に商品がない
-//                $cart[$product_id] = $product_num;
-//                session()->put('phoneOrderCart',$cart);
-//            }
+            $cart = array();
+            if(session()->has('phoneOrderCart')){
+                $cart = session()->pull('phoneOrderCart');
+                $cart[$product_id] = $product_num;
+                session()->put('phoneOrderCart',$cart);
+            }else{  //カート内に商品がない
+                $cart[$product_id] = $product_num;
+                session()->put('phoneOrderCart',$cart);
+            }
 
+            return compact('cart');
 
+    /*
             $cart = session()->get("phoneOrderCart",[]);
             $cart[$product_id] = $product_num;
 
@@ -334,10 +336,7 @@ class PhoneOrdersController extends Controller
             "status" => "ok",
             'cart' => $cart
         ];
-
-
-//        dd('err',session()->all());
-
+    */
     }
 
 
