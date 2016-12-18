@@ -36,7 +36,7 @@ class PhoneOrdersController extends Controller
     }
 
 
-    // 顧客検索
+    // 会員検索
     public function input(Request $request)
     {
         // 電話番号
@@ -56,7 +56,7 @@ class PhoneOrdersController extends Controller
         }
 
         // 負の数
-        if ($phone <= 0) {
+        if ($phone < 0) {
             $check["status"] = "false";
             $check["message"] = "電話番号は正の数で入力してください。";
             return compact('check', 'users');
