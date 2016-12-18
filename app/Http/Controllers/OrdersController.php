@@ -236,7 +236,8 @@ class OrdersController extends Controller
 
         $userId = Auth::user()->id;
 
-        if(!is_null($dbFirst)){
+        // 初回限定であれば
+        if($dbFirst == 1){
 
             $userOrder = DB::table('orders_master')->where('user_id','=',$userId)->get();
 

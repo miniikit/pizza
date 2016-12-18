@@ -111,8 +111,8 @@ class CouponsController extends Controller
             $id = DB::table('coupons_master')->insertGetId([
                 'coupons_types_id' => 1,
                 'coupon_name' => $request->coupon_name,
-                'coupon_discount' => $request->coupon_product_id,
-                'coupon_conditions_money' => $request->coupon_discount_price,
+                'coupon_discount' => $request->coupon_discount_price,
+                'coupon_conditions_money' => $request->coupon_conditions_price,
                 'product_id' => $product_id,
                 'coupon_start_date' => $request->coupon_start_date,
                 'coupon_end_date' => $request->coupon_end_date,
