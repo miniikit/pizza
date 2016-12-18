@@ -26,7 +26,7 @@
             {{--<form class="" action="/pizzzzza/order/accept/customer/check" method="post"> --}}
                 {{-- ここから：あえてformタグを消しています --}}
                 <div class="form-group">
-                    <input id="phone-number" type="text" class="form-control" placeholder="電話番号を入力してください" name="phone"
+                    <input id="phone-number" type="number" class="form-control" placeholder="電話番号を入力してください" name="phone"
                            value="">
                 </div>
                 <a id="phone-submit" class="btn btn-primary btn-lg btn-block" href="#">確認</a>

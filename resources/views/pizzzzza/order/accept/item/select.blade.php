@@ -49,8 +49,9 @@
                                 @endif
                             @endforeach
                         </div>
-
+                        <div id="side">
                         <h1 class="text-center title-space">サイド</h1>
+                        </div>
                         <div class="row">
                             @foreach($products as $product)
                                 @if ($product->genre_id == 2)
@@ -110,14 +111,14 @@
         　
         <ul class="list-group list-none">
             <li class="list" data-href="#">
-                <a href="#pizza"><h4>ピザ<span class="badge menu-space">{{ $pizzacnt }}</span></h4></a>
+                <a href="#pizza"><h4>ピザ<span class="badge menu-space">{{ $pizzaCount }}</span></h4></a>
             </li>
 
             <li class="list">
-                <a href="#side"><h4>サイド<span class="badge menu-space">{{ $sidecnt }}</span></h4></a>
+                <a href="#side"><h4>サイド<span class="badge menu-space">{{ $sideCount }}</span></h4></a>
             </li>
             <li class="list">
-                <a href="#drink"><h4>ドリンク<span class="badge menu-space">{{ $drinkcnt }}</span></h4></a>
+                <a href="#drink"><h4>ドリンク<span class="badge menu-space">{{ $drinkCount }}</span></h4></a>
             </li>
         </ul>
     </div>
