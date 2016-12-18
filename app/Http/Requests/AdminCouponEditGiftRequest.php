@@ -28,7 +28,7 @@ class AdminCouponEditGiftRequest extends FormRequest
             'coupon_num' => 'required|regex:/^[a-zA-Z0-9-]+$/', //半角英数とハイフン
             'coupon_end_date' => 'required|date',
             'coupon_conditions_first' => 'required',
-            'coupon_max' => 'required|numeric',
+            'coupon_max' => 'numeric',
             'coupon_conditions_price' => 'required|numeric',
         ];
     }

@@ -89,7 +89,7 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::get('/pizzzzza/coupon/{id}/edit','CouponsController@edit')->name('editCoupon');  //クーポン編集
     Route::post('/pizzzzza/coupon/{id}/update/discount','CouponsController@DiscountUpdateDo');
     Route::post('/pizzzzza/coupon/{id}/update/gift','CouponsController@GiftUpdateDo');  //クーポン更新
-    Route::post('/pizzzzza/coupon/{id}/delete','CouponsController@delete');  //クーポン削除
+    Route::get('/pizzzzza/coupon/{id}/delete','CouponsController@delete');  //クーポン削除
     Route::get('/pizzzzza/coupon/add/discount/input','CouponsController@couponNewDiscount')->name('newCouponDiscount'); //クーポン値引き入力ページ
     Route::post('/pizzzzza/coupon/add/discount/do','CouponsController@couponNewDiscountDo'); //クーポン追加処理（値引き）
     Route::get('/pizzzzza/coupon/add/gift/input','CouponsController@couponNewGift'); //プレゼントクーポン条件入力ページ
@@ -97,12 +97,12 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::get('/pizzzzza/coupon/history','CouponsController@couponHistory'); //過去のクーポン一覧ページ
 
 //従業員用キャンペーン
-    Route::get('/pizzzzza/campaign/','AdminCampaignsController@index')->name('adminCampIndex');    // 管理者クーポン一覧
+    Route::get('/pizzzzza/campaign','AdminCampaignsController@index')->name('adminCampIndex');    // 管理者クーポン一覧
     Route::get('/pizzzzza/campaign/{id}/show','AdminCampaignsController@show')->name('adminCampShow');    // 管理者クーポン詳細
     Route::get('/pizzzzza/campaign/add','AdminCampaignsController@add');   // 管理者クーポン追加
     Route::get('/pizzzzza/campaign/{id}/edit','AdminCampaignsController@edit');   // 管理者クーポン編集
     Route::post('/pizzzzza/campaign/store','AdminCampaignsController@store');   // 管理者クーポン追加処理
-    Route::get('/pizzzzza/campaign/{id}/update','AdminCampaignsController@update');   // 管理者クーポン更新処理
+    Route::post('/pizzzzza/campaign/{id}/update','AdminCampaignsController@update');   // 管理者クーポン更新処理
     Route::get('/pizzzzza/campaign/{id}/delete','AdminCampaignsController@delete');   // 管理者クーポン削除処理
     Route::get('/pizzzzza/campaign/history','AdminCampaignsController@history');   // 管理者クーポン履歴
 

@@ -29,7 +29,7 @@ class AdminCouponEditDiscountRequest extends FormRequest
             'coupon_discount_price' => 'required|min:1',
             'coupon_end_date' => 'required|date',
             'coupon_conditions_first' => 'required',
-            'coupon_max' => 'required|numeric',
+            'coupon_max' => 'numeric',
             'coupon_conditions_price' => 'required|numeric',
             'coupon_product_id' => 'required|numeric',
         ];

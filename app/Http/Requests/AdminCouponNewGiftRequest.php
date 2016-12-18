@@ -29,7 +29,7 @@ class AdminCouponNewGiftRequest extends FormRequest
             'coupon_start_date' => 'required|date',
             'coupon_end_date' => 'required|date',
             'coupon_target' => 'required',
-            'coupon_max' => 'required|numeric',
+            'coupon_max' => 'numeric',
             'coupon_conditions_price' => 'required|numeric',
             'coupon_present_product_id' => 'required|numeric',
         ];

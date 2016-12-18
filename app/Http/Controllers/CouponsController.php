@@ -94,6 +94,15 @@ class CouponsController extends Controller
                 $product_id = $request->coupon_product_id;
             }
 
+        //
+        //　「クーポン利用上限回数」が「なし」であれば、nullを設定する。
+        //
+            if(isset($request->coupon_max)){
+                $coupon_max = $request->coupon_max;
+            }else{
+                $coupon_max = 0;
+            }
+
 
         //
         //  INSERT  SQL実行
@@ -108,11 +117,15 @@ class CouponsController extends Controller
                 'coupon_start_date' => $request->coupon_start_date,
                 'coupon_end_date' => $request->coupon_end_date,
                 'coupon_number' => $request->coupon_num,
-                'coupon_conditions_count' => $request->coupon_max,
+                'coupon_conditions_count' => null,  //ひとまずnullを設定し、このSQLの次にupdate文を走らせる。
                 'coupon_conditions_first' => $request->coupon_target,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
+
+        if($coupon_max >= 1){
+            DB::table('coupons_master')->where('id','=',$id)->update(['coupon_conditions_count'=> $coupon_max]);
+        }
 
             flash('クーポンの発行が完了しました。', 'success');
 
@@ -180,6 +193,14 @@ class CouponsController extends Controller
         $discount_price = $TmpDiscount_price->product_price;
         $conditions_price = (int) $request->coupon_conditions_price;
 
+        //
+        //　「クーポン利用上限回数」が「なし」であれば、nullを設定する。
+        //
+        if(isset($request->coupon_max)){
+            $coupon_max = $request->coupon_max;
+        }else{
+            $coupon_max = 0;
+        }
 
         //
         //  INSERT  SQL実行
@@ -194,11 +215,16 @@ class CouponsController extends Controller
             'coupon_start_date' => $request->coupon_start_date,
             'coupon_end_date' => $request->coupon_end_date,
             'coupon_number' => $request->coupon_num,
-            'coupon_conditions_count' => $request->coupon_max,
+            'coupon_conditions_count' => null, //nullを代入し、もし値があれば次にupdate文を実行する。
             'coupon_conditions_first' => $request->coupon_target,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+
+
+        if($coupon_max >= 1){
+            DB::table('coupons_master')->where('id','=',$id)->update(['coupon_conditions_count'=> $coupon_max]);
+        }
 
         flash('クーポンの発行が完了しました。', 'success');
 
@@ -236,7 +262,7 @@ class CouponsController extends Controller
 
 
         // 条件商品を取得
-        if(isset($coupon->product_id) && $coupon->product_id != 0) {
+        if($coupon->product_id != 0) {
 
             $product_id = $coupon->product_id;
             $product = DB::table('products_master')->where('products_master.id', '=', $product_id)->first();
@@ -265,24 +291,25 @@ class CouponsController extends Controller
         //DBから取得（クーポン＋クーポン種別を、$idと一致する１つだけ取得）
             $coupon = DB::table('coupons_master')->join('coupons_types_master','coupons_master.coupons_types_id','=','coupons_types_master.id')->where('coupons_master.id','=',$id)->first();
 
-        //もし、クーポン種別が「プレゼント」であれば、どの商品が無料になるのかを表示するために商品表と結合し、上書きする
+        //もし、クーポン種別が「プレゼント」であれば、どの商品が無料になるのかを表示するために商品表と種別表と結合し、上書きする
             $couponTypeId = $coupon->coupons_types_id;
             if($couponTypeId == 2){
-                $coupon = DB::table('coupons_master')->join('coupons_types_master','coupons_master.coupons_types_id','=','coupons_types_master.id')->where('coupons_master.id','=',$id)->first();
+                $coupon = DB::table('coupons_master')->join('coupons_types_master','coupons_master.coupons_types_id','=','coupons_types_master.id')->join('products_master','coupons_master.product_id','=','products_master.id')->where('coupons_master.id','=',$id)->first();
             }
-
 
 
         //クーポン種別を取得する(Viewで使用）
             $couponTypes = DB::table('coupons_types_master')->get();    //12.6の変更で不要に
 
-        // 条件商品を取得
-            if(isset($coupon->product_id)){
+        //現在の商品IDを返却（checked属性を追加するために使用）
+            if(isset($coupon->product_id) && $coupon->product_id != 0){
                 $product_id = $coupon->product_id;
             }else{
                 $product_id = null;
             }
-            $products = DB::table('products_master')->get();
+            $today = Carbon::today();
+        //商品表から、「販売中」である商品一覧を抽出
+            $products = DB::table('products_master')->where('sales_start_date','<=',$today)->Where('sales_end_date','=',null)->orWhere('sales_end_date','>=',$today)->get();
 
         return view('pizzzzza.coupon.edit',compact('coupon','couponTypes','couponTarget','id','products','product_id'));
 
@@ -306,7 +333,11 @@ class CouponsController extends Controller
                 //値引き金額
                 $update['coupon_discount'] = $request->coupon_discount_price;
                 //利用上限回数
-                $update['coupon_conditions_count'] = $request->coupon_max;
+                if($request->coupon_max >= 1) {
+                    $update['coupon_conditions_count'] = $request->coupon_max;
+                }else{
+                    $update['coupon_conditions_count'] = null;
+                }
                 //使用条件金額
                 $update['coupon_conditions_money'] = $request->coupon_conditions_price;
                 //使用条件商品
@@ -366,7 +397,11 @@ class CouponsController extends Controller
             //値引き金額
             $update['coupon_discount'] = $request->coupon_discount_price;
             //利用上限回数
-            $update['coupon_conditions_count'] = $request->coupon_max;
+            if($request->coupon_max >= 1) {
+                $update['coupon_conditions_count'] = $request->coupon_max;
+            }else{
+                $update['coupon_conditions_count'] = null;
+            }
             //使用条件金額
             $update['coupon_conditions_money'] = $request->coupon_conditions_price;
             //使用条件商品

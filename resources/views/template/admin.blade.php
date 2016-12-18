@@ -43,6 +43,18 @@
                 </li>
 
                 <li><a href="/pizzzzza/order/accept/input">電話注文</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">キャンペーン<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/pizzzzza/campaign">キャンペーン一覧</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/pizzzzza/campaign/add">キャンペーン追加</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/pizzzzza/campaign/history">キャンペーン履歴</a></li>
+                    </ul>
+                </li>
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">クーポン<span class="caret"></span></a>
                     <ul class="dropdown-menu">

@@ -345,7 +345,6 @@ class CouponsMasterSeeder extends Seeder
             'coupon_number' => 'GIFTPOTATO',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => null,
-            'deleted_at' => null
         ]);
         //2 テストデータ：（キャンペーンと整合性 // 値引き・全員・5000以上・1000円引き・1人1回まで）
         Coupon::create([
@@ -382,7 +381,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_money' => 3000,
             'product_id' => null,
             'coupon_start_date' => Carbon::parse('2016-08-04'),
-            'coupon_end_date' => Carbon::parse('2016-12-25'),
+            'coupon_end_date' => Carbon::parse('2017-12-25'),
             'coupon_number' => '500OFF',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => null,
@@ -410,8 +409,9 @@ class CouponsMasterSeeder extends Seeder
             'coupon_start_date' => Carbon::today()->subMonth(),
             'coupon_end_date' => Carbon::today()->subDay(),
             'coupon_number' => 'SUMMER',
-            'coupon_conditions_count' => 3,
+            'coupon_conditions_count' => null,
             'coupon_conditions_first' => 1,
+            'deleted_at' => Carbon::today()->subDay()
         ]);
 
     }
