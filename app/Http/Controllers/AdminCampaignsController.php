@@ -16,14 +16,18 @@ class AdminCampaignsController extends Controller
     public function index(){
 
         $Campaign = new AdminCampaignService();
-        $campaigns = $Campaign->getAll();
+        $campaigns = $Campaign->getNowAll();
 
         return view('pizzzzza.campaign.index',compact('campaigns'));
     }
 
     // キャンペーン履歴
     public function history(){
-        return view('pizzzzza.campaign.history');
+
+        $Campaign = new AdminCampaignService();
+        $campaigns = $Campaign->getAll();
+
+        return view('pizzzzza.campaign.history',compact('campaigns'));
     }
 
     // キャンペーン詳細 k
@@ -35,7 +39,7 @@ class AdminCampaignsController extends Controller
         return view('pizzzzza.campaign.show',compact('campaign','id'));
     }
 
-    // キャンペーン追加
+    // キャンペーン追加 k
     public function add(){
         return view('pizzzzza.campaign.add');
     }
@@ -49,7 +53,7 @@ class AdminCampaignsController extends Controller
         return view('pizzzzza.campaign.edit',compact('campaign','id'));
     }
 
-    // キャンペーン更新処理 画像が反映されない
+    // キャンペーン更新処理 k
     public function update(AdminCampaignEditRequest $request,$id){
         // campaign_start_dateは送られてこない。 campaign_image、campaign_bannerは更新がある場合のみ送られてくる。
 
@@ -70,7 +74,7 @@ class AdminCampaignsController extends Controller
 
     }
 
-    // キャンペーン追加処理 画像が反映されない
+    // キャンペーン追加処理 k
     public function store(AdminCampaignRequest $request){
 
         $Campaign = new AdminCampaignService();

@@ -8,22 +8,33 @@ use Illuminate\Support\Facades\DB;
 
 class AdminCampaignService
 {
+    // すべて
     public function getAll()
     {
-
         $campaigns = DB::table('campaigns_master')->get();
 
         return $campaigns;
     }
 
+    // 開催中のみ
+    public function getNowAll()
+    {
+        $today = Carbon::today();
+
+        $campaigns = DB::table('campaigns_master')->where('campaign_start_day','<=',$today)->where('campaign_end_day','>=',$today)->orWhere('campaign_end_day','=',null)->where('deleted_at','=',null)->get();
+
+        return $campaigns;
+    }
+
+    // $idが一致する１件
     public function getOne($id)
     {
-
         $campaign = DB::table('campaigns_master')->where('id', '=', $id)->first();
 
         return $campaign;
     }
 
+    // 更新処理
     public function update($request, $id)
     {
         // 現在のDBのデータを取得（キャンペーン画像用）
@@ -79,6 +90,7 @@ class AdminCampaignService
         return $status;
     }
 
+    // 新規追加処理
     public function insert($request)
     {
         $carbon = Carbon::now();
