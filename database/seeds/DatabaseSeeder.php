@@ -344,7 +344,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_end_date' => Carbon::parse('2017-10-18'),
             'coupon_number' => 'GIFTPOTATO',
             'coupon_conditions_count' => 1,
-            'coupon_conditions_first' => null,
+            'coupon_conditions_first' => 0, //全員
         ]);
         //2 テストデータ：（キャンペーンと整合性 // 値引き・全員・5000以上・1000円引き・1人1回まで）
         Coupon::create([
@@ -357,7 +357,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_end_date' => Carbon::parse('2017-06-07'),
             'coupon_number' => '1000OFF',
             'coupon_conditions_count' => 1,
-            'coupon_conditions_first' => 1,
+            'coupon_conditions_first' => 0, //全員
         ]);
         //3 テストデータ：（キャンペーンと整合性 // プレゼント・全員・2500以上・コーラ無料・1人1回まで）
         Coupon::create([
@@ -370,8 +370,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_end_date' => Carbon::parse('2017-08-31'),
             'coupon_number' => 'GIFTCOLA',
             'coupon_conditions_count' => 1,
-            'coupon_conditions_first' => null,
-            'deleted_at' => null
+            'coupon_conditions_first' => 0, //全員
         ]);
         //4 テストデータ：（キャンペーンと整合性 // 値引き・全員・3000以上・500円OFF・1人1回まで）
         Coupon::create([
@@ -384,7 +383,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_end_date' => Carbon::parse('2017-12-25'),
             'coupon_number' => '500OFF',
             'coupon_conditions_count' => 1,
-            'coupon_conditions_first' => null,
+            'coupon_conditions_first' => 0, //全員
         ]);
         //5 テストデータ：開催中 （プレゼント・全員対象・2000円以上・十勝産コーンポタージュ・無制限）
         Coupon::create([
@@ -397,7 +396,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_end_date' => Carbon::parse('2018-12-31'),
             'coupon_number' => 'FREEPOTARGE',
             'coupon_conditions_count' => null,
-            'coupon_conditions_first' => 1, //初回限定
+            'coupon_conditions_first' => 0,  //全員
         ]);
         //6 テストデータ：終了 （値引き・初回限定・500円以上・コーラ無料・無制限）
         Coupon::create([
@@ -410,7 +409,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_end_date' => Carbon::today()->subDay(),
             'coupon_number' => 'SUMMER',
             'coupon_conditions_count' => null,
-            'coupon_conditions_first' => 1,
+            'coupon_conditions_first' => 1,  //初回限定
             'deleted_at' => Carbon::today()->subDay()
         ]);
 

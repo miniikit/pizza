@@ -131,7 +131,6 @@
                         data: data,
                         success: function(message, dataType)
                         {
-                            alert(message);
                             //値引き後金額
                             if(message["status"] == "error"){
                                 $("#coupon-message").css('display','inline-block').removeClass('coupon-true').addClass('coupon-false');

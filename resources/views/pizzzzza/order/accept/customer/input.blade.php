@@ -36,7 +36,8 @@
             </tr>
             <tr>
                 <th class="text-center">郵便番号</th>
-                <td><input class="form-control" type="number" name="postal" value="" placeholder="ハイフン抜き"></td>
+                <td><input class="form-control" type="number" name="postal" value="" placeholder="ハイフン抜き"
+                           onKeyUp="AjaxZip3.zip2addr(this,'','address1','address2');" maxlength="7"></td>
             </tr>
             <tr>
                 <th class="text-center">住所</th>
@@ -52,7 +53,7 @@
             </tr>
             <tr>
                 <th class="text-center">電話番号</th>
-                <td><input class="form-control" type="number" name="phone" value="" placeholder="例）08012345678"></td>
+                <td><input class="form-control" type="number" name="phone" value="" placeholder="例）08012345678" maxlength="11"></td>
             </tr>
             </tbody>
         </table>
@@ -62,4 +63,8 @@
         </div>
         {{ csrf_field() }}
     </form>
+@endsection
+
+@section('script')
+    <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 @endsection
