@@ -90,7 +90,7 @@ class AdminCampaignService
         return $status;
     }
 
-    // 新規追加処理
+    // 追加処理
     public function insert($request)
     {
         $carbon = Carbon::now();
@@ -128,5 +128,16 @@ class AdminCampaignService
         $id = DB::table('campaigns_master')->insertGetId($insert);
 
         return $id;
+    }
+
+    // 削除処理
+    public function delete($id){
+
+        $now = Carbon::now();
+        $yesterday = Carbon::yesterday();
+
+        $delete = DB::table('campaigns_master')->where('id','=',$id)->update(["deleted_at" => $now,"campaign_end_day" => $yesterday]);
+
+        return $delete;
     }
 }

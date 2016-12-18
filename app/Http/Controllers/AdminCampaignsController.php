@@ -12,7 +12,7 @@ use App\Http\Requests\AdminCampaignEditRequest;
 
 class AdminCampaignsController extends Controller
 {
-    // キャンペーン一覧 k
+    // キャンペーン一覧
     public function index(){
 
         $Campaign = new AdminCampaignService();
@@ -30,7 +30,7 @@ class AdminCampaignsController extends Controller
         return view('pizzzzza.campaign.history',compact('campaigns'));
     }
 
-    // キャンペーン詳細 k
+    // キャンペーン詳細
     public function show($id){
 
         $Campaign = new AdminCampaignService();
@@ -39,12 +39,12 @@ class AdminCampaignsController extends Controller
         return view('pizzzzza.campaign.show',compact('campaign','id'));
     }
 
-    // キャンペーン追加 k
+    // キャンペーン追加
     public function add(){
         return view('pizzzzza.campaign.add');
     }
 
-    // キャンペーン編集 k
+    // キャンペーン編集
     public function edit($id){
 
         $Campaign = new AdminCampaignService();
@@ -53,7 +53,7 @@ class AdminCampaignsController extends Controller
         return view('pizzzzza.campaign.edit',compact('campaign','id'));
     }
 
-    // キャンペーン更新処理 k
+    // キャンペーン更新処理
     public function update(AdminCampaignEditRequest $request,$id){
         // campaign_start_dateは送られてこない。 campaign_image、campaign_bannerは更新がある場合のみ送られてくる。
 
@@ -61,9 +61,9 @@ class AdminCampaignsController extends Controller
         $campaign = $Campaign->update($request,$id);
 
         if(count($campaign) >= 1) {
-            flash('クーポンの更新が完了しました。', 'success');
+            flash('キャンペーンの更新が完了しました。', 'success');
         }else{
-            flash('クーポンの更新に失敗しました。','danger');
+            flash('キャンペーンの更新に失敗しました。','danger');
         }
 
         return redirect()->route('adminCampShow',$id);
@@ -71,19 +71,29 @@ class AdminCampaignsController extends Controller
 
     // キャンペーン削除処理
     public function delete($id){
+        
+        $Campaign = new AdminCampaignService();
+        $delete = $Campaign->delete($id);
 
+        if(count($delete) >= 1) {
+            flash('キャンペーンの削除が完了しました。', 'success');
+        }else{
+            flash('キャンペーンの削除に失敗しました。','danger');
+        }
+
+        return redirect()->route('adminCampShow',$id);
     }
 
-    // キャンペーン追加処理 k
+    // キャンペーン追加処理
     public function store(AdminCampaignRequest $request){
 
         $Campaign = new AdminCampaignService();
         $id = $Campaign->insert($request);
 
         if(count($id) >= 1) {
-            flash('クーポンの作成が完了しました。', 'success');
+            flash('キャンペーンの作成が完了しました。', 'success');
         }else{
-            flash('クーポンの作成に失敗しました。','danger');
+            flash('キャンペーンの作成に失敗しました。','danger');
         }
 
         return redirect()->route('adminCampShow',$id);
