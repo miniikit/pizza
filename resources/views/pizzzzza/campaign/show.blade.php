@@ -29,16 +29,20 @@
                     <td>{{ $campaign->campaign_text }}</td>
                 </tr>
                 <tr>
-                    <th class="text-center">キャンペーン画像</th>
-                    <td></td>
-                </tr>
-                <tr>
                     <th class="text-center">注意事項</th>
                     <td>{{ $campaign->campaign_note }}</td>
                 </tr>
                 <tr>
                     <th class="text-center">対象者</th>
                     <td>{{ $campaign->campaign_subject }}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">メイン画像</th>
+                    <td><img src="{{ $campaign->campaign_image }}"></td>
+                </tr>
+                <tr>
+                    <th class="text-center">バナー画像</th>
+                    <td><img src="{{ $campaign->campaign_banner }}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -74,8 +78,8 @@
                 </tr>
                 </tbody>
             </table>
-            <form class="ar" action="/pizzzzza/employee/{{$campaign->id}}/delete" method="post">
-                <a href="/pizzzzza/employee/{{$campaign->id}}/edit" class="btn btn-default btn-sm">編集</a>
+            <form class="ar" action="/pizzzzza/campaign/{{$campaign->id}}/delete" method="post">
+                <a href="/pizzzzza/campaign/{{$campaign->id}}/edit" class="btn btn-default btn-sm">編集</a>
                 @if (is_null($campaign->deleted_at))
                     <input class="btn btn-danger btn-sm ml" type="submit" name="delete" value="削除">
                 @endif
@@ -83,7 +87,7 @@
             </form>
         </div>
         <div class="col-md-4 col-md-offset-4 mt">
-            <a href="/pizzzzza/employee" class="btn btn-default btn-lg btn-block">戻る</a>
+            <a href="/pizzzzza/campaign" class="btn btn-default btn-lg btn-block">戻る</a>
         </div>
     </div>
 @endsection
