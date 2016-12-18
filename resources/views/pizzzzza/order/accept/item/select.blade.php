@@ -38,7 +38,7 @@
                                             <div class="text-center space">{{ $product->product_price }}円</div>
                                             <div class="text-center space">
                                                 <select name="product_num" id="{{ $product->product_name }}"
-                                                        class="{{ $product->genre_name }}">
+                                                        class="{{ $product->genre_name }} form-control">
                                                     @for($i = 0; $i<= 10; $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
@@ -64,7 +64,7 @@
                                             <div class="text-center space">{{ $product->product_price }}円</div>
                                             <div class="text-center space">
                                                 <select name="product_num" id="{{ $product->product_name }}"
-                                                        class="{{ $product->genre_name }}">
+                                                        class="{{ $product->genre_name }} form-control">
                                                     @for($i = 0; $i<= 10; $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
@@ -90,7 +90,7 @@
                                             <div class="text-center space">{{ $product->product_price }}円</div>
                                             <div class="text-center space">
                                                 <select name="product_num" id="{{ $product->product_name }}"
-                                                        class="{{ $product->genre_name }}">
+                                                        class="{{ $product->genre_name }} form-control">
                                                     @for($i = 0; $i<= 10; $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
@@ -132,7 +132,6 @@
             <tr>
                 <th>商品</th>
                 <th>数量</th>
-                <th>ジャンル</th>
             </tr>
             </thead>
             <tbody id="cart">
@@ -165,22 +164,6 @@
 
 
         $(function () {
-
-            //セレクトボックスが切り替わったら発動
-            $('select').change(function () {
-
-                //選択したvalue値を変数に格納
-                var num = $(this).val();
-                var name = $(this).attr("id");
-                var genre = $(this).attr("class");
-
-                //選択したvalue値をp要素に出力
-                $('#cart').append('<tr><td>' + name + '</td><td>' + num + '</td><td>' + genre + '</tr>');
-            });
-        });
-
-
-        $(function () {
             $('select').change(function () {
 
 
@@ -203,8 +186,23 @@
                             type: "POST",
                             url: "/pizzzzza/order/accept/customer/cart",
                             data: data,
-                            success: function (message,flag,dataType) {
-                                console.log(message,flag);
+                            success: function (cart,status,count) {
+                                // 成功 alert(cart["cart"]["綾鷹"]);
+                                // 成功 alert(cart["cart"].綾鷹);
+
+                                // #cartを初期化
+                                $('#cart').empty();
+
+                                // #cartに書き足し
+                                $.each(cart["cart"], function(i, val) {
+                                    $('#cart').append('<tr><td>' + i + '</td><td><select class="select form-control"><option value='+ val +' selected>' + val + '</option></select></td></tr>');
+                                    // $("#cart").append(i + " - " + val);
+                                });
+
+                                // option valueを追加
+                                for(var i=0; i <= 10; i++) {
+                                    $('.select').append('<option values='+ i +'>'+ i +'</option>');
+                                }
 
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {

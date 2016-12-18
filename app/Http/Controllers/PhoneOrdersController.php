@@ -48,27 +48,27 @@ class PhoneOrdersController extends Controller
         // 手動バリデーションチェック
         //
 
-            // 入力なし
-            if($phone <= ""){
-                $check["status"] = "false";
-                $check["message"] = "電話番号を入力してください。";
-                return compact('check', 'users');
-            }
+        // 入力なし
+        if ($phone <= "") {
+            $check["status"] = "false";
+            $check["message"] = "電話番号を入力してください。";
+            return compact('check', 'users');
+        }
 
-            // 負の数
-            if($phone <= 0){
-                $check["status"] = "false";
-                $check["message"] = "電話番号は正の数で入力してください。";
-                return compact('check', 'users');
-            }
+        // 負の数
+        if ($phone <= 0) {
+            $check["status"] = "false";
+            $check["message"] = "電話番号は正の数で入力してください。";
+            return compact('check', 'users');
+        }
 
-            // 桁数が10-11桁以外
-            if(!preg_match('/^[0-9]{10,11}$/', $phone)){
-                $cnt = strlen($phone);
-                $check["status"] = "false";
-                $check["message"] = "電話番号は10-11桁で数値のみを入力してください。（現在：" . $cnt . "桁）";
-                return compact('check', 'users');
-            }
+        // 桁数が10-11桁以外
+        if (!preg_match('/^[0-9]{10,11}$/', $phone)) {
+            $cnt = strlen($phone);
+            $check["status"] = "false";
+            $check["message"] = "電話番号は10-11桁で数値のみを入力してください。（現在：" . $cnt . "桁）";
+            return compact('check', 'users');
+        }
 
         // 検索
         $users = DB::table('users')->where('phone', '=', $phone)->get();
@@ -97,7 +97,7 @@ class PhoneOrdersController extends Controller
             // 累計注文回数
             $orderCount = $phoneOrder->getOrderCount($id);
 
-            if($orderCount >= 1) {
+            if ($orderCount >= 1) {
 
                 // 注文情報（価格＋注文＋注文詳細＋商品＋状態マスタの連結）
                 $orders = $phoneOrder->getOrders($id);
@@ -113,7 +113,7 @@ class PhoneOrdersController extends Controller
 
                 return view('pizzzzza.order.accept.customer.show', compact('user', 'orders', 'orderCount', 'orderTotal', 'orderAvg', 'orderCouponTotal'));
 
-            }else{
+            } else {
 
                 return view('pizzzzza.order.accept.customer.show', compact('user'));
 
@@ -171,24 +171,24 @@ class PhoneOrdersController extends Controller
             if ($request->detailPost == "戻る") {
                 return redirect()->route('telSearch');
 
-            // 商品選択ページへ（会員情報OK）
+                // 商品選択ページへ（会員情報OK）
             } else if ($request->detailPost == "注文へ") {
                 $this->orderSelect($request);
                 // この辺で、会員IDをセッションに保存する必要あり。
-                return redirect()->route('telOrderSelect',$request->customer_id);
+                return redirect()->route('telOrderSelect', $request->customer_id);
 
-            // 会員情報編集ページへ
+                // 会員情報編集ページへ
             } else if ($request->detailPost == "編集") {
                 return redirect()->route('telEdit', $request->customer_id);
 
-            // それ以外のボタンが押された
+                // それ以外のボタンが押された
             } else {
                 Flash::error('エラーが発生しました。（不正な遷移：エラーコード501）');
                 return redirect()->route('orderTop');
             }
 
-        // その他ページからの遷移　（現状ないので、不正な遷移
-        }else{
+            // その他ページからの遷移　（現状ないので、不正な遷移
+        } else {
             Flash::error('エラーが発生しました。（不正な遷移：エラーコード501-2）');
             return redirect()->route('orderTop');
         }
@@ -197,22 +197,22 @@ class PhoneOrdersController extends Controller
 
 
     // WEB会員 お届け先住所 更新処理
-    public function updateWeb(AdminPhoneUserEditRequestForWeb $request,$id)
+    public function updateWeb(AdminPhoneUserEditRequestForWeb $request, $id)
     {
 
         $user_update = $request->all();
 
         // 更新処理
         $Phone = new PhoneOrderService();
-        $success = $Phone->updateWebCustomer($id,$user_update);
+        $success = $Phone->updateWebCustomer($id, $user_update);
 
         // リダイレクト
-        if(count($success)>0) {
+        if (count($success) > 0) {
 
             Flash::success('お届け先情報の更新が完了しました。');
             return redirect()->route('telShow', $id);
 
-        }else{
+        } else {
 
             Flash::danger('お届け先情報の更新に失敗しました。');
             return redirect()->route('telShow', $id);
@@ -222,20 +222,20 @@ class PhoneOrdersController extends Controller
 
 
     // PHONE会員 お届け先住所 更新処理
-    public function updatePhone(AdminPhoneUserEditRequest $request,$id)
+    public function updatePhone(AdminPhoneUserEditRequest $request, $id)
     {
 
         $user_update = $request->all();
 
         // 更新処理
         $Phone = new PhoneOrderService();
-        $success = $Phone->updatePhoneCustomer($id,$user_update);
+        $success = $Phone->updatePhoneCustomer($id, $user_update);
 
         // リダイレクト
-        if(count($success) > 0) {
+        if (count($success) > 0) {
             Flash::success('お届け先情報の更新が完了しました。');
             return redirect()->route('telShow', $id);
-        }else{
+        } else {
             Flash::danger('お届け先情報の更新に失敗しました。');
             return redirect()->route('telShow', $id);
         }
@@ -259,10 +259,10 @@ class PhoneOrdersController extends Controller
         $id = $Phone->newCustomerInsert($new_customer);
 
         // リダイレクト
-        if(count($id) >= 1) {
+        if (count($id) >= 1) {
             Flash::success('お届け先情報の登録が完了しました。');
             return redirect()->route('telShow', $id);
-        }else{
+        } else {
             Flash::danger('お届け先情報の登録が完了しました。');
             return redirect()->route('telShow', $id);
         }
@@ -283,7 +283,7 @@ class PhoneOrdersController extends Controller
         $sideCount = $Phone->getSideCnt();
         $drinkCount = $Phone->getDrinkCnt();
 
-        return view('pizzzzza.order.accept.item.select', compact('products', 'pizzaCount', 'sideCount', 'drinkCount','id'));
+        return view('pizzzzza.order.accept.item.select', compact('products', 'pizzaCount', 'sideCount', 'drinkCount', 'id'));
     }
 
     // カート内リアルタイム反映
@@ -292,23 +292,29 @@ class PhoneOrdersController extends Controller
         // session()->forget('phoneOrderCart');
 
         // POSTデータ受け取り
-            $product_id = $request->product_id;
-            $product_num = $request->product_num;
+        $product_id = $request->product_id;
+        $product_num = $request->product_num;
 
-        // セッション処理
-            $cart = session()->get("phoneOrderCart",[]);
+        // セッションから取り出し
+        $cart = session()->get("phoneOrderCart", []);
 
-            $cart[$product_id] = $product_num;
-            session()->put('phoneOrderCart',$cart);
+        // 変数に配置
+        $cart[$product_id] = $product_num;
+
+        // 削除された場合の処理
+        if ($product_num == 0) {
+            // $product_idを削除
+            unset($cart[$product_id]);
+        }
+
+        // セッションを再配置
+        session()->put('phoneOrderCart', $cart);
 
 
-            $count = count($cart);
+        // 件数
+        $count = count($cart);
 
-        return [
-            "status" => "ok",
-            "cart" => $cart,
-            "count" => $count,
-        ];
+        return ["cart" => $cart, "status" => "ok", "count" => $count,];
 
     }
 
