@@ -283,10 +283,6 @@ class PhoneOrdersController extends Controller
         $sideCount = $Phone->getSideCnt();
         $drinkCount = $Phone->getDrinkCnt();
 
-        //$pizzaCount = Product::where('genre_id', 1)->count();
-        //$sideCount = Product::where('genre_id', 2)->count();
-        //$drinkCount = Product::where('genre_id', 3)->count();
-
         return view('pizzzzza.order.accept.item.select', compact('products', 'pizzaCount', 'sideCount', 'drinkCount','id'));
     }
 
