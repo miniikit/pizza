@@ -7,6 +7,19 @@ use Illuminate\Support\Facades\DB;
 
 class AdminCampaignService
 {
+    public function getAll(){
+        $campaigns = DB::table('campaigns_master')->get();
+
+        return $campaigns;
+    }
+
+    public function getOne($id){
+        $campaign = DB::table('campaigns_master')->where('id','=',$id)->first();
+
+        return $campaign;
+    }
+
+    //多分途中、これ
     public function insert($request){
 
         //

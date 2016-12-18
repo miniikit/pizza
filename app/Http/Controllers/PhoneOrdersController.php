@@ -58,7 +58,7 @@ class PhoneOrdersController extends Controller
         }
     }
 
-
+    //詳細
     public function show($id)
     {
         $phoneOrder = new PhoneOrderService();
@@ -249,7 +249,7 @@ class PhoneOrdersController extends Controller
         return view('pizzzzza.order.accept.customer.input');
     }
 
-
+    //新規会員登録＞DB挿入処理
     public function newCustomerInsert(AdminPhoneUserAddRequest $request)
     {
 
@@ -293,7 +293,6 @@ class PhoneOrdersController extends Controller
 
     }
 
-
     //商品入力・選択ページ
     public function orderSelect($id)
     {
@@ -305,7 +304,7 @@ class PhoneOrdersController extends Controller
         return view('pizzzzza.order.accept.item.select', compact('products', 'pizzacnt', 'sidecnt', 'drinkcnt','id'));
     }
 
-
+    //カート内リアルタイム表示
     public function orderCart(Request $request)
     {
         //session()->forget('phoneOrderCart');
@@ -330,7 +329,6 @@ class PhoneOrdersController extends Controller
         ];
 
     }
-
 
     //注文情報確認ページ
     public function orderConfirm()

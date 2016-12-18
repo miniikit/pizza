@@ -13,7 +13,11 @@ class AdminCampaignsController extends Controller
 {
     // キャンペーン一覧
     public function index(){
-        return view('pizzzzza.campaign.index');
+
+        $Campaign = new AdminCampaignService();
+        $campaigns = $Campaign->getAll();
+
+        return view('pizzzzza.campaign.index',compact('campaigns'));
     }
 
     // キャンペーン履歴
@@ -23,7 +27,11 @@ class AdminCampaignsController extends Controller
 
     // キャンペーン詳細
     public function show($id){
-        return view('pizzzzza.campaign.show',compact('id'));
+
+        $Campaign = new AdminCampaignService();
+        $campaign = $Campaign->getOne($id);
+
+        return view('pizzzzza.campaign.show',compact('campaign'));
     }
 
     // キャンペーン追加
