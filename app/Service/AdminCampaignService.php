@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 
@@ -25,34 +26,54 @@ class AdminCampaignService
 
     public function update($request, $id)
     {
-
+        // 現在のDBのデータを取得（キャンペーン画像用）
         $nowData = DB::table('campaigns_master')->where('id', '=', $id)->first();
 
         $update = array();
+        $carbon = Carbon::now();
 
-        $update['campaign_title'] = $request->campaign_name;
-        $update['campaign_text'] = $request->campaign_text;
-        $update['campaign_note'] = $request->campaign_note;
-        $tmp_subject = $request->campaign_subject;
-        if ($tmp_subject == 1) {
-            $insert["campaign_subject"] = "全会員";
-        } else if ($tmp_subject == 2) {
-            $insert["campaign_subject"] = "初回利用者限定";
-        } else {
-            $insert["campaign_subject"] = "全員";
-        }
-        $update['campaign_end_day'] = $request->campaign_end_day;
-        if (isset($request->file1)) {
-            $update['campaign_image'] = $request->file1;
-        } else {
-            $update['campaign_image'] = $nowData->campaign_image;
-        }
-        if (isset($request->file2)) {
-            $update['campaign_banner'] = $request->file2;
-        } else {
-            $update['campaign_banner'] = $nowData->campaign_banner;
-        }
+        //
+        // 更新データのセット
+        //
 
+            $update['campaign_title'] = $request->campaign_name;
+            $update['campaign_text'] = $request->campaign_text;
+            $update['campaign_note'] = $request->campaign_note;
+            $update['campaign_end_day'] = $request->campaign_end_day;
+
+            // 対象者を、数値からDB格納用に変換
+            $tmp_subject = $request->campaign_subject;
+            if ($tmp_subject == 1) {
+                $insert["campaign_subject"] = "全会員";
+            } else if ($tmp_subject == 2) {
+                $insert["campaign_subject"] = "初回利用者限定";
+            } else {
+                $insert["campaign_subject"] = "全員";
+            }
+
+            //キャンペーン画像
+            if (isset($request->file1)) {
+                // 画像１：名前を決めて画像を所定の場所に格納
+                $file1 = $request->file('file1');
+                $fileName1 = $carbon->format('Y-m-d-H-i-s') . '.jpg';
+                $file1->move(public_path('images/campaign/'), $fileName1);
+                $update['campaign_image'] = '/images/campaign/' . $fileName1;
+            } else {
+                $update['campaign_image'] = $nowData->campaign_image;
+            }
+
+            //キャンペーンバナー
+            if (isset($request->file2)) {
+                // 画像２：名前を決めて画像を所定の場所に格納
+                $file2 = $request->file('file2');
+                $fileName2 = $carbon->format('Y-m-d-H-i-s') . '.jpg';
+                $file2->move(public_path('images/campaign_banner/'), $fileName2);
+                $update['campaign_banner'] = '/images/campaign_banner/' . $fileName2;
+            } else {
+                $update['campaign_banner'] = $nowData->campaign_banner;
+            }
+
+        // Update SQL
         $status = DB::table('campaigns_master')->where('id', '=', $id)->update($update);
 
         return $status;
@@ -60,8 +81,21 @@ class AdminCampaignService
 
     public function insert($request)
     {
+        $carbon = Carbon::now();
+
+        // 画像１：名前を決めて画像を所定の場所に格納
+        $file1 = $request->file('file1');
+        $fileName1 = $carbon->format('Y-m-d-H-i-s') . '.jpg';
+        $file1->move(public_path('images/campaign/'), $fileName1);
+
+        // 画像２：名前を決めて画像を所定の場所に格納
+        $file2 = $request->file('file2');
+        $fileName2 = $carbon->format('Y-m-d-H-i-s') . '.jpg';
+        $file2->move(public_path('images/campaign_banner/'), $fileName2);
+
         $insert = array();
 
+        //POSTデータを挿入用配列にセット
         $insert["campaign_title"] = $request->campaign_name;
         $insert["campaign_text"] = $request->campaign_text;
         $insert["campaign_note"] = $request->campaign_note;
@@ -75,8 +109,9 @@ class AdminCampaignService
         }
         $insert["campaign_start_day"] = $request->campaign_start_day;
         $insert["campaign_end_day"] = $request->campaign_end_day;
-        $insert["campaign_image"] = $request->file1;
-        $insert["campaign_banner"] = $request->file2;
+        $insert["campaign_image"] = '/images/campaign/' . $fileName1;
+        $insert["campaign_banner"] = '/images/campaign_banner/' . $fileName2;
+
 
         $id = DB::table('campaigns_master')->insertGetId($insert);
 
