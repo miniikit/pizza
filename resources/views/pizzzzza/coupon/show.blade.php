@@ -35,23 +35,27 @@
                 <tr>
                     @if($coupon->coupons_types_id == 2)
                         <th class="text-center">プレゼント商品名</th>
-                        @if(isset($product) && ($product->product_id != 0) )
+                        @if(isset($product) && ($coupon->product_id != 0) )
                             <td>{{ $product->product_name }}</td>
                         @else
-                            <td> なし </td>
+                            <td> なし</td>
                         @endif
                     @else
                         <th class="text-center">値引額</th>
-                        <td>{{ $coupon->coupon_discount }}</td>
+                        <td>{{ number_format($coupon->coupon_discount) }}円</td>
                     @endif
                 </tr>
                 <tr>
                     <th class="text-center">利用上限回数</th>
-                    <td>{{ $coupon->coupon_conditions_count }}</td>
+                    @if(!empty($coupon->coupon_conditions_count))
+                        <td>{{ $coupon->coupon_conditions_count }}回</td>
+                    @else
+                        <td>なし（無限）</td>
+                    @endif
                 </tr>
                 <tr>
                     <th class="text-center">利用条件金額</th>
-                    <td>{{ $coupon->coupon_conditions_money }}</td>
+                    <td>{{ number_format($coupon->coupon_conditions_money) }}円</td>
                 </tr>
                 <tr>
                     <th class="text-center">対象者</th>
@@ -68,7 +72,7 @@
                 @if($coupon->coupons_types_id ==1)
                     <tr>
                         <th class="text-center">使用条件商品</th>
-                        @if(isset($coupon->product_id))
+                        @if(isset($product))
                             <td>{{ $product->product_name }}</td>
                         @else
                             <td>なし</td>
@@ -102,7 +106,9 @@
 
             <div class="ar">
                 <a href="/pizzzzza/coupon/{{$id}}/edit" class="btn btn-default btn-sm ar">編集</a>
-                <a href="/pizzzzza/coupon/{{$id}}/delete" class="btn btn-danger btn-sm ml">削除</a>
+                @if(empty($coupon->deleted_at))
+                    <a href="/pizzzzza/coupon/{{$id}}/delete" class="btn btn-danger btn-sm ml">削除</a>
+                @endif
             </div>
 
 

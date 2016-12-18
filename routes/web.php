@@ -89,7 +89,7 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::get('/pizzzzza/coupon/{id}/edit','CouponsController@edit')->name('editCoupon');  //クーポン編集
     Route::post('/pizzzzza/coupon/{id}/update/discount','CouponsController@DiscountUpdateDo');
     Route::post('/pizzzzza/coupon/{id}/update/gift','CouponsController@GiftUpdateDo');  //クーポン更新
-    Route::post('/pizzzzza/coupon/{id}/delete','CouponsController@delete');  //クーポン削除
+    Route::get('/pizzzzza/coupon/{id}/delete','CouponsController@delete');  //クーポン削除
     Route::get('/pizzzzza/coupon/add/discount/input','CouponsController@couponNewDiscount')->name('newCouponDiscount'); //クーポン値引き入力ページ
     Route::post('/pizzzzza/coupon/add/discount/do','CouponsController@couponNewDiscountDo'); //クーポン追加処理（値引き）
     Route::get('/pizzzzza/coupon/add/gift/input','CouponsController@couponNewGift'); //プレゼントクーポン条件入力ページ

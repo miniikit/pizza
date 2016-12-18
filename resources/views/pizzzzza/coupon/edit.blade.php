@@ -58,7 +58,7 @@
                     <tr>
                         <th class="text-center">利用上限回数</th>
                         <td><input class="form-control" type="text" name="coupon_max"
-                                   value="{{ $coupon->coupon_conditions_count }}"></td>
+                                   value="{{ $coupon->coupon_conditions_count }}" placeholder="未入力で無限"></td>
                     </tr>
                     <tr>
                         <th class="text-center">利用条件金額</th>
@@ -107,7 +107,20 @@
                             </select>
                         </td>
                         @else {{-- クーポン種別がプレゼントであれば --}}
-
+                        <th class="text-center">プレゼント商品</th>
+                        <td>
+                            <select class="form-control" name="coupon_product_id" disabled>
+                                @foreach($products as $product)
+                                    @if($product->id == $product_id)
+                                        <option value="{{ $product->id }}"
+                                                selected>{{ $product->product_name }}</option>
+                                    @else
+                                        <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            <input type="hidden" name="coupon_product_id" value="{{ $coupon->product_id }}">
+                        </td>
                         @endif
                     </tr>
                     </tbody>
