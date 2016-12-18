@@ -25,11 +25,11 @@
                     <td>{{ $campaign->campaign_title }}</td>
                 </tr>
                 <tr>
-                    <th class="text-center">キャンペーン内容</th>
+                    <th class="text-center">説明文</th>
                     <td>{{ $campaign->campaign_text }}</td>
                 </tr>
                 <tr>
-                    <th class="text-center">注意事項</th>
+                    <th class="text-center">その他</th>
                     <td>{{ $campaign->campaign_note }}</td>
                 </tr>
                 <tr>
@@ -55,11 +55,11 @@
                     <td>{{ $campaign->id }}</td>
                 </tr>
                 <tr>
-                    <th class="text-center">開始日</th>
+                    <th class="text-center">掲載開始日</th>
                     <td>{{ \Carbon\Carbon::parse($campaign->campaign_start_day)->format('Y年m月d日') }}</td>
                 </tr>
                 <tr>
-                    <th class="text-center">終了日</th>
+                    <th class="text-center">掲載終了日</th>
                     <td>
                         @if($campaign->campaign_end_day == null)
                             未設定
