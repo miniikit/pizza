@@ -16,8 +16,8 @@ class CampaignsMaster extends Migration
       Schema::create('campaigns_master', function (Blueprint $table) {
           $table->increments('id');//->primary();  //キャンペーンID
           $table->string('campaign_title'); //キャンペーンタイトル
-          $table->string('campaign_banner',200); //キャンペーンバナー
-          $table->string('campaign_image',200); //キャンペーン画像
+          $table->string('campaign_banner',50); //キャンペーンバナー
+          $table->string('campaign_image',50); //キャンペーン画像
           $table->text('campaign_text');  //キャンペーン内容文
           $table->text('campaign_note');  //キャンペーン注意事項
           $table->string('campaign_subject')->nullable(); //キャンペーン対象者

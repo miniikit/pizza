@@ -35,17 +35,17 @@
                     <td><input class="form-control" type="text" name="campaign_name" value="{{ $campaign->campaign_title }}"></td>
                 </tr>
                 <tr>
-                    <th>キャンペーン説明文</th>
+                    <th>説明文</th>
                     <td><textarea class="form-control" id="exampleTextarea" rows="6" name="campaign_text" maxlength="255"
                                   resize="none">{{ $campaign->campaign_text }}</textarea></td>
                 </tr>
                 <tr>
-                    <th>注意事項</th>
+                    <th>その他</th>
                     <td><textarea class="form-control" id="exampleTextarea" rows="6" name="campaign_note" maxlength="255"
                                   resize="none">{{ $campaign->campaign_note }}</textarea></td>
                 </tr>
                 <tr>
-                    <th>キャンペーン対象者</th>
+                    <th>対象者</th>
                     <td>
                         <select name="campaign_subject" id="">
                             <option value="1">全会員</option>
