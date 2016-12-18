@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\phoneSearchRequest;
 use App\Service\PhoneOrderService;
 use Laracasts\Flash\Flash;
-use Illuminate\Support\Facades\DB;  //サービスに移植後削除
+use Illuminate\Support\Facades\DB;  // サービスに移植後削除
 use App\Product;
 use Carbon\Carbon;
 
@@ -29,24 +29,51 @@ class PhoneOrdersController extends Controller
 {
 
 
-    //電話番号入力ページ
+    // 電話番号入力ページ
     public function index()
     {
         return view('pizzzzza.order.accept.input');
     }
 
 
-    //電話番号入力ページ＞バリデーションチェック処理
-    //タスク：：バリデーションチェック
-    //public function input(phoneSearchRequest $request){
+    // 顧客検索
     public function input(Request $request)
     {
+        // 電話番号
+        $phone = $request->number;
 
-        //$check = new PhoneOrderService();
-        //$check->searchPhoneNumber($request->number);
         $check = array();
-        $users = DB::table('users')->where('phone', '=', $request->number)->get();
 
+        //
+        // 手動バリデーションチェック
+        //
+
+            // 入力なし
+            if($phone <= ""){
+                $check["status"] = "false";
+                $check["message"] = "電話番号を入力してください。";
+                return compact('check', 'users');
+            }
+
+            // 負の数
+            if($phone <= 0){
+                $check["status"] = "false";
+                $check["message"] = "電話番号は正の数で入力してください。";
+                return compact('check', 'users');
+            }
+
+            // 桁数が10-11桁以外
+            if(!preg_match('/^[0-9]{10,11}$/', $phone)){
+                $cnt = strlen($phone);
+                $check["status"] = "false";
+                $check["message"] = "電話番号は10-11桁で数値のみを入力してください。（現在：" . $cnt . "桁）";
+                return compact('check', 'users');
+            }
+
+        // 検索
+        $users = DB::table('users')->where('phone', '=', $phone)->get();
+
+        // 結果の返却
         if (count($users) > 0) {
             $check["status"] = "true";
             $check["message"] = "ユーザが見つかりました。";
@@ -56,9 +83,10 @@ class PhoneOrdersController extends Controller
             $check["message"] = "ユーザが見つかりませんでした。";
             return compact('check');
         }
+
     }
 
-    //詳細
+    // 詳細
     public function show($id)
     {
         $phoneOrder = new PhoneOrderService();
@@ -66,21 +94,21 @@ class PhoneOrdersController extends Controller
 
         if (count($user) > 0) {
 
-            //累計注文回数
+            // 累計注文回数
             $orderCount = $phoneOrder->getOrderCount($id);
 
             if($orderCount >= 1) {
 
-                //注文情報（価格＋注文＋注文詳細＋商品＋状態マスタの連結）
+                // 注文情報（価格＋注文＋注文詳細＋商品＋状態マスタの連結）
                 $orders = $phoneOrder->getOrders($id);
 
-                //累計注文金額
+                // 累計注文金額
                 $orderTotal = $phoneOrder->getOrderTotal($id);
 
-                //平均支出金額
+                // 平均支出金額
                 $orderAvg = $orderTotal / $orderCount;
 
-                //クーポン使用総額のカウント
+                // クーポン使用総額のカウント
                 $orderCouponTotal = $phoneOrder->getOrderCouponTotal($id);
 
                 return view('pizzzzza.order.accept.customer.show', compact('user', 'orders', 'orderCount', 'orderTotal', 'orderAvg', 'orderCouponTotal'));
@@ -98,7 +126,7 @@ class PhoneOrdersController extends Controller
 
     }
 
-    //会員情報編集
+    // 会員情報編集
     public function edit($id)
     {
 
@@ -130,36 +158,36 @@ class PhoneOrdersController extends Controller
     // POSTデータの受け皿。
     public function handler(Request $request)
     {
-        //
+        // 
         //  会員情報確認画面からの遷移を想定
-        //
-        //　※ 想定値 : $request -> detailPost ->  "戻る" / "注文へ" / "編集"
-        //
+        // 
+        // 　※ 想定値 : $request -> detailPost ->  "戻る" / "注文へ" / "編集"
+        // 
 
-        //会員情報　確認画面からの遷移であるか
+        // 会員情報　確認画面からの遷移であるか
         if (isset($request->detailPost)) {
 
-            //電話番号入力ページへ（電話番号の入力間違い）
+            // 電話番号入力ページへ（電話番号の入力間違い）
             if ($request->detailPost == "戻る") {
                 return redirect()->route('telSearch');
 
-            //商品選択ページへ（会員情報OK）
+            // 商品選択ページへ（会員情報OK）
             } else if ($request->detailPost == "注文へ") {
                 $this->orderSelect($request);
-                //この辺で、会員IDをセッションに保存する必要あり。
+                // この辺で、会員IDをセッションに保存する必要あり。
                 return redirect()->route('telOrderSelect',$request->customer_id);
 
-            //会員情報編集ページへ
+            // 会員情報編集ページへ
             } else if ($request->detailPost == "編集") {
                 return redirect()->route('telEdit', $request->customer_id);
 
-            //それ以外のボタンが押された
+            // それ以外のボタンが押された
             } else {
                 Flash::error('エラーが発生しました。（不正な遷移：エラーコード501）');
                 return redirect()->route('orderTop');
             }
 
-        //その他ページからの遷移　（現状ないので、不正な遷移
+        // その他ページからの遷移　（現状ないので、不正な遷移
         }else{
             Flash::error('エラーが発生しました。（不正な遷移：エラーコード501-2）');
             return redirect()->route('orderTop');
@@ -168,33 +196,17 @@ class PhoneOrdersController extends Controller
     }
 
 
-    //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞Webの、バリデーションチェック＆更新処理
+    // WEB会員 お届け先住所 更新処理
     public function updateWeb(AdminPhoneUserEditRequestForWeb $request,$id)
     {
 
         $user_update = $request->all();
 
+        // 更新処理
+        $Phone = new PhoneOrderService();
+        $success = $Phone->updateWebCustomer($id,$user_update);
 
-        //POSTデータの受取
-        $name = $user_update['name'];
-        $name_katakana = $user_update['name_katakana'];
-        $postal = $user_update['postal'];
-        $address1 = $user_update['address1'];
-        $address2 = $user_update['address2'];
-        $address3 = $user_update['address3'];
-        $phone = $user_update['phone'];
-
-
-        //追加POSTデータの受取
-        $birthday = $user_update['birthday'];
-        $email = $user_update['email'];
-        $gender_id = $user_update['gender'];
-
-
-        //更新
-        $success = DB::table('users')->where('users.id', '=', $id)->update(['name' => $name, 'kana' => $name_katakana, 'email' => $email, 'gender_id' => $gender_id, 'birthday' => $birthday, 'postal' => $postal, 'address1' => $address1, 'address2' => $address2, 'address3' => $address3, 'phone' => $phone]);
-
-        //リダイレクト
+        // リダイレクト
         if(count($success)>0) {
 
             Flash::success('お届け先情報の更新が完了しました。');
@@ -209,105 +221,79 @@ class PhoneOrdersController extends Controller
     }
 
 
-    //電話番号入力ページ＞会員情報確認＞会員情報編集＞更新ボタン押された＞バリデーションチェック＆更新処理
+    // PHONE会員 お届け先住所 更新処理
     public function updatePhone(AdminPhoneUserEditRequest $request,$id)
     {
 
         $user_update = $request->all();
 
+        // 更新処理
+        $Phone = new PhoneOrderService();
+        $success = $Phone->updatePhoneCustomer($id,$user_update);
 
-        //POSTデータの受取
-        $name = $user_update['name'];
-        $name_katakana = $user_update['name_katakana'];
-        $postal = $user_update['postal'];
-        $address1 = $user_update['address1'];
-        $address2 = $user_update['address2'];
-        $address3 = $user_update['address3'];
-        $phone = $user_update['phone'];
-
-        $success = DB::table('users')->where('users.id', '=', $id)->update(['name' => $name, 'kana' => $name_katakana, 'postal' => $postal, 'address1' => $address1, 'address2' => $address2, 'address3' => $address3, 'phone' => $phone]);
-
+        // リダイレクト
         if(count($success) > 0) {
-
             Flash::success('お届け先情報の更新が完了しました。');
-
             return redirect()->route('telShow', $id);
-
         }else{
-
             Flash::danger('お届け先情報の更新に失敗しました。');
-
             return redirect()->route('telShow', $id);
         }
+
     }
 
 
-
-    //電話番号入力ページ＞お客様情報入力ページ
+    // PHONE会員 新規登録
     public function newCustomer()
     {
         return view('pizzzzza.order.accept.customer.input');
     }
 
-    //新規会員登録＞DB挿入処理
+    // PHONE会員 追加処理
     public function newCustomerInsert(AdminPhoneUserAddRequest $request)
     {
+        $new_customer = $request->all();
 
-        //POSTデータの受取
-        $name = $request->name;
-        $name_katakana = $request->kana;
-        $postal = $request->postal;
-        $address1 = $request->address1;
-        $address2 = $request->address2;
-        $address3 = $request->address3;
-        $phone = $request->phone;
+        // 追加処理
+        $Phone = new PhoneOrderService();
+        $id = $Phone->newCustomerInsert($new_customer);
 
-
-        //登録
-        $id = DB::table('users')->insertGetId([
-            'name' => $name,
-            'kana' => $name_katakana,
-            'postal' => $postal,
-            'address1' => $address1,
-            'address2' => $address2,
-            'address3' => $address3,
-            'phone' => $phone,
-            'authority_id' => 4,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
-
-
-        //リダイレクト
+        // リダイレクト
         if(count($id) >= 1) {
-
             Flash::success('お届け先情報の登録が完了しました。');
             return redirect()->route('telShow', $id);
-
         }else{
-
             Flash::danger('お届け先情報の登録が完了しました。');
             return redirect()->route('telShow', $id);
-
         }
 
     }
 
-    //商品入力・選択ページ
+    // 商品選択
     public function orderSelect($id)
     {
-        //$products = DB::table('products_master')->join('products_prices_master', 'products_master.price_id', '=', 'products_prices_master.id')->join('genres_master', 'products_master.genre_id', '=', 'genres_master.id')->orderBy('genre_id', 'asc')->get();
-        $products = DB::table('genres_master')->join('products_master','genres_master.id','=','products_master.genre_id')->join('products_prices_master','products_master.price_id', '=', 'products_prices_master.id')->orderBy('genre_id','asc')->get();
-        $pizzacnt = Product::where('genre_id', 1)->count();
-        $sidecnt = Product::where('genre_id', 2)->count();
-        $drinkcnt = Product::where('genre_id', 3)->count();
-        return view('pizzzzza.order.accept.item.select', compact('products', 'pizzacnt', 'sidecnt', 'drinkcnt','id'));
+
+        $Phone = new PhoneOrderService();
+
+        // 販売中商品一覧
+        $products = $Phone->getNowProducts();
+
+        // カテゴリごとの件数
+        $pizzaCount = $Phone->getPizzaCnt();
+        $sideCount = $Phone->getSideCnt();
+        $drinkCount = $Phone->getDrinkCnt();
+
+        //$pizzaCount = Product::where('genre_id', 1)->count();
+        //$sideCount = Product::where('genre_id', 2)->count();
+        //$drinkCount = Product::where('genre_id', 3)->count();
+
+        return view('pizzzzza.order.accept.item.select', compact('products', 'pizzaCount', 'sideCount', 'drinkCount','id'));
     }
 
-    //カート内リアルタイム表示
+    // カート内リアルタイム反映
     public function orderCart(Request $request)
     {
-        //session()->forget('phoneOrderCart');
+        // session()->forget('phoneOrderCart');
 
         // POSTデータ受け取り
             $product_id = $request->product_id;
@@ -330,7 +316,7 @@ class PhoneOrdersController extends Controller
 
     }
 
-    //注文情報確認ページ
+    // 注文情報確認ページ
     public function orderConfirm()
     {
         return view('pizzzzza.order.accept.item.confirm');
