@@ -40,66 +40,77 @@
                         <tr>
                             <th>名前</th>
                             <td><input type="text" placeholder="（例）大阪　太郎" size="20" maxlength="50" name="name"
-                                       value="{{ $user->name }}"></td>
+                                       value="{{ old('name',$user->name) }}"></td>
                         </tr>
                         <tr>
                             <th>フリガナ</th>
                             <td><input type="text" placeholder="（例）オオサカ　タロウ" size="20" maxlength="100"
-                                       name="name_katakana" value="{{ $user->kana }}"></td>
+                                       name="name_katakana" value="{{ old('name_katakana',$user->kana) }}"></td>
                         </tr>
                         <tr>
                             <th>郵便番号</th>
-                            <td><input type="text" placeholder="123456" size="8" name="postal" maxlength="7" value="{{ $user->postal }}"></td>
+                            <td><input type="text" placeholder="123456" size="8" name="postal" maxlength="7"
+                                       value="{{ old('postal',$user->postal) }}"></td>
                         </tr>
                         <tr>
                             <th>住所</th>
-                            <td><input type="text" placeholder="（例）大阪府大阪市天王寺区" size="40" name="address1" maxlength="255" value="{{ $user->address1 }}"></td>
+                            <td><input type="text" placeholder="（例）大阪府大阪市天王寺区" size="40" name="address1" maxlength="255"
+                                       value="{{ old('address1',$user->address1) }}"></td>
                         </tr>
                         <tr>
                             <th>番地</th>
-                            <td><input type="text" placeholder="（例）１−１−１" size="40" name="address2" maxlength="255" value="{{ $user->address2 }}"></td>
+                            <td><input type="text" placeholder="（例）１−１−１" size="40" name="address2" maxlength="255"
+                                       value="{{ old('address2',$user->address2) }}"></td>
                         </tr>
                         <tr>
                             <th>建物名</th>
-                            <td><input type="text" placeholder="（例）東マンション　５０２号室" size="40" maxlength="255" name="address3" value="{{ $user->address3 }}"></td>
+                            <td><input type="text" placeholder="（例）東マンション　５０２号室" size="40" maxlength="255"
+                                       name="address3" value="{{ old('address3',$user->address3) }}"></td>
                         </tr>
                         <tr>
                             <th>生年月日</th>
-                            <td><input type="date" size="20" maxlength="50" name="birthday" value="{{ date('Y-0n-0j', strtotime($user->birthday)) }}"></td>
+                            <td><input type="date" size="20" maxlength="50" name="birthday"
+                                       value="{{ \Carbon\Carbon::parse(old('birthday',$user->birthday))->format('Y-m-d') }}">
+                            </td>
                         </tr>
                         <tr>
                             <th>電話番号</th>
-                            <td><input type="tel" placeholder="08012345678" size="13" maxlength="11" name="phone" value="{{ $user->phone }}"></td>
+                            <td><input type="tel" placeholder="08012345678" size="13" maxlength="11" name="phone"
+                                       value="{{ old('phone',$user->phone) }}"></td>
                         </tr>
                         <tr>
                             <th>性別</th>
                             <td>
                                 @if ($user->gender_id === 1)
-                                    <label for=""><input type="radio" name="gender" value="男" checked > 男</label>
-                                    <label for=""><input type="radio" name="gender" value="女" > 女</label>
+                                    <label for=""><input type="radio" name="gender" value="男" checked> 男</label>
+                                    <label for=""><input type="radio" name="gender" value="女"> 女</label>
                                 @else
-                                    <label for=""><input type="radio" name="gender" value="男" > 男</label>
-                                    <label for=""><input type="radio" name="gender" value="女" checked > 女</label>
+                                    <label for=""><input type="radio" name="gender" value="男"> 男</label>
+                                    <label for=""><input type="radio" name="gender" value="女" checked> 女</label>
                                 @endif
                             </td>
                         </tr>
                         <tr>
                             <th>メールアドレス</th>
-                            <td><input type="email" size="20" maxlength="256" name="email" value="{{ $user->email }}">
+                            <td><input type="email" size="20" maxlength="256" name="email"
+                                       value="{{ old('email',$user->email) }}">
                             </td>
                         </tr>
                         <tr>
                             <th class="edit-password">新しいパスワード</th>
-                            <td><input type="password" placeholder="新しいパスワード" size="40" name="new_password" maxlength="128"><span class="caption">※英小文字・英大文字・数字を「各１つ以上」ご使用ください</span></td>
+                            <td><input type="password" placeholder="新しいパスワード" size="40" name="new_password"
+                                       maxlength="128"><span class="caption">※英小文字・英大文字・数字を「各１つ以上」ご使用ください</span></td>
                         </tr>
                         <tr>
                             <th>新しいパスワード</th>
-                            <td><input type="password" placeholder="新しいパスワード(確認)" size="40" name="new_password_confirm" maxlength="128"></td>
+                            <td><input type="password" placeholder="新しいパスワード(確認)" size="40" name="new_password_confirm"
+                                       maxlength="128"></td>
                         </tr>
                         <div class="space"></div>
                         <tr>
                             <th>現在のパスワード</th>
-                            <td><input type="password" placeholder="必ず入力" size="20" name="confirm_password" value=""></td>
+                            <td><input type="password" placeholder="必ず入力" size="20" name="confirm_password" value="">
+                            </td>
                         </tr>
                     @endforeach
 

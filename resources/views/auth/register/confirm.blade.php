@@ -1,20 +1,20 @@
 @extends('template.master')
 @section('title', '新規登録確認')
 @section('css')
-<link rel="stylesheet" href="/css/auth/register/index.css" media="all" title="no title"> @endsection @section('js')
-<script type="text/javascript" src="https://ajaxzip3.github.io/ajaxzip3.js" charset="utf-8"></script>
-<script src="/js/common/autokana/jquery.autoKana.js" language="javascript" type="text/javascript"></script>
+    <link rel="stylesheet" href="/css/auth/register/index.css" media="all" title="no title"> @endsection @section('js')
+    <script type="text/javascript" src="https://ajaxzip3.github.io/ajaxzip3.js" charset="utf-8"></script>
+    <script src="/js/common/autokana/jquery.autoKana.js" language="javascript" type="text/javascript"></script>
 @endsection @section('main')
-<div class="container">
-    <div class="wrap">
-        <div class="main-title">
-            <h1>新規会員登録確認</h1>
-        </div>
-        <div class="register">
-            <form role="form" method="POST" action="{{ url('/register/complete') }}">
-                {{ csrf_field() }}
-                <table id="table">
-                    <tbody>
+    <div class="container">
+        <div class="wrap">
+            <div class="main-title">
+                <h1>新規会員登録確認</h1>
+            </div>
+            <div class="register">
+                <form role="form" method="POST" action="{{ url('/register/complete') }}">
+                    {{ csrf_field() }}
+                    <table id="table">
+                        <tbody>
                         <tr>
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <th><label for="name">氏名<font class="red">※</font></label></th>
@@ -43,7 +43,8 @@
                             </div>
                         </tr>
                         <tr>
-                            <th><label for="postal" class="control-label">郵便番号 (半角)<font class="red">※</font></label></th>
+                            <th><label for="postal" class="control-label">郵便番号 (半角)<font class="red">※</font></label>
+                            </th>
                             <td class="form-inline">
                                 <h4>{{ $data['postal'] }}</h4>
                                 <input type="hidden" class="form-control" name="postal" value="{{ $data['postal'] }}">
@@ -64,7 +65,8 @@
                                 <th><label for="address1">市区町村 (全角)<font class="red">※</font></label></th>
                                 <td class="form-inline">
                                     <h4>{{ $data['address1'] }}</h4>
-                                    <input type="hidden" class="form-control" name="address1" value="{{ $data['address1'] }}">
+                                    <input type="hidden" class="form-control" name="address1"
+                                           value="{{ $data['address1'] }}">
                                 </td>
                             </div>
                         </tr>
@@ -73,7 +75,8 @@
                                 <th><label for="address2">町名・番地 (全角)<font class="red">※</font></label></th>
                                 <td class="form-inline">
                                     <h4>{{ $data['address2'] }}</h4>
-                                    <input type="hidden" class="form-control" name="address2" value="{{ $data['address2'] }}">
+                                    <input type="hidden" class="form-control" name="address2"
+                                           value="{{ $data['address2'] }}">
                                 </td>
                             </div>
                         </tr>
@@ -82,7 +85,8 @@
                                 <th><label for="address3">建物名 (全角)</label></th>
                                 <td class="form-inline">
                                     <h4>{{ $data['address3'] }}</h4>
-                                    <input type="hidden" class="form-control" name="address3" value="{{ $data['address3'] }}">
+                                    <input type="hidden" class="form-control" name="address3"
+                                           value="{{ $data['address3'] }}">
                                 </td>
                             </div>
                         </tr>
@@ -100,7 +104,8 @@
                                 <th><label for="gender_id">性別<font class="red">※</font></label></th>
                                 <td class="form-inline">
                                     <h4>{{ $data['gender_id'] }}</h4>
-                                    <input type="hidden" class="form-control" name="gender_id" value="{{ $data['gender_id'] }}">
+                                    <input type="hidden" class="form-control" name="gender_id"
+                                           value="{{ $data['gender_id'] }}">
                                 </td>
                             </div>
                         </tr>
@@ -109,22 +114,23 @@
                                 <th><label for="birthday">誕生日<font class="red">※</font></label></th>
                                 <td class="form-inline">
                                     <h4>{{ $data['birthday'] }}</h4>
-                                    <input type="hidden" class="form-control" name="birthday" value="{{ $data['birthday'] }}">
+                                    <input type="hidden" class="form-control" name="birthday"
+                                           value="{{ $data['birthday'] }}">
                                 </td>
                             </div>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
 
-                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <input type="hidden" class="form-control" name="password" value="{{ $data['password'] }}">
-                </div>
+                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <input type="hidden" class="form-control" name="password" value="{{ $data['password'] }}">
+                    </div>
 
-                <div class="btn-wrap">
-                    <button type="submit" class="btn">登録</button>
-                </div>
-            </form>
+                    <div class="btn-wrap">
+                        <button type="submit" class="btn">登録</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 @endsection

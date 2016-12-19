@@ -164,8 +164,31 @@
 
 
         $(function () {
-            $('select').change(function () {
 
+            var cart = {};
+
+            $('select').change(function () {
+                var product_id =  $(this).attr('id');
+                var product_num =  $(this).val();
+
+                cart[product_id] = product_num;
+
+                // #cartを初期化
+                 $('#cart').empty();
+
+                // #cartに書き足し
+                $.each(cart, function(i, val) {
+                    if(val != 0) {
+                        $('#cart').append('<tr><td>' + i + '</td><td><select class="select form-control"><option value=' + val + ' selected>' + val + '</option></select></td></tr>');
+                    }
+                });
+
+                // option valueを追加
+                for(var i=0; i <= 10; i++) {
+                    $('.select').append('<option values='+ i +'>'+ i +'</option>');
+                }
+
+/*
 
                 {{-- トークンをmetaに設定し、送る --}}
                 $.ajaxSetup({
@@ -214,6 +237,7 @@
                         });
                 //ページをリロードしない
                 return false;
+               */
             });
         });
 

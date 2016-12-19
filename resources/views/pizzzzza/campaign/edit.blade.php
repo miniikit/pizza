@@ -32,24 +32,34 @@
                 <tbody>
                 <tr>
                     <th>キャンペーン名</th>
-                    <td><input class="form-control" type="text" name="campaign_name" value="{{ $campaign->campaign_title }}"></td>
+                    <td><input class="form-control" type="text" name="campaign_name" value="{{ old('campaign_name',$campaign->campaign_title) }}"></td>
                 </tr>
                 <tr>
                     <th>説明文</th>
                     <td><textarea class="form-control" id="exampleTextarea" rows="6" name="campaign_text" maxlength="255"
-                                  resize="none">{{ $campaign->campaign_text }}</textarea></td>
+                                  resize="none">{{ old('campaign_text',$campaign->campaign_text) }}</textarea></td>
                 </tr>
                 <tr>
                     <th>その他</th>
                     <td><textarea class="form-control" id="exampleTextarea" rows="6" name="campaign_note" maxlength="255"
-                                  resize="none">{{ $campaign->campaign_note }}</textarea></td>
+                                  resize="none">{{ old('campaign_note',$campaign->campaign_note) }}</textarea></td>
                 </tr>
                 <tr>
                     <th>対象者</th>
                     <td>
                         <select name="campaign_subject" id="">
-                            <option value="1">全会員</option>
-                            <option value="2">初回利用者限定</option>
+                            @if(old('campaign_subject'))
+                                @if(old('campaign_subject') == 1)
+                                    <option value="1" selected>全会員</option>
+                                    <option value="2">初回利用者限定</option>
+                                @else
+                                    <option value="1">全会員</option>
+                                    <option value="2" selected>初回利用者限定</option>
+                                @endif
+                            @else
+                                <option value="1">全会員</option>
+                                <option value="2">初回利用者限定</option>
+                            @endif
                         </select>
                     </td>
                 </tr>
@@ -62,7 +72,7 @@
                 <tr>
                     <th>掲載終了日</th>
                     <td><input class="form-control" id="example-date-input" type="date" name="campaign_end_day"
-                               size="5" value="{{ $campaign->campaign_end_day }}">
+                               size="5" value="{{ old('campaign_end_day',$campaign->campaign_end_day) }}">
                     </td>
                 </tr>
                 <tr>
