@@ -38,7 +38,7 @@ class MenusService
         $data = $request->all();
 
 
-        $product = Product::withTrashed()->with('productPrice')->find($id);
+        $product = $this->getProduct($id);
 
         // リクエストの中の画像が存在するか
 
@@ -152,7 +152,7 @@ class MenusService
     public function destroy($id)
     {
 
-        $product = Product::with('productPrice', 'genre')->find($id);
+        $product = $this->getProduct($id);
 
         $product->sales_end_date = Carbon::today();
         $product->save();

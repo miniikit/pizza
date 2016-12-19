@@ -104,7 +104,7 @@ class EmployeesController extends Controller
 
         $employeesService = new EmployeesService();
         $employeesService->updateEmployee($data,$id);
-        
+
 
         Flash::success('更新完了しました。');
 
