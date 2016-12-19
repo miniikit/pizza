@@ -55,11 +55,11 @@ class AdminCampaignService
             // 対象者を、数値からDB格納用に変換
             $tmp_subject = $request->campaign_subject;
             if ($tmp_subject == 1) {
-                $insert["campaign_subject"] = "全会員";
+                $update["campaign_subject"] = "全会員";
             } else if ($tmp_subject == 2) {
-                $insert["campaign_subject"] = "初回利用者限定";
+                $update["campaign_subject"] = "初回利用者限定";
             } else {
-                $insert["campaign_subject"] = "全員";
+                $update["campaign_subject"] = "全員";
             }
 
             //キャンペーン画像
