@@ -29,43 +29,51 @@
                     <tbody>
                     <tr>
                         <th class="text-center" >名前</th>
-                        <td><input class="form-control" type="text" name="name" value="" placeholder="例）山田太郎"></td>
+                        <td><input class="form-control" type="text" name="name" value="{{ old('name') }}" placeholder="例）山田太郎"></td>
                     </tr>
                     <tr>
                         <th class="text-center" >フリガナ</th>
-                        <td><input class="form-control" type="text" name="kana" value="" placeholder="例）ヤマダタロウ"></td>
+                        <td><input class="form-control" type="text" name="kana" value="{{ old('kana') }}" placeholder="例）ヤマダタロウ"></td>
                     </tr>
                     <tr>
                         <th class="text-center" >生年月日</th>
-                        <td><input class="form-control" type="date" name="birthday" value="1990-01-01" ></td>
+                        <td><input class="form-control" type="date" name="birthday" value="{{ old('birthday') }}" ></td>
                     </tr>
                     <tr>
                         <th class="text-center" >性別</th>
-                        <td><input class="" type="radio" name="gender_id" value="1" checked > 男 <input class="" type="radio" name="gender_id" value="2"> 女 </td>
+                        @if(old('gender_id'))
+                            @if(old('gender_id') == 1)
+                            <td><input class="" type="radio" name="gender_id" value="1" checked > 男 <input class="" type="radio" name="gender_id" value="2"> 女 </td>
+                            @else
+                                <td><input class="" type="radio" name="gender_id" value="1"> 男 <input class="" type="radio" name="gender_id" value="2" checked> 女 </td>
+                            @endif
+                        @else
+                            <td><input class="" type="radio" name="gender_id" value="1" checked > 男 <input class="" type="radio" name="gender_id" value="2"> 女 </td>
+                        @endif
                     </tr>
                     <tr>
                         <th class="text-center" >郵便番号</th>
-                        <td><input class="form-control" type="text" name="postal" value="" placeholder="ハイフン抜き"></td>
+                        <td><input class="form-control" type="text" name="postal" value="{{ old('postal') }}" placeholder="ハイフン抜き"></td>
                     </tr>
                     <tr>
                         <th class="text-center" >住所</th>
-                        <td><input class="form-control" type="text" name="address1" value="" placeholder="例）大阪府大阪市天王寺区"></td>
+                        <td><input class="form-control" type="text" name="address1" value="{{ old('address1') }}" placeholder="例）大阪府大阪市天王寺区"></td>
                     </tr>
                     <tr>
                         <th class="text-center" >番地</th>
-                        <td><input class="form-control" type="text" name="address2" value="" placeholder="例）１−１−１"></td>
+                        <td><input class="form-control" type="text" name="address2" value="{{ old('address2') }}" placeholder="例）１−１−１"></td>
                     </tr>
                     <tr>
                         <th class="text-center" >建物名</th>
-                        <td><input class="form-control" type="text" name="address3" value="" placeholder="例）東マンション　５０２号室"></td>
+                        <td><input class="form-control" type="text" name="address3" value="{{ old('address3') }}" placeholder="例）東マンション　５０２号室"></td>
                     </tr>
                     <tr>
                         <th class="text-center" >電話番号</th>
-                        <td><input class="form-control" type="text" name="phone" value="" placeholder="例）08012345678"></td>
+                        <td><input class="form-control" type="text" name="phone" value="{{ old('phone') }}" placeholder="例）08012345678"></td>
                     </tr>
                     <tr>
                         <th class="text-center" >メールアドレス</th>
-                        <td><input class="form-control" type="text" name="email" value="" placeholder="例）example@example.com" ></td>
+                        <td><input class="form-control" type="text" name="email" value="{{ old('email') }}" placeholder="例）example@example.com" ></td>
                     </tr>
                     <tr>
                         <th class="text-center" >パスワード</th>
