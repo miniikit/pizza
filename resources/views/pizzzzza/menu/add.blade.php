@@ -30,32 +30,40 @@
                 <tbody>
                 <tr>
                     <th>商品名</th>
-                    <td><input class="form-control" type="text" name="product_name" value=""></td>
+                    <td><input class="form-control" type="text" name="product_name" value="{{ old('product_name') }}"></td>
                 </tr>
                 <tr>
                     <th>価格</th>
-                    <td><input class="form-control" type="number" name="product_price" value=""></td>
+                    <td><input class="form-control" type="number" name="product_price" value="{{ old('product_price') }}"></td>
                 </tr>
                 <tr>
                     <th>ジャンル</th>
                     <td>
                         <select name="product_genre_id">
-                            <option value="1">ピザ</option>
+                            @if(old('product_genre_id') == 1 || old('product_genre_id') == null)
+                            <option selected value="1">ピザ</option>
                             <option value="2">サイド</option>
                             <option value="3">ドリンク</option>
+                            @elseif(old('product_genre_id') == 2)
+                            <option value="1">ピザ</option>
+                            <option selected value="2">サイド</option>
+                            <option value="3">ドリンク</option>
+                            @elseif(old('product_genre_id') == 3)
+                            <option value="1">ピザ</option>
+                            <option value="2">サイド</option>
+                            <option selected value="3">ドリンク</option>
+                            @endif
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <th>販売開始日</th>
-                    <td><input class="form-control" id="example-date-input" type="date" name="product_sales_start_day"
-                               value="" size="5">
+                    <td><input class="form-control" id="example-date-input" type="date" name="product_sales_start_day" value="{{ old('product_sales_start_day') }}" size="5">
                     </td>
                 </tr>
                 <tr>
                     <th>販売終了日</th>
-                    <td><input class="form-control" id="example-date-input" type="date" name="product_sales_end_day"
-                               value="" size="5">
+                    <td><input class="form-control" id="example-date-input" type="date" name="product_sales_end_day" value="{{ old('product_sales_end_day') }}" size="5">
                     </td>
                 </tr>
                 <tr>
@@ -68,8 +76,7 @@
                 </tr>
                 <tr>
                     <th>商品説明文</th>
-                    <td><textarea class="form-control" id="exampleTextarea" rows="6" name="product_text" maxlength="255"
-                                  resize="none"></textarea></td>
+                    <td><textarea class="form-control" id="exampleTextarea" rows="6" name="product_text" maxlength="255" resize="none">{{ old('product_text') }}</textarea></td>
                 </tr>
                 </tbody>
             </table>
