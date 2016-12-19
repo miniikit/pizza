@@ -24,8 +24,9 @@
                 <div class="alert alert-danger">{{ $error }}</div>
             @endforeach
         @endif
-        <div class="form-group table-responsive">
+
             <form action="/pizzzzza/order/accept/customer/handler" method="post">
+                <div class="form-group table-responsive">
                 <table class="table table-bordered">
                     <tbody>
                     <tr>
@@ -84,19 +85,20 @@
                     @endif
                     </tbody>
                 </table>
+                </div>
+
+                <div class="text-right">
+                    <input type="submit" class="btn btn-default btn-sm" name="detailPost" value="編集">
+                </div>
                 <div class="text-center">
                     <input type="submit" class="btn btn-default btn-lg mr" name="detailPost" value="戻る">
                     <input type="submit" class="btn btn-primary btn-lg ml" name="detailPost" value="注文へ">
                 </div>
-                <div class="text-right">
-                    <input type="submit" class="btn btn-primary btn-lg" name="detailPost" value="編集">
-                </div>
                 <input type="hidden" name="customer_id" value="{{ $user->id }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
             </form>
-        </div>
 
-        <div id="status">
+        <div id="status" class="mt-b">
             @if(isset($orderCount))
                 <h1>統計情報</h1>
                 <table class="table table-bordered">
@@ -115,7 +117,7 @@
                         @endif
                     </tr>
                 </table>
-
+            <div class="mt-b">
                 <h1>注文履歴</h1>
                 <table class="table table-bordered">
                     <tr>
@@ -132,17 +134,17 @@
                             {{--  どこまでが１件の注文かを、まとめる処理。  --}}
                             @if(!isset($order_id))
                                 <?php // 最初だけ実行
-                                    $order_id = 1;
-                                    $order_date = $order->order_date;
+                                $order_id = 1;
+                                $order_date = $order->order_date;
                                 ?>
                             @endif
                             <td><?php // 注文日時が違えば実行
-                                    if($order->order_date != $order_date){
-                                        $order_id += 1;
-                                    }
-                                    // 毎回実行
-                                    echo $order_id;
-                                    $order_date = $order->order_date;
+                                if($order->order_date != $order_date){
+                                    $order_id += 1;
+                                }
+                                // 毎回実行
+                                echo $order_id;
+                                $order_date = $order->order_date;
                                 ?>
                             </td>
                             {{--  ここまで　どこまでが１件の注文かをまとめる処理  --}}
@@ -155,9 +157,10 @@
                         </tr>
                     @endforeach
                 </table>
-            @else
-                <h1>注文履歴がありませんでした</h1>
-            @endif
+                @else
+                    <h1>注文履歴がありませんでした</h1>
+                @endif
+            </div>
         </div>
     </div>
 @endsection

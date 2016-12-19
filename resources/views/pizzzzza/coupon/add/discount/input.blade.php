@@ -30,41 +30,51 @@
             <tbody>
             <tr>
                 <th class="text-center">クーポン名</th>
-                <td><input class="form-control" type="text" name="coupon_name" value="" placeholder="冬限定５００円OFFクーポン"></td>
+                <td><input class="form-control" type="text" name="coupon_name" value="{{ old('coupon_name') }}" placeholder="冬限定５００円OFFクーポン"></td>
             </tr>
             <tr>
                 <th class="text-center">クーポン番号</th>
-                <td><input class="form-control" type="text" name="coupon_num" value="" placeholder="半角英数字とハイフンのみ"></td>
+                <td><input class="form-control" type="text" name="coupon_num" value="{{ old('coupon_num') }}" placeholder="半角英数字とハイフンのみ"></td>
             </tr>
             <tr>
                 <th class="text-center">値引き額</th>
-                <td><input class="form-control" type="number" name="coupon_discount_price" value="" placeholder="500"></td>
+                <td><input class="form-control" type="number" name="coupon_discount_price" value="{{ old('coupon_discount_price') }}" placeholder="500"></td>
             </tr>
             <tr>
                 <th class="text-center">利用開始日</th>
-                <td><input class="form-control" type="date" name="coupon_start_date" value="1" checked>
+                <td><input class="form-control" type="date" name="coupon_start_date" value="{{ old('coupon_start_date') }}" checked>
                 </td>
             </tr>
             <tr>
                 <th class="text-center">利用終了日</th>
-                <td><input class="form-control" type="date" name="coupon_end_date" value="" placeholder="ハイフン抜き"></td>
+                <td><input class="form-control" type="date" name="coupon_end_date" value="{{ old('coupon_end_date') }}" placeholder="ハイフン抜き"></td>
             </tr>
             <tr>
                 <th class="text-center">対象者</th>
                 <td><select class="form-control" name="coupon_target" id="">
-                        <option value="0" checked>全員</option>
-                        <option value="1">当店初回利用者限定</option>
+                        @if(old('coupon_target'))
+                            @if(old('coupon_target') == 0)
+                                <option value="0" selected>全員</option>
+                                <option value="1">当店初回利用者限定</option>
+                            @else
+                                <option value="0">全員</option>
+                                <option value="1" selected>当店初回利用者限定</option>
+                            @endif
+                        @else
+                            <option value="0" selected>全員</option>
+                            <option value="1">当店初回利用者限定</option>
+                        @endif
                     </select>
                 </td>
             </tr>
             <tr>
                 <th class="text-center">利用上限回数</th>
-                <td><input class="form-control" type="number" name="coupon_max" value="" placeholder="１人あたりの使用上限回数を指定します">
+                <td><input class="form-control" type="number" name="coupon_max" value="{{ old('coupon_max') }}" placeholder="１人あたりの使用上限回数を指定します">
                 </td>
             </tr>
             <tr>
                 <th class="text-center">利用条件金額</th>
-                <td><input class="form-control" type="number" name="coupon_conditions_price" value=""
+                <td><input class="form-control" type="number" name="coupon_conditions_price" value="{{ old('coupon_conditions_price') }}"
                            placeholder="この金額以上の際にクーポンが適用可能になります"></td>
             </tr>
             <tr>

@@ -1,4 +1,3 @@
-
 @extends('template/master')
 
 @section('title', '送信完了')
@@ -19,7 +18,7 @@
                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
                 <h3>お問い合わせありがとうございます</h3>
             </div>
-       </div>
+        </div>
     </div>
 @endsection
 

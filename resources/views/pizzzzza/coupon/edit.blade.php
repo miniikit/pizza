@@ -42,38 +42,48 @@
                     <tr>
                         <th class="text-center">クーポン名</th>
                         <td><input class="form-control" type="text" name="coupon_name"
-                                   value="{{ $coupon->coupon_name }}"></td>
+                                   value="{{ old('coupon_name',$coupon->coupon_name) }}"></td>
                     </tr>
                     <tr>
                         <th class="text-center">クーポン番号</th>
                         <td><input class="form-control" type="text" name="coupon_num"
-                                   value="{{ $coupon->coupon_number }}"></td>
+                                   value="{{ old('coupon_num',$coupon->coupon_number) }}"></td>
                     </tr>
                     <tr>
                         <th class="text-center">値引き額</th>
                         <td><input class="form-control" type="text" name="coupon_discount_price"
-                                   value="{{ $coupon->coupon_discount }}">
+                                   value="{{ old('coupon_discount_price',$coupon->coupon_discount) }}">
                         </td>
                     </tr>
                     <tr>
                         <th class="text-center">利用上限回数</th>
                         <td><input class="form-control" type="text" name="coupon_max"
-                                   value="{{ $coupon->coupon_conditions_count }}" placeholder="未入力で無限"></td>
+                                   value="{{ old('coupon_max',$coupon->coupon_conditions_count) }}" placeholder="未入力で無限"></td>
                     </tr>
                     <tr>
                         <th class="text-center">利用条件金額</th>
                         <td><input class="form-control" type="text" name="coupon_conditions_price"
-                                   value="{{ $coupon->coupon_conditions_money }}"></td>
+                                   value="{{ old('coupon_conditions_price',$coupon->coupon_conditions_money) }}"></td>
                     </tr>
                     <tr>
                         <th class="text-center">対象者</th>
                         <td><select class="form-control" name="coupon_conditions_first" id="">
-                                @if($coupon->coupon_conditions_first == 1)
-                                    <option value="0">全員</option>
-                                    <option value="1" checked>当店初回利用者限定</option>
+                                @if(old('coupon_conditions_first'))
+                                    @if(old('coupon_conditions_first') == 1)
+                                        <option value="0">全員</option>
+                                        <option value="1" selected>当店初回利用者限定</option>
+                                    @else
+                                        <option value="0" selected>全員</option>
+                                        <option value="1">当店初回利用者限定</option>
+                                    @endif
                                 @else
-                                    <option value="0" checked>全員</option>
-                                    <option value="1">当店初回利用者限定</option>
+                                    @if($coupon->coupon_conditions_first == 1)
+                                        <option value="0">全員</option>
+                                        <option value="1" selected>当店初回利用者限定</option>
+                                    @else
+                                        <option value="0" selected>全員</option>
+                                        <option value="1">当店初回利用者限定</option>
+                                    @endif
                                 @endif
                             </select></td>
                     </tr>
@@ -119,7 +129,7 @@
                                     @endif
                                 @endforeach
                             </select>
-                            <input type="hidden" name="coupon_product_id" value="{{ $coupon->product_id }}">
+                            <input type="hidden" name="coupon_product_id" value="{{ old('',$coupon->product_id }}">
                         </td>
                         @endif
                     </tr>
@@ -136,7 +146,7 @@
                 <tr>
                     <th class="text-center">終了日</th>
                     <td><input class="form-control" type="date" name="coupon_end_date"
-                               value="{{ $coupon->coupon_end_date }}"></td>
+                               value="{{ old('coupon_end_date',$coupon->coupon_end_date) }}"></td>
                 </tr>
                 <tr>
                     <th class="text-center">登録日時</th>
@@ -151,13 +161,13 @@
         <!--
             <div class="ar">
                 @if($coupon->deleted_at == NULL)
-        @endif
+                @endif
                 <input class="btn btn-primary btn-sm ml" type="submit" name="status" value="更新">
             </div>
             -->
 
             {{ csrf_field() }}
-            <input type="hidden" name="coupons_types_id" value="{{  $coupon->coupons_types_id }}">
+            <input type="hidden" name="coupons_types_id" value="{{ $coupon->coupons_types_id }}">
         </div>
         <div class="col-md-4 col-md-offset-4 ac">
             <a href="/pizzzzza/coupon/{{$id}}/show" class="btn btn-default btn-lg mr">戻る</a>

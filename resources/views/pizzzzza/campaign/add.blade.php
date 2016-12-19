@@ -30,44 +30,54 @@
                 <tbody>
                 <tr>
                     <th>キャンペーン名</th>
-                    <td><input class="form-control" type="text" name="campaign_name" value=""></td>
+                    <td><input class="form-control" type="text" name="campaign_name" value="{{ old('campaign_name') }}"></td>
                 </tr>
                 <tr>
                     <th>説明文</th>
                     <td><textarea class="form-control" id="exampleTextarea" rows="6" name="campaign_text" maxlength="255"
-                                  resize="none"></textarea></td>
+                                  resize="none">{{ old('campaign_text') }}</textarea></td>
                 </tr>
                 <tr>
                     <th>その他</th>
                     <td><textarea class="form-control" id="exampleTextarea" rows="6" name="campaign_note" maxlength="255"
-                                  resize="none"></textarea></td>
+                                  resize="none">{{ old('campaign_note') }}</textarea></td>
                 </tr>
                 <tr>
                     <th>対象者</th>
                     <td>
                         <select name="campaign_subject" id="">
-                            <option value="1">全会員</option>
-                            <option value="2">初回利用者限定</option>
+                            @if(old('campaign_subject'))
+                                @if(old('campaign_subject') == 1)
+                                    <option value="1" selected>全会員</option>
+                                    <option value="2">初回利用者限定</option>
+                                @else
+                                    <option value="1">全会員</option>
+                                    <option value="2" selected>初回利用者限定</option>
+                                @endif
+                            @else
+                                <option value="1">全会員</option>
+                                <option value="2">初回利用者限定</option>
+                            @endif
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <th>掲載開始日</th>
                     <td><input class="form-control" id="example-date-input" type="date" name="campaign_start_day"
-                               value="" size="5">
+                               size="5" value="{{ old('campaign_start_day') }}">
                     </td>
                 </tr>
                 <tr>
                     <th>掲載終了日</th>
                     <td><input class="form-control" id="example-date-input" type="date" name="campaign_end_day"
-                               value="" size="5">
+                               size="5" value="{{ old('campaign_end_day') }}">
                     </td>
                 </tr>
                 <tr>
                     <th>メイン画像</th>
                     <td class="imgInput">
                         <img class="mb imgView" src="/images/campaign/noimage.jpg" alt="">
-                        <input type="file" id="getfile" name="file1" value="" />
+                        <input type="file" id="getfile" name="file1"/>
                         <div class="caption mt">※ 横:1200px 縦:400px 拡張子: jpg jpeg</div>
                     </td>
                 </tr>
@@ -75,7 +85,7 @@
                     <th>バナー画像</th>
                     <td class="imgInput">
                         <img class="mb imgView" src="/images/campaign_banner/noimage.jpg" alt="">
-                        <input type="file" id="getfile" name="file2" value="" />
+                        <input type="file" id="getfile" name="file2"/>
                         <div class="caption mt">※ 横:100px 縦:440px 拡張子: jpg jpeg</div>
                     </td>
                 </tr>
