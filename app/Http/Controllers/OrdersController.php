@@ -18,12 +18,12 @@ use App\Service\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\DB;  //サービスに移植後削除
+use Illuminate\Support\Facades\DB;  // サービスに移植後削除
 
 
 class OrdersController extends Controller
 {
-    //  注文確認ページ
+    // 注文確認ページ
     public function index(){
 
         $userId = Auth::user()->id;
@@ -58,7 +58,7 @@ class OrdersController extends Controller
         $cart = new CartService();
         list($products,$productCount,$total) = $cart->showCart();
 
-        //クーポンIDを取得
+        // クーポンIDを取得
         $couponId = NULL;
         if(session()->has('used_coupon_id')) {
             $couponId = session()->pull('used_coupon_id');
@@ -90,41 +90,41 @@ class OrdersController extends Controller
     }
 
 
-    //クーポンが入力された場合の処理
+    // クーポンが入力された場合の処理
     public function coupon(Request $request){
 
 
-        //
+        // 
         //  ログインチェック
-        //
+        // 
 
-        //認証済みでなければ
+        // 認証済みでなければ
         if (!Auth::check()) {
             return 'ログインしてください！';
         }
 
 
-        //
+        // 
         //  POSTデータ（クーポン番号）の受け取り
-        //
+        // 
 
-        //念のため値をすべて受け取り
+        // 念のため値をすべて受け取り
         $post_data = $request->all();                   // ['user' => '[userの入力値]', 'passwd' => '[passwdの入力値]']
-        //クーポン番号だけ取得
+        // クーポン番号だけ取得
         $input_coupon = htmlspecialchars($post_data['number']);          // "入力値"
 
 
-        //
+        // 
         //  return用メッセージ配列の宣言。
-        //
+        // 
 
         $message = array();
         $message["coupon_number"] = $input_coupon;
 
 
-        //
+        // 
         //  クーポンなしで適用を押された場合はエラー
-        //
+        // 
 
         if($input_coupon == "" || strlen($input_coupon) == 0){
             $message["message"] = "クーポン番号が入力されていません。";
@@ -133,14 +133,14 @@ class OrdersController extends Controller
         }
 
 
-        //
+        // 
         //  DBに、そのクーポン番号が存在するか確認
-        //
+        // 
 
-        //入力されたクーポン番号が見つかるか
+        // 入力されたクーポン番号が見つかるか
         $dbTmp = DB::table('coupons_master')->where('coupon_number','=',$input_coupon)->get();
 
-        //クーポンが見つからなければ終了する
+        // クーポンが見つからなければ終了する
         if(!count($dbTmp) > 0){
             $message["message"] =  "クーポンが見つかりませんでした。";
             $message["status"] = "error";
@@ -148,36 +148,36 @@ class OrdersController extends Controller
         }
 
 
-        //
+        // 
         //  DBにクーポンが存在するので、下記条件をすべて満たしているかチェックする
-        //
+        // 
 
-        //DBの値を、参照できるように変換
+        // DBの値を、参照できるように変換
         list($dbCoupon) = $dbTmp;
 
 
-        //
+        // 
         //  クーポン条件１：　開催期間中であるか
-        //
+        // 
 
-        //日付
+        // 日付
         $today = Carbon::now()->format('Y-m-d');
 
-        //クーポンが、開催期間中であることを判定する処理　（終了日はNULL許可なので処理が二つに）
+        // クーポンが、開催期間中であることを判定する処理　（終了日はNULL許可なので処理が二つに）
         if(is_null($dbCoupon->coupon_end_date)){
-            //クーポン終了日がNULLであった場合の処理
+            // クーポン終了日がNULLであった場合の処理
             if($dbCoupon->coupon_start_date <= $today){
             }else{
-                //エラーメッセージで処理終了
+                // エラーメッセージで処理終了
                 $message["message"] = "こちらのクーポンは開催期間前です。";
                 $message["status"] = "error";
                 return $message;
             }
         }else{
-            //クーポン終了日が設定されていた場合の処理
+            // クーポン終了日が設定されていた場合の処理
             if($dbCoupon->coupon_start_date <= $today && $dbCoupon->coupon_end_date >= $today){
             }else{
-                //エラーメッセージで処理終了
+                // エラーメッセージで処理終了
                 $message["message"] = "こちらのクーポンは終了いたしました。";
                 $message["status"] = "error";
                 return $message;
@@ -185,42 +185,51 @@ class OrdersController extends Controller
         }
 
 
-        //
+        // 
         //  クーポン条件２：　クーポンの使用条件金額を満たしているか
-        //
+        // 
 
-        //totalを参照
+        // totalを参照
         $cart = new CartService();
+
+        // $totalに合計金額を格納
         list($products,$productCount,$total) = $cart->showCart();
 
+        // クーポンの値引き金額を取得
         $couponMoney = $dbCoupon->coupon_conditions_money;
 
-        if($couponMoney >= $total){ //合計金額より、利用下限金額のほうが大きい場合
-            //エラーメッセージで処理終了
+        // プレゼントクーポンであれば、値引き金額分を、使用条件金額に付加する。
+        if($dbCoupon->coupons_types_id == 2){
+            $couponMoney += $dbCoupon->coupon_discount;
+        }
+
+        // 合計金額より、利用下限金額のほうが大きい場合
+        if($couponMoney >= $total){ 
+            // エラーメッセージで処理終了
             $message["message"] = "クーポンの利用可能金額を満たしておりません。";
             $message["status"] = "error";
             return $message;
         }
 
 
-        //
+        // 
         //  クーポン条件３：　カート内に、対象商品が含まれているか
-        //
+        // 
 
 
-        //対象商品のID
+        // 対象商品のID
         $dbProductId = $dbCoupon->product_id;
 
-        //クーポンの「対象商品ID」が設定されていれば
+        // クーポンの「対象商品ID」が設定されていれば
         if(!is_null($dbProductId)){
 
             // カート内の商品IDをセッションから取得。  ※[ 4 => "2", 7=> "3"]のように、「商品ID => "個数"」の形で入る。
             $cartProductsId = session()->get("productCount",[]);
 
-            //商品IDが見つかるか
+            // 商品IDが見つかるか
             if (!array_key_exists($dbProductId, $cartProductsId)) {
 
-                //エラーメッセージで処理終了
+                // エラーメッセージで処理終了
                 $message["message"] = "対象商品をカートに追加してください。";
                 $message["status"] = "error";
                 return $message;
@@ -228,9 +237,9 @@ class OrdersController extends Controller
         }
 
 
-        //
+        // 
         //  クーポン条件４：　初回利用者のみのクーポンであれば、その条件を満たしているか
-        //
+        // 
 
         $dbFirst = $dbCoupon->coupon_conditions_first;
 
@@ -251,9 +260,9 @@ class OrdersController extends Controller
         }
 
 
-        //
+        // 
         //  クーポン条件５：　クーポンごとの使用回数制限を超えていないか
-        //
+        // 
 
         $couponMax = $dbCoupon->coupon_conditions_count;
 
@@ -273,12 +282,12 @@ class OrdersController extends Controller
 
         //
         //  クーポン条件６：　すでにクーポンを１度以上適用している場合　（その都度DBから直接価格を算出しているので処理不要）
-        //
+        // 
 
 
-        //
+        // 
         //  クーポン条件７：　クーポンが無効化されていないか確認する
-        //
+        // 
 
             $now = Carbon::now();
             $activeStatus = DB::table('coupons_master')->where('coupons_master.id','=',$couponId)->where('deleted_at','!=','NULL')->first();
@@ -288,36 +297,36 @@ class OrdersController extends Controller
                 return $message;
             }
 
-        //
+        // 
         //  最終処理：　クーポン情報を配列で返却
-        //
+        // 
 
-        //totalを参照。上の方でtotalは宣言済み。
+        // totalを参照。上の方でtotalは宣言済み。
         if(!$total){
             $cart = new CartService();
             list($products,$productCount,$total) = $cart->showCart();
         }
 
-        //返却用の変数・配列
-        $coupon = array();   //return用の配列
-        $newTotal = $total - $dbCoupon->coupon_discount;    //値引き後金額
-        $name = $dbCoupon->coupon_name;     //クーポン名
+        // 返却用の変数・配列
+        $coupon = array();   // return用の配列
+        $newTotal = $total - $dbCoupon->coupon_discount;    // 値引き後金額
+        $name = $dbCoupon->coupon_name;     // クーポン名
 
-        //セッションにクーポンIDを保存
+        // セッションにクーポンIDを保存
         session()->put('used_coupon_id', $couponId);
 
         $coupon["status"] = "ok";
         $coupon["message"] = "クーポンを適用しました！";
-        $coupon["total"] = $total;  //値引き前金額
-        $coupon["newTotal"] = $newTotal;   //値引き後金額
-        $coupon["name"] = $name;   //クーポン名
+        $coupon["total"] = $total;  // 値引き前金額
+        $coupon["newTotal"] = $newTotal;   // 値引き後金額
+        $coupon["name"] = $name;   // クーポン名
 
 
         return $coupon;
     }
 
 
-    //  注文完了ページ
+    // 注文完了ページ
     public function complete(){
 
         return view('order.complete');
