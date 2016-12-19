@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: minion
- * Date: 2016/11/15
- * Time: 14:17
- */
 
-
-//セッションIDからユーザIDを取得するのが、セッション内不明のため、まだ。
 
 namespace App\Service;
 

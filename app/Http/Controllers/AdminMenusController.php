@@ -17,7 +17,7 @@ use App\Http\Requests\AdminMenuEditForm;
 use App\Product;
 use App\ProductPrice;
 use Laracasts\Flash\Flash;
-use Illuminate\Support\Facades\DB;
+use App\Service\MenusService;
 use Illuminate\Support\Facades\Auth;    //ログインユーザを判別
 
 
@@ -34,12 +34,9 @@ class AdminMenusController extends Controller
 
     public function destroy($id) {
 
-        $product = Product::with('productPrice', 'genre')->find($id);
+        $menus = new MenusService();
+        $menus->destroy($id);
 
-        $product->sales_end_date = Carbon::today();
-        $product->save();
-
-        $product->delete();
 
         Flash::success('削除しました。');
 

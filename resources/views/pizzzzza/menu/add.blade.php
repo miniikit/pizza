@@ -40,9 +40,19 @@
                     <th>ジャンル</th>
                     <td>
                         <select name="product_genre_id">
-                            <option value="1">ピザ</option>
+                            @if(old('product_genre_id') == 1 || old('product_genre_id') == null)
+                            <option selected value="1">ピザ</option>
                             <option value="2">サイド</option>
                             <option value="3">ドリンク</option>
+                            @elseif(old('product_genre_id') == 2)
+                            <option value="1">ピザ</option>
+                            <option selected value="2">サイド</option>
+                            <option value="3">ドリンク</option>
+                            @elseif(old('product_genre_id') == 3)
+                            <option value="1">ピザ</option>
+                            <option value="2">サイド</option>
+                            <option selected value="3">ドリンク</option>
+                            @endif
                         </select>
                     </td>
                 </tr>
