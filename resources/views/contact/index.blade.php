@@ -1,4 +1,3 @@
-
 @extends('template/master')
 
 @section('title', 'お問い合わせ')
@@ -23,17 +22,17 @@
                 </ul>
             </div>
         @endif
-         <div id="contact">
-          <form action="/contact" method="post">
-              <ul id="from-group">
-                <li class="title">メールアドレス</li>
-                <li><input type="text" name="email" class="form-mail" placeholder="example@xxx.com"></li>
-                <li class="title">内容</li>
-                <li><textarea name="body" rows="10" cols="100" placeholder="テキストを入れてください" ></textarea></li>
-              </ul>
-              <div class="form-bottom"><a>送信</a></div>
-              {{ csrf_field() }}
-          </form>
+        <div id="contact">
+            <form action="/contact" method="post">
+                <ul id="from-group">
+                    <li class="title">メールアドレス</li>
+                    <li><input type="text" name="email" class="form-mail" placeholder="example@xxx.com"></li>
+                    <li class="title">内容</li>
+                    <li><textarea name="body" rows="10" cols="100" placeholder="テキストを入れてください"></textarea></li>
+                </ul>
+                <div class="form-bottom"><a>送信</a></div>
+                {{ csrf_field() }}
+            </form>
         </div>
     </div>
 @endsection

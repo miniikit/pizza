@@ -12,23 +12,23 @@
 @endsection
 @section('main')
     <div class="flexslider">
-      <ul class="slides">
-          <li><img src="images/index/pizza01.png" /></li>
-          <li><img src="images/index/pizza02.png" /></li>
-          <li><img src="images/index/pizza03.png" /></li>
-          <li><img src="images/index/pizza04.png" /></li>
-          <li><img src="images/index/pizza05.png" /></li>
-      </ul>
+        <ul class="slides">
+            <li><img src="images/index/pizza01.png"/></li>
+            <li><img src="images/index/pizza02.png"/></li>
+            <li><img src="images/index/pizza03.png"/></li>
+            <li><img src="images/index/pizza04.png"/></li>
+            <li><img src="images/index/pizza05.png"/></li>
+        </ul>
     </div>
     <div class="container wrap">
         <div class="campaign">
             <ul>
-                <li><img src="images/index/banner02.png" alt="" /></li>
-                <li><img src="images/index/banner01.png" alt="" /></li>
-                <li><img src="images/index/banner01.png" alt="" /></li>
-                <li><img src="images/index/banner01.png" alt="" /></li>
-                <li><img src="images/index/banner01.png" alt="" /></li>
-                <li><img src="images/index/banner01.png" alt="" /></li>
+                <li><img src="images/index/banner02.png" alt=""/></li>
+                <li><img src="images/index/banner01.png" alt=""/></li>
+                <li><img src="images/index/banner01.png" alt=""/></li>
+                <li><img src="images/index/banner01.png" alt=""/></li>
+                <li><img src="images/index/banner01.png" alt=""/></li>
+                <li><img src="images/index/banner01.png" alt=""/></li>
             </ul>
         </div>
     </div>
@@ -36,7 +36,7 @@
 
 @section('script')
     <script type="text/javascript">
-        $(window).load(function() {
+        $(window).load(function () {
             $('.flexslider').flexslider({
                 animation: "slide"
             });

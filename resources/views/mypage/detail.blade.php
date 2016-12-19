@@ -25,23 +25,56 @@
                     {{-- 郵便番号にハイフンを合体。いっそ関数にしても？ --}}
                     <?php
                     $zip = $user->postal;
-                    $postal = substr($zip, 0, 3).'-'.substr($zip, 3);
+                    $postal = substr($zip, 0, 3) . '-' . substr($zip, 3);
                     $gender = "男";
-                    if($user->gender_id == 2){
+                    if ($user->gender_id == 2) {
                         $gender = "女";
                     }
                     ?>
-                <tr><th>名前</th><td>{{ $user->name }}</td></tr>
-                <tr><th>フリガナ</th><td>{{ $user->kana }}</td></tr>
-                <tr><th>郵便番号</th><td>〒{{ $postal }}</td></tr>
-                <tr><th>住所</th><td>{{ $user->address1 }}</td></tr>
-                <tr><th>番地</th><td>{{ $user->address2 }}</td></tr>
-                <tr><th>建物名</th><td>{{ $user->address3 }}</td></tr>
-                <tr><th>生年月日</th><td>{{ date('Y年 n月 j日', strtotime($user->birthday)) }}</td></tr>
-                <tr><th>電話番号</th><td>{{ $user->phone }}</td></tr>
-                <tr><th>性別</th><td>{{ $gender }}</td></tr>
-                <tr><th>メールアドレス</th><td>{{ $user->email }}</td></tr>
-                <tr><th>パスワード</th><td>**********</td></tr>
+                    <tr>
+                        <th>名前</th>
+                        <td>{{ $user->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>フリガナ</th>
+                        <td>{{ $user->kana }}</td>
+                    </tr>
+                    <tr>
+                        <th>郵便番号</th>
+                        <td>〒{{ $postal }}</td>
+                    </tr>
+                    <tr>
+                        <th>住所</th>
+                        <td>{{ $user->address1 }}</td>
+                    </tr>
+                    <tr>
+                        <th>番地</th>
+                        <td>{{ $user->address2 }}</td>
+                    </tr>
+                    <tr>
+                        <th>建物名</th>
+                        <td>{{ $user->address3 }}</td>
+                    </tr>
+                    <tr>
+                        <th>生年月日</th>
+                        <td>{{ date('Y年 n月 j日', strtotime($user->birthday)) }}</td>
+                    </tr>
+                    <tr>
+                        <th>電話番号</th>
+                        <td>{{ $user->phone }}</td>
+                    </tr>
+                    <tr>
+                        <th>性別</th>
+                        <td>{{ $gender }}</td>
+                    </tr>
+                    <tr>
+                        <th>メールアドレス</th>
+                        <td>{{ $user->email }}</td>
+                    </tr>
+                    <tr>
+                        <th>パスワード</th>
+                        <td>**********</td>
+                    </tr>
                 @endforeach
             </table>
             <form class="submit" action="/mypage/edit" method="get">
@@ -53,7 +86,7 @@
 
 @section('script')
     <script type="text/javascript">
-        $(window).load(function() {
+        $(window).load(function () {
             $('.flexslider').flexslider({
                 animation: "slide"
             });

@@ -18,17 +18,17 @@
                 <i class="fa fa-truck" aria-hidden="true"></i>
                 <h3>ご注文ありがとうございます。</h3>
             </div>
-       </div>
-       <div class="btn">
-           <div class="inner special"><a href="/">トップへ戻る</a></div>
-       </div>
+        </div>
+        <div class="btn">
+            <div class="inner special"><a href="/">トップへ戻る</a></div>
+        </div>
     </div>
 @endsection
 
 @section('script')
-<script type="text/javascript">
-    $('#submit').on('click',function () {
-        $('#post').submit();
-    })
-</script>
+    <script type="text/javascript">
+        $('#submit').on('click', function () {
+            $('#post').submit();
+        })
+    </script>
 @endsection
