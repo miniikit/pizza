@@ -17,18 +17,6 @@
             });
         });
 </script>
-
-    <link rel="stylesheet" href="/css/auth/register/index.css" media="all" title="no title"> @endsection @section('js')
-    <script type="text/javascript" src="https://ajaxzip3.github.io/ajaxzip3.js" charset="utf-8"></script>
-    <script src="/js/common/autokana/jquery.autoKana.js" language="javascript" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(
-                function () {
-                    $.fn.autoKana('#name', '#kana', {
-                        katakana: true //true：カタカナ、false：ひらがな（デフォルト）
-                    });
-                });
-    </script>
 @endsection
 
 @section('main')
