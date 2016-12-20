@@ -133,7 +133,7 @@
                             <tr>
                                 <th>商品</th>
                                 <th>数量</th>
-                                <th>削除</th>
+                                <th class="ac">削除</th>
                             </tr>
                             </thead>
                             <tbody id="cart">
@@ -173,7 +173,7 @@
                 // #cartに書き足し
                 $.each(cart, function (i, val) {
                     if (val != 0) {
-                        $('#cart').append('<tr class="item"><td>' + i + '</td><td><select class="select form-control"><option value=' + val + ' selected>' + val + '</option></select></td><td><button class="btn btn-danger btn-sm">削除</button></td> </tr>');
+                        $('#cart').append('<tr class="item"><td>' + i + '</td><td><select class="select form-control"><option value=' + val + ' selected>' + val + '</option></select></td><td class="ac"><button class="btn btn-danger btn-sm">削除</button></td> </tr>');
                     }
                 });
 
