@@ -68,3 +68,18 @@
         transform: rotate(360deg);
     }
 }
+
+.item td {
+    padding: 5px 8px !important;
+    vertical-align: middle !important;
+}
+
+.item td:first-child {
+    width: 60%;
+}
+
+div#sidemenu.fixed {
+    position:fixed;
+    right:0;
+    top:0;
+}
