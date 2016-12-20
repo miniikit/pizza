@@ -17,77 +17,67 @@ use App\Employee;
 use App\User;
 use App\Http\Requests\EmployeeRequest;
 use App\Http\Requests\EmployeeUpdateRequest;
+use App\Service\EmployeesService;
 
 
 class EmployeesController extends Controller
 {
     //  従業員一覧ページ
-    public function index()  {
+    public function index()
+    {
 
-        $employees = Employee::with('user.gender')->get();
+        $employeesService = new EmployeesService();
+        $employees = $employeesService->all();
 
-        return view('pizzzzza.employee.index',compact('employees'));
+        return view('pizzzzza.employee.index', compact('employees'));
     }
 
-    public function history()  {
+    public function history()
+    {
 
-        $employees = Employee::withTrashed()->with('user.gender')->get();
+        $employeesService = new EmployeesService();
+        $employees = $employeesService->history();
 
-        return view('pizzzzza.employee.history',compact('employees'));
+        return view('pizzzzza.employee.history', compact('employees'));
     }
 
 
     //  従業員詳細
-    public function show($id)  {
+    public function show($id)
+    {
 
-        $employee = Employee::withTrashed()->with('user.gender')->find($id);
-        return view('pizzzzza.employee.show',compact('employee'));
+        $employeesService = new EmployeesService();
+        $employee = $employeesService->getEmployee($id);
+
+        return view('pizzzzza.employee.show', compact('employee'));
 
     }
 
 
     //  従業員編集ページ
-    public function edit($id)  {
+    public function edit($id)
+    {
 
-        $employee = Employee::withTrashed()->with('user.gender')->find($id);
-        return view('pizzzzza.employee.edit',compact('employee'));
+        $employeesService = new EmployeesService();
+        $employee = $employeesService->getEmployee($id);
+
+        return view('pizzzzza.employee.edit', compact('employee'));
 
     }
 
     //  従業員追加ページ
-    public function add()  {
+    public function add()
+    {
         return view('pizzzzza.employee.add');
     }
 
-    public function store(EmployeeRequest $request)  {
+    public function store(EmployeeRequest $request)
+    {
 
         $data = $request->all();
 
-        if (empty($data['address3'])) {
-            $data['address3'] = NULL;
-        }
-
-        $user = User::create([
-            'name' => $data['name'],
-            'kana' => $data['kana'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'postal' => $data['postal'],
-            'address1' => $data['address1'],
-            'address2' => $data['address2'],
-            'address3' => $data['address3'],
-            'phone' => $data['phone'],
-            'gender_id' => $data['gender_id'],
-            'birthday' => $data['birthday'],
-            'authority_id' => 2,
-        ]);
-
-
-        Employee::create([
-            'users_id' => $user->id,
-            'emoloyee_agreement_date' => Carbon::today(),
-            'emoloyee_agreement_enddate' => null,
-        ]);
+        $employeesService = new EmployeesService();
+        $employeesService->addEmployee($data);
 
 
         Flash::success('新規登録完了しました。');
@@ -96,14 +86,11 @@ class EmployeesController extends Controller
 
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
 
-        $employee = Employee::with('user.gender')->find($id);
-
-        $employee->emoloyee_agreement_enddate = Carbon::today();
-        $employee->save();
-
-        $employee->delete();
+        $employeesService = new EmployeesService();
+        $employeesService->removeEmployee($id);
 
         Flash::success('削除しました。');
 
@@ -111,32 +98,13 @@ class EmployeesController extends Controller
 
     }
 
-    public function update(EmployeeUpdateRequest $request,$id) {
-
-        $employee = Employee::withTrashed()->with('user.gender')->find($id);
-
+    public function update(EmployeeUpdateRequest $request, $id)
+    {
         $data = $request->all();
 
-        $employee->user->name = $data['name'];
-        $employee->user->kana = $data['kana'];
-        $employee->user->birthday = $data['birthday'];
-        $employee->user->gender_id = $data['gender_id'];
-        $employee->user->postal = $data['postal'];
-        $employee->user->address1 = $data['address1'];
-        $employee->user->address2 = $data['address2'];
-        $employee->user->address3 = $data['address3'];
-        $employee->user->phone = $data['phone'];
-        $employee->user->email = $data['email'];
+        $employeesService = new EmployeesService();
+        $employeesService->updateEmployee($data,$id);
 
-        if (empty($data['emoloyee_agreement_enddate'])){
-            $employee->emoloyee_agreement_enddate = NULL;
-        }else{
-            $employee->emoloyee_agreement_enddate = $data['emoloyee_agreement_enddate'];
-        }
-
-
-        $employee->user->save();
-        $employee->save();
 
         Flash::success('更新完了しました。');
 

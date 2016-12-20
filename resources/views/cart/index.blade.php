@@ -1,4 +1,3 @@
-
 @extends('template/master')
 
 @section('title', 'メニュー')
@@ -26,20 +25,20 @@
 
             <table id="table">
                 <thead>
-                    <tr>
-                        <th></th>
-                        <th>商品名</th>
-                        <th>詳細</th>
-                        <th>金額</th>
-                        <th>数量</th>
-                        <th>小計</th>
-                        <th>削除</th>
-                    </tr>
+                <tr>
+                    <th></th>
+                    <th>商品名</th>
+                    <th>詳細</th>
+                    <th>金額</th>
+                    <th>数量</th>
+                    <th>小計</th>
+                    <th>削除</th>
+                </tr>
                 </thead>
                 <tbody>
                 @foreach ($products as $product)
                     <tr>
-                        <td><img src="{{$product->product_image}}" alt="" /></td>
+                        <td><img src="{{$product->product_image}}" alt=""/></td>
                         <td>{{$product->product_name}}</td>
                         <td>{{$product->product_text}}</td>
                         <td>{{number_format($product->productPrice->product_price)}}円</td>
@@ -49,7 +48,7 @@
                                     <select class="sum" name="sum">
                                         <option value="{{$productCount[$product->id]}}">{{$productCount[$product->id]}}</option>
                                         @for ($i=1; $i <= 10 ; $i++)
-                                        <option value="{{$i}}">{{$i}}</option>
+                                            <option value="{{$i}}">{{$i}}</option>
                                         @endfor
                                     </select>
                                 </span>
@@ -58,7 +57,11 @@
                             </form>
                         </td>
                         <td>{{number_format($productCount[$product->id] * $product->productPrice->product_price)}}円</td>
-                        <td><form action="/cart/clear/{{$product->id}}" method="post"><div class="form-bottom"><a><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>{{ csrf_field() }}</form></td>
+                        <td>
+                            <form action="/cart/clear/{{$product->id}}" method="post">
+                                <div class="form-bottom"><a><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                </div>{{ csrf_field() }}</form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -88,9 +91,9 @@
 
 @section('script')
     <script type="text/javascript">
-    $(".sum").change(function(){
-        var form = $(this).parent().parent();
-        $(form).submit();
-    });
+        $(".sum").change(function () {
+            var form = $(this).parent().parent();
+            $(form).submit();
+        });
     </script>
 @endsection

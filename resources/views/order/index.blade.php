@@ -16,7 +16,7 @@
         <h2 class="title">ORDER</h2>
         <form id="post" action="/order/confirm/insert" method="post">
             @if (Session::has('error_text'))
-            <div class="alert error">{{ Session::get('error_text') }}</div>
+                <div class="alert error">{{ Session::get('error_text') }}</div>
             @endif
             <div class="userInfo">
                 <div>
@@ -39,16 +39,23 @@
                 <div class="special">
                     <ul>
                         <li class="title">配達希望日時</li>
-                        <li><label for=""><span>日付</span><input type="date" name="date" value="{{ \Carbon\Carbon::now()->toDateString() }}"></label></li>
-                        <li><label for=""><span>時刻</span><input type="time" name="time" value="{{ \Carbon\Carbon::now()->addHour()->format('H:i') }}"></label></li>
+                        <li><label for=""><span>日付</span><input type="date" name="date"
+                                                                value="{{ \Carbon\Carbon::now()->toDateString() }}"></label>
+                        </li>
+                        <li><label for=""><span>時刻</span><input type="time" name="time"
+                                                                value="{{ \Carbon\Carbon::now()->addHour()->format('H:i') }}"></label>
+                        </li>
                         <li class="cap">※デフォルトでは現在時刻の1時間後になっております</li>
                     </ul>
                 </div>
                 <div class="coupon">
                     <ul>
                         <li class="title">クーポン</li>
-                        <li><input id="coupon_text" type="text" name="coupon" value="" placeholder="クーポンコードを入力してください"><a id="coupon-btn" class="input-btn" href="#">適用</a></li>
-                        <li><div id="coupon-message"></div></li>
+                        <li><input id="coupon_text" type="text" name="coupon" value="" placeholder="クーポンコードを入力してください"><a
+                                    id="coupon-btn" class="input-btn" href="#">適用</a></li>
+                        <li>
+                            <div id="coupon-message"></div>
+                        </li>
                     </ul>
                 </div>
                 <div class="sum">
@@ -60,17 +67,17 @@
                 <h3 class="title">注文内容</h3>
                 <table id="table">
                     <thead>
-                        <tr>
-                            <th></th>
-                            <th>商品名</th>
-                            <th>金額</th>
-                            <th>数量</th>
-                        </tr>
+                    <tr>
+                        <th></th>
+                        <th>商品名</th>
+                        <th>金額</th>
+                        <th>数量</th>
+                    </tr>
                     </thead>
                     <tbody>
                     @foreach ($products as $product)
                         <tr>
-                            <td><img src="{{$product->product_image}}" alt="" /></td>
+                            <td><img src="{{$product->product_image}}" alt=""/></td>
                             <td>{{$product->product_name}}</td>
                             <td>{{number_format($product->productPrice->product_price)}}円</td>
                             <td>{{$productCount[$product->id]}}</td>
@@ -82,7 +89,7 @@
 
             <div class="btn">
                 <div class="inner special"><a href="/menu">カートに戻る</a></div>
-                <div class="inner"><a id="submit" >購入する</a></div>
+                <div class="inner"><a id="submit">購入する</a></div>
             </div>
             {{ csrf_field() }}
         </form>
@@ -93,70 +100,66 @@
 @endsection
 
 @section('script')
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    var clicked = false;
-    $('#submit').on('click',function () {
-        if(!clicked) {
-            clicked = true;
-            $('#post').submit();
-        }
-    })
+        var clicked = false;
+        $('#submit').on('click', function () {
+            if (!clicked) {
+                clicked = true;
+                $('#post').submit();
+            }
+        })
 
-    $('#coupon-btn').on('click',function () {
-        var num = $('#coupon_text').val();
-        $('#post_coupon_num').val(num);
-        // $('#post_coupon').submit();
-    })
+        $('#coupon-btn').on('click', function () {
+            var num = $('#coupon_text').val();
+            $('#post_coupon_num').val(num);
+            // $('#post_coupon').submit();
+        })
 
 
-    $(function()
-    {
-        $('#coupon-btn').click(function()
-        {
-            {{-- トークンをmetaに設定し、送る --}}
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        $(function () {
+            $('#coupon-btn').click(function () {
+                {{-- トークンをmetaに設定し、送る --}}
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
-            {{-- 入力値をdataに設定 --}}
-            var data = {number : $('#post_coupon_num').val()};
+                        {{-- 入力値をdataに設定 --}}
+                var data = {number: $('#post_coupon_num').val()};
 
-            $.ajax(
-                    {
-                        type:"POST",
-                        url: "/order/confirm/coupon",
-                        data: data,
-                        success: function(message, dataType)
+                $.ajax(
                         {
-                            //値引き後金額
-                            if(message["status"] == "error"){
-                                $("#coupon-message").css('display','inline-block').removeClass('coupon-true').addClass('coupon-false');
-                                $('#coupon-message').text(message["message"]);
-                            }else if(message["status"] == "ok"){
-                                $("#coupon-message").css('display','inline-block').removeClass('coupon-false').addClass('coupon-true');
-                                $('#coupon-message').text(message["message"]);
-                                var newTotal = String(message["newTotal"]).toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-                                $("#total").text(newTotal + "円");
-                            }else{
-                                //なにも設定されていない
-                                $("#coupon-message").css('display','inline-block').removeClass('coupon-true').addClass('coupon-false');
-                                $('#coupon-message').text("クーポンコードが不正です");
+                            type: "POST",
+                            url: "/order/confirm/coupon",
+                            data: data,
+                            success: function (message, dataType) {
+                                //値引き後金額
+                                if (message["status"] == "error") {
+                                    $("#coupon-message").css('display', 'inline-block').removeClass('coupon-true').addClass('coupon-false');
+                                    $('#coupon-message').text(message["message"]);
+                                } else if (message["status"] == "ok") {
+                                    $("#coupon-message").css('display', 'inline-block').removeClass('coupon-false').addClass('coupon-true');
+                                    $('#coupon-message').text(message["message"]);
+                                    var newTotal = String(message["newTotal"]).toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+                                    $("#total").text(newTotal + "円");
+                                } else {
+                                    //なにも設定されていない
+                                    $("#coupon-message").css('display', 'inline-block').removeClass('coupon-true').addClass('coupon-false');
+                                    $('#coupon-message').text("クーポンコードが不正です");
+                                }
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                alert('Error : ' + errorThrown);
+                                $("#XMLHttpRequest").html("XMLHttpRequest : " + XMLHttpRequest.status);
+                                $("#textStatus").html("textStatus : " + textStatus);
+                                $("#errorThrown").html("errorThrown : " + errorThrown);
                             }
-                        },
-                        error: function(XMLHttpRequest, textStatus, errorThrown)
-                        {
-                            alert('Error : ' + errorThrown);
-                            $("#XMLHttpRequest").html("XMLHttpRequest : " + XMLHttpRequest.status);
-                            $("#textStatus").html("textStatus : " + textStatus);
-                            $("#errorThrown").html("errorThrown : " + errorThrown);
-                        }
-                    });
-            //ページをリロードしない
-            return false;
+                        });
+                //ページをリロードしない
+                return false;
+            });
         });
-    });
-</script>
+    </script>
 @endsection

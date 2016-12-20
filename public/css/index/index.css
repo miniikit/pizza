@@ -1,6 +1,6 @@
 .campaign {
     letter-spacing: -.4em;
-    text-align: center;
+    text-align: left;
 }
 
 .campaign li{
@@ -11,4 +11,15 @@
 
 .container .wrap {
     padding: 80px 0;
+}
+
+@media screen and (max-width: 768px) {
+    .campaign {
+        text-align: center;
+    }
+    .campaign li {
+        display: block;
+        width: auto;
+        margin-bottom: 20px;
+    }
 }

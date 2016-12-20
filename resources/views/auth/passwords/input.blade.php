@@ -8,18 +8,18 @@
 @endsection
 
 @section('main')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">パスワード再発行のお手続き</div>
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                      <h5>パスワードをお忘れの場合、下記の入力フォームにてメールアドレスをご記入ください。</h5>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">パスワード再発行のお手続き</div>
+                    <div class="panel-body">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                        <h5>パスワードをお忘れの場合、下記の入力フォームにてメールアドレスをご記入ください。</h5>
                     </div>
 
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
@@ -29,7 +29,8 @@
                             <label for="email" class="col-md-4 control-label">メールアドレス</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email"
+                                       value="{{ old('email') }}" required>
                                 <span class="emailreset_exaplain">例)oic@example.com</span>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -50,5 +51,5 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 @endsection

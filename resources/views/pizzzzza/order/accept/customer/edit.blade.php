@@ -36,65 +36,75 @@
                     <tbody>
                     <tr>
                         <th class="text-center"><label for="">氏名(漢字)</label></th>
-                        <td><input class="form-control" type="text" name="name" value="{{ $user->name }}" placeholder="姓"></td>
+                        <td><input class="form-control" type="text" name="name" value="{{ old('name',$user->name) }}" placeholder="姓"></td>
                     </tr>
                     <tr>
                         <th class="text-center"><label for="">氏名(カナ)</label></th>
-                        <td><input class="form-control" type="text" name="name_katakana" value="{{ $user->kana }}" placeholder="セイ"></td>
+                        <td><input class="form-control" type="text" name="name_katakana" value="{{ old('name_katakana',$user->kana) }}" placeholder="セイ"></td>
                     </tr>
                     @if(isset($user->birthday) || isset($user->gender_name))
                         <tr>
                             <th class="text-center"><label for="">生年月日</label></th>
-                            <td><input type="date" name="birthday" value="{{ $user->birthday }}"></td>
+                            <td><input class="form-control" type="date" name="birthday" value="{{ old('birthday',$user->birthday) }}"></td>
                         </tr>
                         @if(isset($genders))
                         <tr>
                             <th class="text-center"><label for="">性別</label></th>
                             <td>
+                                @if(old('gender'))
                                     @foreach($genders as $gender)
-                                        @if($gender->id == $user->gender_id)
-                                            <input type="radio" name="gender" value="{{$gender->id}}" checked>{{ $gender->gender_name }}
+                                        @if($gender->id == old('gender'))
+                                            <input type="radio" name="gender" value="{{ $gender->id }}" checked>{{ $gender->gender_name }}
                                         @else
-                                            <input type="radio" name="gender" value="{{$gender->id}}">{{ $gender->gender_name }}
+                                            <input type="radio" name="gender" value="{{ $gender->id }}">{{ $gender->gender_name }}
                                         @endif
                                     @endforeach
+                                @else
+                                    @foreach($genders as $gender)
+                                        @if($gender->id == $user->gender_id)
+                                            <input type="radio" name="gender" value="{{ $gender->id }}" checked>{{ $gender->gender_name }}
+                                        @else
+                                            <input type="radio" name="gender" value="{{ $gender->id }}">{{ $gender->gender_name }}
+                                        @endif
+                                    @endforeach
+                                @endif
                                 </td>
                         </tr>
                         @endif
                     @endif
                     <tr>
                         <th class="text-center"><label for="">郵便番号</label></th>
-                        <td><input class="form-control" maxlength="8" type="text" name="postal" size="10" maxlength="8" value="{{ $user->postal }}"
+                        <td><input class="form-control" maxlength="8" type="text" name="postal" size="10" maxlength="8" value="{{ old('postal',$user->postal) }}"
                                    placeholder="ハイフンなし" onKeyUp="AjaxZip3.zip2addr(this,'','address1','address1');"></td>
                     </tr>
                     <tr>
                         <th class="text-center"><label for="">住所</label></th>
-                        <td><input class="form-control" type="text" name="address1" value="{{ $user->address1 }}" size="60" placeholder="市区町村"></td>
+                        <td><input class="form-control" type="text" name="address1" value="{{ old('address1',$user->address1) }}" size="60" placeholder="市区町村"></td>
                     </tr>
                     <tr>
                         <th class="text-center"><label for="">番地</label></th>
-                        <td><input class="form-control" type="text" name="address2" value="{{ $user->address2 }}" placeholder="番地"></td>
+                        <td><input class="form-control" type="text" name="address2" value="{{ old('address2',$user->address2) }}" placeholder="番地"></td>
                     </tr>
                     <tr>
                         <th class="text-center"><label for="">建物名</label></th>
-                        <td><input class="form-control" type="text" name="address3" value="{{ $user->address3 }}" placeholder="建物名"></td>
+                        <td><input class="form-control" type="text" name="address3" value="{{ old('address3',$user->address3) }}" placeholder="建物名"></td>
                     </tr>
                     <tr>
                         <th class="text-center"><label for="">電話番号</label></th>
-                        <td><input class="form-control" type="number" name="phone" value="{{ $user->phone }}" placeholder=""></td>
+                        <td><input class="form-control" type="number" name="phone" value="{{ old('phone',$user->phone) }}" placeholder=""></td>
                     </tr>
                     @if(isset($user->email))
                         <tr>
                             <th class="text-center"><label for="">メールアドレス</label></th>
-                            <td><input type="email" name="email" value="{{ $user->email }}"></td>
+                            <td><input class="form-control" type="email" name="email" value="{{ old('email',$user->email) }}"></td>
                         </tr>
                     @endif
                     </tbody>
 
                 </table>
                 <div class="text-center">
-                    <a type="button" class="btn btn-default btn-sm ml" href="/pizzzzza/order/accept/customer/{{ $user->id }}/show">戻る</a>
-                    <input id="submit" type="submit" class="btn btn-primary btn-sm ml" name="editPost" value="更新" onclick="changeData()">
+                    <a type="button" class="btn btn-default btn-lg ml" href="/pizzzzza/order/accept/customer/{{ $user->id }}/show">戻る</a>
+                    <input id="submit" type="submit" class="btn btn-primary btn-lg ml" name="editPost" value="更新" onclick="changeData()">
                 </div>
             </div>
             {{  csrf_field()  }}
