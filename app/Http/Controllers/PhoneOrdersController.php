@@ -111,11 +111,11 @@ class PhoneOrdersController extends Controller
                 // クーポン使用総額のカウント
                 $orderCouponTotal = $phoneOrder->getOrderCouponTotal($id);
 
-                return view('pizzzzza.order.accept.customer.show', compact('user', 'orders', 'orderCount', 'orderTotal', 'orderAvg', 'orderCouponTotal'));
+                return view('pizzzzza.order.accept.customer.show', compact('user', 'orders', 'orderCount', 'orderTotal', 'orderAvg', 'orderCouponTotal','id'));
 
             } else {
 
-                return view('pizzzzza.order.accept.customer.show', compact('user'));
+                return view('pizzzzza.order.accept.customer.show', compact('user','id'));
 
             }
 

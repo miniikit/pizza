@@ -771,21 +771,61 @@ class OrdersMasterSeeder extends Seeder
     {
         DB::table('orders_master')->delete();
 
-        // WEBとPHONEの生成数（合計）
-        $max = 100; //ここを変更する場合の注意点：この数値を、orders_details_tableの先頭行$maxの値に代入すること
+        // WEBとPHONEの生成数（過去の合計）
+        $max = 300; //ここを変更する場合の注意点：この数値を、orders_details_tableの先頭行$maxの値に代入すること
 
-        // WEB+PHONEの注文
-        for($i = 1; $i<= $max; $i++){
+        // 注文の比率
+        $past = $max * 0.95;
+        $future = $max * 0.05;
 
-            //徐々に小さくなる値
-            $rand = ($max-$i) * 3;
+        // 過去の注文(WEB+PHONE)
+        for($i = 1; $i<= $past; $i++){
 
+            // 徐々に小さくなる値
+            $rand = ($past-$i) * 3;
+
+            // 注文日を設定
             $orderDate = Carbon::today()->subHour($rand);
             $today = Carbon::today();
 
+            // 配達希望日時
+            $apointment_date = $orderDate->addMinutes(rand(60,240));
 
-            //配達希望日時
-            $apointment_date = $today->addHour($i)->addMinute($rand);
+            // 状態ID（もし、配達希望日時が過去であれば、「完了」または「キャンセル」にセット
+            if($apointment_date <= $today){
+                $state_id = rand(1,2);
+
+            // 配達希望日が未来である
+            }else{
+                //状態を、1または3に設定する。（１は未完了・３はキャンセル）
+                $state_id = rand(1,3);
+                if($state_id == 2){
+                    $state_id = 1;
+                }
+            }
+
+            $type = rand(1,2);
+            if($type == 1) { // WEB会員
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand(7, 20), 'employee_id' => NULL,]);
+            }else { // PHONE会員
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand(7, 20), 'employee_id' => rand(1, 6),]);
+            }
+
+        }
+
+        // 未来の注文(WEB+PHONE)
+        for($i = 1; $i<= $future; $i++){
+
+            //徐々に小さくなる値
+            $rand = ($future - $i) * 5;
+
+            // 注文日時
+            $orderDate = Carbon::now()->subMinute($rand);
+            $today = Carbon::today();
+
+            // 配達希望日は、１−４時間後に設定する
+            $apointment_date = $orderDate;
+            $apointment_date = $apointment_date->addMinute($i * rand(60,240));
 
             //状態ID（もし、配達希望日時が過去であれば、「完了」または「キャンセル」にセット
             if($apointment_date <= $today){
@@ -804,7 +844,7 @@ class OrdersMasterSeeder extends Seeder
             if($type == 1) { // WEB会員
                 Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand(7, 20), 'employee_id' => NULL,]);
             }else { // PHONE会員
-                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $today->addMinute(30), 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand(7, 20), 'employee_id' => rand(1, 6),]);
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand(7, 20), 'employee_id' => rand(1, 6),]);
             }
 
         }
