@@ -1,8 +1,13 @@
 @extends('template.master')
+
 @section('title', '新規登録')
+
 @section('css')
-<link rel="stylesheet" href="/css/auth/register/index.css" media="all" title="no title"> @endsection @section('js')
-<script type="text/javascript" src="https://ajaxzip3.github.io/ajaxzip3.js" charset="utf-8"></script>
+<link rel="stylesheet" href="/css/auth/register/index.css" media="all" title="no title">
+@endsection
+ 
+@section('plug')
+<script src="/js/common/ajaxzip3.js" type="text/javascript"></script>
 <script src="/js/common/autokana/jquery.autoKana.js" language="javascript" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(
@@ -13,6 +18,7 @@
         });
 </script>
 @endsection
+
 @section('main')
 <div class="container">
 <div class="wrap">
@@ -101,7 +107,7 @@
                             <label for="postal" class="control-label">郵便番号(半角)<font class="red">※</font></label>
                         </th>
                         <td class="form-inline">
-                            <input type="text" class="form-control" name="postal" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')" size="5" maxlength="7" onKeyup="AjaxZip3.zip2addr('postal','','pref','address1');">
+                            <input type="text" class="form-control" name="postal" size="5" maxlength="7" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')" onKeyup="AjaxZip3.zip2addr('postal','','pref','address1');">
                             <input type="button" class="form-btn" name="postal" onClick="AjaxZip3.zip2addr('postal','','pref','address1');" value="〒→変換" onKeyup="AjaxZip3.zip2addr('postal','','pref','address1');">
                             <span class="example">例)0000000</span>
                         </td>
