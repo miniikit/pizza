@@ -22,9 +22,7 @@ class AdminMenusController extends Controller
 
     protected $menusService;
 
-    /**
-     * AdminMenusController constructor.
-     */
+
     public function __construct(MenusService $menusService)
     {
         $this->menusService = $menusService;
