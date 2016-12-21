@@ -7,7 +7,17 @@ use App\Service\ContactService;
 
 class ContactController extends Controller
 {
-    //
+    protected $contactService;
+
+    /**
+     * ContactController constructor.
+     * @param $contactService
+     */
+    public function __construct(ContactService $contactService)
+    {
+        $this->contactService = $contactService;
+    }
+
 
     public function index() {
 
@@ -20,10 +30,7 @@ class ContactController extends Controller
 
        $data = $request->all();
 
-
-       $contact = new ContactService();
-
-       $contact->send($data);
+       $this->contactService->send($data);
 
        return view('contact.complete');
 
