@@ -20,11 +20,21 @@ use App\Service\MenusService;
 class AdminMenusController extends Controller
 {
 
+    protected $menusService;
+
+    /**
+     * AdminMenusController constructor.
+     */
+    public function __construct(MenusService $menusService)
+    {
+        $this->menusService = $menusService;
+
+    }
+
     public function index()
     {
 
-        $menusService = new MenusService();
-        $products = $menusService->all();
+        $products = $this->menusService->all();
 
         return view('pizzzzza.menu.index', compact('products'));
     }
@@ -32,8 +42,7 @@ class AdminMenusController extends Controller
     public function destroy($id)
     {
 
-        $menusService = new MenusService();
-        $menusService->destroy($id);
+        $this->menusService->destroy($id);
 
 
         Flash::success('削除しました。');
@@ -44,16 +53,15 @@ class AdminMenusController extends Controller
 
     public function history()
     {
-        $menusService = new MenusService();
-        $products = $menusService->history();
+
+        $products = $this->menusService->history();
 
         return view('pizzzzza.menu.history', compact('products'));
     }
 
     public function show($id)
     {
-        $menusService = new MenusService();
-        $product = $menusService->getProduct($id);
+        $product = $this->menusService->getProduct($id);
 
         return view('pizzzzza.menu.show', compact('product'));
     }
@@ -61,8 +69,7 @@ class AdminMenusController extends Controller
     public function edit($id)
     {
 
-        $menusService = new MenusService();
-        $product = $menusService->getProduct($id);
+        $product = $this->menusService->getProduct($id);
 
         return view('/pizzzzza.menu.edit', compact('product'));
     }
@@ -71,8 +78,7 @@ class AdminMenusController extends Controller
     {
 
 
-        $menusService = new MenusService();
-        $menusService->updateProduct($request, $id);
+        $this->menusService->updateProduct($request, $id);
 
 
         Flash::success('更新完了しました。');
@@ -91,8 +97,7 @@ class AdminMenusController extends Controller
     public function store(AdminMenuAddForm $request)
     {
 
-        $menusService = new MenusService();
-        $menusService->addProduct($request);
+        $this->menusService->addProduct($request);
 
 
         Flash::success('登録完了しました。');
