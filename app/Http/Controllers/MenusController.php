@@ -11,7 +11,9 @@ class MenusController extends Controller
 {
     public function index() {
 
-        $products = Product::where('sales_end_date', null)->orWhere('sales_end_date', '>=', Carbon::today())->with('productPrice')->get();
+        $today = Carbon::today();
+
+        $products = Product::where('sales_end_date', null)->orWhere('sales_end_date', '>=',$today)->with('productPrice')->get();
 
         return view('menu.index',compact('products'));
     }

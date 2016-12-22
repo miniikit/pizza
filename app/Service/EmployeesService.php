@@ -11,8 +11,9 @@ class EmployeesService
 {
     public function all()
     {
+        $today = Carbon::today();
 
-        $employees = Employee::with('user.gender')->get();
+        $employees = Employee::with('user.gender')->where('emoloyee_agreement_enddate','>=',$today)->orWhere('emoloyee_agreement_enddate',NULL)->get();
 
         return $employees;
     }

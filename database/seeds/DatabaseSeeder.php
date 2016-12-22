@@ -262,11 +262,11 @@ class EmployeeMasterSeeder extends Seeder
             'emoloyee_agreement_enddate' => null,
         ]);
 
-        //テストデータ：契約中
+        //テストデータ：契約中(本日まで)
         Employee::create([
             'users_id' => 4,
             'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
-            'emoloyee_agreement_enddate' => null,
+            'emoloyee_agreement_enddate' => Carbon::today(),
         ]);
 
         //テストデータ：契約終了
@@ -545,6 +545,7 @@ class ProductsMasterSeeder extends Seeder
             'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
+
         Product::create([
             'product_name' => '【期間限定】もち明太グラタン',
             'price_id' => 10,
@@ -554,6 +555,7 @@ class ProductsMasterSeeder extends Seeder
             'sales_start_date' => Carbon::parse('2016-12-20'),
             'sales_end_date' => Carbon::parse('2017-03-31'),
         ]);
+
         Product::create([
             'product_name' => '【期間限定】越後産ズワイガニのご馳走ピザ',
             'price_id' => 11,
@@ -590,6 +592,8 @@ class ProductsMasterSeeder extends Seeder
             'sales_start_date' => Carbon::parse('2016-12-10'),
             'sales_end_date' => null,
         ]);
+
+        // 販売終了
         Product::create([
             'product_name' => '海のミックスコラボ',
             'price_id' => 15,
@@ -597,8 +601,10 @@ class ProductsMasterSeeder extends Seeder
             'product_text' => '海の幸をふんだんに使用した、シーフードずきにはたまらない一品です。',
             'genre_id' => 1,
             'sales_start_date' => Carbon::parse('2016-12-10'),
-            'sales_end_date' => null,
+            'sales_end_date' => Carbon::yesterday(),
         ]);
+
+        // 本日まで
         Product::create([
             'product_name' => 'ミックスパーティー',
             'price_id' => 16,
@@ -606,7 +612,7 @@ class ProductsMasterSeeder extends Seeder
             'product_text' => '子供から大人まで幅広い年代の方に支持される、大人気ミックスピザです。',
             'genre_id' => 1,
             'sales_start_date' => Carbon::parse('2016-12-10'),
-            'sales_end_date' => null,
+            'sales_end_date' => Carbon::today(),
         ]);
     }
 }
