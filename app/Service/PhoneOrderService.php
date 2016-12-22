@@ -8,14 +8,6 @@ use Carbon\Carbon;
 
 class PhoneOrderService
 {
-    // 電話番号が一致するユーザ
-    public function searchPhoneNumber($phone) {
-
-        $user = User::with('gender')->where('phone','=',$phone)->get();
-
-        return $user;
-
-    }
 
     /**
      * 会員情報確認
@@ -78,6 +70,7 @@ class PhoneOrderService
             return $total;
         }
     }
+
 
     /**
      * 会員情報 更新・登録処理
@@ -156,6 +149,7 @@ class PhoneOrderService
         return $id;
     }
 
+
     /**
      * 商品選択
      */
@@ -177,7 +171,7 @@ class PhoneOrderService
 
     }
 
-    // 販売中ピザの件数
+    // 販売中サイドの件数
     public function getSideCnt(){
 
         $genre_id = 2;
@@ -187,7 +181,7 @@ class PhoneOrderService
 
     }
 
-    // 販売中ピザの件数
+    // 販売中ドリンクの件数
     public function getDrinkCnt(){
 
         $genre_id = 3;

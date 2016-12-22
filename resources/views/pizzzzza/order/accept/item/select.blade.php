@@ -25,7 +25,7 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>商品 (ピザ)</th>
+                                <th>商品（ピザ）</th>
                                 <th>値段</th>
                                 <th>数量</th>
                             </tr>
@@ -56,7 +56,7 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>商品 (サイド)</th>
+                                <th>商品（サイド）</th>
                                 <th>値段</th>
                                 <th>数量</th>
                             </tr>
@@ -87,14 +87,14 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>商品 (ドリンク)</th>
+                                <th>商品（ドリンク）</th>
                                 <th>値段</th>
                                 <th>数量</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($products as $product)
-                                @if ($product->genre_id == 2)
+                                @if ($product->genre_id == 3)
                                     <tr class="item">
                                         <td>
                                             <a href="/pizzzzza/menu/{{$product->id}}/show">{{ $product->product_name }}</a>
@@ -145,6 +145,9 @@
                             </tr>
                             </tbody>
                         </table>
+                        <div id="order" class="ar">
+                            <a href="/pizzzzza/order/accept/customer/{{ $id }}/show" class="btn btn-default btn-sm">戻る</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -188,8 +191,8 @@
                                 $('#cart').empty();
 
                                 // #cartに書き足し
-                                $.each(cart["cart"], function (i, val) {
-                                    $('#cart').append('<tr><td>' + i + '</td><td><select class="select form-control"><option value=' + val + ' selected>' + val + '</option></select></td> </td><td class="ac"><button class="btn btn-danger btn-sm">削除</button></td> </tr>');
+                                $.each(cart["cart"], function (product_name, val) {
+                                    $('#cart').append('<tr><td>' + product_name + '</td><td><select class="select form-control" id="'+ product_name +'"><option value=' + val + ' selected>' + val + '</option></select></td> </td><td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="'+ product_name +'">削除</a></td> </tr>');
                                     // $("#cart").append(i + " - " + val);
                                 });
 
@@ -199,7 +202,7 @@
                                 }
 
                                 // 注文へ進むボタンを追加
-                                $('#cart').append('<input type = "submit" value="注文確認へ">' + i + '');
+                                $('#order').append('<a href="/pizzzzza/order/accept/item/{id}/confirm" class="btn btn-primary btn-sm ml">確認</a>');
 
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -238,7 +241,7 @@
                             type: "POST",
                             url: "/pizzzzza/order/accept/customer/cart",
                             data: data,
-                            success: function (cart, status, count) {
+                            success: function (cart) {
                                 // 成功 alert(cart["cart"]["綾鷹"]);
                                 // 成功 alert(cart["cart"].綾鷹);
 
@@ -246,8 +249,8 @@
                                 $('#cart').empty();
 
                                 // #cartに書き足し
-                                $.each(cart["cart"], function (i, val) {
-                                    $('#cart').append('<tr><td>' + i + '</td><td><select class="select form-control"><option value=' + val + ' selected>' + val + '</option></select></td> </td><td class="ac"><button class="btn btn-danger btn-sm">削除</button></td> </tr>');
+                                $.each(cart["cart"], function (product_name, val) {
+                                    $('#cart').append('<tr><td>' + product_name + '</td><td><select class="select form-control" id="'+ product_name +'"><option value=' + val + ' selected>' + val + '</option></select></td> </td><td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="'+ product_name +'">削除</button></td> </tr>');
                                     // $("#cart").append(i + " - " + val);
                                 });
 
@@ -269,6 +272,58 @@
 
             });
 
+            {{-- 削除ボタンが押されるたびに実行 --}}
+            $(document).on('click', '.delete', function () {
+
+                {{-- トークンをmetaに設定し、送る --}}
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                        {{-- 入力値をdataに設定 --}}
+                var data = {
+                            product_name: $(this).val(),
+                            "_token": "{{ csrf_token() }}"
+                        };
+
+                {{-- Ajax通信 --}}
+                 $.ajax(
+                        {
+                            type: "POST",
+                            url: "/pizzzzza/order/accept/customer/cart/delete",
+                            data: data,
+                            success: function (cart) {
+                                // 成功 alert(cart["cart"]["綾鷹"]);
+                                // 成功 alert(cart["cart"].綾鷹);
+
+                                // #cartを初期化
+                                $('#cart').empty();
+
+                                // #cartに書き足し
+                                $.each(cart["cart"], function (product_name, val) {
+                                    $('#cart').append('<tr><td>' + product_name + '</td><td><select class="select form-control" id="'+ product_name +'"><option value=' + val + ' selected>' + val + '</option></select></td> </td><td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="'+ product_name +'">削除</button></td> </tr>');
+                                    // $("#cart").append(i + " - " + val);
+                                });
+
+                                // option valueを追加
+                                for (var i = 0; i <= 10; i++) {
+                                    $('.select').append('<option values=' + i + '>' + i + '</option>');
+                                }
+
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                alert('Error : ' + errorThrown);
+                                $("#XMLHttpRequest").html("XMLHttpRequest : " + XMLHttpRequest.status);
+                                $("#textStatus").html("textStatus : " + textStatus);
+                                $("#errorThrown").html("errorThrown : " + errorThrown);
+                            }
+                        });
+                //ページをリロードしない
+                return false;
+
+            });
         });
 
         {{-- カート固定 --}}
