@@ -341,10 +341,28 @@ class PhoneOrdersController extends Controller
     }
 
     // 注文情報確認ページ
-    public function orderConfirm(Request $request)
+    public function orderConfirm(Request $request,$id)
     {
+        $Phone = new PhoneOrderService();
+
+        // 会員情報
+        $user = $Phone->getUser($id);
+
+        // 商品
+        $data = $Phone->getPrice($request);
+
+        // 商品一覧
+        $items = $data['result'];
+
+        // 合計金額
+        $total = $data['total'];
+
+        return view('pizzzzza.order.accept.item.confirm',compact('user','items','total','id'));
+    }
+
+    // 購入処理
+    public function orderComplete(Request $request,$id){
         dd($request->all());
-        return view('pizzzzza.order.accept.item.confirm');
     }
 
 }

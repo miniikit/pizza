@@ -84,7 +84,7 @@ Route::group(['middleware' => ['adminauth']], function () {
 
 //クーポン
     Route::get('/pizzzzza/coupon/add','CouponsController@couponNew'); //クーポン種別選択ページ
-    Route::get('/pizzzzza/coupon','CouponsController@couponNowList'); //開催中クーポン一覧ページ
+    Route::get('/pizzzzza/coupon','CouponsController@couponNowList'); //クーポン一覧ページ
     Route::get('/pizzzzza/coupon/{id}/show', 'CouponsController@show')->name('showCoupon'); //クーポン詳細
     Route::get('/pizzzzza/coupon/{id}/edit','CouponsController@edit')->name('editCoupon');  //クーポン編集
     Route::post('/pizzzzza/coupon/{id}/update/discount','CouponsController@DiscountUpdateDo');
@@ -143,6 +143,7 @@ Route::group(['middleware' => ['adminauth']], function () {
 //電話注文　注文処理
     Route::get('/pizzzzza/order/accept/item/{id}/select', 'PhoneOrdersController@orderSelect')->name('telOrderSelect'); //商品入力・選択ページ
     Route::get('/pizzzzza/order/accept/item/{id}/confirm', 'PhoneOrdersController@orderConfirm'); //注文情報確認ページ
+    Route::post('/pizzzzza/order/accept/item/{id}/complete', 'PhoneOrdersController@orderComplete'); //注文情報確認ページ
 
 //売上・売れ筋
     Route::get('/pizzzzza/analysis/populer', 'AnalysisController@analysisPopuler');

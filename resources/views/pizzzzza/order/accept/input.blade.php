@@ -1,6 +1,6 @@
 @extends('template.admin')
 
-@section('title', '電話注文受付')
+@section('title', '電話注文')
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
@@ -10,13 +10,13 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
-        <li class="active">電話注文受付</li>
+        <li class="active">電話注文</li>
     </ol>
 @endsection
 
 @section('main')
     <div class="wrap">
-        <h1>電話注文受付</h1>
+        <h1>電話注文</h1>
         <div id="tel">
             @if (count($errors) > 0)
                 @foreach ($errors->all() as $error)
