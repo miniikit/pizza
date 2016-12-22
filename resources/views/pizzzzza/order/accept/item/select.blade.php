@@ -9,8 +9,8 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
-        <li><a href="/pizzzzza/order/accept/input">電話注文受付</a></li>
-        <li><a href="/pizzzzza/order/accept/customer/{{$id}}/show">お客様情報確認</a></li>
+        <li><a href="/pizzzzza/order/accept/input">電話注文</a></li>
+        <li><a href="/pizzzzza/order/accept/customer/{{ $id }}/show">お客様情報確認</a></li>
         <li class="active">商品選択</li>
     </ol>
 @endsection
@@ -18,7 +18,7 @@
 @section('main')
     <h1>商品選択</h1>
     @if(isset($products))
-        <form action="#">
+        <form action="/pizzzzza/order/accept/item/{{ $id }}/confirm">
             <div class="row">
                 <div class="col-md-7">
                     <div id="pizza">
@@ -39,7 +39,7 @@
                                         </td>
                                         <td>{{ number_format($product->product_price) }} 円</td>
                                         <td>
-                                            <select name="product_num" id="{{ $product->product_name }}"
+                                            <select name="" id="{{ $product->product_name }}"
                                                     class="{{ $product->genre_name }} form-control">
                                                 @for($i = 0; $i<= 10; $i++)
                                                     <option value="{{ $i }}">{{ $i }}</option>
@@ -70,7 +70,7 @@
                                         </td>
                                         <td>{{ number_format($product->product_price) }} 円</td>
                                         <td>
-                                            <select name="product_num" id="{{ $product->product_name }}"
+                                            <select name="" id="{{ $product->product_name }}"
                                                     class="{{ $product->genre_name }} form-control">
                                                 @for($i = 0; $i<= 10; $i++)
                                                     <option value="{{ $i }}">{{ $i }}</option>
@@ -101,7 +101,7 @@
                                         </td>
                                         <td>{{ number_format($product->product_price) }} 円</td>
                                         <td>
-                                            <select name="product_num" id="{{ $product->product_name }}"
+                                            <select name="" id="{{ $product->product_name }}"
                                                     class="{{ $product->genre_name }} form-control">
                                                 @for($i = 0; $i<= 10; $i++)
                                                     <option value="{{ $i }}">{{ $i }}</option>
@@ -147,6 +147,7 @@
                         </table>
                         <div id="order" class="ar">
                             <a href="/pizzzzza/order/accept/customer/{{ $id }}/show" class="btn btn-default btn-sm">戻る</a>
+                            <button id="form-button" class="btn btn-primary btn-sm ml" style="display: none;">確認</button>
                         </div>
                     </div>
                 </div>
@@ -200,15 +201,15 @@
                                     $.each(cart["cart"], function (product_name, val) {
 
                                         // 一行書き出し
-                                        $('#cart').append('<tr class="item"><td>' + product_name + '</td><td><select class="select form-control ' + product_name + '" id="' + product_name + '"></select></td> <td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="' + product_name + '">削除</button></td></tr>');
+                                        $('#cart').append('<tr class="item"><td>' + product_name + '</td><td><select class="select form-control ' + product_name + '" id="' + product_name + '" name="'+ product_name +'"'+'"></select></td> <td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="' + product_name + '">削除</button></td></tr>');
 
                                         // selectタグ内に追加
                                         var max = 11;
                                         for (var i = 0; i < max; i++) {
                                             if (i == val) {
-                                                $("#" + product_name + "").append('<option value="' + i + '" selected>' + i + '</option>');
+                                                $("." + product_name + "").append('<option value="' + i + '" selected>' + i + '</option>');
                                             } else {
-                                                $("#" + product_name + "").append('<option value="' + i + '">' + i + '</option>');
+                                                $("." + product_name + "").append('<option value="' + i + '">' + i + '</option>');
                                             }
                                         }
                                     });
@@ -218,8 +219,8 @@
                                     $('#cart').append('<tr class="item"><td colspan="3">空です</td></tr>');
                                 }
 
-                                // 注文へ進むボタンを追加
-                                $('#order').append('<a href="/pizzzzza/order/accept/item/{id}/confirm" class="btn btn-primary btn-sm ml">確認</a>');
+                                // 注文へ進むボタンを表示
+                                $('#form-button').css('display','inline-block');
 
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -273,15 +274,15 @@
                                     $.each(cart["cart"], function (product_name, val) {
 
                                         // 一行書き出し
-                                        $('#cart').append('<tr class="item"><td>' + product_name + '</td><td><select class="select form-control ' + product_name + '" id="' + product_name + '"></select></td> <td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="' + product_name + '">削除</button></td></tr>');
+                                        $('#cart').append('<tr class="item"><td>' + product_name + '</td><td><select class="select form-control ' + product_name + '" id="' + product_name + '" name="'+ product_name +'"'+'"></select></td> <td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="' + product_name + '">削除</button></td></tr>');
 
                                         // selectタグ内に追加
                                         var max = 11;
                                         for (var i = 0; i < max; i++) {
                                             if (i == val) {
-                                                $("#" + product_name + "").append('<option value="' + i + '" selected>' + i + '</option>');
+                                                $("." + product_name + "").append('<option value="' + i + '" selected>' + i + '</option>');
                                             } else {
-                                                $("#" + product_name + "").append('<option value="' + i + '">' + i + '</option>');
+                                                $("." + product_name + "").append('<option value="' + i + '">' + i + '</option>');
                                             }
                                         }
                                     });
@@ -290,6 +291,9 @@
                                 }else{
                                     $('#cart').append('<tr class="item"><td colspan="3">空です</td></tr>');
                                 }
+
+                                // 注文へ進むボタンを表示
+                                $('#form-button').css('display','inline-block');
 
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -340,15 +344,15 @@
                                     $.each(cart["cart"], function (product_name, val) {
 
                                         // 一行書き出し
-                                        $('#cart').append('<tr class="item"><td>' + product_name + '</td><td><select class="select form-control ' + product_name + '" id="' + product_name + '"></select></td> <td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="' + product_name + '">削除</button></td></tr>');
+                                        $('#cart').append('<tr class="item"><td>' + product_name + '</td><td><select class="select form-control ' + product_name + '" id="' + product_name + '" name="'+ product_name +'"'+'"></select></td> <td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="' + product_name + '">削除</button></td></tr>');
 
                                         // selectタグ内に追加
                                         var max = 11;
                                         for (var i = 0; i < max; i++) {
                                             if (i == val) {
-                                                $("#" + product_name + "").append('<option value="' + i + '" selected>' + i + '</option>');
+                                                $("." + product_name + "").append('<option value="' + i + '" selected>' + i + '</option>');
                                             } else {
-                                                $("#" + product_name + "").append('<option value="' + i + '">' + i + '</option>');
+                                                $("." + product_name + "").append('<option value="' + i + '">' + i + '</option>');
                                             }
                                         }
                                     });
@@ -357,6 +361,9 @@
                                 }else{
                                     $('#cart').append('<tr class="item"><td colspan="3">空です</td></tr>');
                                 }
+
+                                // 注文へ進むボタンを表示
+                                $('#form-button').css('display','inline-block');
 
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -396,5 +403,12 @@
             });
         });
 
+        {{-- form submit --}}
+        $(function () {
+            $('#form-bottom').click(function () {
+                var form = $(this).parent();
+                $(form).submit();
+            });
+        })
     </script>
 @endsection

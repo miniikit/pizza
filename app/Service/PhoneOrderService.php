@@ -191,4 +191,44 @@ class PhoneOrderService
 
     }
 
+    /**
+     * 注文確認
+     */
+    //
+    public function getPrice($request){
+
+        $today = Carbon::today();
+
+        $items = $request->all();
+
+        // 商品名を取得 [0]=> "商品名"、[1]=>"商品名"...
+        $keys = array_keys($items);
+
+        // 結果を返却する配列
+        $result = array();
+
+        // 合計金額を格納する配列
+        $total = 0;
+
+        // 商品表、商品価格表から取得
+        for($i = 0; $i<count($keys); $i++){
+
+            // 商品名
+            $product_name = $keys[$i];
+
+            // 商品個数
+            $num = $items[$product_name];
+
+            // DBから見つかった情報を格納
+            $result[$i] = DB::table('products_master')->where('product_name','=',$product_name)->where(function($query) use ($today){$query->orWhere('sales_end_date','>=',$today)->orWhere('sales_end_date','=',null);})->join('products_prices_master','products_master.price_id','=','products_prices_master.id')->first();
+
+            // 個数を共に格納
+            $result[$i]->num = $num;
+
+            //合計金額を算出
+            $total += $result[$i]->product_price * $num;
+        }
+
+        return compact('result','total');
+    }
 }

@@ -9,7 +9,7 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
-        <li class="active"><a href="/pizzzzza/order/accept/input">電話注文受付</a></li>
+        <li class="active"><a href="/pizzzzza/order/accept/input">電話注文</a></li>
         <li class="active"><a href="/pizzzzza/order/accept/customer/{{ $user->id }}/show">お客様情報確認</a></li>
         <li class="active">お客様情報編集</li>
     </ol>

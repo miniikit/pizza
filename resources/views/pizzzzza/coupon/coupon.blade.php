@@ -1,6 +1,6 @@
 @extends('template.admin')
 
-@section('title', '開催中クーポン一覧')
+@section('title', 'クーポン一覧')
 
 @section('css')
     <link rel="stylesheet" href="/css/pizzzzza/coupon/index.css" media="all" title="no title">
@@ -9,12 +9,12 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
-        <li class="active">開催中クーポン一覧</li>
+        <li class="active">クーポン一覧</li>
     </ol>
 @endsection
 
 @section('main')
-    <h1>開催中クーポン一覧</h1>
+    <h1>クーポン一覧</h1>
 
     <div class="row">
         <table class="table" >
@@ -24,7 +24,6 @@
                 <th class="text">クーポン名</th>
                 <th class="text">開始日</th>
                 <th class="text">終了日</th>
-                <th class="text">登録日時</th>
                 <th class="text">更新日時</th>
             </tr>
             </thead>
@@ -33,10 +32,9 @@
                 <tr class="link" data-href="/pizzzzza/coupon/{{ $coupon->id }}/show">
                     <td class="number">{{ $coupon->id }}</td>
                     <td class="name">{{ $coupon->coupon_name }}</td>
-                    <td class="date">{{ $coupon->coupon_start_date }}</td>
-                    <td class="date">{{ $coupon->coupon_end_date }}</td>
-                    <td class="date">{{ $coupon->created_at }}</td>
-                    <td class="date">{{ $coupon->updated_at }}</td>
+                    <td class="date">{{ \Carbon\Carbon::parse($coupon->coupon_start_date)->format('Y年m月d日') }}</td>
+                    <td class="date">{{ \Carbon\Carbon::parse($coupon->coupon_end_date)->format('Y年m月d日') }}</td>
+                    <td class="date">{{ \Carbon\Carbon::parse($coupon->updated_at)->format('Y年m月d日') }}</td>
                     </td>
                 </tr>
                 @endforeach
