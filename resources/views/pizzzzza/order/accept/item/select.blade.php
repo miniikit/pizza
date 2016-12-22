@@ -39,7 +39,8 @@
                                         </td>
                                         <td>{{ number_format($product->product_price) }} 円</td>
                                         <td>
-                                            <select name="product_num" id="{{ $product->product_name }}" class="{{ $product->genre_name }} form-control">
+                                            <select name="product_num" id="{{ $product->product_name }}"
+                                                    class="{{ $product->genre_name }} form-control">
                                                 @for($i = 0; $i<= 10; $i++)
                                                     <option value="{{ $i }}">{{ $i }}</option>
                                                 @endfor
@@ -161,99 +162,135 @@
 
             var cart = {};
 
-            $('select').change(function () {
-                var product_id = $(this).attr('id');
-                var product_num = $(this).val();
-
-                cart[product_id] = product_num;
-
-                // #cartを初期化
-                $('#cart').empty();
-
-                // #cartに書き足し
-                $.each(cart, function (i, val) {
-                    if (val != 0) {
-                        $('#cart').append('<tr class="item"><td>' + i + '</td><td><select class="select form-control"><option value=' + val + ' selected>' + val + '</option></select></td><td class="ac"><button class="btn btn-danger btn-sm">削除</button></td> </tr>');
-                    }
-                });
-
-                // option valueを追加
-                for (var i = 0; i <= 10; i++) {
-                    $('.select').append('<option values=' + i + '>' + i + '</option>');
-                }
-
-                /*
+            {{-- 初回読み込み時のみ実行 --}}
+            $(document).ready(function () {
 
                 {{-- トークンをmetaに設定し、送る --}}
                 $.ajaxSetup({
-                 headers: {
-                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                 }
-                 });
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                        {{-- 送信する値 --}}
+                var data = {
+                            "_token": "{{ csrf_token() }}"
+                        };
+
+                $.ajax(
+                        {
+                            type: "POST",
+                            url: "/pizzzzza/order/accept/customer/cart/check",
+                            data: data,
+                            success: function (cart) {
+
+                                // #cartを初期化
+                                $('#cart').empty();
+
+                                // #cartに書き足し
+                                $.each(cart["cart"], function (i, val) {
+                                    $('#cart').append('<tr><td>' + i + '</td><td><select class="select form-control"><option value=' + val + ' selected>' + val + '</option></select></td> </td><td class="ac"><button class="btn btn-danger btn-sm">削除</button></td> </tr>');
+                                    // $("#cart").append(i + " - " + val);
+                                });
+
+                                // option valueを追加
+                                for (var i = 0; i <= 10; i++) {
+                                    $('.select').append('<option values=' + i + '>' + i + '</option>');
+                                }
+
+                                // 注文へ進むボタンを追加
+                                $('#cart').append('<input type = "submit" value="注文確認へ">' + i + '');
+
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                alert('Error : ' + errorThrown);
+                                $("#XMLHttpRequest").html("XMLHttpRequest : " + XMLHttpRequest.status);
+                                $("#textStatus").html("textStatus : " + textStatus);
+                                $("#errorThrown").html("errorThrown : " + errorThrown);
+                            }
+                        });
+
+                //ページをリロードしない
+                return false;
+
+            });
+
+            {{-- selectの値が変わるたびに実行 --}}
+            $(document).on('change', 'select', function () {
+
+                {{-- トークンをmetaに設定し、送る --}}
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
                 {{-- 入力値をdataに設定 --}}
                 var data = {
-                 product_id: $(this).attr('id'),
-                 product_num: $(this).val(),
-                 "_token": "{{ csrf_token() }}"
-                 };
+                            product_id: $(this).attr('id'),
+                            product_num: $(this).val(),
+                            "_token": "{{ csrf_token() }}"
+                        };
 
+                {{-- Ajax通信 --}}
                  $.ajax(
-                 {
-                 type: "POST",
-                 url: "/pizzzzza/order/accept/customer/cart",
-                 data: data,
-                 success: function (cart,status,count) {
-                 // 成功 alert(cart["cart"]["綾鷹"]);
-                 // 成功 alert(cart["cart"].綾鷹);
+                        {
+                            type: "POST",
+                            url: "/pizzzzza/order/accept/customer/cart",
+                            data: data,
+                            success: function (cart, status, count) {
+                                // 成功 alert(cart["cart"]["綾鷹"]);
+                                // 成功 alert(cart["cart"].綾鷹);
 
-                 // #cartを初期化
-                 $('#cart').empty();
+                                // #cartを初期化
+                                $('#cart').empty();
 
-                 // #cartに書き足し
-                 $.each(cart["cart"], function(i, val) {
-                 $('#cart').append('<tr><td>' + i + '</td><td><select class="select form-control"><option value='+ val +' selected>' + val + '</option></select></td></tr>');
-                 // $("#cart").append(i + " - " + val);
-                 });
+                                // #cartに書き足し
+                                $.each(cart["cart"], function (i, val) {
+                                    $('#cart').append('<tr><td>' + i + '</td><td><select class="select form-control"><option value=' + val + ' selected>' + val + '</option></select></td> </td><td class="ac"><button class="btn btn-danger btn-sm">削除</button></td> </tr>');
+                                    // $("#cart").append(i + " - " + val);
+                                });
 
-                 // option valueを追加
-                 for(var i=0; i <= 10; i++) {
-                 $('.select').append('<option values='+ i +'>'+ i +'</option>');
-                 }
+                                // option valueを追加
+                                for (var i = 0; i <= 10; i++) {
+                                    $('.select').append('<option values=' + i + '>' + i + '</option>');
+                                }
 
-                 },
-                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                 alert('Error : ' + errorThrown);
-                 $("#XMLHttpRequest").html("XMLHttpRequest : " + XMLHttpRequest.status);
-                 $("#textStatus").html("textStatus : " + textStatus);
-                 $("#errorThrown").html("errorThrown : " + errorThrown);
-                 }
-                 });
-                 //ページをリロードしない
-                 return false;
-                 */
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                alert('Error : ' + errorThrown);
+                                $("#XMLHttpRequest").html("XMLHttpRequest : " + XMLHttpRequest.status);
+                                $("#textStatus").html("textStatus : " + textStatus);
+                                $("#errorThrown").html("errorThrown : " + errorThrown);
+                            }
+                        });
+                //ページをリロードしない
+                return false;
+
             });
+
         });
 
-        $(function() {
-            var $sidebar	= $("#sidebar"),
-                $window		= $(window),
-                width       = $(window).width(),
-                offset		= $sidebar.offset(),
-                topPadding	= 15;
+        {{-- カート固定 --}}
+        $(function () {
+            var $sidebar = $("#sidebar"),
+                    $window = $(window),
+                    width = $(window).width(),
+                    offset = $sidebar.offset(),
+                    topPadding = 15;
 
-            $window.scroll(function() {
+            $window.scroll(function () {
                 if (width > 991) {
 
                 }
                 if ($window.scrollTop() > offset.top) {
                     $sidebar.stop().css({
-                        marginTop:$window.scrollTop() - offset.top + topPadding
-                })
+                        marginTop: $window.scrollTop() - offset.top + topPadding
+                    })
                 } else {
                     $sidebar.stop().css({
-                        marginTop:0
-                });
+                        marginTop: 0
+                    });
                 }
             });
         });

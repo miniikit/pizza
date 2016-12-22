@@ -289,7 +289,7 @@ class PhoneOrdersController extends Controller
     // カート内リアルタイム反映
     public function orderCart(Request $request)
     {
-        // session()->forget('phoneOrderCart');
+         session()->forget('phoneOrderCart');
 
         // POSTデータ受け取り
         $product_id = $request->product_id;
@@ -315,6 +315,16 @@ class PhoneOrdersController extends Controller
         $count = count($cart);
 
         return ["cart" => $cart, "status" => "ok", "count" => $count,];
+
+    }
+
+    // カート内リアルタイム反映（初期処理用）
+    public function orderCartCheck(){
+
+        // セッションから取り出し
+        $cart = session()->get("phoneOrderCart", []);
+
+        return ["cart" => $cart,"status" => "ok",];
 
     }
 
