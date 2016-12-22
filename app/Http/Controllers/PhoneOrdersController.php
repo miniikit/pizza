@@ -27,18 +27,16 @@ use App\Http\Requests\AdminPhoneUserEditRequest;
 
 class PhoneOrdersController extends Controller
 {
-
-
     // 電話番号入力ページ
     public function index()
     {
         return view('pizzzzza.order.accept.input');
     }
 
-
-    // 会員検索
+    // 会員検索処理
     public function input(Request $request)
     {
+
         // 電話番号
         $phone = $request->number;
 
@@ -52,14 +50,14 @@ class PhoneOrdersController extends Controller
         if ($phone <= "") {
             $check["status"] = "false";
             $check["message"] = "電話番号を入力してください。";
-            return compact('check', 'users');
+            return compact('check');
         }
 
         // 負の数
         if ($phone < 0) {
             $check["status"] = "false";
             $check["message"] = "電話番号は正の数で入力してください。";
-            return compact('check', 'users');
+            return compact('check');
         }
 
         // 桁数が10-11桁以外
@@ -67,7 +65,7 @@ class PhoneOrdersController extends Controller
             $cnt = strlen($phone);
             $check["status"] = "false";
             $check["message"] = "電話番号は10-11桁で数値のみを入力してください。（現在：" . $cnt . "桁）";
-            return compact('check', 'users');
+            return compact('check');
         }
 
         // 検索
@@ -286,10 +284,10 @@ class PhoneOrdersController extends Controller
         return view('pizzzzza.order.accept.item.select', compact('products', 'pizzaCount', 'sideCount', 'drinkCount', 'id'));
     }
 
-    // カート内リアルタイム反映
+    // カート内リアルタイム反映（商品追加・個数変更）
     public function orderCart(Request $request)
     {
-         session()->forget('phoneOrderCart');
+        // session()->forget('phoneOrderCart');
 
         // POSTデータ受け取り
         $product_id = $request->product_id;
@@ -310,11 +308,8 @@ class PhoneOrdersController extends Controller
         // セッションを再配置
         session()->put('phoneOrderCart', $cart);
 
-
-        // 件数
-        $count = count($cart);
-
-        return ["cart" => $cart, "status" => "ok", "count" => $count,];
+        // 返却
+        return compact('cart');
 
     }
 
@@ -324,13 +319,31 @@ class PhoneOrdersController extends Controller
         // セッションから取り出し
         $cart = session()->get("phoneOrderCart", []);
 
-        return ["cart" => $cart,"status" => "ok",];
+        return compact('cart');
 
     }
 
+    // カート内リアルタイム反映（削除処理）
+    public function orderDelete(Request $request){
+
+        $product_id = $request->product_name;
+
+        // セッションから取り出し
+        $cart = session()->get("phoneOrderCart", []);
+
+        // $product_idを削除
+        unset($cart[$product_id]);
+
+        // セッションを再配置
+        session()->put('phoneOrderCart', $cart);
+
+        return compact('cart');
+    }
+
     // 注文情報確認ページ
-    public function orderConfirm()
+    public function orderConfirm(Request $request)
     {
+        dd($request->all());
         return view('pizzzzza.order.accept.item.confirm');
     }
 

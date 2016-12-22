@@ -772,30 +772,38 @@ class OrdersMasterSeeder extends Seeder
         DB::table('orders_master')->delete();
 
         // WEBとPHONEの生成数（過去の合計）
-        $max = 300; //ここを変更する場合の注意点：この数値を、orders_details_tableの先頭行$maxの値に代入すること
+        $max = 300; //この値を変更する場合の注意点：この数値を、orders_details_tableの先頭行$maxの値に代入すること
+
+        // 注文を行う「会員ID」の最小値と最大値
+        $userIdMin = 7;
+        $userIdMax = 20;
+
+        // 注文を受理する「会員ID（担当者）」の最小値と最大値
+        $employeeIdMin = 1;
+        $employeeIdMax = 6;
 
         // 注文の比率
-        $past = $max * 0.95;
-        $future = $max * 0.05;
+        $past = $max * 0.95;  // 過去
+        $future = $max * 0.05;  // 未来
 
-        // 過去の注文(WEB+PHONE)
+        // 過去の注文を生成(WEB+PHONE)
         for($i = 1; $i<= $past; $i++){
 
-            // 徐々に小さくなる値
+            // $iの値が増えるたびに、徐々に小さくなる値
             $rand = ($past-$i) * 3;
 
-            // 注文日を設定
+            // 注文日
             $orderDate = Carbon::today()->subHour($rand);
             $today = Carbon::today();
 
             // 配達希望日時
             $apointment_date = $orderDate->addMinutes(rand(60,240));
 
-            // 状態ID（もし、配達希望日時が過去であれば、「完了」または「キャンセル」にセット
+            // 状態ID（配達希望日時が過去であれば、「完了」または「キャンセル」にセット）
             if($apointment_date <= $today){
                 $state_id = rand(1,2);
 
-            // 配達希望日が未来である
+            // 状態ID（配達希望日が未来であれば、「未完了」または「キャンセル」にセット）
             }else{
                 //状態を、1または3に設定する。（１は未完了・３はキャンセル）
                 $state_id = rand(1,3);
@@ -804,16 +812,19 @@ class OrdersMasterSeeder extends Seeder
                 }
             }
 
+            // PHONE注文か、WEB注文かを指定
             $type = rand(1,2);
-            if($type == 1) { // WEB会員
-                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand(7, 20), 'employee_id' => NULL,]);
-            }else { // PHONE会員
-                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand(7, 20), 'employee_id' => rand(1, 6),]);
+
+            // SQL処理
+            if($type == 1) { // WEB注文
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => NULL,]);
+            }else { // PHONE注文
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => rand($employeeIdMin, $employeeIdMax),]);
             }
 
         }
 
-        // 未来の注文(WEB+PHONE)
+        // 未来の注文を生成(WEB+PHONE)
         for($i = 1; $i<= $future; $i++){
 
             //徐々に小さくなる値
@@ -842,9 +853,9 @@ class OrdersMasterSeeder extends Seeder
 
             $type = rand(1,2);
             if($type == 1) { // WEB会員
-                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand(7, 20), 'employee_id' => NULL,]);
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => NULL, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => NULL,]);
             }else { // PHONE会員
-                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand(7, 20), 'employee_id' => rand(1, 6),]);
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => NULL, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => rand($employeeIdMin, $employeeIdMax),]);
             }
 
         }
@@ -905,7 +916,7 @@ class OrdersDetailsTableSeeder extends Seeder
         DB::table('orders_details_table')->delete();
 
         // orderマスタのfor文の件数を変更した場合、ここを変更
-        $max = 100;
+        $max = 300;
 
         // WEB会員からの注文 + 電話会員からの注文（クーポンなし）
         // orders_masterの注文IDと整合性を保っています

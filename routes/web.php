@@ -134,12 +134,15 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::post('/pizzzzza/order/accept/customer/{id}/update/web', 'PhoneOrdersController@updateWeb'); //会員情報編集＞更新処理＞WEB
     Route::get('/pizzzzza/order/accept/customer/input', 'PhoneOrdersController@newCustomer')->name('newCustomer'); //新規登録
     Route::post('/pizzzzza/order/accept/customer/input/add', 'PhoneOrdersController@newCustomerInsert'); //新規登録＞DB追加処理
-    Route::post('/pizzzzza/order/accept/customer/cart','PhoneOrdersController@orderCart'); //商品入力ページ・カート処理
-    Route::post('/pizzzzza/order/accept/customer/cart/check','PhoneOrdersController@orderCartCheck'); //商品入力ページ・カート処理
+
+//電話注文　カート処理
+    Route::post('/pizzzzza/order/accept/customer/cart','PhoneOrdersController@orderCart'); //商品入力ページ＞カート処理（商品の追加・個数変更）
+    Route::post('/pizzzzza/order/accept/customer/cart/check','PhoneOrdersController@orderCartCheck'); //商品入力ページ＞カート処理（初回読み込み）
+    Route::post('/pizzzzza/order/accept/customer/cart/delete','PhoneOrdersController@orderDelete'); //商品入力ページ＞カート処理（商品削除）
 
 //電話注文　注文処理
     Route::get('/pizzzzza/order/accept/item/{id}/select', 'PhoneOrdersController@orderSelect')->name('telOrderSelect'); //商品入力・選択ページ
-    Route::get('/pizzzzza/order/accept/item/confirm', 'PhoneOrdersController@orderConfirm'); //注文情報確認ページ
+    Route::get('/pizzzzza/order/accept/item/{id}/confirm', 'PhoneOrdersController@orderConfirm'); //注文情報確認ページ
 
 //売上・売れ筋
     Route::get('/pizzzzza/analysis/populer', 'AnalysisController@analysisPopuler');
