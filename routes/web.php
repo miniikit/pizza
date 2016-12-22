@@ -143,6 +143,7 @@ Route::group(['middleware' => ['adminauth']], function () {
 //電話注文　注文処理
     Route::get('/pizzzzza/order/accept/item/{id}/select', 'PhoneOrdersController@orderSelect')->name('telOrderSelect'); //商品入力・選択ページ
     Route::get('/pizzzzza/order/accept/item/{id}/confirm', 'PhoneOrdersController@orderConfirm'); //注文情報確認ページ
+    Route::post('/pizzzzza/order/accept/item/{id}/complete', 'PhoneOrdersController@orderComplete'); //注文情報確認ページ
 
 //売上・売れ筋
     Route::get('/pizzzzza/analysis/populer', 'AnalysisController@analysisPopuler');

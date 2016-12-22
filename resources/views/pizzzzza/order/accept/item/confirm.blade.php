@@ -21,7 +21,7 @@
 @section('main')
     <div class="wrap">
         <h1>注文確認</h1>
-        <form action="" method="post">
+        <form action="/pizzzzza/order/accept/item/{{ $id }}/complete" method="post">
 
           <div class="info">
             <table class="table table-bordered">
@@ -56,7 +56,7 @@
                 </tr>
                 @foreach($items as $item)
                 <tr>
-                    <td> {{ $item->product_name }}</td>
+                    <td> <input type="hidden"{{ $item->product_name }}</td>
                     <td> {{ $item->num }}個</td>
                     <td> {{ number_format($item->product_price) }}円</td>
                     <td> {{ number_format($item->product_price * $item->num) }}円</td>
@@ -66,10 +66,10 @@
           </div>
 
           <div class="text-center">
-              <input type="submit" class="btn btn-default btn-lg" name="" value="戻る">
+              <a href="/pizzzzza/order/accept/item/{{ $id }}/select" class="btn btn-default btn-lg">戻る</a>
               <input type="submit" class="btn btn-primary btn-lg" name="" value="注文確定">
           </div>
-
+        {{ csrf_field() }}
         </form>
     </div>
 

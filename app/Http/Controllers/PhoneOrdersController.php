@@ -351,10 +351,18 @@ class PhoneOrdersController extends Controller
         // 商品
         $data = $Phone->getPrice($request);
 
+        // 商品一覧
         $items = $data['result'];
+
+        // 合計金額
         $total = $data['total'];
 
-        return view('pizzzzza.order.accept.item.confirm',compact('user','items','total'));
+        return view('pizzzzza.order.accept.item.confirm',compact('user','items','total','id'));
+    }
+
+    // 購入処理
+    public function orderComplete(Request $request,$id){
+        dd($request->all());
     }
 
 }
