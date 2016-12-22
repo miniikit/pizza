@@ -364,9 +364,6 @@ class PhoneOrdersController extends Controller
     // 購入処理
     public function orderComplete(Request $request,$id){
 
-        // 会員情報
-        $user = $this->phoneOrderService->getUser($id);
-
         // 商品と合計金額
         $data = $this->phoneOrderService->getPrice($request);
 
