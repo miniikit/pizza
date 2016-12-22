@@ -5,6 +5,7 @@ namespace App\Service;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PhoneOrderService
 {
@@ -216,6 +217,9 @@ class PhoneOrderService
             // 商品名
             $product_name = $keys[$i];
 
+            if($product_name == "_token" || $product_name == "date" || $product_name == "time"){
+                continue;
+            }
             // 商品個数
             $num = $items[$product_name];
 
@@ -230,5 +234,43 @@ class PhoneOrderService
         }
 
         return compact('result','total');
+    }
+
+
+    /**
+     * 注文確定
+     */
+    public function insertOrder($items,$id,$appointment_date){
+
+        $now = Carbon::now();
+
+        // 注文マスタに登録
+        $insert = array();
+
+        $insert["order_date"] = $now;
+        $insert["order_appointment_date"] = $appointment_date;
+        $insert["coupon_id"] = NULL;
+        $insert["state_id"] = 1;
+        $insert["user_id"] = $id;
+        $insert["employee_id"] = Auth::user()->id;
+        $insert["created_at"] = $now;
+        $insert["updated_at"] = $now;
+
+        $orderId = DB::table('orders_master')->insertGetId($insert);
+
+        // 注文明細マスタに登録
+        foreach($items as $item){
+            $insertDetails = array();
+            $insertDetails["id"] = $orderId;
+            $insertDetails["price_id"] = $item->price_id;
+            $insertDetails["number"] = $item->num;
+            $insertDetails["created_at"] = $now;
+            $insertDetails["updated_at"] = $now;
+            DB::table('orders_details_table')->insert($insertDetails);
+        }
+
+        // 注文IDを返却
+        return $orderId;
+
     }
 }

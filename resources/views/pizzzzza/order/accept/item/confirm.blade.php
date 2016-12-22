@@ -38,7 +38,10 @@
                     <td>{{ $user->name }}（{{ $user->kana }}）</td>
                     <td> {{ $user->address1 }} {{ $user->address2 }} {{ $user->address3 }}</td>
                     <td> {{ $user->phone }}</td>
-                    <td> 配達日時</td>
+                    <td>
+                        <input type="date" name="date" value="{{ old('date',\Carbon\Carbon::now()->toDateString()) }}">
+                        <input type="time" name="time" value="{{ old('time',\Carbon\Carbon::now()->addHour()->format('H:i')) }}">
+                    </td>
                     <td> {{ number_format($total) }}円</td>
                     <td> 代引き</td>
                 </tr>
@@ -56,7 +59,7 @@
                 </tr>
                 @foreach($items as $item)
                 <tr>
-                    <td> <input type="hidden"{{ $item->product_name }}</td>
+                    <td> <input type="hidden" name="{{ $item->product_name }}" value="{{ $item->num }}">{{ $item->product_name }}</td>
                     <td> {{ $item->num }}個</td>
                     <td> {{ number_format($item->product_price) }}円</td>
                     <td> {{ number_format($item->product_price * $item->num) }}円</td>

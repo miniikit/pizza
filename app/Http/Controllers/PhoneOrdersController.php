@@ -27,6 +27,15 @@ use App\Http\Requests\AdminPhoneUserEditRequest;
 
 class PhoneOrdersController extends Controller
 {
+    protected $phoneOrderService;
+
+    public function __construct(PhoneOrderService $phoneOrderService)
+    {
+        $this->phoneOrderService = $phoneOrderService;
+    }
+
+
+
     // 電話番号入力ページ
     public function index()
     {
@@ -87,27 +96,26 @@ class PhoneOrdersController extends Controller
     // 詳細
     public function show($id)
     {
-        $phoneOrder = new PhoneOrderService();
-        $user = $phoneOrder->getUser($id);
+        $user = $this->phoneOrderService->getUser($id);
 
         if (count($user) > 0) {
 
             // 累計注文回数
-            $orderCount = $phoneOrder->getOrderCount($id);
+            $orderCount = $this->phoneOrderService->getOrderCount($id);
 
             if ($orderCount >= 1) {
 
                 // 注文情報（価格＋注文＋注文詳細＋商品＋状態マスタの連結）
-                $orders = $phoneOrder->getOrders($id);
+                $orders = $this->phoneOrderService->getOrders($id);
 
                 // 累計注文金額
-                $orderTotal = $phoneOrder->getOrderTotal($id);
+                $orderTotal = $this->phoneOrderService->getOrderTotal($id);
 
                 // 平均支出金額
                 $orderAvg = $orderTotal / $orderCount;
 
                 // クーポン使用総額のカウント
-                $orderCouponTotal = $phoneOrder->getOrderCouponTotal($id);
+                $orderCouponTotal = $this->phoneOrderService->getOrderCouponTotal($id);
 
                 return view('pizzzzza.order.accept.customer.show', compact('user', 'orders', 'orderCount', 'orderTotal', 'orderAvg', 'orderCouponTotal','id'));
 
@@ -201,8 +209,7 @@ class PhoneOrdersController extends Controller
         $user_update = $request->all();
 
         // 更新処理
-        $Phone = new PhoneOrderService();
-        $success = $Phone->updateWebCustomer($id, $user_update);
+        $success = $this->phoneOrderService->updateWebCustomer($id, $user_update);
 
         // リダイレクト
         if (count($success) > 0) {
@@ -226,8 +233,7 @@ class PhoneOrdersController extends Controller
         $user_update = $request->all();
 
         // 更新処理
-        $Phone = new PhoneOrderService();
-        $success = $Phone->updatePhoneCustomer($id, $user_update);
+        $success = $this->phoneOrderService->updatePhoneCustomer($id, $user_update);
 
         // リダイレクト
         if (count($success) > 0) {
@@ -253,8 +259,7 @@ class PhoneOrdersController extends Controller
         $new_customer = $request->all();
 
         // 追加処理
-        $Phone = new PhoneOrderService();
-        $id = $Phone->newCustomerInsert($new_customer);
+        $id = $this->phoneOrderService->newCustomerInsert($new_customer);
 
         // リダイレクト
         if (count($id) >= 1) {
@@ -271,15 +276,13 @@ class PhoneOrdersController extends Controller
     public function orderSelect($id)
     {
 
-        $Phone = new PhoneOrderService();
-
         // 販売中商品一覧
-        $products = $Phone->getNowProducts();
+        $products = $this->phoneOrderService->getNowProducts();
 
         // カテゴリごとの件数
-        $pizzaCount = $Phone->getPizzaCnt();
-        $sideCount = $Phone->getSideCnt();
-        $drinkCount = $Phone->getDrinkCnt();
+        $pizzaCount = $this->phoneOrderService->getPizzaCnt();
+        $sideCount = $this->phoneOrderService->getSideCnt();
+        $drinkCount = $this->phoneOrderService->getDrinkCnt();
 
         return view('pizzzzza.order.accept.item.select', compact('products', 'pizzaCount', 'sideCount', 'drinkCount', 'id'));
     }
@@ -343,13 +346,11 @@ class PhoneOrdersController extends Controller
     // 注文情報確認ページ
     public function orderConfirm(Request $request,$id)
     {
-        $Phone = new PhoneOrderService();
-
         // 会員情報
-        $user = $Phone->getUser($id);
+        $user = $this->phoneOrderService->getUser($id);
 
         // 商品
-        $data = $Phone->getPrice($request);
+        $data = $this->phoneOrderService->getPrice($request);
 
         // 商品一覧
         $items = $data['result'];
@@ -362,7 +363,35 @@ class PhoneOrdersController extends Controller
 
     // 購入処理
     public function orderComplete(Request $request,$id){
-        dd($request->all());
+
+        // 会員情報
+        $user = $this->phoneOrderService->getUser($id);
+
+        // 商品と合計金額
+        $data = $this->phoneOrderService->getPrice($request);
+
+        // 商品一覧
+        $items = $data['result'];
+
+        // 注文希望日時
+        $date = $request->date;
+        $time = $request->time;
+
+        $appointment_date = $date .' '. $time;
+
+        // もし現在時刻より前だったら
+        if ($appointment_date <= Carbon::now()->format('Y-m-d H:i')) {
+
+            Flash::error('配達希望日時は１時間後より指定可能です。');
+            return redirect()->route('telOrderConfirm',$id);
+        }
+
+        // DB挿入処理
+        $orderId = $this->phoneOrderService->insertOrder($items,$id,$appointment_date);
+
+        Flash::success("注文が完了しました。注文番号：$orderId");
+
+        return redirect()->route('orderTop');
     }
 
 }
