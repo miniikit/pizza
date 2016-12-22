@@ -175,7 +175,7 @@
                     }
                 });
 
-                        {{-- 送信する値 --}}
+                {{-- 送信する値 --}}
                 var data = {
                             "_token": "{{ csrf_token() }}"
                         };
@@ -190,15 +190,32 @@
                                 // #cartを初期化
                                 $('#cart').empty();
 
-                                // #cartに書き足し
-                                $.each(cart["cart"], function (product_name, val) {
-                                    $('#cart').append('<tr><td>' + product_name + '</td><td><select class="select form-control" id="'+ product_name +'"><option value=' + val + ' selected>' + val + '</option></select></td> </td><td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="'+ product_name +'">削除</a></td> </tr>');
-                                    // $("#cart").append(i + " - " + val);
-                                });
+                                // カートに存在する、商品の種類数
+                                var length = Object.keys(cart["cart"]).length;
 
-                                // option valueを追加
-                                for (var i = 0; i <= 10; i++) {
-                                    $('.select').append('<option values=' + i + '>' + i + '</option>');
+                                // カート内に商品が入っていれば表示
+                                if(length > 0) {
+
+                                    // #cart内に一行ずつ、商品を書き足し
+                                    $.each(cart["cart"], function (product_name, val) {
+
+                                        // 一行書き出し
+                                        $('#cart').append('<tr class="item"><td>' + product_name + '</td><td><select class="select form-control ' + product_name + '" id="' + product_name + '"></select></td> <td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="' + product_name + '">削除</button></td></tr>');
+
+                                        // selectタグ内に追加
+                                        var max = 11;
+                                        for (var i = 0; i < max; i++) {
+                                            if (i == val) {
+                                                $("#" + product_name + "").append('<option value="' + i + '" selected>' + i + '</option>');
+                                            } else {
+                                                $("#" + product_name + "").append('<option value="' + i + '">' + i + '</option>');
+                                            }
+                                        }
+                                    });
+
+                                // カート内に商品が入っていない場合
+                                }else{
+                                    $('#cart').append('<tr class="item"><td colspan="3">空です</td></tr>');
                                 }
 
                                 // 注文へ進むボタンを追加
@@ -242,21 +259,36 @@
                             url: "/pizzzzza/order/accept/customer/cart",
                             data: data,
                             success: function (cart) {
-                                // 成功 alert(cart["cart"]["綾鷹"]);
-                                // 成功 alert(cart["cart"].綾鷹);
 
                                 // #cartを初期化
                                 $('#cart').empty();
 
-                                // #cartに書き足し
-                                $.each(cart["cart"], function (product_name, val) {
-                                    $('#cart').append('<tr><td>' + product_name + '</td><td><select class="select form-control" id="'+ product_name +'"><option value=' + val + ' selected>' + val + '</option></select></td> </td><td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="'+ product_name +'">削除</button></td> </tr>');
-                                    // $("#cart").append(i + " - " + val);
-                                });
+                                // カートに存在する、商品の種類数
+                                var length = Object.keys(cart["cart"]).length;
 
-                                // option valueを追加
-                                for (var i = 0; i <= 10; i++) {
-                                    $('.select').append('<option values=' + i + '>' + i + '</option>');
+                                // カート内に商品が入っていれば表示
+                                if(length > 0) {
+
+                                    // #cart内に一行ずつ、商品を書き足し
+                                    $.each(cart["cart"], function (product_name, val) {
+
+                                        // 一行書き出し
+                                        $('#cart').append('<tr class="item"><td>' + product_name + '</td><td><select class="select form-control ' + product_name + '" id="' + product_name + '"></select></td> <td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="' + product_name + '">削除</button></td></tr>');
+
+                                        // selectタグ内に追加
+                                        var max = 11;
+                                        for (var i = 0; i < max; i++) {
+                                            if (i == val) {
+                                                $("#" + product_name + "").append('<option value="' + i + '" selected>' + i + '</option>');
+                                            } else {
+                                                $("#" + product_name + "").append('<option value="' + i + '">' + i + '</option>');
+                                            }
+                                        }
+                                    });
+
+                                    // カート内に商品が入っていない場合
+                                }else{
+                                    $('#cart').append('<tr class="item"><td colspan="3">空です</td></tr>');
                                 }
 
                             },
@@ -295,21 +327,35 @@
                             url: "/pizzzzza/order/accept/customer/cart/delete",
                             data: data,
                             success: function (cart) {
-                                // 成功 alert(cart["cart"]["綾鷹"]);
-                                // 成功 alert(cart["cart"].綾鷹);
-
                                 // #cartを初期化
                                 $('#cart').empty();
 
-                                // #cartに書き足し
-                                $.each(cart["cart"], function (product_name, val) {
-                                    $('#cart').append('<tr><td>' + product_name + '</td><td><select class="select form-control" id="'+ product_name +'"><option value=' + val + ' selected>' + val + '</option></select></td> </td><td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="'+ product_name +'">削除</button></td> </tr>');
-                                    // $("#cart").append(i + " - " + val);
-                                });
+                                // カートに存在する、商品の種類数
+                                var length = Object.keys(cart["cart"]).length;
 
-                                // option valueを追加
-                                for (var i = 0; i <= 10; i++) {
-                                    $('.select').append('<option values=' + i + '>' + i + '</option>');
+                                // カート内に商品が入っていれば表示
+                                if(length > 0) {
+
+                                    // #cart内に一行ずつ、商品を書き足し
+                                    $.each(cart["cart"], function (product_name, val) {
+
+                                        // 一行書き出し
+                                        $('#cart').append('<tr class="item"><td>' + product_name + '</td><td><select class="select form-control ' + product_name + '" id="' + product_name + '"></select></td> <td class="ac"><button class="btn btn-danger btn-sm delete" name="product_name" value="' + product_name + '">削除</button></td></tr>');
+
+                                        // selectタグ内に追加
+                                        var max = 11;
+                                        for (var i = 0; i < max; i++) {
+                                            if (i == val) {
+                                                $("#" + product_name + "").append('<option value="' + i + '" selected>' + i + '</option>');
+                                            } else {
+                                                $("#" + product_name + "").append('<option value="' + i + '">' + i + '</option>');
+                                            }
+                                        }
+                                    });
+
+                                // カート内に商品が入っていない場合
+                                }else{
+                                    $('#cart').append('<tr class="item"><td colspan="3">空です</td></tr>');
                                 }
 
                             },
