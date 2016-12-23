@@ -93,7 +93,9 @@ tr.link:hover{
 }
 .table>tbody>tr>th, .table>tfoot>tr>th{
     vertical-align: middle;
-    width: 50%;
+}
+.th-50{
+    width:50%;
 }
 
 .cap,
