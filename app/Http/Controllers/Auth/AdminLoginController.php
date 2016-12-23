@@ -12,27 +12,33 @@ class AdminLoginController extends Controller
 {
 
 public function form(){
-    return view('pizzzzza/login');
+    if(Auth::check()){
+        return redirect()->route('orderTop');
+    }
+    return view('pizzzzza.login');
 }
 
 public function login(Request $request) {
-
     //リクエストを取得
     $email = $request->get('email');
     $password = $request->get('password');
 
     //DBからメアドが一致するやつを取得
-    $pizza = DB::table('users')->where('users.email',$email)->get();;
+    $userinfo = DB::table('users')->where('users.email',$email)->first();
+    $userid = $userinfo->id;
+    $employeeinfo = DB::table('employees_master')->where('employees_master.users_id','=',$userid)->where('employees_master.deleted_at','=',null)->first();
 
-    //DB結果をカウントし、件数が１件でなければ、エラー処理
-    $count = count($pizza);
-    if($count != 1){
+    //　会員情報がなければエラー処理
+    if(!$userinfo){
      flash('メールアドレスが登録されていません。', 'danger');
      return redirect('/pizzzzza/login');
     }
-
-    //ユーザ表の情報を取得。
-    $userinfo = $pizza[0];
+    
+     // アカウントが無効化されていた場合の処理
+    if(!$employeeinfo){
+     flash('アカウントが無効化されています。', 'danger');
+     return redirect('/pizzzzza/login');
+    }
 
     //権限を取得。
     $authId = $userinfo->authority_id;
@@ -53,9 +59,7 @@ public function login(Request $request) {
         flash('ログインする権限がありません', 'danger'); 
         return redirect('/pizzzzza/login');  //権限が４の場合
     }
-    
 }
-
     public function logout(Request $request){ //ログアウト処理
         Auth::logout();
 
