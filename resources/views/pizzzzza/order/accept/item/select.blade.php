@@ -146,7 +146,7 @@
                             </tbody>
                         </table>
                         <div id="order" class="ar">
-                            <a href="/pizzzzza/order/accept/customer/{{ $id }}/select" class="btn btn-default btn-sm">戻る</a>
+                            <a href="/pizzzzza/order/accept/customer/{{ $id }}/show" class="btn btn-default btn-sm">戻る</a>
                             <button id="form-button" class="btn btn-primary btn-sm ml" style="display: none;">確認</button>
                         </div>
                     </div>

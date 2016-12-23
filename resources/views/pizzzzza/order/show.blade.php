@@ -173,7 +173,11 @@
 
         </div>
         <div class="col-md-4 col-md-offset-4 mt">
-            <a href="/pizzzzza/order/history" class="btn btn-default btn-lg btn-block">戻る</a>
+            @if(preg_match('{history}',$_SERVER["HTTP_REFERER"]))
+                <a href="/pizzzzza/order/history" class="btn btn-default btn-lg btn-block">戻る</a>
+            @else {{-- 電話注文ページからの繊維である場合 --}}
+                <a href="{{ $_SERVER["HTTP_REFERER"] }}" class="btn btn-default btn-lg btn-block">戻る</a>
+            @endif
         </div>
     </div>
 @endsection
