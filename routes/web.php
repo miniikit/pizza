@@ -164,6 +164,7 @@ Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理�
 
 Auth::routes();
 
+Route::get('/login','auth\LoginController@form'); //ログインページ
 Route::get('/register','auth\RegisterController@register'); //登録ページ
 Route::post('/register/confirm', 'auth\RegisterController@confirm');
 Route::post('/register/complete','auth\RegisterController@complete');
