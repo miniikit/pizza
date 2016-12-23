@@ -790,24 +790,27 @@ class OrdersMasterSeeder extends Seeder
         $employeeIdMax = 6;
 
         // 注文の比率
-        $past = $max * 0.95;  // 過去
-        $future = $max * 0.05;  // 未来
-
-        // 過去の注文を生成(WEB+PHONE)
+        $past = $max * 0.8;  // 過去
+        $recently = $max * 0.15;  // 近日
+        $near = $max * 0.05; // 本日頃
+        
+        // 遠い過去の注文を生成(WEB+PHONE)
         for($i = 1; $i<= $past; $i++){
 
             // $iの値が増えるたびに、徐々に小さくなる値
             $rand = ($past-$i) * 3;
 
             // 注文日
-            $orderDate = Carbon::today()->subHour($rand);
+            $orderDate = Carbon::today()->subDay($rand);
             $today = Carbon::today();
 
-            // 配達希望日時
-            $apointment_date = $orderDate->addMinutes(rand(60,240));
+            // 配達希望日時は、１−１６時間後に設定する
+            $appointment_date = $orderDate;
+            $addHour = rand(1,4) * rand(1,4);
+            $appointment_date = $appointment_date->addHour($addHour);
 
             // 状態ID（配達希望日時が過去であれば、「完了」または「キャンセル」にセット）
-            if($apointment_date <= $today){
+            if($appointment_date <= $today){
                 $state_id = rand(1,2);
 
             // 状態ID（配達希望日が未来であれば、「未完了」または「キャンセル」にセット）
@@ -824,29 +827,30 @@ class OrdersMasterSeeder extends Seeder
 
             // SQL処理
             if($type == 1) { // WEB注文
-                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => NULL,]);
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $appointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => NULL,]);
             }else { // PHONE注文
-                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => rand($employeeIdMin, $employeeIdMax),]);
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $appointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => rand($employeeIdMin, $employeeIdMax),]);
             }
 
         }
 
-        // 未来の注文を生成(WEB+PHONE)
-        for($i = 1; $i<= $future; $i++){
+        // 近い過去の注文を生成(WEB+PHONE)
+        for($i = 1; $i<= $recently; $i++){
 
             //徐々に小さくなる値
-            $rand = ($future - $i) * 5;
+            $rand = ($recently - $i + 10) * 5;
 
             // 注文日時
-            $orderDate = Carbon::now()->subMinute($rand);
+            $orderDate = Carbon::now()->subHour($rand);
             $today = Carbon::today();
 
-            // 配達希望日は、１−４時間後に設定する
-            $apointment_date = $orderDate;
-            $apointment_date = $apointment_date->addMinute($i * rand(60,240));
+            // 配達希望日時は、１−１６時間後に設定する
+            $appointment_date = $orderDate;
+            $addHour = rand(1,4) * rand(1,4);
+            $appointment_date = $appointment_date->addHour($addHour);
 
             //状態ID（もし、配達希望日時が過去であれば、「完了」または「キャンセル」にセット
-            if($apointment_date <= $today){
+            if($appointment_date <= $today){
                 $state_id = rand(1,2);
 
             //配達希望日が未来である
@@ -860,52 +864,92 @@ class OrdersMasterSeeder extends Seeder
 
             $type = rand(1,2);
             if($type == 1) { // WEB会員
-                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => NULL, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => NULL,]);
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $appointment_date, 'coupon_id' => NULL, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => NULL,]);
             }else { // PHONE会員
-                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => NULL, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => rand($employeeIdMin, $employeeIdMax),]);
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $appointment_date, 'coupon_id' => NULL, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => rand($employeeIdMin, $employeeIdMax),]);
             }
 
         }
 
-        //21 クーポン1 使用時（商品ID4 かつ 2000円以上）
+        // 本日頃の注文を生成(WEB+PHONE)
+        for($i = 1; $i<= $near; $i++){
+
+            //徐々に小さくなる値
+            $rand = ($near - $i + 3) * 2;
+
+            // 注文日時
+            $orderDate = Carbon::now()->subHour($rand);
+            $today = Carbon::today();
+            $now = Carbon::now();
+
+            // 配達希望日は、１−１６時間後に設定する
+            $appointment_date = $orderDate;
+            $addHour = rand(1,4) * rand(1,4);
+            $appointment_date = $appointment_date->addHour($addHour);
+
+            //状態ID（もし、配達希望日時が過去であれば、「完了」または「キャンセル」にセット
+            if($appointment_date <= $today){
+                $state_id = rand(1,2);
+
+            //配達希望日が未来である
+            }else{
+                //状態を、1または3に設定する。（１は未完了・３はキャンセル）
+                $state_id = rand(1,3);
+                if($state_id == 2){
+                    $state_id = 1;
+                }
+            }
+
+            $type = rand(1,2);
+            if($type == 1) { // WEB会員
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $appointment_date, 'coupon_id' => NULL, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => NULL,]);
+            }else { // PHONE会員
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $appointment_date, 'coupon_id' => NULL, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => rand($employeeIdMin, $employeeIdMax),]);
+            }
+
+        }
+
+
+        // クーポン1 使用時（商品ID4 かつ 2000円以上）
         Order::create([
-            'order_date' => Carbon::now(),
-            'order_appointment_date' => Carbon::tomorrow(),
+            'order_date' => Carbon::now()->subHour(rand(7,8)),
+            'order_appointment_date' => Carbon::tomorrow()->addHour(rand(8,20)),
             'coupon_id' => 1,
             'state_id' => 1,
             'user_id' => 8,
             'employee_id' => NULL,
         ]);
-        //22 クーポン2 使用時（5000円以上）
+        // クーポン2 使用時（5000円以上）
         Order::create([
-            'order_date' => Carbon::now(),
-            'order_appointment_date' => Carbon::tomorrow(),
-            'coupon_id' => null,
+            'order_date' => Carbon::now()->subHour(rand(6,7)),
+            'order_appointment_date' => Carbon::tomorrow()->addHour(rand(8,20)),
+            'coupon_id' => 2,
             'state_id' => 1,
             'user_id' => 10,
             'employee_id' => NULL,
         ]);
-        //23 クーポン3 使用時（商品ID7 かつ 2500円以上）
+        // クーポン3 使用時（商品ID7 かつ 2500円以上）
         Order::create([
-            'order_date' => Carbon::now(),
-            'order_appointment_date' => Carbon::tomorrow(),
-            'coupon_id' => null,
+            'order_date' => Carbon::now()->subHour(rand(5,6)),
+            'order_appointment_date' => Carbon::tomorrow()->addHour(rand(8,20)),
+            'coupon_id' => 3,
             'state_id' => 1,
             'user_id' => 3,
             'employee_id' => NULL,
         ]);
-        //24 クーポン5 使用時（商品ID5 かつ 2000円以上）
+        // クーポン5 使用時（商品ID5 かつ 2000円以上）
         Order::create([
-            'order_date' => Carbon::now(),
-            'order_appointment_date' => Carbon::tomorrow(),
-            'coupon_id' => null,
+            'order_date' => Carbon::now()->subHour(rand(4,5)),
+            'order_appointment_date' => Carbon::tomorrow()->addHour(rand(8,20)),
+            'coupon_id' => 5,
             'state_id' => 1,
             'user_id' => 7,
             'employee_id' => NULL,
         ]);
+        // 電話注文サンプル
         Order::create([
-            'order_date' => Carbon::now(),
-            'order_appointment_date' => Carbon::tomorrow(),
+            'order_date' => Carbon::now()->subHour(rand(3,4)),
+            'order_appointment_date' => Carbon::tomorrow()->addHour(rand(8,20)),
             'coupon_id' => null,
             'state_id' => 1,
             'user_id' => 9,
