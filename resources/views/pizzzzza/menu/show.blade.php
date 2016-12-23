@@ -86,3 +86,12 @@
         </div>
     </div>
 @endsection
+
+@section('script')
+    <script style="text/javascript">
+        {{-- thをwidth:50%に --}}
+        $(document).ready(function () {
+            $('th').addClass('th-50');
+        });
+    </script>
+@endsection

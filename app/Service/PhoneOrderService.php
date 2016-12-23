@@ -32,8 +32,8 @@ class PhoneOrderService
     // 注文状況を取得
     public function getOrders($id){
 
-        // 注文マスタ＋注文詳細テーブル＋価格マスタ＋商品マスタ＋状態マスタの結合。
-        $orders = DB::table('orders_master')->where('orders_master.user_id', '=', $id)->join('orders_details_table','orders_details_table.id','=','orders_master.id')->join('products_prices_master','orders_details_table.price_id','=','products_prices_master.id')->join('products_master','products_master.price_id','=','products_prices_master.id')->join('states_master','states_master.id','=','orders_master.state_id')->get();
+        // 注文マスタ＋状態マスタの結合（会員IDが一致する人の注文情報）
+        $orders = DB::table('states_master')->join('orders_master','states_master.id','=','orders_master.state_id')->where('orders_master.user_id', '=', $id)->get();
 
         return $orders;
     }

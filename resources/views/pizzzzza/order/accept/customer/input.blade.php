@@ -1,6 +1,6 @@
 @extends('template.admin')
 
-@section('title', 'お届け先情報登録')
+@section('title', 'お客様情報登録')
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
@@ -10,7 +10,7 @@
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
         <li><a href="/pizzzzza/order/accept/input">電話注文</a></li>
-        <li class="active">お届け先情報登録</li>
+        <li class="active">お客様情報登録</li>
     </ol>
 @endsection
 
@@ -22,7 +22,7 @@
         @endforeach
         </div>
     @endif
-    <h1>お届け先情報登録</h1>
+    <h1>お客様情報登録</h1>
     <form action="/pizzzzza/order/accept/customer/input/add" method="post">
         <table class="table table-bordered ">
             <tbody>

@@ -1,5 +1,6 @@
 img {
     max-width: 100%;
+    max-width: 400px;
 }
 
 main.main {
@@ -88,9 +89,13 @@ tr.link:hover{
 
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     padding: 15px 8px;
+    vertical-align: middle;
 }
 .table>tbody>tr>th, .table>tfoot>tr>th{
     vertical-align: middle;
+}
+.th-50{
+    width:50%;
 }
 
 .cap,

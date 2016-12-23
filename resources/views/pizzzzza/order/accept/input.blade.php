@@ -106,7 +106,7 @@
                                         }
 
                                         $('#customer-detail').append(
-                                                "<tr class=\"customer link clickable\" data-href=\"/pizzzzza/order/accept/customer/\"" + code["users"][i]["id"] + "/show/\"><td>" + code["users"][i]["name"] + "</td>" +
+                                                "<tr class=\"customer link clickable\" data-href=\"/pizzzzza/order/accept/customer/" + code["users"][i]["id"] + "/show/\"><td>" + code["users"][i]["name"] + "</td>" +
                                                 "<td>" + code["users"][i]["postal"] + "</td>" +
                                                 "<td>" + code["users"][i]["address1"] + " " + code["users"][i]["address2"] + " " + code["users"][i]["address3"] + "</td>" +
                                                 "<td>" + code["users"][i]["authority_id"] + "</td></tr>"

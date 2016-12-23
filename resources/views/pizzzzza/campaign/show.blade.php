@@ -4,12 +4,17 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+    <link rel="stylesheet" href="/css/index/index.css" media="all" title="no title">
 @endsection
 
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
-        <li><a href="/pizzzzza/campaign">キャンペーン一覧</a></li>
+        @if(preg_match('{history}',$_SERVER["HTTP_REFERER"]))
+            <li><a href="/pizzzzza/campaign/history">キャンペーン履歴</a></li>
+        @else
+            <li><a href="/pizzzzza/campaign">キャンペーン一覧</a></li>
+        @endif
         <li class="active">キャンペーン詳細</li>
     </ol>
 @endsection
@@ -21,7 +26,7 @@
             <table class="table table-bordered">
                 <tbody>
                 <tr>
-                    <th class="text-center">キャンペーン名</th>
+                    <th class="text-center">タイトル</th>
                     <td>{{ $campaign->campaign_title }}</td>
                 </tr>
                 <tr>
@@ -87,7 +92,21 @@
             </form>
         </div>
         <div class="col-md-4 col-md-offset-4 mt">
-            <a href="/pizzzzza/campaign" class="btn btn-default btn-lg btn-block">戻る</a>
+            @if(preg_match('{history}',$_SERVER["HTTP_REFERER"]))
+                <a href="/pizzzzza/campaign/history" class="btn btn-default btn-lg btn-block">戻る</a>
+            @else
+                <a href="/pizzzzza/campaign" class="btn btn-default btn-lg btn-block">戻る</a>
+            @endif
         </div>
     </div>
+@endsection
+
+
+@section('script')
+    <script style="text/javascript">
+        {{-- thをwidth:50%に --}}
+        $(document).ready(function () {
+            $('th').addClass('th-50');
+        });
+    </script>
 @endsection

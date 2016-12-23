@@ -129,7 +129,7 @@
                                     @endif
                                 @endforeach
                             </select>
-                            <input type="hidden" name="coupon_product_id" value="{{ old('',$coupon->product_id }}">
+                            <input type="hidden" name="coupon_product_id" value="{{ old('',$coupon->product_id) }}">
                         </td>
                         @endif
                     </tr>
