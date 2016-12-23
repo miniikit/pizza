@@ -52,6 +52,7 @@
 			});
         });
 
+
 		$.ajax({
 			type: 'GET',
 			url: '/app/countCartContents',
