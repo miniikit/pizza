@@ -30,13 +30,18 @@
                     <li class="title">内容</li>
                     <li><textarea name="body" rows="10" cols="100" placeholder="テキストを入れてください"></textarea></li>
                 </ul>
-                <div class="form-bottom"><a>送信</a></div>
+                <div class="form-bottom"><a onClick="return double()">送信</a></div>
                 {{ csrf_field() }}
             </form>
         </div>
     </div>
 @endsection
 
-@section('scrip')
-
+@section('script')
+<script type="text/javascript">
+  var set=0;
+  function double() {
+  if(set==0){ set=1; } else {
+  return false; }}
+</script>
 @endsection

@@ -8,6 +8,7 @@
     @yield('head')
     <meta name="description" itemprop="description" content="@yield('description')">
     <meta name="keywords" itemprop="keywords" content="@yield('keywords')">
+    <script src="/js/common/main.js" charset="utf-8"></script>
     <link href="/css/common/reset.css" rel="stylesheet">
     <link href="/css/common/font-awesome.min.css" rel="stylesheet">
     <link href="/css/common/bootstrap.min.css" rel="stylesheet">

@@ -87,8 +87,17 @@
                 </table>
                 <div class="col-md-4 col-md-offset-4 ac">
                     <a class="btn btn-default btn-lg mr" href="/pizzzzza/employee" >戻る</a>
-                    <input type="submit" class="btn btn-primary btn-lg" name="store" value="追加">
+                    <input type="submit" class="btn btn-primary btn-lg" name="store" value="追加" onClick="return double()">
                 </div>
                 {{ csrf_field() }}
             </form>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+  var set=0;
+  function double() {
+  if(set==0){ set=1; } else {
+  return false; }}
+</script>
 @endsection

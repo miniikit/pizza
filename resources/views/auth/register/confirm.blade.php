@@ -127,10 +127,19 @@
                     </div>
 
                     <div class="btn-wrap">
-                        <button type="submit" class="btn">登録</button>
+                        <button type="submit" class="btn" onClick="return double()">登録</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+  var set=0;
+  function double() {
+  if(set==0){ set=1; } else {
+  return false; }}
+</script>
 @endsection
