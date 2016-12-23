@@ -20,19 +20,19 @@
         <h1>お届け先情報確認</h1>
         <div class="row">
             <form action="/pizzzzza/order/accept/customer/handler" method="post">
-            @if(isset($orderCount))
-                <div class="col-md-7">
-            @else
-                <div class="col-md-12">
-            @endif
-                    @if (count($errors) > 0)
-                        @foreach ($errors->all() as $error)
-                            <div class="alert alert-danger">{{ $error }}</div>
-                        @endforeach
-                    @endif
-                        <div class="form-group table-responsive">
-                            <table class="table table-bordered">
-                                <tbody>
+                @if(isset($orderCount))
+                    <div class="col-md-7">
+                        @else
+                            <div class="col-md-12">
+                                @endif
+                                @if (count($errors) > 0)
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger">{{ $error }}</div>
+                                    @endforeach
+                                @endif
+                                <div class="form-group table-responsive">
+                                    <table class="table table-bordered">
+                                        <tbody>
                                         <tr>
                                             <th class="text-center">登録日</th>
                                             <td>{{ $user->created_at }}</td>
@@ -89,88 +89,86 @@
                                         @endif
                                         </tbody>
                                     </table>
-                        </div>
-                            <input type="hidden" name="customer_id" value="{{ $user->id }}">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                </div>{{-- col-md-12の終わりタグ --}}
-                        @if(isset($orderCount))
-                            <div class="col-md-5">
-
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <th>累計注文金額</th>
-                                        <td>{{ number_format($orderTotal) }}円</td>
-                                    </tr>
-                                    <tr>
-                                        <th>累計注文回数</th>
-                                        <td>{{ $orderCount }}回</td>
-                                    </tr>
-                                    <tr>
-                                        <th>平均注文金額</th>
-                                        <td>{{ number_format($orderAvg) }}円</td>
-                                    </tr>
-                                    <tr>
-                                        <th>累計クーポン使用金額</th>
-                                        @if(isset($orderCouponTotal))
-                                            <td>{{ number_format($orderCouponTotal) }}円</td>
-                                        @endif
-                                    </tr>
-                                </table>
-                                <div class="text-right">
-                                    <a href="/pizzzzza/order/accept/customer/{{ $id }}/edit"
-                                       class="btn btn-default btn-sm">編集</a>
                                 </div>
-                            </div>
-                            </div>{{-- col-md-7の終わりタグ --}}
-                        @endif
+                                <input type="hidden" name="customer_id" value="{{ $user->id }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            </div>{{-- col-md-12の終わりタグ --}}
+                            @if(isset($orderCount))
+                                <div class="col-md-5">
+
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th>累計注文金額</th>
+                                            <td>{{ number_format($orderTotal) }}円</td>
+                                        </tr>
+                                        <tr>
+                                            <th>累計注文回数</th>
+                                            <td>{{ $orderCount }}回</td>
+                                        </tr>
+                                        <tr>
+                                            <th>平均注文金額</th>
+                                            <td>{{ number_format($orderAvg) }}円</td>
+                                        </tr>
+                                        <tr>
+                                            <th>累計クーポン使用金額</th>
+                                            @if(isset($orderCouponTotal))
+                                                <td>{{ number_format($orderCouponTotal) }}円</td>
+                                            @endif
+                                        </tr>
+                                    </table>
+                                    <div class="text-right">
+                                        <a href="/pizzzzza/order/accept/customer/{{ $id }}/edit"
+                                           class="btn btn-default btn-sm">編集</a>
+                                    </div>
+                                </div>
+                    </div>{{-- col-md-7の終わりタグ --}}
+                @endif
                 <div class="text-center">
                     <input type="submit" class="btn btn-default btn-lg mr" name="detailPost" value="戻る">
                     <input type="submit" class="btn btn-primary btn-lg ml" name="detailPost"
                            value="注文へ">
                 </div>
             </form>
-                @if(isset($orderCount))
-                    <div id="status" class="mt-b">
-                        <h1>注文履歴</h1>
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>件</th>
-                                <th>注文日時</th>
-                                <th>配達日時</th>
-                                <th>注文状況</th>
-                                <th>商品名</th>
-                                <th>個数</th>
-                                <th>注文金額</th>
+            @if(isset($orderCount))
+                <div id="status" class="mt-b">
+                    <h1>注文履歴</h1>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>注文ID</th>
+                            <th>注文日時</th>
+                            <th>配達日時</th>
+                            <th>注文状況</th>
+                            <th>商品名</th>
+                            <th>個数</th>
+                            <th>注文金額</th>
+                        </tr>
+                        @foreach($orders as $order)
+                            <tr class="link" data-href="/pizzzzza/order/{{ $order->id }}/show">
+                                <td>{{ $order->id }}</td>
+                                <td>{{ \Carbon\Carbon::parse($order->order_date)->format('Y年m月d日 H時i分') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($order->order_appointment_date)->format('Y年m月d日 H時i分') }}</td>
+                                <td>{{ $order->state_name }}</td>
+                                <td>{{ $order->product_name }}</td>
+                                <td>{{ $order->number }}</td>
+                                <td>{{ number_format($order->product_price * $order->number) }}</td>
                             </tr>
-                            @foreach($orders as $order)
-                                <tr>
-                                    {{--  どこまでが１件の注文かを、まとめる処理。  --}}
-                                    @if(!isset($order_id))
-                                        <?php // 最初だけ実行
-                                        $order_id = 1;
-                                        $order_date = $order->order_date;
-                                        ?>
-                                    @endif
-                                    <td><?php // 注文日時が違えば実行
-                                        if ($order->order_date != $order_date) {
-                                            $order_id += 1;
-                                        }
-                                        // 毎回実行
-                                        echo $order_id;
-                                        $order_date = $order->order_date;
-                                        ?>
-                                    </td>
-                                    {{--  ここまで　どこまでが１件の注文かをまとめる処理  --}}
-                                    <td>{{ \Carbon\Carbon::parse($order->order_date)->format('Y年m月d日 H時i分') }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($order->order_appointment_date)->format('Y年m月d日 H時i分') }}</td>
-                                    <td>{{ $order->state_name }}</td>
-                                    <td>{{ $order->product_name }}</td>
-                                    <td>{{ $order->number }}</td>
-                                    <td>{{ number_format($order->product_price * $order->number) }}</td>
-                                </tr>
-                            @endforeach
-                        </table>
-                    </div>
-                @endif
+                        @endforeach
+                    </table>
+                </div>
+            @endif
         </div>
+@endsection
+
+@section('xx')
+            <script type="text/javascript">
+                $('.table tr[data-href]').addClass('clickable').click(function () {
+                    window.location = $(this).attr('data-href');
+                }).find('a').hover(function () {
+                    $(this).parents('tr').unbind('click');
+                }, function () {
+                    $(this).parents('tr').click(function () {
+                        window.location = $(this).attr('data-href');
+                    });
+                });
+            </script>
 @endsection
