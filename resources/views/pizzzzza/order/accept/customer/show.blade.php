@@ -66,16 +66,8 @@
                                             <td>{{ $user->postal }}</td>
                                         </tr>
                                         <tr>
-                                            <th class="text-center">住所1</th>
-                                            <td>{{ $user->address1 }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-center">住所2</th>
-                                            <td>{{ $user->address2 }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-center">住所3</th>
-                                            <td>{{ $user->address3 }}</td>
+                                            <th class="text-center">住所</th>
+                                            <td>{{ $user->address1 }} {{ $user->address2 }} {{ $user->address3 }}</td>
                                         </tr>
                                         <tr>
                                             <th class="text-center">電話番号</th>
@@ -138,9 +130,6 @@
                             <th>注文日時</th>
                             <th>配達日時</th>
                             <th>注文状況</th>
-                            <th>商品名</th>
-                            <th>個数</th>
-                            <th>注文金額</th>
                         </tr>
                         @foreach($orders as $order)
                             <tr class="link" data-href="/pizzzzza/order/{{ $order->id }}/show">
@@ -148,9 +137,6 @@
                                 <td>{{ \Carbon\Carbon::parse($order->order_date)->format('Y年m月d日 H時i分') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($order->order_appointment_date)->format('Y年m月d日 H時i分') }}</td>
                                 <td>{{ $order->state_name }}</td>
-                                <td>{{ $order->product_name }}</td>
-                                <td>{{ $order->number }}</td>
-                                <td>{{ number_format($order->product_price * $order->number) }}</td>
                             </tr>
                         @endforeach
                     </table>
@@ -159,7 +145,7 @@
         </div>
 @endsection
 
-@section('xx')
+@section('script')
             <script type="text/javascript">
                 $('.table tr[data-href]').addClass('clickable').click(function () {
                     window.location = $(this).attr('data-href');
