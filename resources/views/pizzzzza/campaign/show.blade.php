@@ -4,6 +4,7 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
+    <link rel="stylesheet" href="/css/index/index.css" media="all" title="no title">
 @endsection
 
 @section('pankuzu')
@@ -21,7 +22,7 @@
             <table class="table table-bordered">
                 <tbody>
                 <tr>
-                    <th class="text-center">キャンペーン名</th>
+                    <th class="text-center">タイトル</th>
                     <td>{{ $campaign->campaign_title }}</td>
                 </tr>
                 <tr>
