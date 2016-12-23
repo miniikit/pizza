@@ -262,18 +262,18 @@ class EmployeeMasterSeeder extends Seeder
             'emoloyee_agreement_enddate' => null,
         ]);
 
-        //テストデータ：契約中(本日まで)
+        //テストデータ：契約中
         Employee::create([
             'users_id' => 4,
             'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
-            'emoloyee_agreement_enddate' => Carbon::today(),
+            'emoloyee_agreement_enddate' => null,
         ]);
 
-        //テストデータ：契約終了
+        //テストデータ：本日まで
         Employee::create([
             'users_id' => 5,
             'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
-            'emoloyee_agreement_enddate' => Carbon::yesterday(),
+            'emoloyee_agreement_enddate' => Carbon::today(),
         ]);
 
         //テストデータ：契約終了
@@ -333,7 +333,7 @@ class CouponsMasterSeeder extends Seeder
     {
         DB::table('coupons_master')->delete();
 
-        //1 テストデータ：（キャンペーンと整合性 // プレゼント・全員・2000以上・焼きたてポテト無料・1人1回まで）
+        //1 テストデータ：（キャンペーンと整合性 // プレゼント・全員・2000以上・焼きたてポテト無料・1人1回まで）(本日まで)
         Coupon::create([
             'coupons_types_id' => '2',
             'coupon_name' => '1人1回まで 2000円以上で焼きたてポテトが無料クーポン',
@@ -341,7 +341,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_money' => 2000,
             'product_id' => 4,
             'coupon_start_date' => Carbon::parse('2016-12-06'),
-            'coupon_end_date' => Carbon::parse('2017-10-18'),
+            'coupon_end_date' => Carbon::today(),
             'coupon_number' => 'GIFTPOTATO',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => 0, //全員
@@ -372,6 +372,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => 0, //全員
         ]);
+
         //4 テストデータ：（キャンペーンと整合性 // 値引き・全員・3000以上・500円OFF・1人1回まで）
         Coupon::create([
             'coupons_types_id' => '1',
@@ -380,7 +381,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_money' => 3000,
             'product_id' => null,
             'coupon_start_date' => Carbon::parse('2016-08-04'),
-            'coupon_end_date' => Carbon::parse('2017-12-25'),
+            'coupon_end_date' => Carbon::parse('2018-12-31'),
             'coupon_number' => '500OFF',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => 0, //全員
@@ -1008,9 +1009,10 @@ class CampaignsMasterSeeder extends Seeder
             'campaign_note' => 'ご注文の際、クーポンコード「500OFF」をご入力ください。お一人様１回までご利用いただけます。',
             'campaign_subject' => '全会員',
             'campaign_start_day' => Carbon::parse('2016-08-04'),
-            'campaign_end_day' => Carbon::parse('2017-12-25'),
+            'campaign_end_day' => Carbon::parse('2017-06-07'),
         ]);
-        // 2000円以上で焼きたてポテト無料
+
+        // 2000円以上で焼きたてポテト無料(本日まで)
         Campaign::create([
             'campaign_title' => '名脇役！焼きたてポテト無料キャンペーン',
             'campaign_banner' => '/images/campaign_banner/2.jpg',
@@ -1019,7 +1021,7 @@ class CampaignsMasterSeeder extends Seeder
             'campaign_note' => 'ご注文の際、「焼きたてポテト」をカートに入れた状態でクーポンコード「GIFTPOTATO」をご入力ください。お一人様１回までご利用いただけます。',
             'campaign_subject' => '全会員',
             'campaign_start_day' => Carbon::parse('2016-12-01'),
-            'campaign_end_day' => Carbon::parse('2017-10-18'),
+            'campaign_end_day' => Carbon::today(),
         ]);
         // 5000円以上で1000円OFF
         Campaign::create([
@@ -1043,7 +1045,7 @@ class CampaignsMasterSeeder extends Seeder
             'campaign_start_day' => Carbon::parse('2016-12-07'),
             'campaign_end_day' => Carbon::parse('2017-08-31'),
         ]);
-        // お正月フェア開催中
+        // お正月フェア(終了)
         Campaign::create([
             'campaign_title' => '冬フェア開催中',
             'campaign_banner' => '/images/campaign_banner/4.jpg',
@@ -1052,7 +1054,7 @@ class CampaignsMasterSeeder extends Seeder
             'campaign_note' => 'スタッフ一押しの越後産ズワイガニをふんだんに使用したピザが登場しています。ぜひご確認ください！',
             'campaign_subject' => null,
             'campaign_start_day' => Carbon::parse('2016-12-01'),
-            'campaign_end_day' => Carbon::parse('2017-03-30'),
+            'campaign_end_day' => Carbon::yesterday(),
         ]);
 
     }
