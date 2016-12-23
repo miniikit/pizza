@@ -39,6 +39,8 @@ class PhoneOrdersController extends Controller
     // 電話番号入力ページ
     public function index()
     {
+        // セッション削除
+        session()->put("phoneOrderCart", []);
         return view('pizzzzza.order.accept.input');
     }
 

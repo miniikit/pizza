@@ -38,13 +38,6 @@ class CouponsController extends Controller
         return view('pizzzzza.coupon.menu');
     }
 
-//    //  クーポン種別選択ページ
-//    public function couponNew()  {
-//        return view('pizzzzza.coupon.add');
-//    }
-
-
-
     //  クーポン種別選択ページ＞値引きクーポン新規発行ページ
     public function couponNewDiscount()  {
 
@@ -132,7 +125,6 @@ class CouponsController extends Controller
             return redirect()->route('showCoupon', $id);
 
     }
-
 
     //  プレゼントクーポン新規発行ページ
     public function couponNewGift()  {
