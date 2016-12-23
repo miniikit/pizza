@@ -9,7 +9,11 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
-        <li><a href="/pizzzzza/order/history">注文履歴</a></li>
+        @if(preg_match('{history}',$_SERVER["HTTP_REFERER"]))
+
+        @else
+            <li><a href="/pizzzzza/order/history">注文履歴</a></li>
+        @endif
         <li class="active">注文詳細</li>
     </ol>
 @endsection
