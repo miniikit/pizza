@@ -386,6 +386,9 @@ class PhoneOrdersController extends Controller
         // DB挿入処理
         $orderId = $this->phoneOrderService->insertOrder($items,$id,$appointment_date);
 
+        // セッション削除
+        session()->put("phoneOrderCart", []);
+
         Flash::success("注文が完了しました。注文番号：$orderId");
 
         return redirect()->route('orderTop');
