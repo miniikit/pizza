@@ -9,10 +9,10 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
-        @if(is_null($employee->deleted_at))
-            <li><a href="/pizzzzza/employee">従業員一覧</a></li>
+        @if(preg_match('{history}',$_SERVER["HTTP_REFERER"]))
+            <li><a href="/pizzzzza/employee/history">従業員履歴</a></li>
         @else
-            <li><a href="/pizzzzza/employee/history">従業員履歴一覧</a></li>
+            <li><a href="/pizzzzza/employee">従業員一覧</a></li>
         @endif
         <li class="active">{{$employee->user->name}}</li>
     </ol>
@@ -99,7 +99,11 @@
             </form>
         </div>
         <div class="col-md-4 col-md-offset-4 mt">
-            <a href="/pizzzzza/employee" class="btn btn-default btn-lg btn-block">戻る</a>
+            @if(preg_match('{history}',$_SERVER["HTTP_REFERER"]))
+                <a href="/pizzzzza/employee/history" class="btn btn-default btn-lg btn-block">戻る</a>
+            @else
+                <a href="/pizzzzza/employee" class="btn btn-default btn-lg btn-block">戻る</a>
+            @endif
         </div>
     </div>
 @endsection
