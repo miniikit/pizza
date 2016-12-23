@@ -41,6 +41,13 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
+    public function  form(){
+        if(Auth::check()){
+        return redirect('/');
+    }
+        return view('auth.login');
+    }
+
     public function login(Request $request) {
     //リクエストを取得
     $email = $request->get('email');

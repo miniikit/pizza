@@ -1,6 +1,6 @@
 @extends('template/master')
 
-@section('title', 'トップ')
+@section('title', '会員情報更新')
 
 @section('css')
     <link rel="stylesheet" href="/css/index/index.css" media="all" title="no title">

@@ -12,7 +12,9 @@ class MenusService
 
     public function all(){
 
-        $products = Product::with('productPrice', 'genre')->get();
+        $today = Carbon::today();
+
+        $products = Product::with('productPrice', 'genre')->where('sales_end_date','>=',$today)->orWhere('sales_end_date',NULL)->get();
 
         return $products;
     }

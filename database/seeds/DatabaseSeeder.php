@@ -269,11 +269,11 @@ class EmployeeMasterSeeder extends Seeder
             'emoloyee_agreement_enddate' => null,
         ]);
 
-        //テストデータ：契約終了
+        //テストデータ：本日まで
         Employee::create([
             'users_id' => 5,
             'emoloyee_agreement_date' => Carbon::parse('2016-10-10'),
-            'emoloyee_agreement_enddate' => Carbon::yesterday(),
+            'emoloyee_agreement_enddate' => Carbon::today(),
         ]);
 
         //テストデータ：契約終了
@@ -333,7 +333,7 @@ class CouponsMasterSeeder extends Seeder
     {
         DB::table('coupons_master')->delete();
 
-        //1 テストデータ：（キャンペーンと整合性 // プレゼント・全員・2000以上・焼きたてポテト無料・1人1回まで）
+        //1 テストデータ：（キャンペーンと整合性 // プレゼント・全員・2000以上・焼きたてポテト無料・1人1回まで）(本日まで)
         Coupon::create([
             'coupons_types_id' => '2',
             'coupon_name' => '1人1回まで 2000円以上で焼きたてポテトが無料クーポン',
@@ -341,7 +341,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_money' => 2000,
             'product_id' => 4,
             'coupon_start_date' => Carbon::parse('2016-12-06'),
-            'coupon_end_date' => Carbon::parse('2017-10-18'),
+            'coupon_end_date' => Carbon::today(),
             'coupon_number' => 'GIFTPOTATO',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => 0, //全員
@@ -372,6 +372,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => 0, //全員
         ]);
+
         //4 テストデータ：（キャンペーンと整合性 // 値引き・全員・3000以上・500円OFF・1人1回まで）
         Coupon::create([
             'coupons_types_id' => '1',
@@ -380,7 +381,7 @@ class CouponsMasterSeeder extends Seeder
             'coupon_conditions_money' => 3000,
             'product_id' => null,
             'coupon_start_date' => Carbon::parse('2016-08-04'),
-            'coupon_end_date' => Carbon::parse('2017-12-25'),
+            'coupon_end_date' => Carbon::parse('2018-12-31'),
             'coupon_number' => '500OFF',
             'coupon_conditions_count' => 1,
             'coupon_conditions_first' => 0, //全員
@@ -545,6 +546,7 @@ class ProductsMasterSeeder extends Seeder
             'sales_start_date' => Carbon::parse('2016-10-10'),
             'sales_end_date' => null,
         ]);
+
         Product::create([
             'product_name' => '【期間限定】もち明太グラタン',
             'price_id' => 10,
@@ -554,6 +556,7 @@ class ProductsMasterSeeder extends Seeder
             'sales_start_date' => Carbon::parse('2016-12-20'),
             'sales_end_date' => Carbon::parse('2017-03-31'),
         ]);
+
         Product::create([
             'product_name' => '【期間限定】越後産ズワイガニのご馳走ピザ',
             'price_id' => 11,
@@ -590,6 +593,8 @@ class ProductsMasterSeeder extends Seeder
             'sales_start_date' => Carbon::parse('2016-12-10'),
             'sales_end_date' => null,
         ]);
+
+        // 販売終了
         Product::create([
             'product_name' => '海のミックスコラボ',
             'price_id' => 15,
@@ -597,8 +602,10 @@ class ProductsMasterSeeder extends Seeder
             'product_text' => '海の幸をふんだんに使用した、シーフードずきにはたまらない一品です。',
             'genre_id' => 1,
             'sales_start_date' => Carbon::parse('2016-12-10'),
-            'sales_end_date' => null,
+            'sales_end_date' => Carbon::yesterday(),
         ]);
+
+        // 本日まで
         Product::create([
             'product_name' => 'ミックスパーティー',
             'price_id' => 16,
@@ -606,7 +613,7 @@ class ProductsMasterSeeder extends Seeder
             'product_text' => '子供から大人まで幅広い年代の方に支持される、大人気ミックスピザです。',
             'genre_id' => 1,
             'sales_start_date' => Carbon::parse('2016-12-10'),
-            'sales_end_date' => null,
+            'sales_end_date' => Carbon::today(),
         ]);
     }
 }
@@ -771,21 +778,72 @@ class OrdersMasterSeeder extends Seeder
     {
         DB::table('orders_master')->delete();
 
-        // WEBとPHONEの生成数（合計）
-        $max = 100; //ここを変更する場合の注意点：この数値を、orders_details_tableの先頭行$maxの値に代入すること
+        // WEBとPHONEの生成数（過去の合計）
+        $max = 300; //この値を変更する場合の注意点：この数値を、orders_details_tableの先頭行$maxの値に代入すること
 
-        // WEB+PHONEの注文
-        for($i = 1; $i<= $max; $i++){
+        // 注文を行う「会員ID」の最小値と最大値
+        $userIdMin = 7;
+        $userIdMax = 20;
 
-            //徐々に小さくなる値
-            $rand = ($max-$i) * 3;
+        // 注文を受理する「会員ID（担当者）」の最小値と最大値
+        $employeeIdMin = 1;
+        $employeeIdMax = 6;
 
+        // 注文の比率
+        $past = $max * 0.95;  // 過去
+        $future = $max * 0.05;  // 未来
+
+        // 過去の注文を生成(WEB+PHONE)
+        for($i = 1; $i<= $past; $i++){
+
+            // $iの値が増えるたびに、徐々に小さくなる値
+            $rand = ($past-$i) * 3;
+
+            // 注文日
             $orderDate = Carbon::today()->subHour($rand);
             $today = Carbon::today();
 
+            // 配達希望日時
+            $apointment_date = $orderDate->addMinutes(rand(60,240));
 
-            //配達希望日時
-            $apointment_date = $today->addHour($i)->addMinute($rand);
+            // 状態ID（配達希望日時が過去であれば、「完了」または「キャンセル」にセット）
+            if($apointment_date <= $today){
+                $state_id = rand(1,2);
+
+            // 状態ID（配達希望日が未来であれば、「未完了」または「キャンセル」にセット）
+            }else{
+                //状態を、1または3に設定する。（１は未完了・３はキャンセル）
+                $state_id = rand(1,3);
+                if($state_id == 2){
+                    $state_id = 1;
+                }
+            }
+
+            // PHONE注文か、WEB注文かを指定
+            $type = rand(1,2);
+
+            // SQL処理
+            if($type == 1) { // WEB注文
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => NULL,]);
+            }else { // PHONE注文
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => rand($employeeIdMin, $employeeIdMax),]);
+            }
+
+        }
+
+        // 未来の注文を生成(WEB+PHONE)
+        for($i = 1; $i<= $future; $i++){
+
+            //徐々に小さくなる値
+            $rand = ($future - $i) * 5;
+
+            // 注文日時
+            $orderDate = Carbon::now()->subMinute($rand);
+            $today = Carbon::today();
+
+            // 配達希望日は、１−４時間後に設定する
+            $apointment_date = $orderDate;
+            $apointment_date = $apointment_date->addMinute($i * rand(60,240));
 
             //状態ID（もし、配達希望日時が過去であれば、「完了」または「キャンセル」にセット
             if($apointment_date <= $today){
@@ -802,9 +860,9 @@ class OrdersMasterSeeder extends Seeder
 
             $type = rand(1,2);
             if($type == 1) { // WEB会員
-                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand(7, 20), 'employee_id' => NULL,]);
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => NULL, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => NULL,]);
             }else { // PHONE会員
-                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $today->addMinute(30), 'coupon_id' => null, 'state_id' => $state_id, 'user_id' => rand(7, 20), 'employee_id' => rand(1, 6),]);
+                Order::create(['order_date' => $orderDate, 'order_appointment_date' => $apointment_date, 'coupon_id' => NULL, 'state_id' => $state_id, 'user_id' => rand($userIdMin, $userIdMax), 'employee_id' => rand($employeeIdMin, $employeeIdMax),]);
             }
 
         }
@@ -865,7 +923,7 @@ class OrdersDetailsTableSeeder extends Seeder
         DB::table('orders_details_table')->delete();
 
         // orderマスタのfor文の件数を変更した場合、ここを変更
-        $max = 100;
+        $max = 300;
 
         // WEB会員からの注文 + 電話会員からの注文（クーポンなし）
         // orders_masterの注文IDと整合性を保っています
@@ -951,9 +1009,10 @@ class CampaignsMasterSeeder extends Seeder
             'campaign_note' => 'ご注文の際、クーポンコード「500OFF」をご入力ください。お一人様１回までご利用いただけます。',
             'campaign_subject' => '全会員',
             'campaign_start_day' => Carbon::parse('2016-08-04'),
-            'campaign_end_day' => Carbon::parse('2017-12-25'),
+            'campaign_end_day' => Carbon::parse('2017-06-07'),
         ]);
-        // 2000円以上で焼きたてポテト無料
+
+        // 2000円以上で焼きたてポテト無料(本日まで)
         Campaign::create([
             'campaign_title' => '名脇役！焼きたてポテト無料キャンペーン',
             'campaign_banner' => '/images/campaign_banner/2.jpg',
@@ -962,7 +1021,7 @@ class CampaignsMasterSeeder extends Seeder
             'campaign_note' => 'ご注文の際、「焼きたてポテト」をカートに入れた状態でクーポンコード「GIFTPOTATO」をご入力ください。お一人様１回までご利用いただけます。',
             'campaign_subject' => '全会員',
             'campaign_start_day' => Carbon::parse('2016-12-01'),
-            'campaign_end_day' => Carbon::parse('2017-10-18'),
+            'campaign_end_day' => Carbon::today(),
         ]);
         // 5000円以上で1000円OFF
         Campaign::create([
@@ -986,7 +1045,7 @@ class CampaignsMasterSeeder extends Seeder
             'campaign_start_day' => Carbon::parse('2016-12-07'),
             'campaign_end_day' => Carbon::parse('2017-08-31'),
         ]);
-        // お正月フェア開催中
+        // お正月フェア(終了)
         Campaign::create([
             'campaign_title' => '冬フェア開催中',
             'campaign_banner' => '/images/campaign_banner/4.jpg',
@@ -995,7 +1054,7 @@ class CampaignsMasterSeeder extends Seeder
             'campaign_note' => 'スタッフ一押しの越後産ズワイガニをふんだんに使用したピザが登場しています。ぜひご確認ください！',
             'campaign_subject' => null,
             'campaign_start_day' => Carbon::parse('2016-12-01'),
-            'campaign_end_day' => Carbon::parse('2017-03-30'),
+            'campaign_end_day' => Carbon::yesterday(),
         ]);
 
     }

@@ -84,7 +84,7 @@ Route::group(['middleware' => ['adminauth']], function () {
 
 //クーポン
     Route::get('/pizzzzza/coupon/add','CouponsController@couponNew'); //クーポン種別選択ページ
-    Route::get('/pizzzzza/coupon','CouponsController@couponNowList'); //開催中クーポン一覧ページ
+    Route::get('/pizzzzza/coupon','CouponsController@couponNowList'); //クーポン一覧ページ
     Route::get('/pizzzzza/coupon/{id}/show', 'CouponsController@show')->name('showCoupon'); //クーポン詳細
     Route::get('/pizzzzza/coupon/{id}/edit','CouponsController@edit')->name('editCoupon');  //クーポン編集
     Route::post('/pizzzzza/coupon/{id}/update/discount','CouponsController@DiscountUpdateDo');
@@ -134,10 +134,16 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::post('/pizzzzza/order/accept/customer/{id}/update/web', 'PhoneOrdersController@updateWeb'); //会員情報編集＞更新処理＞WEB
     Route::get('/pizzzzza/order/accept/customer/input', 'PhoneOrdersController@newCustomer')->name('newCustomer'); //新規登録
     Route::post('/pizzzzza/order/accept/customer/input/add', 'PhoneOrdersController@newCustomerInsert'); //新規登録＞DB追加処理
-    Route::post('/pizzzzza/order/accept/customer/cart','PhoneOrdersController@orderCart'); //商品入力ページ・カート処理　　　
+
+//電話注文　カート処理
+    Route::post('/pizzzzza/order/accept/customer/cart','PhoneOrdersController@orderCart'); //商品入力ページ＞カート処理（商品の追加・個数変更）
+    Route::post('/pizzzzza/order/accept/customer/cart/check','PhoneOrdersController@orderCartCheck'); //商品入力ページ＞カート処理（初回読み込み）
+    Route::post('/pizzzzza/order/accept/customer/cart/delete','PhoneOrdersController@orderDelete'); //商品入力ページ＞カート処理（商品削除）
+
 //電話注文　注文処理
     Route::get('/pizzzzza/order/accept/item/{id}/select', 'PhoneOrdersController@orderSelect')->name('telOrderSelect'); //商品入力・選択ページ
-    Route::get('/pizzzzza/order/accept/item/confirm', 'PhoneOrdersController@orderConfirm'); //注文情報確認ページ
+    Route::get('/pizzzzza/order/accept/item/{id}/confirm', 'PhoneOrdersController@orderConfirm')->name('telOrderConfirm'); //注文情報確認ページ
+    Route::post('/pizzzzza/order/accept/item/{id}/complete', 'PhoneOrdersController@orderComplete'); //注文情報確認ページ
 
 //売上・売れ筋
     Route::get('/pizzzzza/analysis/populer', 'AnalysisController@analysisPopuler');
@@ -158,6 +164,7 @@ Route::post('/pizzzzza/order/top', 'auth\AdminLoginController@login'); //管理�
 
 Auth::routes();
 
+Route::get('/login','auth\LoginController@form'); //ログインページ
 Route::get('/register','auth\RegisterController@register'); //登録ページ
 Route::post('/register/confirm', 'auth\RegisterController@confirm');
 Route::post('/register/complete','auth\RegisterController@complete');

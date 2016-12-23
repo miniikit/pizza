@@ -13,12 +13,25 @@ use \App\Service\CartService;
 
 class CartsController extends Controller
 {
+
+    protected $cartService;
+
+    /**
+     * CartsController constructor.
+     * @param $cartService
+     */
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
+
     //  カートページ
+
     public function index()  {
 
-        $cart = new CartService();
 
-        list($products,$productCount,$total) = $cart->showCart();
+        list($products,$productCount,$total) = $this->cartService->showCart();
 
         return view('cart.index',compact('products','productCount','total'));
     }
@@ -28,9 +41,8 @@ class CartsController extends Controller
         $id  = $request->get("id");
         $sum = $request->get("sum");
 
-        $cart = new CartService();
 
-        $cart->addProduct($id,$sum);
+        $this->cartService->addProduct($id,$sum);
 
         return redirect()->route('cart');
     }
@@ -44,8 +56,7 @@ class CartsController extends Controller
 
     public function pop($id) {
 
-        $cart = new CartService();
-        $cart->popProduct($id);
+        $this->cartService->popProduct($id);
 
         return redirect()->route('cart');
 
@@ -56,8 +67,7 @@ class CartsController extends Controller
         $id  = $request->get("id");
         $sum = $request->get("sum");
 
-        $cart = new CartService();
-        $cart->editCartSum($id,$sum);
+        $this->cartService->editCartSum($id,$sum);
 
         return redirect()->route('cart');
 

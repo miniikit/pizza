@@ -1,6 +1,6 @@
 @extends('template.admin')
 
-@section('title', '電話注文受付')
+@section('title', '電話注文')
 
 @section('css')
     <link rel="stylesheet" href="/css/pages/index.css" media="all" title="no title">
@@ -10,13 +10,13 @@
 @section('pankuzu')
     <ol class="breadcrumb">
         <li><a href="/pizzzzza/order">ホーム</a></li>
-        <li class="active">電話注文受付</li>
+        <li class="active">電話注文</li>
     </ol>
 @endsection
 
 @section('main')
     <div class="wrap">
-        <h1>電話注文受付</h1>
+        <h1>電話注文</h1>
         <div id="tel">
             @if (count($errors) > 0)
                 @foreach ($errors->all() as $error)
@@ -100,13 +100,13 @@
                                         }
 
                                         if (code["users"][i]["authority_id"] == 3) {
-                                            code["users"][i]["authority_id"] = "WEB";
+                                            code["users"][i]["authority_id"] = "WEB会員";
                                         } else if (code["users"][i]["authority_id"] == 4) {
-                                            code["users"][i]["authority_id"] = "PHONE";
+                                            code["users"][i]["authority_id"] = "電話会員";
                                         }
 
                                         $('#customer-detail').append(
-                                                "<tr class=\"customer link clickable\" data-href=\"/pizzzzza/order/accept/customer/" + code["users"][i]["id"] + "/show/\"><td>" + code["users"][i]["name"] + "</td>" +
+                                                "<tr class=\"customer link clickable\" data-href=\"/pizzzzza/order/accept/customer/\"" + code["users"][i]["id"] + "/show/\"><td>" + code["users"][i]["name"] + "</td>" +
                                                 "<td>" + code["users"][i]["postal"] + "</td>" +
                                                 "<td>" + code["users"][i]["address1"] + " " + code["users"][i]["address2"] + " " + code["users"][i]["address3"] + "</td>" +
                                                 "<td>" + code["users"][i]["authority_id"] + "</td></tr>"
@@ -125,7 +125,6 @@
 
                                 //table jQuery Click
                                 $('.table tr[data-href]').addClass('clickable').click(function () {
-                                    console.log('aa');
                                     window.location = $(this).attr('data-href');
                                 }).find('a').hover(function () {
                                     $(this).parents('tr').unbind('click');

@@ -1,18 +1,24 @@
 @extends('template.master')
+
 @section('title', '新規登録')
+
 @section('css')
-    <link rel="stylesheet" href="/css/auth/register/index.css" media="all" title="no title"> @endsection @section('js')
-    <script type="text/javascript" src="https://ajaxzip3.github.io/ajaxzip3.js" charset="utf-8"></script>
-    <script src="/js/common/autokana/jquery.autoKana.js" language="javascript" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(
-                function () {
-                    $.fn.autoKana('#name', '#kana', {
-                        katakana: true //true：カタカナ、false：ひらがな（デフォルト）
-                    });
-                });
-    </script>
+<link rel="stylesheet" href="/css/auth/register/index.css" media="all" title="no title">
 @endsection
+ 
+@section('plug')
+<script src="/js/common/ajaxzip3.js" type="text/javascript"></script>
+<script src="/js/common/autokana/jquery.autoKana.js" language="javascript" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(
+        function() {
+            $.fn.autoKana('#name', '#kana', {
+                katakana: true //true：カタカナ、false：ひらがな（デフォルト）
+            });
+        });
+</script>
+@endsection
+
 @section('main')
     <div class="container">
         <div class="wrap">
@@ -95,7 +101,9 @@
                                     <span class="example">確認の為、もう一度入力してください。</span> @if ($errors->has('password_confirmation'))
                                         <span class="help-block">
                                     <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                 </span> @endif
+                                 </span> 
+                                 @endif
+
                                 </td>
                             </div>
                         </tr>
@@ -182,10 +190,8 @@
                                 <label for="gender_id">性別<font class="red">※</font></label>
                             </th>
                             <td class="form-inline">
-                                <label for="gender" class="radio-inline"><input type="radio" name="gender_id"
-                                                                                class="radio" value="1"/>男性</label>
-                                <label for="gender" class="radio-inline"><input type="radio" name="gender_id"
-                                                                                class="radio" value="2"/>女性</label>
+                                <label for="gender" class="radio-inline"><input type="radio" name="gender_id"　class="radio" value="1"/>男性</label>
+                                <label for="gender" class="radio-inline"><input type="radio" name="gender_id"　class="radio" value="2"/>女性</label>
                                 <span class="example">必ずどちらかを選択してください。</span>
                             </td>
                         </tr>
@@ -206,6 +212,7 @@
 
                     <div class="form-group{{ $errors->has('authority_id') ? ' has-error' : '' }}">
                         <input type="hidden" name="authority_id" value="3">
+
                     </div>
 
                     <div class="btn-wrap">

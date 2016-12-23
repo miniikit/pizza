@@ -22,12 +22,23 @@ use App\Service\EmployeesService;
 
 class EmployeesController extends Controller
 {
+    protected $employeesService;
+
+    /**
+     * EmployeesController constructor.
+     * @param $employeesService
+     */
+    public function __construct(EmployeesService $employeesService)
+    {
+        $this->employeesService = $employeesService;
+    }
+
+
     //  従業員一覧ページ
     public function index()
     {
 
-        $employeesService = new EmployeesService();
-        $employees = $employeesService->all();
+        $employees = $this->employeesService->all();
 
         return view('pizzzzza.employee.index', compact('employees'));
     }
@@ -35,8 +46,7 @@ class EmployeesController extends Controller
     public function history()
     {
 
-        $employeesService = new EmployeesService();
-        $employees = $employeesService->history();
+        $employees = $this->employeesService->history();
 
         return view('pizzzzza.employee.history', compact('employees'));
     }
@@ -46,8 +56,7 @@ class EmployeesController extends Controller
     public function show($id)
     {
 
-        $employeesService = new EmployeesService();
-        $employee = $employeesService->getEmployee($id);
+        $employee = $this->employeesService->getEmployee($id);
 
         return view('pizzzzza.employee.show', compact('employee'));
 
@@ -58,8 +67,7 @@ class EmployeesController extends Controller
     public function edit($id)
     {
 
-        $employeesService = new EmployeesService();
-        $employee = $employeesService->getEmployee($id);
+        $employee = $this->employeesService->getEmployee($id);
 
         return view('pizzzzza.employee.edit', compact('employee'));
 
@@ -76,8 +84,7 @@ class EmployeesController extends Controller
 
         $data = $request->all();
 
-        $employeesService = new EmployeesService();
-        $employeesService->addEmployee($data);
+        $this->employeesService->addEmployee($data);
 
 
         Flash::success('新規登録完了しました。');
@@ -89,8 +96,7 @@ class EmployeesController extends Controller
     public function destroy($id)
     {
 
-        $employeesService = new EmployeesService();
-        $employeesService->removeEmployee($id);
+        $this->employeesService->removeEmployee($id);
 
         Flash::success('削除しました。');
 
@@ -102,8 +108,7 @@ class EmployeesController extends Controller
     {
         $data = $request->all();
 
-        $employeesService = new EmployeesService();
-        $employeesService->updateEmployee($data,$id);
+        $this->employeesService->updateEmployee($data,$id);
 
 
         Flash::success('更新完了しました。');
