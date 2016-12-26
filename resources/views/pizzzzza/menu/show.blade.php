@@ -11,7 +11,9 @@
         @if(preg_match('{history}',$_SERVER["HTTP_REFERER"]))
             <li><a href="/pizzzzza/menu/history">商品履歴</a></li>
         @elseif(preg_match('{accept}',$_SERVER["HTTP_REFERER"]))
-            <li><a href="{{ url($_SERVER["HTTP_REFERER"]) }}">電話注文:商品選択</a></li>
+            <li><a href="/pizzzzza/order/accept/input">電話注文</a></li>
+            <li><a href="{{ url($_SERVER["HTTP_REFERER"]) }}">商品選択</a></li>
+            <li class="active">商品詳細</li>
         @else
             <li><a href="/pizzzzza/menu">商品一覧</a></li>
         @endif
