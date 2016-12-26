@@ -200,7 +200,12 @@ class PhoneOrderService
 
         $today = Carbon::today();
 
-        $items = $request->all();
+        // POSTならフォームの値を優先し、GETならセッションの値を利用する。
+        if($request->all()) {
+            $items = $request->all();
+        }else{
+            $items = session()->get('phoneOrderCart');
+        }
 
         // 商品名を取得 [0]=> "商品名"、[1]=>"商品名"...
         $keys = array_keys($items);
@@ -235,7 +240,6 @@ class PhoneOrderService
 
         return compact('result','total');
     }
-
 
     /**
      * 注文確定

@@ -351,8 +351,17 @@ class PhoneOrdersController extends Controller
         // 会員情報
         $user = $this->phoneOrderService->getUser($id);
 
-        // 商品
-        $data = $this->phoneOrderService->getPrice($request);
+
+        // 商品、個数、金額（POSTアクセス時と、リロードやredirectなどGETでアクセスされた場合の切り分け）
+        if($request->all()) {  // POSTの場合（$requestから値を取得）
+
+            $data = $this->phoneOrderService->getPrice($request);
+
+        }else{  // GETの場合（sessionから値を取得）
+
+            $data = $this->phoneOrderService->getPrice($request);
+
+        }
 
         // 商品一覧
         $items = $data['result'];
@@ -378,8 +387,8 @@ class PhoneOrdersController extends Controller
 
         $appointment_date = $date .' '. $time;
 
-        // もし現在時刻より前だったら
-        if ($appointment_date <= Carbon::now()->format('Y-m-d H:i')) {
+        // もし現在時刻＋１時間より前だったら
+        if ($appointment_date <= Carbon::now()->addHour()->addMinute()->format('Y-m-d H:i')) {
 
             Flash::error('配達希望日時は１時間後より指定可能です。');
             return redirect()->route('telOrderConfirm',$id);
