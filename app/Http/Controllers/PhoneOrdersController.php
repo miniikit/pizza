@@ -388,7 +388,7 @@ class PhoneOrdersController extends Controller
         $appointment_date = $date .' '. $time;
 
         // もし現在時刻＋１時間より前だったら
-        if ($appointment_date <= Carbon::now()->addHour()->format('Y-m-d H:i')) {
+        if ($appointment_date <= Carbon::now()->addHour()->addMinute()->format('Y-m-d H:i')) {
 
             Flash::error('配達希望日時は１時間後より指定可能です。');
             return redirect()->route('telOrderConfirm',$id);
