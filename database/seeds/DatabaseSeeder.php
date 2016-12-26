@@ -811,7 +811,7 @@ class OrdersMasterSeeder extends Seeder
 
             // 状態ID（配達希望日時が過去であれば、「完了」または「キャンセル」にセット）
             if($appointment_date <= $today){
-                $state_id = rand(1,2);
+                $state_id = rand(2,3);
 
             // 状態ID（配達希望日が未来であれば、「未完了」または「キャンセル」にセット）
             }else{
@@ -851,7 +851,7 @@ class OrdersMasterSeeder extends Seeder
 
             //状態ID（もし、配達希望日時が過去であれば、「完了」または「キャンセル」にセット
             if($appointment_date <= $today){
-                $state_id = rand(1,2);
+                $state_id = rand(2,3);
 
             //配達希望日が未来である
             }else{
@@ -889,7 +889,7 @@ class OrdersMasterSeeder extends Seeder
 
             //状態ID（もし、配達希望日時が過去であれば、「完了」または「キャンセル」にセット
             if($appointment_date <= $today){
-                $state_id = rand(1,2);
+                $state_id = rand(2,3);
 
             //配達希望日が未来である
             }else{
