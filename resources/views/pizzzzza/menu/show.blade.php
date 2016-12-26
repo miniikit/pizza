@@ -10,6 +10,8 @@
         <li><a href="/pizzzzza/order">ホーム</a></li>
         @if(preg_match('{history}',$_SERVER["HTTP_REFERER"]))
             <li><a href="/pizzzzza/menu/history">商品履歴</a></li>
+        @elseif(preg_match('{accept}',$_SERVER["HTTP_REFERER"]))
+            <li><a href="{{ url($_SERVER["HTTP_REFERER"]) }}">電話注文:商品選択</a></li>
         @else
             <li><a href="/pizzzzza/menu">商品一覧</a></li>
         @endif
@@ -84,6 +86,8 @@
         <div class="col-md-4 col-md-offset-4 mt">
             @if(preg_match('{history}',$_SERVER["HTTP_REFERER"]))
                 <a href="/pizzzzza/menu/history" class="btn btn-default btn-lg btn-block">戻る</a>
+            @elseif(preg_match('{accept}',$_SERVER["HTTP_REFERER"]))
+                <a href="{{ url($_SERVER["HTTP_REFERER"]) }}" class="btn btn-default btn-lg btn-block">戻る</a>
             @else
                 <a href="/pizzzzza/menu" class="btn btn-default btn-lg btn-block">戻る</a>
             @endif
