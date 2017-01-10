@@ -27,8 +27,11 @@ class IndexController extends Controller
         $subMonth = Carbon::today()->subMonth();
 
         $popularPizza =  $this->rankingService->popular($subMonth,1,3);
+        $popularSide = $this->rankingService->popular($subMonth,2,3);
+        $popularDrink = $this->rankingService->popular($subMonth,3,3);
 
-        return view('index',compact('campaigns','popularPizza'));
+
+        return view('index',compact('campaigns','popularPizza','popularSide','popularDrink'));
     }
 
 }

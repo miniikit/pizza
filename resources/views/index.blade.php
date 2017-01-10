@@ -56,6 +56,38 @@
                     @endforeach
                 </ul>
             </div>
+            <h2>人気サイドランキング</h2>
+            <div class="ranking">
+                <ul>
+                    <?php $rank = 0; ?>
+                    @foreach ($popularSide as $side)
+                        <?php $rank += 1; ?>
+                        <div class="product ranking">
+                            <div class="inner">
+                                <div class="rank">{{ $rank }}位</div>
+                                <div class="image"><img src="{{ $side->product_image }}" alt=""/></div>
+                                <div class="title"><h3>{{ $side->product_name }}</h3></div>
+                                <div class="price"><p>{{ $side->product_price }}円</p></div>
+                                <div class="text"><p>{{ $side->product_text }}</p></div>
+                                <div class="btn">
+                                    <form class="" action="/cart/store" method="post">
+                                <span>
+                                    <select class="" name="sum">
+                                        @for ($i=1; $i <= 10 ; $i++)
+                                            <option value="{{$i}}">{{$i}}</option>
+                                        @endfor
+                                    </select>
+                                </span>
+                                        <input type="hidden" name="id" value="{{ $side->id }}">
+                                        <div class="form-bottom">カートに入れる</div>
+                                        {{ csrf_field() }}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </ul>
+            </div>
             <h2>キャンペーン情報</h2>
             <div class="campaign">
                 <ul>
