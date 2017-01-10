@@ -973,7 +973,7 @@ class OrdersDetailsTableSeeder extends Seeder
         // orders_masterの注文IDと整合性を保っています
         for($i = 1; $i<= $max; $i++){
             $orderCnt = rand(1,5);
-            $randomCnt = rand(0,4);
+            $randomCnt = rand(0,10);
             for($k = 1; $k <= $orderCnt; $k++){
                 OrderDetail::create([
                     'id' => $i,

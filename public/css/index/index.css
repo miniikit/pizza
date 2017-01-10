@@ -17,9 +17,19 @@
     .campaign {
         text-align: center;
     }
+
     .campaign li {
         display: block;
         width: auto;
         margin-bottom: 20px;
     }
+}
+
+.ranking {
+    position: relative;
+}
+
+.rank {
+    position: absolute;
+    font-size: 1.5em;
 }
