@@ -28,15 +28,15 @@
             <div class="ranking">
                 <ul>
                     <?php $rank = 0; ?>
-                    @foreach ($populars as $popular)
+                    @foreach ($popularPizza as $pizza)
                         <?php $rank += 1; ?>
                         <div class="product ranking">
                             <div class="inner">
                                 <div class="rank">{{ $rank }}位</div>
-                                <div class="image"><img src="{{ $popular->product_image }}" alt=""/></div>
-                                <div class="title"><h3>{{ $popular->product_name }}</h3></div>
-                                <div class="price"><p>{{ $popular->product_price }}円</p></div>
-                                <div class="text"><p>{{ $popular->product_text }}</p></div>
+                                <div class="image"><img src="{{ $pizza->product_image }}" alt=""/></div>
+                                <div class="title"><h3>{{ $pizza->product_name }}</h3></div>
+                                <div class="price"><p>{{ $pizza->product_price }}円</p></div>
+                                <div class="text"><p>{{ $pizza->product_text }}</p></div>
                                 <div class="btn">
                                     <form class="" action="/cart/store" method="post">
                                 <span>
@@ -46,7 +46,7 @@
                                         @endfor
                                     </select>
                                 </span>
-                                        <input type="hidden" name="id" value="{{ $popular->id }}">
+                                        <input type="hidden" name="id" value="{{ $pizza->id }}">
                                         <div class="form-bottom">カートに入れる</div>
                                         {{ csrf_field() }}
                                     </form>
