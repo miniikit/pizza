@@ -35,7 +35,7 @@
                                 <div class="rank">{{ $rank }}位</div>
                                 <div class="image"><img src="{{ $pizza->product_image }}" alt=""/></div>
                                 <div class="title"><h3>{{ $pizza->product_name }}</h3></div>
-                                <div class="price"><p>{{ $pizza->product_price }}円</p></div>
+                                <div class="price"><p>{{ number_format($pizza->product_price) }}円</p></div>
                                 <div class="text"><p>{{ $pizza->product_text }}</p></div>
                                 <div class="btn">
                                     <form class="" action="/cart/store" method="post">
@@ -67,7 +67,7 @@
                                 <div class="rank">{{ $rank }}位</div>
                                 <div class="image"><img src="{{ $side->product_image }}" alt=""/></div>
                                 <div class="title"><h3>{{ $side->product_name }}</h3></div>
-                                <div class="price"><p>{{ $side->product_price }}円</p></div>
+                                <div class="price"><p>{{ number_format($side->product_price) }}円</p></div>
                                 <div class="text"><p>{{ $side->product_text }}</p></div>
                                 <div class="btn">
                                     <form class="" action="/cart/store" method="post">
