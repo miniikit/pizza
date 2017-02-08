@@ -91,7 +91,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="/pizzzzza/analysis/earning">売上</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="/pizzzzza/analysis/populer">売れ筋</a></li>
+                            <li><a href="/pizzzzza/analysis/popular">売れ筋</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

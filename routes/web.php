@@ -146,8 +146,8 @@ Route::group(['middleware' => ['adminauth']], function () {
     Route::post('/pizzzzza/order/accept/item/{id}/complete', 'PhoneOrdersController@orderComplete'); //注文情報確認ページ
 
 //売上・売れ筋
-    Route::get('/pizzzzza/analysis/populer', 'AnalysisController@analysisPopuler');
-    Route::get('/pizzzzza/analysis/earning', 'AnalysisController@index');
+    Route::get('/pizzzzza/analysis/popular', 'AnalysisController@index_popular');
+    Route::get('/pizzzzza/analysis/earning', 'AnalysisController@index_earning');
 
 //Auth
     Route::post('/pizzzzza/logout', 'auth\AdminLoginController@logout'); //管理者用ログアウトページ
