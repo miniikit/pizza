@@ -20,6 +20,7 @@ class AnalysisController extends Controller
         $this->analysisService = $analysisService;
     }
 
+    // 売れ筋商品
     public function index_popular()
     {
         // デフォルトで表示するもの
@@ -34,6 +35,7 @@ class AnalysisController extends Controller
         return view('pizzzzza.analysis.popular',compact('populars'));
     }
 
+    // 売れ筋商品>>条件適用時向け
     public function popular_ajax(Request $request)
     {
         $RankingService = new RankingService();

@@ -44,7 +44,7 @@ class AnalysisService
                 return $query->where('users.authority_id','=',$member_type);
             })
             ->get();
-
+        $order_count = count($orders);
 
         // 取得した注文情報から、「価格ID : その商品の注文回数」の形式でまとめる
         $popular_count = array();
@@ -69,6 +69,7 @@ class AnalysisService
         foreach(array_keys($popular_count) as $key){
             $populars[$i]['product_info'] = DB::table('products_master')->join('products_prices_master', 'products_master.id', '=', 'products_prices_master.product_id')->where('products_prices_master.id', '=', $key)->first();
             $populars[$i]['number_of_sales'] = $popular_count[$key]; // 売上数
+            $populars[$i]['share'] = round($popular_count[$key] / $order_count,3) * 100; // シェア率
             $i++;
         }
 
