@@ -33,7 +33,6 @@
                             // 現在の割合を算出（全体の7割を越えれば、それ以降分は"その他"にまとめる。
                             $percentage = $num / $total;
                             $num += $populars[$i]["number_of_sales"];
-                            echo $percentage;
 
                             // 5件以上人気商品がある場合は、"その他"に集約するためのif文
                             if($percentage < 0.7){
@@ -229,17 +228,22 @@
 
                             success: function (result) {
 
+                                {{-- フォームのエラー返却用（主に日付用）--}}
                                 $("#conditions_errors").text("");
                                 if(result["error"]){
                                     $("#conditions_errors").append('<div class="alert alert-danger"><ul><li>'+ result["error"] +'</li></ul></div>');
                                     exit;
                                 }
 
+                                {{-- 表を書き換え --}}
                                 if(result.length > 0 || result["check_flg"] == 1){
                                     $("#insert-here").text("");
                                     var rank = 0;
                                     var share;
                                     for(var i in result){
+                                        if(i == "check_flg"){
+                                            break;
+                                        }
                                         {{-- 小数点以下の桁数を取得し、2桁以上あれば1桁に。--}}
                                         share = result[i]["share"];
                                         var numbers = String(share).split('.'), num_result  = 0;
@@ -249,10 +253,64 @@
                                         if(num_result > 1){
                                             share  = result[i]["share"].toFixed(1);
                                         }
-
-                                        $("#insert-here").append("<tr><td>"+ ++rank + "位</td>" + "<td>" + result[i]["product_info"]["product_name"] + "</td>" + "<td>" + result[i]["number_of_sales"] + "</td>" + "<td>" + share + "%</td></tr>");
+                                        $("#insert-here").append("<tr><td>"+ ++rank + "位</td>" + "<td>" + result[i]['product_info']['product_name'] + "</td>" + "<td>" + result[i]['number_of_sales'] + "</td>" + "<td>" + share + "%</td></tr>");
                                     }
 
+                                    // グラフで用いる、$labelと$dataを動的に生成する処理
+                                    var label = ""; // 結果格納用
+                                    var data = ""; // 結果格納用
+                                    var populars_num = 0; // 人気商品の数
+                                    var other_data = 0; // その他
+                                    var total = 0; // 人気商品　売上数の合計
+                                    var num = 0; // 人気商品　売上数の合計（割合算出用。for文で$iの個数を足してゆく。）
+                                    var populars = result; // コピー
+
+                                    // トータルを算出
+                                    for(var i in populars){
+                                        if(i == "check_flg"){
+                                            break;
+                                        }
+                                        total += populars[i]["number_of_sales"];
+                                        populars_num++;
+                                    }
+
+                                    // グラフ用のデータを、$labelと$dataに文字列として保存。
+                                    for(i = 0; i < populars_num; i++){
+
+                                        // 現在の割合を算出（全体の7割を越えれば、それ以降分は"その他"にまとめる。
+                                        var percentage = num / total;
+                                        num += populars[i]["number_of_sales"];
+
+                                        // 7割を超えた商品は、"その他"に集約。
+                                        if(percentage < 0.7){
+                                            if(i != 0){
+                                                label = label + ',';
+                                                data = data + ',';
+                                            }
+                                                label = label + '"' + populars[i]["product_info"]["product_name"] + '"';
+                                                data = data + '"' + populars[i]["number_of_sales"] + '"';
+
+                                        } else if(i+1 == populars_num){  // その他を出力
+                                            label = label + ',"その他"';
+                                            data = data + ',"' + other_data + '"';
+                                        } else { // その他を作成
+                                            other_data += populars[i]["number_of_sales"];
+                                        }
+                                    }console.log(label,data);
+                                    $('#graph').html("<canvas id='chart'></canvas>");
+
+                                    var ctx = document.getElementById('chart').getContext('2d');
+                                    var chart = new Chart(ctx, {
+                                        type: 'pie',
+                                        data: {
+                                            labels: [ label ],
+                                            datasets: [{
+                                                label: 'Populars',
+                                                data: [ data ],
+                                                backgroundColor: "tomato"
+                                            }]
+                                        }
+                                    });
                                 } else {
                                     $("#insert-here").text("条件に合致するデータが存在しませんでした。");
                                 }
