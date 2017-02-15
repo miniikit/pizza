@@ -65,7 +65,7 @@
                      });
                      </script>
                 </div>
-                <table class="table">
+                <table id="populars-table" class="table">
                     <thead>
                     <tr>
                         <th>順位</th>
@@ -87,8 +87,8 @@
                             <tr>
                                 @endif
                                 <td><?php echo $i++; ?> 位</td>
-                                <td>{{ $popular["product_info"]->product_name }}</td>
-                                <td>{{ $popular["number_of_sales"] }}</td>
+                                <td class="product_name">{{ $popular["product_info"]->product_name }}</td>
+                                <td class="product_num">{{ $popular["number_of_sales"] }}</td>
                                 <td>{{ $popular["share"] }}%</td>
                             </tr>
                             @endforeach
@@ -205,6 +205,52 @@
     {{--  Graph  --}}
     <script src="https://d3js.org/d3.v4.min.js"></script>
 
+    <script>
+        /*
+        $(function() {
+            //項目用の配列を定義
+            var labels = [];
+            var data = [];
+//th用の数値取得
+            for(var i = 0; i < 3; i++){
+                var label = $('.product_name').text;
+                labels.push(label);
+            }console.log(labels,i);
+
+            $('#populars-table td').each(function () {
+                var this_label = $(this).find('product_name' + i).text();
+                labels.push(this_label);
+                var this_data = $(this).find('.product_name').text();
+                data.push(this_data);
+            });
+            console.log(data,labels);
+            //Chart.jsの基本設定
+            var data = {
+//th用の数値を反映させるため、配列変数挿入
+                labels: labels,
+                datasets: [
+                    {
+                        fillColor: "#0a50a1",
+                        strokeColor: "#0a50a1",
+                        pointStrokeColor: "#fff",
+//td用の数値を反映させるため、配列変数挿入
+                        data: data
+                    }
+                ]
+            };
+            //Chart.jsの基本オプション
+            var option = {
+                animationEasing: "easeInOutQuart",
+                scaleShowLabels: true,
+                barValueSpacing: 65
+            }
+            window.onload = function(){
+                var ctx = document.getElementById("chart").getContext("2d");
+                window.myPie = new Chart(ctx).Pie(data);
+            };
+        });
+        */
+    </script>
 
     {{--  ajax  --}}
     <script type="text/javascript">
@@ -311,6 +357,7 @@
                                             }]
                                         }
                                     });
+
                                 } else {
                                     $("#insert-here").text("条件に合致するデータが存在しませんでした。");
                                 }
