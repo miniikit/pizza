@@ -1,4 +1,5 @@
-.graph{
-    height:300px;
-    text-align: center;
+canvas{
+    width:100%;
+    min-height:300px;
+    max-height:600px;
 }

@@ -10,7 +10,7 @@ class AnalysisService
 {
 
     // 売れ筋商品を検索
-    public function popular($period_start_day,$period_end_day,$member_type,$target_genre){
+    public function popular($period_start_day,$period_end_day,$member_type,$target_genre,$member_gender,$older_min_date,$older_max_date){
         //
         //
 
@@ -25,6 +25,19 @@ class AnalysisService
             $member_type_status = true;
         } else {
             $member_type_status = false;
+        }
+        // 性別
+        if($member_gender >= 1){
+            $member_gender_status = true;
+        } else {
+            $member_gender_status = false;
+        }
+        // 年代 ※指定なしの場合、呼び出し元関数側で、1000年1月1日が標準で設定されています。
+        $check_date = Carbon::create(1300, 1, 1, 0, 0, 0, 'Asia/Tokyo');
+        if($older_min_date >= $check_date || $older_max_date >= $check_date){
+            $member_older_status = true;
+        } else {
+            $member_older_status = false;
         }
 
         // 注文情報
@@ -42,6 +55,14 @@ class AnalysisService
             // 会員種別の指定があれば
             ->when($member_type_status, function ($query) use ($member_type) {
                 return $query->where('users.authority_id','=',$member_type);
+            })
+            // 性別の指定があれば
+            ->when($member_gender_status, function ($query) use ($member_gender) {
+                return $query->where('users.gender_id','=',$member_gender);
+            })
+            // 年代の指定があれば
+            ->when($member_older_status, function ($query) use ($older_min_date,$older_max_date) {
+                return $query->whereBetween('users.birthday',[$older_min_date,$older_max_date]);
             })
             ->get();
         $order_count = count($orders);
@@ -73,7 +94,7 @@ class AnalysisService
             $i++;
         }
 
-        return $populars;
+        return $populars;dd($populars);
     }
 
 

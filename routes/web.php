@@ -148,6 +148,7 @@ Route::group(['middleware' => ['adminauth']], function () {
 //売上・売れ筋
     Route::get('/pizzzzza/analysis/popular', 'AnalysisController@index_popular');
     Route::get('/pizzzzza/analysis/earning', 'AnalysisController@index_earning');
+    Route::post('/pizzzzza/analysis/popular/apply', 'AnalysisController@apply_popular');
 
 //Auth
     Route::post('/pizzzzza/logout', 'auth\AdminLoginController@logout'); //管理者用ログアウトページ
