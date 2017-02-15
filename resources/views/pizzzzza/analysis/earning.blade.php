@@ -12,7 +12,7 @@
     <form action="#" method="POST">
 
     </form>
-
+    <!--
     <div class="dropdown mb">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="true">
@@ -27,8 +27,9 @@
             <li><a href="#">期間</a></li>
         </ul>
     </div>
-    <div class="ac">
-        <img src="http://nmbr.jp/wp/wp-content/uploads/2015/02/mcdonaldhdjp.png" alt=""/>
+    !-->
+    <div id="graph" class="ac">
+
     </div>
     <div class="row">
         <div class="col-md-8">
@@ -43,16 +44,58 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach($populars as $popular)
+                    <tr>
+                        <td>{{ $popular["product_info"]->product_name }}</td>
+                        <td>{{ number_format($popular["product_info"]->product_price) }}円</td>
+                        <td>{{ $popular["coupon_percentage"] }}%</td>
+                        <td>{{ $popular["number_of_sales"] }}個</td>
+                        <td>{{ number_format($popular["number_of_sales"] * $popular["product_info"]->product_price) }}円
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
-        <div class="col-md-4">.col-md-4</div>
+        <div class="col-md-4">
+            <table class="table">
+                <tr>
+                    <th>受注機会</th>
+                    <td>{{ $earning["orders_count"] }}回</td>
+                </tr>
+                <tr>
+                    <th>取引完了数</th>
+                    <td>{{ $earning["orders_finish_count"] }}回</td>
+                </tr>
+                <tr>
+                    <th>キャンセル数</th>
+                    <td>{{ $earning["cancel_count"] }}回</td>
+                </tr>
+                <tr>
+                    <th>キャンセル率</th>
+                    <td>{{ $earning["cancel_percentage"] }}%</td>
+                </tr>
+                <tr>
+                    <th>クーポン使用回数</th>
+                    <td>{{ $earning["coupon_count"] }}回</td>
+                </tr>
+                <tr>
+                    <th>クーポン使用率</th>
+                    <td>{{ $earning["coupon_percentage"] }}%</td>
+                </tr>
+                <tr>
+                    <th>累計受注金額</th>
+                    <td>{{ number_format($earning["sales_amount_total"]) }}円</td>
+                </tr>
+                <tr>
+                    <th>クーポン使用金額</th>
+                    <td>{{ number_format($earning["coupon_discount"]) }}円</td>
+                </tr>
+                <tr>
+                    <th>売上高（販促費込み）</th>
+                    <td>{{ number_format($earning["sales_amount"]) }}円</td>
+                </tr>
+            </table>
+        </div>
     </div>
 @endsection

@@ -24,7 +24,7 @@ class AnalysisController extends Controller
     }
 
 
-    // 売れ筋商品
+    // 人気商品管理
     public function index_popular()
     {
         // デフォルトで表示するもの
@@ -43,7 +43,7 @@ class AnalysisController extends Controller
     }
 
 
-    // 売れ筋商品>>条件適用時向け(ajax)
+    // 人気商品管理>>条件適用時向け(ajax)
     public function apply_popular(Request $request)
     {
         $now = Carbon::now();
@@ -172,7 +172,6 @@ class AnalysisController extends Controller
         }
         return $populars;
     }
-
     public function old_index_popular(){
         // デフォルトで表示するもの
         $period_start_day = Carbon::today()->subMonth();
@@ -189,9 +188,34 @@ class AnalysisController extends Controller
         return view('pizzzzza.analysis.popular',compact('populars'));
     }
 
+    // 売上管理
+    public function index_earning()
+    {
+        // デフォルトで表示するもの
+        $start_day = Carbon::today()->subMonth();
+        $end_day = Carbon::now();
+        $order_type = 0; // 注文種別
+        $period_type = 0; // 期間種別 ( 週:0 / 月:1 / 年:2 )
 
-    public function index_earning() {
-        return view('pizzzzza.analysis.earning');
+        // 売上高 グラフ用
+        $AnalysisService = new AnalysisService();
+        $earning = $AnalysisService->earning($start_day,$end_day,$order_type,$period_type);
+
+        // 商品ごとの統計用
+        // デフォルトで表示するもの
+        $period_start_day = Carbon::today()->subMonth();
+        $period_end_day = Carbon::now();
+        $member_type = 0; // 全会員
+        $target_genre = 0; // 対象ジャンル
+        $member_gender = 0; // 性別
+        $older_min_date = Carbon::create(1000, 1, 1, 0, 0, 0, 'Asia/Tokyo'); // 年代指定なし
+        $older_max_date = Carbon::create(1000, 4, 1, 0, 0, 0, 'Asia/Tokyo'); // 年代指定なし
+
+        $AnalysisService = new AnalysisService();
+        $populars = $AnalysisService->popular($start_day,$end_day,$member_type,$target_genre,$member_gender,$older_min_date,$older_max_date);
+        //dd($populars);
+
+        return view('pizzzzza.analysis.earning',compact('earning','populars'));
     }
 
 

@@ -118,20 +118,6 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>性別</th>
-                            <td>
-                                <div class="radio-inline">
-                                    <lavel><input type="radio" name="gender" value="man">男</lavel>
-                                </div>
-                                <div class="radio-inline">
-                                    <lavel><input type="radio" name="gender" value="woman">女</lavel>
-                                </div>
-                                <div class="radio-inline">
-                                    <lavel><input type="radio" name="gender" value="none" checked>指定なし</lavel>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
                             <th>会員種別</th>
                             <td>
                                 <div class="radio-inline">
@@ -174,6 +160,20 @@
                             <td>
                                 <lavel><input type="date" class="form-control" name="end_date" value="">
                                 </lavel>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>性別（ウェブ会員）</th>
+                            <td>
+                                <div class="radio-inline">
+                                    <lavel><input type="radio" name="gender" value="man">男</lavel>
+                                </div>
+                                <div class="radio-inline">
+                                    <lavel><input type="radio" name="gender" value="woman">女</lavel>
+                                </div>
+                                <div class="radio-inline">
+                                    <lavel><input type="radio" name="gender" value="none" checked>指定なし</lavel>
+                                </div>
                             </td>
                         </tr>
                         <tr>
