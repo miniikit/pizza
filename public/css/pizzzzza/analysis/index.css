@@ -2,4 +2,5 @@ canvas{
     width:100%;
     min-height:300px;
     max-height:600px;
+    padding:30px;
 }

@@ -9,9 +9,42 @@
 
 @section('main')
     <h1>売上確認</h1>
-    <form action="#" method="POST">
-
-    </form>
+    <div class="row">
+        <div class="col-md-12">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
+            <div id="graph">
+                <canvas id="chart"></canvas>
+                <?php
+                    $label = "";
+                    $data = "";
+                    $i = 0;
+                    foreach($earning["sales"] as $part){
+                        if($i != 0){
+                            $label = $label . ',';
+                            $data = $data . ',';
+                        }
+                        $label = $label . '"' . $part["period_date"] . '"';
+                        $data = $data . '"' . $part["sales_amount"] . '"';
+                        $i++;
+                    }//dd($label,$data)
+                ?>
+                <script>
+                    var ctx = document.getElementById('chart');
+                    var chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: [{!!  $label !!}],
+                            datasets: [{
+                                label: '売上高',
+                                data: [{!! $data !!}],
+                                backgroundColor: "tomato"
+                            }]
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
     <!--
     <div class="dropdown mb">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"

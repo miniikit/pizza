@@ -241,17 +241,21 @@ class AnalysisService
                 $i = 0;
             }
 
-            $order_payment = $order->product_price * $order->number;
-            $sales[$i]["sales_amount"] += $order_payment;
             // 総売上高
             $sales_amount_total += $order->product_price * $order->number;
 
             if($order->state_id == 3){ // キャンセル
+                $sales[$i]["sales_amount"] += 0;
                 $cancel_count++;
             } else {
                 if($order->state_id == 2) { // 取引完了
+                    // 決算データ用
                     $sales_amount_real += $order->product_price * $order->number;
                     $orders_finish_count++;
+
+                    // グラフ用
+                    $order_payment = $order->product_price * $order->number;
+                    $sales[$i]["sales_amount"] += $order_payment;
                 }
                 // クーポン
                 if($order->coupon_id){
@@ -259,8 +263,6 @@ class AnalysisService
                     $coupon_amount += $order->coupon_discount;
                 }
             }
-
-
 
         }
 

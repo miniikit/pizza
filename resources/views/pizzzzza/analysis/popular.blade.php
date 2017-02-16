@@ -65,38 +65,7 @@
                      });
                      </script>
                 </div>
-                <table id="populars-table" class="table">
-                    <thead>
-                    <tr>
-                        <th>順位</th>
-                        <th>商品名</th>
-                        <th>売上数</th>
-                        <th>シェア率</th>
-                    </tr>
-                    </thead>
-                    <tbody id="insert-here">
-                    <?php $i = 1; ?>
-                    @foreach($populars as $popular)
-                        @if($i === 1)
-                            <tr id="no1">
-                        @elseif($i === 2)
-                            <tr id="no2">
-                        @elseif($i === 3)
-                            <tr id="no3">
-                        @else
-                            <tr>
-                                @endif
-                                <td><?php echo $i++; ?> 位</td>
-                                <td class="product_name">{{ $popular["product_info"]->product_name }}</td>
-                                <td class="product_num">{{ $popular["number_of_sales"] }}</td>
-                                <td>{{ $popular["share"] }}%</td>
-                            </tr>
-                            @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-sm-6">
-                <div>条件</div>
+                <div><b>条件</b></div>
                 <div id="conditions_errors">{{-- ajax時のエラーが入ります。--}}</div>
                 <form action="/pizzzzza/analysis/popular/apply" method="POST">
                     <table class="table">
@@ -196,6 +165,38 @@
                         <input type="submit" id="submit-btn" class="btn btn-primary btn-sm" name="" value="適用">
                     </div>
                 </form>
+            </div>
+            <div class="col-sm-6">
+
+                <table id="populars-table" class="table">
+                    <thead>
+                    <tr>
+                        <th>順位</th>
+                        <th>商品名</th>
+                        <th>売上数</th>
+                        <th>シェア率</th>
+                    </tr>
+                    </thead>
+                    <tbody id="insert-here">
+                    <?php $i = 1; ?>
+                    @foreach($populars as $popular)
+                        @if($i === 1)
+                            <tr id="no1">
+                        @elseif($i === 2)
+                            <tr id="no2">
+                        @elseif($i === 3)
+                            <tr id="no3">
+                        @else
+                            <tr>
+                                @endif
+                                <td><?php echo $i++; ?> 位</td>
+                                <td class="product_name">{{ $popular["product_info"]->product_name }}</td>
+                                <td class="product_num">{{ $popular["number_of_sales"] }}</td>
+                                <td>{{ $popular["share"] }}%</td>
+                            </tr>
+                            @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

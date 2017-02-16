@@ -192,7 +192,7 @@ class AnalysisController extends Controller
     public function index_earning()
     {
         // デフォルトで表示するもの
-        $start_day = Carbon::today()->subMonth();
+        $start_day = Carbon::today()->subDay(20);
         $end_day = Carbon::now();
         $order_type = 0; // 注文種別
         $period_type = 0; // 期間種別 ( 週:0 / 月:1 / 年:2 )
