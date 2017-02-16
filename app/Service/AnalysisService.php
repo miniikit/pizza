@@ -209,7 +209,6 @@ class AnalysisService
         $sales_amount_total = 0; // 総売上高
         $sales_amount_real = 0; // 注文完了分の売上高
         $sales = array(); // 期間ごとの売上をまとめる
-        $i = 0;
 
 
         // 日付(開始日・終了日)の差異を計算
@@ -226,11 +225,11 @@ class AnalysisService
             $sales[$i]["period_date"] = $week[$i];
             $sales[$i]["sales_amount"] = 0; // 売上高
         }
-        $i =  0;
 
         // 四半期ごとにまとめる。
         foreach($orders as $order){
-            $created_at = new Carbon($order->created_at);
+            $created_at = new Carbon($order->order_appointment_date);
+
             if($created_at->diffInDays($start_day) >= $unit * 3){
                 $i = 3;
             } else if($created_at->diffInDays($start_day) >= $unit * 2){

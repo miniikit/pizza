@@ -192,7 +192,7 @@ class AnalysisController extends Controller
     public function index_earning()
     {
         // デフォルトで表示するもの
-        $start_day = Carbon::today()->subDay(20);
+        $start_day = Carbon::today()->subYear();
         $end_day = Carbon::now();
         $order_type = 0; // 注文種別
         $period_type = 0; // 期間種別 ( 週:0 / 月:1 / 年:2 )
@@ -203,8 +203,6 @@ class AnalysisController extends Controller
 
         // 商品ごとの統計用
         // デフォルトで表示するもの
-        $period_start_day = Carbon::today()->subMonth();
-        $period_end_day = Carbon::now();
         $member_type = 0; // 全会員
         $target_genre = 0; // 対象ジャンル
         $member_gender = 0; // 性別
@@ -213,7 +211,7 @@ class AnalysisController extends Controller
 
         $AnalysisService = new AnalysisService();
         $populars = $AnalysisService->popular($start_day,$end_day,$member_type,$target_genre,$member_gender,$older_min_date,$older_max_date);
-        //dd($populars);
+
 
         return view('pizzzzza.analysis.earning',compact('earning','populars'));
     }
